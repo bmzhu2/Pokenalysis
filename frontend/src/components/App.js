@@ -1,9 +1,19 @@
 import React from 'react';
-import { AuthRoute, ProtectedRoute } from '../util/route_util'
-import { Switch } from 'react-router-dom';
-
+import { Auth, Protected } from '../util/route_util'
+import {
+    Route,
+    Redirect,
+    Switch,
+    Link,
+    HashRouter
+} from 'react-router-dom';
+import SplashContainer from './splash/splash_container';
 const App = () => (
-  <div>it's all good in the hood</div>
+  <div id="app">
+    <Switch>
+      <Route path="/" component={SplashContainer} />
+    </Switch>
+  </div>
 );
 
 export default App;
