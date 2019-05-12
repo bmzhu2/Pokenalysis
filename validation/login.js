@@ -2,7 +2,7 @@ const Validator = require('validator');
 const validText = require('./valid-text');
 
 module.exports = function(data) {
-  errors: {};
+  let errors = {};
 
   data.user = validText(data.usernane) ? data.username : ' '
   data.password = validText(data.password) ? data.password : ' '
