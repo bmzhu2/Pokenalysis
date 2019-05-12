@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { AuthRoute, ProtectedRoute } from '../util/route_util'
+import { Switch } from 'react-router-dom';
 
-class App extends Component {
-  render() {
-    return (
-      <div></div>
-    );
-  }
-}
+const App = () => (
+  <div>it's all good in the hood</div>
+);
 
 export default App;
