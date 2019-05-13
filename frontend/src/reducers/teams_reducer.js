@@ -8,7 +8,7 @@ const teamsReducer = (state={}, action) => {
         case RECEIVE_TEAMS:
             return Object.assign({}, state, action.teams)
         case REMOVE_TEAM:
-            let newState = state;
+            let newState = Object.assign({}, state);
             delete newState[action.teamId];
             return newState;
         default:
