@@ -4,16 +4,20 @@ export const spriteAddress = id => {
   return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
 }
 
-export const fetchPokemon = id => {
-  return axios.get('https://pokeapi.co/api/v2/pokemon/' + id)
+export const fetchPokemon = name => {
+  return axios.get('https://pokeapi.co/api/v2/pokemon/' + name)
 }
 
-export const fetchAllPokemon = () => {
-  return axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=964')
+export const fetchManyPokemon = (startIdx = 0) => {
+  return axios.get('https://pokeapi.co/api/v2/pokemon?offset=' + startIdx + '&limit=100')
 }
 
-export const fetchItem = id => {
-  return axios.get('https://pokeapi.co/api/v2/item/' + id)
+export const fetchByType = type => {
+  return axios.get('https://pokeapi.co/api/v2/type/' + type)
+}
+
+export const fetchItem = name => {
+  return axios.get('https://pokeapi.co/api/v2/item/' + name)
 }
 
 export const fetchAllItems = () => {
