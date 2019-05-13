@@ -1,7 +1,7 @@
-const types = ['normal', 'fighting', 'flying', 'poison', 'ground', 'rock', 'bug', 'ghost', 'steel',
+export const types = ['normal', 'fighting', 'flying', 'poison', 'ground', 'rock', 'bug', 'ghost', 'steel',
                 'fire', 'water', 'grass', 'electric', 'psychic', 'ice', 'dragon', 'dark', 'fairy']
 
-const dualTypeDamageTakenRelation = (type1, type2) => {
+export const dualTypeDamageTakenRelation = (type1, type2) => {
   let relation = {
     quad_damage_from: [],
     double_damage_from: [],
@@ -39,7 +39,7 @@ const dualTypeDamageTaken = (type1, type2, moveType) => {
   const type1Dmg = damageRelations[type1];
   const type2Dmg = damageRelations[type2];
 
-  if (type1Dmg.no_damage_to.includes(moveType) || type2Dmg.no_damage_to.includes(moveType)) {
+  if (type1Dmg.no_damage_from.includes(moveType) || type2Dmg.no_damage_from.includes(moveType)) {
     return "no damage";
   } else if (type1Dmg.half_damage_from.includes(moveType) && (type2Dmg.half_damage_from.includes(moveType))) {
     return "one-fourth damage";
@@ -56,7 +56,7 @@ const dualTypeDamageTaken = (type1, type2, moveType) => {
   }
 }
 
-const damageRelations = {
+export const damageRelations = {
   normal: {
     double_damage_from: ['fighting'],
     half_damage_from: [],
