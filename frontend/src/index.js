@@ -42,12 +42,9 @@ document.addEventListener('DOMContentLoaded', ()=> {
   window.dispatch = store.dispatch
   window.createTeam = createTeam
   window.signup = signup
-<<<<<<< HEAD
   window.logout = logout
   window.fetchPokemon = fetchPokemon
-=======
   window.login = login
->>>>>>> master
 
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store} />, root)
