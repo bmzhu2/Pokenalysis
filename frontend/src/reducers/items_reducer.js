@@ -1,0 +1,28 @@
+import {RECEIVE_ITEM, RECEIVE_ITEMS} from '../actions/poke_api_actions';
+
+
+const itemsReducer = (state = {}, action) => {
+  Object.freeze(state);
+  let emptyState = {};
+  switch (action.type) {
+    case RECEIVE_ITEM:
+      let data = action.item.data
+
+      let item = {
+        effect: data.effect_entries[0].short_effect,
+        sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/" + data.name + ".png"
+      }
+      return Object.assign({}, state, { [data.name]: item })
+    case RECEIVE_ITEMS:
+      let itemList = {}
+      Object.values(action.item.data.results).forEach(item => {
+        itemList[item.name] = {}
+      })
+
+      return Object.assign({}, state, itemList)
+    default:
+      return state
+  }
+}
+
+export default itemsReducer

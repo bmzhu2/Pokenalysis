@@ -50,12 +50,12 @@ export const fetchPokemon = name => dispatch => (
 
 export const fetchManyPokemon = startIdx => dispatch => (
   PokeAPIUtil.fetchManyPokemon(startIdx)
-    .then(pokemon => dispatch(receivePokemon(pokemon)))
+    .then(pokemon => dispatch(receiveManyPokemon(pokemon)))
 )
 
 export const fetchByType = type => dispatch => (
   PokeAPIUtil.fetchByType(type)
-    .then(pokemon => dispatch(receivePokemon(pokemon)))
+    .then(pokemon => dispatch(receivePokemonByType(pokemon)))
 )
 
 export const fetchItem = name => dispatch => (
@@ -63,9 +63,9 @@ export const fetchItem = name => dispatch => (
     .then(item => dispatch(receiveItem(item)))
 )
 
-export const fetchAllItems = () => dispatch => (
+export const fetchItems = () => dispatch => (
   PokeAPIUtil.fetchAllItems()
-    .then(items => dispatch(receiveItem(items)))
+    .then(items => dispatch(receiveItems(items)))
 )
 
 export const fetchMove = name => dispatch => (
