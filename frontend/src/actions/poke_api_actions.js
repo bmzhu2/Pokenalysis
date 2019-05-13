@@ -64,7 +64,7 @@ export const fetchItem = name => dispatch => (
 )
 
 export const fetchItems = () => dispatch => (
-  PokeAPIUtil.fetchAllItems()
+  PokeAPIUtil.fetchItems()
     .then(items => dispatch(receiveItems(items)))
 )
 
