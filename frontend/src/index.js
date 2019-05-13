@@ -42,8 +42,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
   window.dispatch = store.dispatch
   window.createTeam = createTeam
   window.signup = signup
-  window.logout = logout
-  window.fetchAbility = fetchAbility
   window.login = login
 
   const root = document.getElementById('root');

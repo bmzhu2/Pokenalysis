@@ -1,4 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
+
+import './form.css'
+import NavbarContainer from '../nav/navbar_container';
 
 class Register extends React.Component {
     constructor(props) {
@@ -21,22 +25,39 @@ class Register extends React.Component {
         e.preventDefault();
         const register = this.props.register;
         const user = Object.assign({}, this.state);
-        register(user);
+        register(user)
+            .then(() => this.props.history.push('/'));
     }
 
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="username-register">Username</label>
-                    <input id="username-register" type="text" onChange={this.update("username")} />
-                    <label htmlFor="password-register">Password</label>
-                    <input id="password-register" type="password" onChange={this.update("password")} />
-                    <label htmlFor="password2-register">Confirm Password</label>
-                    <input id="password2-register" type="password" onChange={this.update("password2")} />
-                    <input type="submit" className="submit" value="Register" />
-                </form>  
+
+            <div className="content-container">
+                <NavbarContainer />
+                <div className="form">
+                    <h1>Signup for Pokenalysis</h1>
+                    <form onSubmit={this.handleSubmit}>
+                        <div className="form-row">
+                            <label htmlFor="username-register">Username</label>
+                            <input id="username-register" type="text" onChange={this.update("username")} />
+                        </div>
+                        <div className="form-row">
+                            <label htmlFor="password2-register">Password</label>
+                            <input id="password-register" type="password" onChange={this.update("password")} />
+                        </div>
+                        <div className="form-row">
+                            <label htmlFor="password-register">Confirm Password</label>
+                            <input id="password2-register" type="password" onChange={this.update("password2")} />
+                        </div>
+                        <div className="form-row">
+                            <input type="submit" className="submit" value="Register" />
+                        </div>
+                        <div className="form-row">
+                            <Link to={'/login'}>Already have an account?</Link>
+                        </div>
+                    </form>  
+                </div>
             </div>
         )
     }

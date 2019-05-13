@@ -30,7 +30,7 @@ class NavBar extends React.Component {
         } else {
             return (
                 <div className="navbar">
-                    <div className="icon"></div>
+                    <Link to={'/'}> <div className="icon"></div> </Link> 
                     <div className="links">
                         <Link to={'/register'}>Signup</Link>
                         <Link to={'/login'}>Login</Link>
