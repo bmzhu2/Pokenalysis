@@ -1,0 +1,54 @@
+
+
+.form{
+    margin-top:10vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    color:black;
+}
+
+.form > h1 {
+    width: 100vw;
+    margin-bottom: 3vw;
+    font-size: 40px;
+    font-weight: 900;
+}
+
+.form-row{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+    color: rgb(109, 109, 109);
+}
+
+.form-row > * {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.form input{
+    border-radius: 50px;
+    border:none;
+    outline: none;
+    padding: 10px 10px;
+    border: 1px solid rgb(152, 152, 152);
+    margin: 10px 20px;
+}
+
+.form .submit{
+    background-color: rgb(94, 208, 94) ;
+    color: whitesmoke;
+    border:none;
+    width: 52%;
+    font-weight: 900;
+    font-size: 12px;
+}
+
+.submit:hover {
+    background-color: rgb(77, 182, 77);
+}
