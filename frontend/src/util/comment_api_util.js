@@ -13,7 +13,7 @@ export const fetchUserComments = userId => {
     return axios.get('api/comments/user/' + userId)
 }
 
-export const createcomment = comment => {
+export const createComment = comment => {
     return axios.post('api/comments', comment)
 }
 
