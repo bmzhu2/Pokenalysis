@@ -7,9 +7,9 @@ import configureStore from './store/store';
 
 import jwt_decode from 'jwt-decode';
 
+import { logout, signup, login } from './actions/session_actions'
 import {setAuthToken} from './util/session_api_util'
-
-import {logout, signup, login} from './actions/session_actions.js'
+import { createTeam } from './actions/team_actions'
 
 
 document.addEventListener('DOMContentLoaded', ()=> {
@@ -38,8 +38,9 @@ document.addEventListener('DOMContentLoaded', ()=> {
   //DELETE LATER
   window.getState = store.getState
   window.dispatch = store.dispatch
+  window.createTeam = createTeam
   window.signup = signup
-  window.logout = logout
+  window.login = login
 
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store} />, root)
