@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
   pokeId: {
-    type: Integer,
+    type: Number,
     required: true,
   },
   team: {
@@ -23,7 +23,7 @@ const UserSchema = new Schema({
     type: String
   },
   itemId: {
-    type: Integer
+    type: Number
   },
   ability: {
     type: String
