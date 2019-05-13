@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const UserSchema = new Schema({
+const PokemonSchema = new Schema({
   pokeId: {
     type: Number,
     required: true,
@@ -38,4 +38,4 @@ const UserSchema = new Schema({
   }
 })
 
-module.exports = User = mongoose.model('users', UserSchema);
+module.exports = Pokemon = mongoose.model('pokemon', PokemonSchema);
