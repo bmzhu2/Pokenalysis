@@ -18,8 +18,8 @@ const PokemonSchema = new Schema({
   move4: {
     type: String
   },
-  itemId: {
-    type: Number
+  item: {
+    type: String
   },
   ability: {
     type: String

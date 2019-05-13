@@ -1,0 +1,79 @@
+
+
+.form{
+    margin-top:-2vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    color:black;
+}
+
+.form > .splash-logo {
+    width: 30vw;
+    height: 12vw;
+}
+
+.form > h1 {
+    width: 100vw;
+    font-size: 2vw;
+    margin-bottom: 3vw;
+    color: rgb(70, 70, 70);
+    font-weight: 900;
+}
+
+.form-row{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+    color: rgb(109, 109, 109);
+}
+
+.form-row > * {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.form input{
+    border-radius: 50px;
+    border:none;
+    outline: none;
+    padding: 10px 10px;
+    border: 1px solid rgb(201, 201, 201);
+    background-color: white;
+    margin: 10px 20px;
+}
+
+.form .submit{
+    background-color: rgb(94, 208, 94) ;
+    color: whitesmoke;
+    border:none;
+    width: 52%;
+    font-weight: 900;
+    font-size: 12px;
+    -webkit-transition: background-color .5s ease-out;
+    -moz-transition: background-color .5s ease-out;
+    -o-transition: background-color .5s ease-out;
+    transition: background-color .5s ease-out;
+}
+
+.submit:hover {
+    background-color: rgb(77, 182, 77);
+}
+
+.errors{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.errors > p{
+    color:red;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

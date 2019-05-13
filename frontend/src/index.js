@@ -12,7 +12,6 @@ import {setAuthToken} from './util/session_api_util'
 import { createTeam } from './actions/team_actions'
 
 
-
 document.addEventListener('DOMContentLoaded', ()=> {
   let store;
 

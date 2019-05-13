@@ -20,7 +20,7 @@ export const fetchItem = name => {
   return axios.get('https://pokeapi.co/api/v2/item/' + name)
 }
 
-export const fetchAllItems = () => {
+export const fetchItems = () => {
   return axios.get('https://pokeapi.co/api/v2/item?offset=0&limit=954')
 }
 
