@@ -7,19 +7,9 @@ const Types = {
 };
 
 const TeamSlotTarget = {
-    // canDrop(props, monitor) {
-    //     const pokemon = monitor.getPokemon();
-    //     return console.log("pokemon is dropped");
-    // },
-
     drop(props, monitor, component){
-        if (monitor.didDrop()){
-            return;
-        }
-
-        const pokemon = monitor.getPokemon();
-        console.log(pokemon.name);
-        props.onDrop
+        const pokemon = monitor.getItem();
+        props.onDrop(pokemon);
     }
 };
 
@@ -37,12 +27,13 @@ class TeamSlot extends React.Component {
     }
 
     render(){
+        console.log(this.props);
         const { name } = this.props;
         const { isOver, canDrop, connectDropTarget } = this.props;
-        
+
         return connectDropTarget(
-            <div>This is a slot that a pokemon may be dragged to
-                { this.props.name };
+            <div>This is a 
+                { this.props.team[0] }
             </div>
         )
     }

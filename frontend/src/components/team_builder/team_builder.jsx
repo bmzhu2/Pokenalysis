@@ -8,16 +8,16 @@ class TeamBuilder extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            components: []
+            team: [],
         };
         this.onDrop = this.onDrop.bind(this);
     }
 
-    onDrop(component){
-        const { name } = this.state;
-        const newComponentsList = this.state.components.concat([name]);
+    onDrop(incomingState){
+        const { name } = incomingState;
+        const newState = this.state.team.concat([name]);
         this.setState({
-            components: newComponentsList
+            team: newState
         });
     }
 
@@ -27,8 +27,7 @@ class TeamBuilder extends React.Component {
             <div>
                 This is a sidebar
                 <ul> 
-                    
-                    <TeamSlot onDrop={this.onDrop} components={this.state.components}/>
+                    <TeamSlot onDrop={this.onDrop} team={this.state.team}/>
                 </ul>
                 <ul>
                     <li>this is a team component</li>

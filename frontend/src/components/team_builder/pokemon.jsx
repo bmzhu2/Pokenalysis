@@ -6,29 +6,11 @@ const Types = {
 };
 
 const pokemonSource = {
-    // canDrag(props) {
-    //     return props.isReady
-    // },
-
-    // isDragging(props, monitor){
-    //     return monitor.getPokemon().id === props.id
-    // },
-
     beginDrag(props, monitor, component){
-        const pokemon = { name: props.name }
+        const pokemon = { name: props.name };
         return pokemon;
     },
 
-    endDrag(props, monitor, component) {
-        if(!monitor.didDrop()){
-            return;
-        }
-
-        const pokemon = monitor.getPokemon();
-        const dropResult = monitor.getDropResult();
-
-        // PokemonActions.movePokemonToTeam(pokemon.name,)
-    }
 };
 
 const collect = (connect, monitor) => {
@@ -52,7 +34,6 @@ class Pokemon extends React.Component {
         return connectDragSource(
             <div>
                 This is a draggable { name }
-                {isDragging && ' (currently being dragged)'}
             </div>
         )
     }
