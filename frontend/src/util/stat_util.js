@@ -8,13 +8,14 @@ export const parseStats = statsArray => {
         statTotal += statVal
     })
     parsedStats['stat-total'] = statTotal;
+    return parsedStats
 }
 
 const extractStats = (team, pokemon) => {
     let pokeStats = [];
 
     team.pokemon.forEach(mon => {
-        let stats = pokemon[mon].stats;
+        let stats = pokemon[mon.pokeId].stats;
         stats = parseStats(stats);
         pokeStats.push(stats);
     })
