@@ -45,6 +45,10 @@ router.post('/',
       user: req.user.id
     });
 
+    for (let i = 0; i < array.length; i++) {
+      newTeam.pokemon[i] = req.body.pokemon[i]
+    }
+
     newTeam.save().then(team => res.json(team));
   }
 );
@@ -61,6 +65,9 @@ router.put('/:id',
     Team.findById(req.params.id)
       .then(team => {
         team.name = req.body.name;
+        for (let i = 0; i < 6; i++) {
+          newTeam.pokemon[i] = req.body.pokemon[i]
+        }
         team.save().then(team => res.json(team));
       })
       .catch(err =>

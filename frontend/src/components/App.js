@@ -5,13 +5,16 @@ import {
     Redirect,
     Switch,
     Link,
-    HashRouter
 } from 'react-router-dom';
 import SplashContainer from './splash/splash_container';
+import LoginContainer from './forms/login_container';
+import RegisterContainer from './forms/register_container';
 const App = () => (
   <div id="app">
     <Switch>
-      <Route path="/" component={SplashContainer} />
+      <Route exact path="/login" component={LoginContainer}/>
+      <Route exact path="/register" component={RegisterContainer}/>
+      <Route exact path="/" component={SplashContainer} />
     </Switch>
   </div>
 );
