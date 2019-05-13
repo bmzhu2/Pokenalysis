@@ -6,6 +6,8 @@ import {
     Switch,
     Link,
 } from 'react-router-dom';
+
+import teamBuilderContainer from './team_builder/team_builder_container';
 import './reset.css';
 import SplashContainer from './splash/splash_container';
 import LoginContainer from './forms/login_container';
@@ -14,6 +16,7 @@ import RegisterContainer from './forms/register_container';
 const App = () => (
   <div id="app">
     <Switch>
+      <Route exact path="/team-builder" component={teamBuilderContainer}/>
       <AuthRoute exact path="/login" component={LoginContainer}/>
       <AuthRoute exact path="/register" component={RegisterContainer}/>
       <Route exact path="/" component={SplashContainer} />
