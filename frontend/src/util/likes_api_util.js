@@ -16,3 +16,7 @@ export const deleteLike = likeId => {
     return axios.delete('api/likes/' + likeId)
 }
 
+export const deleteLike = likeId => dispatch => (
+    APIUtil.deleteLike(likeId)
+        .then(likeId => dispatch(removeLike(likeId)))
+)
