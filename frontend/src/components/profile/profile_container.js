@@ -1,18 +1,20 @@
-import { fetchUserComments } from '../../actions/comment_actions';
-import { fetchUserTeams } from '../../actions/team_actions';
+
+import { fetchUserLikes } from '../../actions/like_actions';
+import { fetchTeams } from '../../actions/team_actions';
 import { fetchUser } from '../../actions/user_actions'
 import { connect } from 'react-redux'
 import Profile from './profile'
+import { userTeams, likedTeams } from '../../reducers/selectors'
 
 const mapStateToProps = (state, ownProps) => ({
     user: state.entities.users[ownProps.match.params.userId],
-    teams: state.entities.teams,
-    comments: state.entities.comments
+    userTeams: userTeams(state.entities.teams, ownProps.match.params.userId),
+    likedTeams: likedTeams(state.entities, ownProps.match.params.userId)
 })
 
 const mapDispatchToBanana = dispatch => ({
-    fetchUserTeams: userId => dispatch(fetchUserTeams(userId)),
-    fetchUserComments: userId => dispatch(fetchUserComments(userId)),
+    fetchTeams: () => dispatch(fetchTeams()),
+    fetchUserLikes: userId => dispatch(fetchUserLikes(userId)),
     fetchUser: userId => dispatch(fetchUser(userId))
 })
 
