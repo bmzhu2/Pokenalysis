@@ -3,7 +3,7 @@
 
 Pokenalysis is a online team builder that leverages the [PokéAPI](https://pokeapi.co/) and allows users to create, analyze, save, and share teams of Pokemon. 
 
-[Live Demove Coming Soon](#)
+[Live Demo Coming Soon](#)
 
 
 ### Functionality and MVP
