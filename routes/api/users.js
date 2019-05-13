@@ -8,8 +8,12 @@ const passport = require('passport');
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
 
-router.get("/test", (req, res) => {
-  res.json({msg: "This is the user route"})
+router.get("/:id", (req, res) => {
+  User.findById(req.params.id)
+    .then(user => res.json(team))
+    .catch(err => 
+      res.status(404).json({ nouserfound: 'No user found with that ID'})
+    );
 });
 
 router.post('/register', (req, res) => {
@@ -39,10 +43,11 @@ router.post('/register', (req, res) => {
             newUser
               .save()
               .then(user => {
-                const payload = { id: user.id, name: user.name };
+                const payload = { id: user.id, username: user.username };
 
                 jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600 }, (err, token) => {
                   res.json({
+                    user: payload,
                     success: true,
                     token: "Bearer " + token
                   });

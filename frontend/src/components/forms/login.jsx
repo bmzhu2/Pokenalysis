@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 
 import './form.css'
-import NavbarContainer from '../nav/navbar_container';
 
 
 class Login extends React.Component {
@@ -13,6 +12,7 @@ class Login extends React.Component {
             password: ""
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.renderErrors = this.renderErrors.bind(this);
     }
 
     update(field) {
@@ -23,10 +23,28 @@ class Login extends React.Component {
 
     handleSubmit(e){
         e.preventDefault();
-        const login = this.props.login; // ensure name in dispatch to props
+        var login = this.props.login; // ensure name in dispatch to props
+        login = this.props.login.bind(this);
         const user = Object.assign({}, this.state);
         login(user)
-            .then(() => this.props.history.push('/'));
+            .then(data => {
+                debugger
+                if(data === undefined){
+                    this.props.history.push('/');
+                } else {
+                    console.log("error logging in");
+                }
+            });      
+    }
+
+    renderErrors() {
+        return(
+            <div className="errors">
+                {Object.values(this.props.errors).map( error => {
+                    return( <p> {error} </p>)
+                })}
+            </div>
+        )
     }
 
 
@@ -34,8 +52,8 @@ class Login extends React.Component {
 
         return(
             <div className="content-container">
-                <NavbarContainer />
                 <div className="form">
+                    <div className="splash-logo"></div>
                     <h1>Login to Pokenalysis</h1>
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-row">
@@ -49,6 +67,7 @@ class Login extends React.Component {
                         <div className="form-row">
                             <input type="submit" className="submit" value="Login" />                    
                         </div>
+                        {this.renderErrors()}
                         <div className="form-row">
                             <Link to={'/register'}>Need to create an account?</Link>
                         </div>

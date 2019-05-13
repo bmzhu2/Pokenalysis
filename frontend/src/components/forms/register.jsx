@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 
 import './form.css'
-import NavbarContainer from '../nav/navbar_container';
 
 class Register extends React.Component {
     constructor(props) {
@@ -13,6 +12,8 @@ class Register extends React.Component {
             password2: ""
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.renderErrors = this.renderErrors.bind(this);
+
     }
 
     update(field) {
@@ -26,16 +27,32 @@ class Register extends React.Component {
         const register = this.props.register;
         const user = Object.assign({}, this.state);
         register(user)
-            .then(() => this.props.history.push('/'));
+            .then(data => {
+                debugger
+                if (data === undefined) {
+                    this.props.history.push('/');
+                } else {
+                    console.log("error logging in");
+                }
+            }); 
     }
 
+    renderErrors() {
+        return (
+            <div className="errors">
+                {Object.values(this.props.errors).map(error => {
+                    return (<p> {error} </p>)
+                })}
+            </div>
+        )
+    }
 
     render() {
         return (
 
             <div className="content-container">
-                <NavbarContainer />
                 <div className="form">
+                    <div className="splash-logo"></div>
                     <h1>Signup for Pokenalysis</h1>
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-row">
@@ -53,6 +70,7 @@ class Register extends React.Component {
                         <div className="form-row">
                             <input type="submit" className="submit" value="Register" />
                         </div>
+                        {this.renderErrors()}
                         <div className="form-row">
                             <Link to={'/login'}>Already have an account?</Link>
                         </div>

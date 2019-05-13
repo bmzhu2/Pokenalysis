@@ -6,6 +6,7 @@ import abilitiesReducer from './abilities_reducer'
 import { combineReducers } from 'redux'
 import commentsReducer from './comments_reducer'
 import likesReducer from './likes_reducer';
+import usersReducer from './users_reducer';
 
 const entitiesReducer = combineReducers({
     teams: teamsReducer,
@@ -14,7 +15,8 @@ const entitiesReducer = combineReducers({
     items: itemsReducer,
     abilities: abilitiesReducer,
     comments: commentsReducer,
-    likes: likesReducer
+    likes: likesReducer,
+    users: usersReducer
 })
 
 export default entitiesReducer
