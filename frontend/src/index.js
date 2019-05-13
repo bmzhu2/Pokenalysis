@@ -11,7 +11,7 @@ import { logout, signup, login } from './actions/session_actions'
 import {setAuthToken} from './util/session_api_util'
 import { createTeam } from './actions/team_actions'
 
-import {fetchPokemon} from './actions/poke_api_actions'
+import {fetchMove} from './actions/poke_api_actions'
 
 
 document.addEventListener('DOMContentLoaded', ()=> {
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
   window.createTeam = createTeam
   window.signup = signup
   window.logout = logout
-  window.fetchPokemon = fetchPokemon
+  window.fetchMove = fetchMove
   window.login = login
 
   const root = document.getElementById('root');
