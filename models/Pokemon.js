@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const UserSchema = new Schema({
+const PokemonSchema = new Schema({
   pokeId: {
-    type: Integer,
+    type: Number,
     required: true,
   },
   team: {
@@ -23,7 +23,7 @@ const UserSchema = new Schema({
     type: String
   },
   itemId: {
-    type: Integer
+    type: Number
   },
   ability: {
     type: String
@@ -38,4 +38,4 @@ const UserSchema = new Schema({
   }
 })
 
-module.exports = User = mongoose.model('users', UserSchema);
+module.exports = Pokemon = mongoose.model('pokemon', PokemonSchema);
