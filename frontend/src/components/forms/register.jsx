@@ -26,7 +26,7 @@ class Register extends React.Component {
 
 
     render() {
-
+        console.log(this.props);
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -36,7 +36,7 @@ class Register extends React.Component {
                     <input id="password-register" type="password" onChange={this.update("password")} />
                     <label htmlFor="password2-register">Confirm Password</label>
                     <input id="password2-register" type="password" onChange={this.update("password")} />
-                    <input type="submit" className="submit" value="Login" />
+                    <input type="submit" className="submit" value="Register" />
                 </form>  
             </div>
         )
