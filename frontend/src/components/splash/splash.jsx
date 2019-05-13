@@ -1,6 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import './splash.css';
+
+import NavbarContainer from '../nav/navbar_container';
 
 class Splash extends React.Component {
     constructor(props) {
@@ -13,13 +16,14 @@ class Splash extends React.Component {
     render() {
         return (
             <div className="content-container">
-                <header>
-                    <Link to="/" className="header-link">
-                        <div className="icon-white"></div>
-                    </Link>
-                </header>
+                <NavbarContainer />
                 <div className="splash-page">
-                    <h1>Hi this is splash page</h1>
+                    <div className="row">
+                        <div className="splash-logo"></div>
+                    </div>
+                    <div className="row">
+                        <h2>the social Pokemon team-builder</h2>                    
+                    </div>
                 </div>
             </div>
         );
