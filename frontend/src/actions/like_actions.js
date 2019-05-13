@@ -1,4 +1,4 @@
-import * as APIUtil from '../util/like_api_util'
+import * as APIUtil from '../util/likes_api_util'
 
 export const RECEIVE_LIKES = 'RECEIVE_LIKES';
 export const RECEIVE_LIKE = 'RECEIVE_LIKE';
@@ -32,4 +32,9 @@ export const fetchUserLikes = userId => dispatch => (
 export const createLike = teamId => dispatch => (
     APIUtil.createLike(teamId)
         .then(like => dispatch(receiveLike(like)))
+)
+
+export const deleteLike = likeId => dispatch => (
+    APIUtil.deleteLike(likeId)
+        .then(likeId => dispatch(removeLike(likeId)))
 )
