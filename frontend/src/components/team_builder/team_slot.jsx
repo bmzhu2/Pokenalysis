@@ -27,7 +27,6 @@ class TeamSlot extends React.Component {
     }
 
     render(){
-        console.log(this.props);
         const { name } = this.props;
         const { isOver, canDrop, connectDropTarget } = this.props;
 
