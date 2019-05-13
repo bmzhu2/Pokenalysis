@@ -45,7 +45,7 @@ router.post('/',
       user: req.user.id
     });
 
-    for (let i = 0; i < array.length; i++) {
+    for (let i = 0; i < 6; i++) {
       newTeam.pokemon[i] = req.body.pokemon[i]
     }
 
