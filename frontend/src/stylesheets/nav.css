@@ -1,0 +1,11 @@
+.icon{
+    background-image: url(https://upload.wikimedia.org/wikipedia/en/3/39/Pokeball.PNG);
+    height: 50px;
+    width: 50px;
+}
+
+.navbar{
+    height: 60px;
+    width: 100%;
+    background-color: red;
+}

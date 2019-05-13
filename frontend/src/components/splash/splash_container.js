@@ -3,8 +3,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import  Splash  from './splash';
 
-const mapStateToProps = ({ }) => {
+const mapStateToProps = state => {
     return {
+        currentUser: state.session.user
     };
 };
 
