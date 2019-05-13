@@ -46,3 +46,8 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+ html, body, #app, #app>div {
+	height: 100vh;
+	background-color: rgb(237, 242, 254);
+}
