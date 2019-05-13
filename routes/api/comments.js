@@ -34,6 +34,7 @@ router.post('/',
 
     const newComment = new Comment({
       text: req.body.text,
+      team: req.body.teamId,
       user: req.user.id
     });
 
