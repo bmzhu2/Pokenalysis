@@ -6,7 +6,7 @@ import {
     createTeam,
     updateTeam,
     deleteTeam
-} from '../../../actions/team_actions';
+} from '../../actions/team_actions';
 import TeamBuilder from './team_builder';
 
 const mapStateToProps = (state, ownProps) => {
