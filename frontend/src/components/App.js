@@ -12,9 +12,13 @@ import './reset.css';
 import SplashContainer from './splash/splash_container';
 import LoginContainer from './forms/login_container';
 import RegisterContainer from './forms/register_container';
+import NavBarContainer from './nav/navbar_container'
 
 const App = () => (
   <div id="app">
+    <header>
+      <NavBarContainer />
+    </header>
     <Switch>
       <Route exact path="/team-builder" component={teamBuilderContainer}/>
       <AuthRoute exact path="/login" component={LoginContainer}/>
