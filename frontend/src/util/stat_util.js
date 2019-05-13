@@ -7,7 +7,7 @@ export const parseStats = statsArray => {
     Object.values(parsedStats).forEach(statVal => {
         statTotal += statVal
     })
-    parsedStats['statTotal'] = statTotal;
+    parsedStats['stat-total'] = statTotal;
 }
 
 const extractStats = (team, pokemon) => {
@@ -23,5 +23,20 @@ const extractStats = (team, pokemon) => {
 }
 
 export const averageStats = (team, pokemon) => {
-    
+    let teamStats = extractStats(team, pokemon);
+
+    const statNames = ['speed', 'defense', 'attack', 'special-attack', 'special-defense', 'hp', 'stat-total']
+
+    let averages = {}
+
+    statNames.forEach(stat=> {
+        let average = 0;
+        teamStats.forEach(mon => {
+            average += mon[stat];
+        })
+        average = average/teamStats.length;
+        averages[stat] = average
+    })
+
+    return averages
 }
