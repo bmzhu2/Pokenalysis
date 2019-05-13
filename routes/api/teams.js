@@ -81,3 +81,5 @@ router.delete('/:id',
       );
   }
 );
+
+module.exports = router;
