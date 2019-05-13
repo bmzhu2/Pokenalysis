@@ -1,0 +1,27 @@
+.splash-page{
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    flex-wrap: wrap;
+}
+
+.splash-logo{
+    background-image: url(https://i.imgur.com/PB7zU8W.png);
+    width: 60vw;
+    height: 20vw;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+}
+
+.row{
+    width: 100vw;
+    display: block;
+}
+
+h2{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3vw;
+    font-weight:900;
+    text-align: center;
+}

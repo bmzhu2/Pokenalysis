@@ -6,9 +6,11 @@ import {
     Switch,
     Link,
 } from 'react-router-dom';
+import './reset.css';
 import SplashContainer from './splash/splash_container';
 import LoginContainer from './forms/login_container';
 import RegisterContainer from './forms/register_container';
+
 const App = () => (
   <div id="app">
     <Switch>

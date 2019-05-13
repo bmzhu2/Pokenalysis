@@ -12,6 +12,14 @@ export const fetchAllPokemon = () => {
   return axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=964')
 }
 
+export const fetchItem = id => {
+  return axios.get('https://pokeapi.co/api/v2/item/' + id)
+}
+
+export const fetchAllItems = () => {
+  return axios.get('https://pokeapi.co/api/v2/item?offset=0&limit=954')
+}
+
 export const fetchMove = name => {
   return axios.get('https://pokeapi.co/api/v2/move/' + name)
 }

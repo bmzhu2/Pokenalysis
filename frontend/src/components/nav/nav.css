@@ -1,0 +1,32 @@
+.icon{
+    background-image: url(https://upload.wikimedia.org/wikipedia/en/3/39/Pokeball.PNG);
+    min-height: 40px;
+    min-width: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left:1vw;
+}
+
+.navbar{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 60px;
+    width: 100vw;
+    background-color: red;
+}
+
+.navbar  a, button {
+    margin: 0 1vw;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.links {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end
+}
