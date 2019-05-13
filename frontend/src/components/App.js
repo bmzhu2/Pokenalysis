@@ -1,5 +1,5 @@
 import React from 'react';
-import { Auth, Protected } from '../util/route_util'
+import { AuthRoute, ProtectedRoute } from '../util/route_util'
 import {
     Route,
     Redirect,
@@ -14,8 +14,8 @@ import RegisterContainer from './forms/register_container';
 const App = () => (
   <div id="app">
     <Switch>
-      <Route exact path="/login" component={LoginContainer}/>
-      <Route exact path="/register" component={RegisterContainer}/>
+      <AuthRoute exact path="/login" component={LoginContainer}/>
+      <AuthRoute exact path="/register" component={RegisterContainer}/>
       <Route exact path="/" component={SplashContainer} />
     </Switch>
   </div>
