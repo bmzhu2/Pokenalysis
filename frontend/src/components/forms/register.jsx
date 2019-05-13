@@ -19,14 +19,13 @@ class Register extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const register = this.props.register; // ensure name in dispatch to props
+        const register = this.props.register;
         const user = Object.assign({}, this.state);
         register(user);
     }
 
 
     render() {
-        console.log(this.props);
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -35,7 +34,7 @@ class Register extends React.Component {
                     <label htmlFor="password-register">Password</label>
                     <input id="password-register" type="password" onChange={this.update("password")} />
                     <label htmlFor="password2-register">Confirm Password</label>
-                    <input id="password2-register" type="password" onChange={this.update("password")} />
+                    <input id="password2-register" type="password" onChange={this.update("password2")} />
                     <input type="submit" className="submit" value="Register" />
                 </form>  
             </div>
