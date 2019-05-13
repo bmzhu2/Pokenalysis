@@ -9,7 +9,8 @@ import jwt_decode from 'jwt-decode';
 
 import {setAuthToken} from './util/session_api_util'
 
-import {logout} from './actions/session_actions.js'
+import {logout, signup, login} from './actions/session_actions.js'
+
 
 document.addEventListener('DOMContentLoaded', ()=> {
   let store;
@@ -30,8 +31,14 @@ document.addEventListener('DOMContentLoaded', ()=> {
       window.location.href = '/login'
     }
   } else{
-    store = configureStore({});
+    store = configureStore();
   }
+
+
+  //DELETE LATER
+  window.getState = store.getState
+  window.dispatch = store.dispatch
+  window.signup = signup
 
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store} />, root)
