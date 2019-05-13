@@ -3,8 +3,6 @@ import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './splash.css';
 
-import NavbarContainer from '../nav/navbar_container';
-
 class Splash extends React.Component {
     constructor(props) {
         super(props);
@@ -16,7 +14,6 @@ class Splash extends React.Component {
     render() {
         return (
             <div className="content-container">
-                <NavbarContainer />
                 <div className="splash-page">
                     <div className="row">
                         <div className="splash-logo"></div>

@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 
 import './form.css'
-import NavbarContainer from '../nav/navbar_container';
 
 class Register extends React.Component {
     constructor(props) {
@@ -52,7 +51,6 @@ class Register extends React.Component {
         return (
 
             <div className="content-container">
-                <NavbarContainer />
                 <div className="form">
                     <div className="splash-logo"></div>
                     <h1>Signup for Pokenalysis</h1>

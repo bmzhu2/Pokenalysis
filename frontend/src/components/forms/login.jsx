@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 
 import './form.css'
-import NavbarContainer from '../nav/navbar_container';
 
 
 class Login extends React.Component {
@@ -53,7 +52,6 @@ class Login extends React.Component {
 
         return(
             <div className="content-container">
-                <NavbarContainer />
                 <div className="form">
                     <div className="splash-logo"></div>
                     <h1>Login to Pokenalysis</h1>
