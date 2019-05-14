@@ -44,3 +44,10 @@ button{
     width: 100%;
     justify-content: flex-end
 }
+
+.links p {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 100;
+    font-size: 13px;
+    padding-right: 15px;
+}
