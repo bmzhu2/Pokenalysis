@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
     store = configureStore();
   }
 
-
   //DELETE LATER
   window.getState = store.getState
   window.dispatch = store.dispatch

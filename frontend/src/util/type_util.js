@@ -1,6 +1,36 @@
 export const types = ['normal', 'fighting', 'flying', 'poison', 'ground', 'rock', 'bug', 'ghost', 'steel',
                 'fire', 'water', 'grass', 'electric', 'psychic', 'ice', 'dragon', 'dark', 'fairy']
 
+export const teamMoveClassAnalysis = (team, moveList => {
+  let physicalMoves = 0;
+  let specialMoves = 0;
+
+  team.pokemon.forEach(pokemon => {
+    if (moveList[pokemon.move1] === "physical") {
+      physicalMoves += 1
+    } else if (moveList[pokemon.move1] === "special") {
+      specialMoves += 1
+    }
+    if (moveList[pokemon.move2] === "physical") {
+      physicalMoves += 1
+    } else if (moveList[pokemon.move2] === "special") {
+      specialMoves += 1
+    }
+    if (moveList[pokemon.move3] === "physical") {
+      physicalMoves += 1
+    } else if (moveList[pokemon.move3] === "special") {
+      specialMoves += 1
+    }
+    if (moveList[pokemon.move4] === "physical") {
+      physicalMoves += 1
+    } else if (moveList[pokemon.move4] === "special") {
+      specialMoves += 1
+    }
+  })
+
+  return {physical: physicalMoves, special: specialMoves}
+})
+
 export const teamCoverageAnalysis = (team, moveList) => {
   let totalCoverage = {}
   team.pokemon.forEach(pokemon => {
