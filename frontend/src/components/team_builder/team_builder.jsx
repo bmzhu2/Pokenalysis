@@ -106,7 +106,9 @@ class TeamBuilder extends React.Component {
     }
 
     filterByType(){
-        if(this.state.typeFilter1 !== "" && this.state.typeFilter2 === ""){
+        const typeFilter1 = this.state.typeFilter1;
+        const typeFilter2 = this.state.typeFilter2;
+        if(typeFilter1 !== "" && typeFilter2 === ""){
             let newPokemon = []
             this.props.fetchByType(this.state.typeFilter1)
                 .then(() => {
@@ -114,37 +116,37 @@ class TeamBuilder extends React.Component {
                 newPokemon = []
                 allPokemon.forEach(pokemon => {
                     if(pokemon.types){
-                        if(pokemon.types.includes(this.state.typeFilter1)){
+                        if(pokemon.types.includes(typeFilter1)){
                             newPokemon.push(pokemon)
                         }
                     }
                     
-                })
+                });
                 this.setState({pokemon: newPokemon})
             });
-        } else if (this.state.typeFilter1 === "" && this.state.typeFilter2 !== ""){
-            this.props.fetchByType(this.state.typeFilter2)
+        } else if (typeFilter1 === "" && typeFilter2 !== ""){
+            this.props.fetchByType(typeFilter2)
                 .then(()=> {
                     let allPokemon = Object.values(this.props.pokemon)
                     let newPokemon = []
                     allPokemon.forEach(pokemon => {
                         if (pokemon.types) {
-                            if (pokemon.types.includes(this.state.typeFilter2)) {
+                            if (pokemon.types.includes(typeFilter2)) {
                                 newPokemon.push(pokemon)
                             }
                         }
                     })
                 this.setState({ pokemon: newPokemon })
             })
-        } else if (this.state.typeFilter1 !== "" && this.state.typeFilter2 !== ""){
-            this.props.fetchByType(this.state.typeFilter2)
-                .then(() => this.props.fetchByType(this.state.typeFilter1)
+        } else if (typeFilter1 !== "" && typeFilter2 !== ""){
+            this.props.fetchByType(typeFilter2)
+                .then(() => this.props.fetchByType(typeFilter1)
                     .then(() => {
                         let allPokemon = Object.values(this.props.pokemon)
                         let newPokemon = []
                         allPokemon.forEach(pokemon => {
                             if (pokemon.types) {
-                                if (pokemon.types.includes(this.state.typeFilter2) && pokemon.types.includes(this.state.typeFilter1)) {
+                                if (pokemon.types.includes(typeFilter2) && pokemon.types.includes(typeFilter1)) {
                                     newPokemon.push(pokemon)
                                 }
                             }
@@ -179,9 +181,9 @@ class TeamBuilder extends React.Component {
     }   
 
     handleTypeFilter(filter, type){
-        this.setState({
+        this.setState(() => ({
             [filter]: type 
-        });
+        }), this.filterByType());
     }
 
     updatePokeAttrs(){
@@ -189,7 +191,7 @@ class TeamBuilder extends React.Component {
     }
 
     render(){
-        console.log(this.state.typeFilter1);
+        console.log(this.state.pokemon);
         const { pokemon, team, openFilter } = this.state;
         const { fetchPokemon, fetchItem, fetchItems, fetchMove, fetchAbility, } = this.props;
         const pokemonComponents = pokemon.map(poke => {
