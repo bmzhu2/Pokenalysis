@@ -5,8 +5,8 @@ const passport = require('passport');
 
 const Like = require('../../models/Like');
 
-router.get('/user/:user_id', (req, res) => {
-  Like.find({ user: req.params.user_id })
+router.get('/user/:username', (req, res) => {
+  Like.find({ username: req.params.username })
     .then(likes => res.json(likes))
     .catch(err =>
       res.status(404).json({ nolikesfound: 'No teams liked by that user' }
