@@ -26,7 +26,7 @@ class TeamItem extends React.Component {
                 <div className="team-container">
                     <div className="team-top">
                         <h1> {this.props.team.name} </h1>
-                        <Link to={`/users/${this.props.team.user}`}><h2> by: {this.props.team.username}</h2></Link>
+                        <Link to={`/users/${this.props.team.username}`}><h2> by: {this.props.team.username}</h2></Link>
                     </div>
                     <TeamPokemon pokemon={this.props.team.pokemon} />
                     <div className="row">
