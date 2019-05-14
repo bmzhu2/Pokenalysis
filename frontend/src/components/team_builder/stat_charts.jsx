@@ -1,7 +1,7 @@
 import React from 'react'
 import * as StatUtil from '../../util/stat_util'
 import * as TypeUtil from '../../util/type_util'
-import { RadarChart } from 'react-vis'
+import { RadarChart, HorizontalBarSeries } from 'react-vis'
 
 class StatChart extends React.Component{
     constructor(props){
@@ -42,8 +42,11 @@ class StatChart extends React.Component{
         return(
             <div className='team-stat-container'>
                 <div className='stat-averages'>
-                    <RadarChart data={statData} domains={statDomains} />
+                    <RadarChart data={statData} domains={statDomains} height={200} width={200}/>
                 </div>
+                <div className='defensive-types'>
+                    
+                </div> 
             </div>
         )
     }
