@@ -1,4 +1,5 @@
 import React from 'react'
+import TeamItem from '../feed/team_item'
 
 class Profile extends React.Component{
     constructor(props){
@@ -30,19 +31,30 @@ class Profile extends React.Component{
             let currentIndex
             if(this.state.switch === 'myTeams'){
                 myTeamsButton = <div className='disabled-profile-button'>
-                    My Teams
+                    {this.props.match.params.username}'s Teams
                 </div>;
                 likedTeamsButton = <div onClick={this.handleSwitch} className='active-profile-button'>
                     Liked Teams
                 </div>;
-                // Object.
+                currentIndex = this.props.userTeams.map(team => (
+                    <TeamItem
+                        key={team._id}
+                        team={team}
+                    />
+                ))
             }else{
                 myTeamsButton = <div className='active-profile-button' onClick={this.handleSwitch} >
-                    My Teams
+                    {this.props.match.params.username}'s Teams
                 </div>
                 likedTeamsButton = <div className='disabled-profile-button'>
                     Liked Teams
                 </div>;
+                currentIndex = this.props.likedTeams.map(team => (
+                    <TeamItem
+                        key={team._id}
+                        team={team}
+                    />
+                ))
             }
 
             
@@ -54,6 +66,9 @@ class Profile extends React.Component{
                     <div>
                         {myTeamsButton}
                         {likedTeamsButton}
+                    </div>
+                    <div>
+                        {currentIndex}
                     </div>
                 </div>
             )

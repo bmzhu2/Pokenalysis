@@ -22,7 +22,7 @@ class NavBar extends React.Component {
                     <Link to={'/'}><div className="icon"></div></Link>
                     <div className="links">
                         <p>Hi {this.props.currentUser.username}</p>
-                        <Link to={'/profile'}>Profile</Link>
+                        <Link to={'/users/' + this.props.currentUser.username}>Profile</Link>
                         <Link to={'/team-builder'}>Create a Team</Link>
                         <button onClick={this.logoutUser}>Logout</button>
                     </div>
