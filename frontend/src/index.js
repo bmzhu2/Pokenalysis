@@ -40,7 +40,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
   window.createTeam = createTeam
   window.signup = signup
   window.login = login
-  window.fetchUser = fetchUser
 
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store} />, root)
