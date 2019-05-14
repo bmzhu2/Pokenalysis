@@ -1,14 +1,8 @@
-.team-container {
+.team-slots-container {
     display: flex;
     overflow: auto;
     flex-wrap: wrap;
     justify-content: center;
-}
-.team-slot-container {
-    display: flex;
-    justify-content: center;
-    min-width: 540px;
-    margin: none;
 }
 
 .pokemon-index {
