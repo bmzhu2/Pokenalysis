@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { fetchTeams } from '../../actions/team_actions';
 import { fetchUser } from '../../actions/user_actions';
+import { fetchTeamLikes } from '../../actions/like_actions'; 
 import Feed from './feed';
 
 const mapStateToProps = state => {
@@ -16,6 +17,7 @@ const mapDispatchToProps = dispatch => {
     return ({
         fetchTeams: () => dispatch(fetchTeams()),
         fetchUser: (id) => dispatch(fetchUser(id)),
+        fetchTeamLikes: (teamId) => dispatch(fetchTeamLikes(teamId)),
     });
 };
 

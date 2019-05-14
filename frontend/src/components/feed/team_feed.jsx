@@ -10,11 +10,11 @@ const TeamFeed = (props) => {
         return(
             <div className='teams-container'>
                 {
-                    
                     Object.values(props.teams).map((team) => (
                         <TeamItem 
                             key={team._id} 
                             team={team}
+                            fetchTeamLikes={props.fetchTeamLikes}
                         />
                     ))
                 }

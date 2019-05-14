@@ -18,7 +18,7 @@ class TeamPoke extends React.Component {
                             }}>
                         </div>
                     </div>
-                    <h3> {this.props.poke.pokeId} </h3>                    
+                    <h3> {this.props.poke.name} </h3>                    
                 </div>
             )
         } else {
