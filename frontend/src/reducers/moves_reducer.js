@@ -2,7 +2,6 @@ import {RECEIVE_MOVE} from '../actions/poke_api_actions';
 
 const movesReducer = (state = {}, action) => {
   Object.freeze(state);
-  let emptyState = {};
   switch (action.type) {
     case RECEIVE_MOVE:
       let data = action.move.data

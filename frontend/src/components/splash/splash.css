@@ -8,7 +8,7 @@
 .splash-logo{
     background-image: url(https://i.imgur.com/PB7zU8W.png);
     width: 60vw;
-    height: 20vw;
+    height: 22vw;
     background-size: cover;
     background-repeat: no-repeat;
     margin: 0 auto;
@@ -16,7 +16,8 @@
 
 .row{
     width: 100vw;
-    display: block;
+    display: flex;
+    justify-content: center;
 }
 
 h2{
@@ -25,4 +26,43 @@ h2{
     font-weight:900;
     text-align: center;
     color:rgb(70, 70, 70);
+}
+
+.link-button {
+    margin: 20px auto 5px auto;
+    background-color: rgb(94, 208, 94) ;
+    font-family: 'Montserrat', sans-serif;
+    color: whitesmoke;
+    border:none;
+    width: 16vw;
+    min-width: 160px;
+    text-align: center;
+    font-weight: 900;
+    font-size: 14px;
+    padding: 20px 6px;
+    text-decoration: none;
+    border-radius: 50px;
+    -webkit-box-shadow: 0px 1.5px 10px 1px #0c0c0c29;
+    -moz-box-shadow: 0px 1.5px 10px 1px #0c0c0c29;
+    box-shadow: 0px 1.5px 10px 1px #0c0c0c29;
+    -webkit-transition: background-color .5s ease-out;
+    -moz-transition: background-color .5s ease-out;
+    -o-transition: background-color .5s ease-out;
+    transition: background-color .5s ease-out;
+}
+
+.link-button:hover{
+    background-color: rgb(77, 182, 77);
+}
+
+.splash-page .row:nth-of-type(3) .link-button{
+    margin-top: 40px;
+}
+
+.splash-page .row:nth-of-type(4) .link-button{
+    background-color: rgb(21, 148, 194);
+}
+
+.splash-page .row:nth-of-type(4) .link-button:hover{
+    background-color: rgb(23, 115, 148);
 }

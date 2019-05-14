@@ -2,7 +2,6 @@ import { RECEIVE_ABILITY } from '../actions/poke_api_actions';
 
 const abilityReducer = (state = {}, action) => {
   Object.freeze(state);
-  let emptyState = {};
   switch (action.type) {
     case RECEIVE_ABILITY:
       let data = action.ability.data

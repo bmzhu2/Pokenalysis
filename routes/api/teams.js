@@ -42,7 +42,7 @@ router.post('/',
 
     const newTeam = new Team({
       name: req.body.name,
-      user: req.user.id
+      user_id: req.user.id
     });
 
     for (let i = 0; i < 6; i++) {
