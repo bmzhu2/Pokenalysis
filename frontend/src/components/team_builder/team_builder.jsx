@@ -7,7 +7,8 @@ import NavbarContainer from '../nav/navbar_container';
 import Sidebar from './sidebar';
 import { idParse } from '../../reducers/pokemon_reducer';
 import PokemonAttributes from './pokemon_attributes';
-// import { types } from '../../util/type_util';
+import Filter from './filter';
+// import { types } from '../../util/type_util'; USE THIS WHEN UTIL FILE IS FIXED
 import './team_builder.css';
 import StatCharts from './stat_charts'
 
@@ -18,10 +19,13 @@ class TeamBuilder extends React.Component {
             pokemon: [],
             teamName: "",
             team: { 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {} },
-            pokeAttrs: { 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {} },
+            attrId: "1",
             search: "",
             typeFilter1: "",
-            typeFilter2: ""
+            typeFilter2: "",
+            openFilter: {
+                name: "typeFilter1",
+            }
         };
         this.onDrop1 = this.onDrop1.bind(this);
         this.onDrop2 = this.onDrop2.bind(this);
@@ -35,31 +39,38 @@ class TeamBuilder extends React.Component {
         this.filterByType = this.filterByType.bind(this)
         this.removeFromTeam = this.removeFromTeam.bind(this);
         this.saveTeam = this.saveTeam.bind(this);
-        this.handleTypeFilter = this.handleTypeFilter.bind(this)
+        this.handleTypeFilter = this.handleTypeFilter.bind(this);
+        this.sendAttrId = this.sendAttrId.bind(this);
     }
 
     onDrop1(incomingState) {
         const team = Object.assign({}, this.state.team, { 1: incomingState });
+        this.props.fetchPokemon(incomingState.name);
         this.setState({ team });
     }
     onDrop2(incomingState) {
         const team = Object.assign({}, this.state.team, { 2: incomingState });
+        this.props.fetchPokemon(incomingState.name);
         this.setState({ team });
     }
     onDrop3(incomingState) {
         const team = Object.assign({}, this.state.team, { 3: incomingState });
+        this.props.fetchPokemon(incomingState.name);
         this.setState({ team });
     }
     onDrop4(incomingState) {
         const team = Object.assign({}, this.state.team, { 4: incomingState });
+        this.props.fetchPokemon(incomingState.name);
         this.setState({ team });
     }
     onDrop5(incomingState) {
         const team = Object.assign({}, this.state.team, { 5: incomingState });
+        this.props.fetchPokemon(incomingState.name);
         this.setState({ team });
     }
     onDrop6(incomingState) {
         const team = Object.assign({}, this.state.team, { 6: incomingState });
+        this.props.fetchPokemon(incomingState.name);
         this.setState({ team });
     }
     
@@ -103,7 +114,9 @@ class TeamBuilder extends React.Component {
     }
 
     filterByType(){
-        if(this.state.typeFilter1 !== "" && this.state.typeFilter2 === ""){
+        const typeFilter1 = this.state.typeFilter1;
+        const typeFilter2 = this.state.typeFilter2;
+        if(typeFilter1 !== "" && typeFilter2 === ""){
             let newPokemon = []
             this.props.fetchByType(this.state.typeFilter1)
                 .then(() => {
@@ -111,43 +124,45 @@ class TeamBuilder extends React.Component {
                 newPokemon = []
                 allPokemon.forEach(pokemon => {
                     if(pokemon.types){
-                        if(pokemon.types.includes(this.state.typeFilter1)){
+                        if(pokemon.types.includes(typeFilter1)){
                             newPokemon.push(pokemon)
                         }
                     }
                     
-                })
-                this.setState({pokemon: newPokemon})
+                });
+                this.setState(() => ({pokemon: newPokemon}));
             });
-        } else if (this.state.typeFilter1 === "" && this.state.typeFilter2 !== ""){
-            this.props.fetchByType(this.state.typeFilter2)
+        } else if (typeFilter1 === "" && typeFilter2 !== ""){
+            this.props.fetchByType(typeFilter2)
                 .then(()=> {
                     let allPokemon = Object.values(this.props.pokemon)
                     let newPokemon = []
                     allPokemon.forEach(pokemon => {
                         if (pokemon.types) {
-                            if (pokemon.types.includes(this.state.typeFilter2)) {
+                            if (pokemon.types.includes(typeFilter2)) {
                                 newPokemon.push(pokemon)
                             }
                         }
                     })
-                this.setState({ pokemon: newPokemon })
+                this.setState(() => ({ pokemon: newPokemon }));
             })
-        } else if (this.state.typeFilter1 !== "" && this.state.typeFilter2 !== ""){
-            this.props.fetchByType(this.state.typeFilter2)
-                .then(() => this.props.fetchByType(this.state.typeFilter1)
+        } else if (typeFilter1 !== "" && typeFilter2 !== ""){
+            this.props.fetchByType(typeFilter2)
+                .then(() => this.props.fetchByType(typeFilter1)
                     .then(() => {
-                        let allPokemon = Object.values(this.props.pokemon)
-                        let newPokemon = []
+                        let allPokemon = Object.values(this.props.pokemon);
+                        let newPokemon = [];
                         allPokemon.forEach(pokemon => {
                             if (pokemon.types) {
-                                if (pokemon.types.includes(this.state.typeFilter2) && pokemon.types.includes(this.state.typeFilter1)) {
-                                    newPokemon.push(pokemon)
+                                if (pokemon.types.includes(typeFilter2) && pokemon.types.includes(typeFilter1)) {
+                                    newPokemon.push(pokemon);
                                 }
                             }
-                        })
-                        this.setState({ pokemon: newPokemon })
-                    }))
+                        });
+                        this.setState(() => ({ pokemon: newPokemon }));
+                    }));
+        } else {
+            this.setState((state, props) => ({ pokemon: Object.values(props.pokemon)}));
         }
     }
     
@@ -175,18 +190,41 @@ class TeamBuilder extends React.Component {
         createTeam(newTeam);
     }   
 
-    handleTypeFilter(e){
-        this.setState({typeFilter1: 'fire'}, () => {
-            this.filterByType();
+    handleOpenFilter(filter){
+        let openFilter = this.state.openFilter;
+        openFilter.name = filter;
+        this.setState({
+            openFilter,
         });
     }
 
-    updatePokeAttrs(){
-        //set state of attrs here
+    handleTypeFilter(filter, type){
+        this.setState(() => ({
+            [filter]: type 
+        }));
+        this.filterByType();
+    }
+
+    clearFilter(filter){
+        this.setState(() => ({
+            [filter]: "",
+        })); 
+        this.filterByType();
+    }
+
+    updatePokeAttrs(id, attrs){
+        let team = this.state.team;
+        team[id] = attrs;
+        this.setState(() => ({ team }));
+    }
+
+    sendAttrId(id){
+        this.setState(() => ({ attrId: id }));
     }
 
     render(){
-        const { pokemon, team } = this.state;
+        console.log(this.state.team);
+        const { pokemon, team, openFilter } = this.state;
         const { fetchPokemon, fetchItem, fetchItems, fetchMove, fetchAbility, } = this.props;
         const pokemonComponents = pokemon.map(poke => {
             return(
@@ -200,20 +238,18 @@ class TeamBuilder extends React.Component {
                     <input onChange={this.updateTeamName()} type="text" placeholder={this.state.teamName}/>
                     <input onClick={this.saveTeam} type="submit" value="Save"/>
                     <ul className="team-slots-container"> 
-                        <TeamSlot key="team-slot-1" id="1" onDrop={this.onDrop1} id={team[1].id} name={team[1].name} sprite={team[1].sprite} removeFromTeam={this.removeFromTeam}/>
-                        <TeamSlot key="team-slot-2" id="2" onDrop={this.onDrop2} id={team[2].id} name={team[2].name} sprite={team[2].sprite} removeFromTeam={this.removeFromTeam}/>
-                        <TeamSlot key="team-slot-3" id="3" onDrop={this.onDrop3} id={team[3].id} name={team[3].name} sprite={team[3].sprite} removeFromTeam={this.removeFromTeam}/>
-                        <TeamSlot key="team-slot-4" id="4" onDrop={this.onDrop4} id={team[4].id} name={team[4].name} sprite={team[4].sprite} removeFromTeam={this.removeFromTeam}/>
-                        <TeamSlot key="team-slot-5" id="5" onDrop={this.onDrop5} id={team[5].id} name={team[5].name} sprite={team[5].sprite} removeFromTeam={this.removeFromTeam}/>
-                        <TeamSlot key="team-slot-6" id="6" onDrop={this.onDrop6} id={team[6].id} name={team[6].name} sprite={team[6].sprite} removeFromTeam={this.removeFromTeam}/>
+                        <TeamSlot onClick={() => this.sendAttrId("1")} key="team-slot-1" id="1" onDrop={this.onDrop1} pokeId={team[1].id} name={team[1].name} sprite={team[1].sprite} removeFromTeam={this.removeFromTeam}/>
+                        <TeamSlot onClick={() => this.sendAttrId("2")} key="team-slot-2" id="2" onDrop={this.onDrop2} pokeId={team[2].id} name={team[2].name} sprite={team[2].sprite} removeFromTeam={this.removeFromTeam}/>
+                        <TeamSlot onClick={() => this.sendAttrId("3")} key="team-slot-3" id="3" onDrop={this.onDrop3} pokeId={team[3].id} name={team[3].name} sprite={team[3].sprite} removeFromTeam={this.removeFromTeam}/>
+                        <TeamSlot onClick={() => this.sendAttrId("4")} key="team-slot-4" id="4" onDrop={this.onDrop4} pokeId={team[4].id} name={team[4].name} sprite={team[4].sprite} removeFromTeam={this.removeFromTeam}/>
+                        <TeamSlot onClick={() => this.sendAttrId("5")} key="team-slot-5" id="5" onDrop={this.onDrop5} pokeId={team[5].id} name={team[5].name} sprite={team[5].sprite} removeFromTeam={this.removeFromTeam}/>
+                        <TeamSlot onClick={() => this.sendAttrId("6")} key="team-slot-6" id="6" onDrop={this.onDrop6} pokeId={team[6].id} name={team[6].name} sprite={team[6].sprite} removeFromTeam={this.removeFromTeam}/>
                     </ul>
                 </div>
                 <PokemonAttributes
-                    fetchPokemon={fetchPokemon}
-                    fetchItem={fetchItem}
-                    fetchMove={fetchMove}
-                    fetchAbility={fetchAbility}
                     updatePokeAttrs={this.updatePokeAttrs}
+                    team={this.state.team}
+                    slot={this.state.attrId}
                 />
                 <div>
                     <StatCharts team={this.state.team} pokemon={this.props.pokemon} />
@@ -224,10 +260,17 @@ class TeamBuilder extends React.Component {
                         <input className="search-button" type="submit" value="Search"/>
                     </form>
                     <div>
-                        <div>filter 1</div>
-                        <div>filter 2</div>
-                        <div>filter 3</div>
+                        <div onClick={() => this.handleOpenFilter("typeFilter1")}>filter 1
+                            <h3 onClick={() => this.clearFilter("typeFilter1")}>X</h3>
+                        </div>
+                        <div onClick={() => this.handleOpenFilter("typeFilter2")}>filter 2
+                            <h3 onClick={() => this.clearFilter("typeFilter2")}>X</h3>
+                        </div>
                     </div>
+                    <Filter handleTypeFilter={this.handleTypeFilter} 
+                            filterByType={this.filterByType}
+                            name={openFilter.name}
+                            />
                 </div>
                 <div>
                     <ul className="pokemon-index">
