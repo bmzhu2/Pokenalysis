@@ -23,6 +23,9 @@ const collect = (connect, monitor) => {
 class Pokemon extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            loaded: false,
+        };
     }
 
     componentDidMount(){
@@ -34,8 +37,9 @@ class Pokemon extends React.Component {
                         const src = img.getAttribute('data-lazy');
 
                         img.setAttribute('src', src);
-
+                        // this.setState({loaded: true});
                         observer.disconnect();
+                        
                     }
                 });
             });
@@ -52,7 +56,12 @@ class Pokemon extends React.Component {
         return connectDragSource(
             <li className="pokemon-container">
                 <h3 className="pokemon-sprite-name">{name}</h3>
-                <img ref={ref => this.imageRef = ref} className="pokemon-index-sprite" src="https://cdn.vox-cdn.com/uploads/chorus_asset/file/13144987/jbareham_180922_0802_pokeball.png" data-lazy={sprite} alt="pokeball"/>
+                <img ref={ref => this.imageRef = ref} 
+                    className={this.state.loaded ? "pokemon-index-sprite" : "pokemon-index-sprite loading"} 
+                    src="https://cdn.vox-cdn.com/uploads/chorus_asset/file/13144987/jbareham_180922_0802_pokeball.png" 
+                    data-lazy={sprite} 
+                    alt="pokeball"
+                />
             </li>
         )
     }

@@ -35,3 +35,16 @@
     text-align: center;
     z-index: 1;
 }
+
+.loading {
+  /* animation: rotation 1s infinite linear; */
+}
+
+@keyframes rotation {
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(-180deg);
+  }
+}
