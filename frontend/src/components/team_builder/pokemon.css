@@ -3,14 +3,18 @@
     height: 70px;
     width: 70px;
     margin: 15px;
-    background-color: #fb6262;
+    background-color: rgb(251, 97, 98);
+    -moz-box-shadow:    inset 0 0 7px 0px #0000004a;
+    -webkit-box-shadow: inset 0 0 7px 0px #0000004a;
+    box-shadow:         inset 0 0 7px 0px #0000004a;
 }
 
 .pokemon-index-sprite {
     height: inherit;
     width: inherit;
     object-fit: contain;  
-    position: absolute;
+    position: relative;
+    top: -14px;
     transition: .2s;
     z-index: 3;  
 
@@ -23,8 +27,13 @@
 }
 
 .pokemon-sprite-name {
-    color: white;
-    text-shadow: 1px 1px rgb(0, 0, 0);
-    position: absolute;
+    color: rgb(38, 38, 38);
+    /* text-shadow: 1px 1px rgb(0, 0, 0); */
+    
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    position: relative;
+    top:74px;
+    text-align: center;
     z-index: 1;
 }

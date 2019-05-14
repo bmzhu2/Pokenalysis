@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    padding-top: 20px;
+    padding: 20px 110px 0 110px;
 }
 
 .team-container{
@@ -12,8 +12,8 @@
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
     height: 20vw;
-    min-width: 70vw;
-    width: 90vw;
+    min-width: 50vw;
+    width: 66vw;
     justify-content: center;
     background-color: rgb(249, 245, 245);
     margin: 20px 0;
@@ -36,8 +36,9 @@
 }
 
 .team-container > h2 {
-    font-size: 3vw;
+    font-size: 2.5vw;
     font-weight: 100;
+    margin-bottom: 1vw;
 }
 
 .poke-container {
@@ -55,18 +56,26 @@
     margin: 0px 1vw;
     width: 8vw;
     height: 8vw;
-    background-color: rgb(205, 100, 100);
-    -webkit-box-shadow: 0px 1.5px 4px 1.5px #0c0c0c29;
-    -moz-box-shadow: 0px 1.5px 4px 1.5px #0c0c0c29;
-    box-shadow: 0px 1.5px 4px 1.5px #0c0c0c29;
+    background-color: rgb(251, 97, 98);
+    -moz-box-shadow:    inset 0 0 7px 0px #0000004a;
+    -webkit-box-shadow: inset 0 0 7px 0px #0000004a;
+    box-shadow:         inset 0 0 7px 0px #0000004a;
+    transition: .2s;
+
 } 
 
-.poke-pic {
-    width: 7vw;
-    height: 7vw;
-    background-size: 10vw;
-    background-position-x: -.8vw;
-    background-position-y: -0.6vw;
+.poke-circle:hover{
+    transform: scale(1.1);
 }
+
+.poke-pic {
+    width: 7.5vw;
+    height: 7.5vw;
+    background-size: 7vw;
+    background-position-x: 0.3vw;
+    background-position-y: 0.1vw;
+    background-repeat: no-repeat;
+}
+
 
 
