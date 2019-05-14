@@ -12,7 +12,7 @@ export const userTeams = (teams, userId) => {
 
 export const likedTeams = (entities, userId) => {
     let newTeams = [];
-    likes = Object.values(entities.likes)
+    let likes = Object.values(entities.likes)
     likes.forEach(like => {
         if(like.user === userId){
             newTeams.push(entities.teams[like.team])
