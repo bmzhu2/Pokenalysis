@@ -209,8 +209,6 @@ class TeamBuilder extends React.Component {
     }
 
     render(){
-        console.log(this.props.pokemon);
-        console.log("2", this.state.typeFilter2);
         const { pokemon, team, openFilter } = this.state;
         const { fetchPokemon, fetchItem, fetchItems, fetchMove, fetchAbility, } = this.props;
         const pokemonComponents = pokemon.map(poke => {
