@@ -38,7 +38,7 @@ class TeamBuilder extends React.Component {
         this.filterByType = this.filterByType.bind(this)
         this.removeFromTeam = this.removeFromTeam.bind(this);
         this.saveTeam = this.saveTeam.bind(this);
-        this.handleTypeFilter = this.handleTypeFilter.bind(this)
+        this.handleTypeFilter = this.handleTypeFilter.bind(this);
     }
 
     onDrop1(incomingState) {
@@ -122,7 +122,7 @@ class TeamBuilder extends React.Component {
                     }
                     
                 });
-                this.setState({pokemon: newPokemon})
+                this.setState(() => ({pokemon: newPokemon}));
             });
         } else if (typeFilter1 === "" && typeFilter2 !== ""){
             this.props.fetchByType(typeFilter2)
@@ -136,23 +136,25 @@ class TeamBuilder extends React.Component {
                             }
                         }
                     })
-                this.setState({ pokemon: newPokemon })
+                this.setState(() => ({ pokemon: newPokemon }));
             })
         } else if (typeFilter1 !== "" && typeFilter2 !== ""){
             this.props.fetchByType(typeFilter2)
                 .then(() => this.props.fetchByType(typeFilter1)
                     .then(() => {
-                        let allPokemon = Object.values(this.props.pokemon)
-                        let newPokemon = []
+                        let allPokemon = Object.values(this.props.pokemon);
+                        let newPokemon = [];
                         allPokemon.forEach(pokemon => {
                             if (pokemon.types) {
                                 if (pokemon.types.includes(typeFilter2) && pokemon.types.includes(typeFilter1)) {
-                                    newPokemon.push(pokemon)
+                                    newPokemon.push(pokemon);
                                 }
                             }
-                        })
-                        this.setState({ pokemon: newPokemon })
-                    }))
+                        });
+                        this.setState(() => ({ pokemon: newPokemon }));
+                    }));
+        } else {
+            this.setState((state, props) => ({ pokemon: Object.values(props.pokemon)}));
         }
     }
     
@@ -191,7 +193,15 @@ class TeamBuilder extends React.Component {
     handleTypeFilter(filter, type){
         this.setState(() => ({
             [filter]: type 
-        }), this.filterByType());
+        }));
+        this.filterByType();
+    }
+
+    clearFilter(filter){
+        this.setState(() => ({
+            [filter]: "",
+        })); 
+        this.filterByType();
     }
 
     updatePokeAttrs(){
@@ -199,6 +209,8 @@ class TeamBuilder extends React.Component {
     }
 
     render(){
+        console.log(this.props.pokemon);
+        console.log("2", this.state.typeFilter2);
         const { pokemon, team, openFilter } = this.state;
         const { fetchPokemon, fetchItem, fetchItems, fetchMove, fetchAbility, } = this.props;
         const pokemonComponents = pokemon.map(poke => {
@@ -222,11 +234,8 @@ class TeamBuilder extends React.Component {
                     </ul>
                 </div>
                 <PokemonAttributes
-                    fetchPokemon={fetchPokemon}
-                    fetchItem={fetchItem}
-                    fetchMove={fetchMove}
-                    fetchAbility={fetchAbility}
                     updatePokeAttrs={this.updatePokeAttrs}
+                    pokeAttrs={this.state.pokeAttrs}
                 />
                 <div className="filters">
                     <form onSubmit={this.handleSubmit}>
@@ -234,8 +243,12 @@ class TeamBuilder extends React.Component {
                         <input className="search-button" type="submit" value="Search"/>
                     </form>
                     <div>
-                        <div onClick={() => this.handleOpenFilter("typeFilter1")}>filter 1</div>
-                        <div onClick={() => this.handleOpenFilter("typeFilter2")}>filter 2</div>
+                        <div onClick={() => this.handleOpenFilter("typeFilter1")}>filter 1
+                            <h3 onClick={() => this.clearFilter("typeFilter1")}>X</h3>
+                        </div>
+                        <div onClick={() => this.handleOpenFilter("typeFilter2")}>filter 2
+                            <h3 onClick={() => this.clearFilter("typeFilter2")}>X</h3>
+                        </div>
                     </div>
                     <Filter handleTypeFilter={this.handleTypeFilter} 
                             filterByType={this.filterByType}
