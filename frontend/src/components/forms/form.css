@@ -16,7 +16,7 @@
     width: 100vw;
     font-size: 2vw;
     margin-bottom: 3vw;
-    color: rgb(70, 70, 70);
+    color: white;
     font-weight: 900;
 }
 
@@ -26,7 +26,11 @@
     justify-content: center;
     flex-wrap: wrap;
     text-align: center;
-    color: rgb(109, 109, 109);
+    color: white;
+}
+
+.form-row a {
+    color: rgb(195, 244, 255);
 }
 
 .form-row > * {

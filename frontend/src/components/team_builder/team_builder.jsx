@@ -7,7 +7,8 @@ import NavbarContainer from '../nav/navbar_container';
 import Sidebar from './sidebar';
 import { idParse } from '../../reducers/pokemon_reducer';
 import PokemonAttributes from './pokemon_attributes';
-// import { types } from '../../util/type_util';
+import Filter from './filter';
+// import { types } from '../../util/type_util'; USE THIS WHEN UTIL FILE IS FIXED
 import './team_builder.css';
 
 class TeamBuilder extends React.Component {
@@ -20,7 +21,10 @@ class TeamBuilder extends React.Component {
             pokeAttrs: { 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {} },
             search: "",
             typeFilter1: "",
-            typeFilter2: ""
+            typeFilter2: "",
+            openFilter: {
+                name: "typeFilter1",
+            }
         };
         this.onDrop1 = this.onDrop1.bind(this);
         this.onDrop2 = this.onDrop2.bind(this);
@@ -34,7 +38,7 @@ class TeamBuilder extends React.Component {
         this.filterByType = this.filterByType.bind(this)
         this.removeFromTeam = this.removeFromTeam.bind(this);
         this.saveTeam = this.saveTeam.bind(this);
-        this.handleTypeFilter = this.handleTypeFilter.bind(this)
+        this.handleTypeFilter = this.handleTypeFilter.bind(this);
     }
 
     onDrop1(incomingState) {
@@ -74,7 +78,9 @@ class TeamBuilder extends React.Component {
                     };
                 })
             });
-        });  
+        });
+
+        this.props.fetchItems()
     }
 
     handleScroll() {
@@ -102,7 +108,9 @@ class TeamBuilder extends React.Component {
     }
 
     filterByType(){
-        if(this.state.typeFilter1 !== "" && this.state.typeFilter2 === ""){
+        const typeFilter1 = this.state.typeFilter1;
+        const typeFilter2 = this.state.typeFilter2;
+        if(typeFilter1 !== "" && typeFilter2 === ""){
             let newPokemon = []
             this.props.fetchByType(this.state.typeFilter1)
                 .then(() => {
@@ -110,43 +118,45 @@ class TeamBuilder extends React.Component {
                 newPokemon = []
                 allPokemon.forEach(pokemon => {
                     if(pokemon.types){
-                        if(pokemon.types.includes(this.state.typeFilter1)){
+                        if(pokemon.types.includes(typeFilter1)){
                             newPokemon.push(pokemon)
                         }
                     }
                     
-                })
-                this.setState({pokemon: newPokemon})
+                });
+                this.setState(() => ({pokemon: newPokemon}));
             });
-        } else if (this.state.typeFilter1 === "" && this.state.typeFilter2 !== ""){
-            this.props.fetchByType(this.state.typeFilter2)
+        } else if (typeFilter1 === "" && typeFilter2 !== ""){
+            this.props.fetchByType(typeFilter2)
                 .then(()=> {
                     let allPokemon = Object.values(this.props.pokemon)
                     let newPokemon = []
                     allPokemon.forEach(pokemon => {
                         if (pokemon.types) {
-                            if (pokemon.types.includes(this.state.typeFilter2)) {
+                            if (pokemon.types.includes(typeFilter2)) {
                                 newPokemon.push(pokemon)
                             }
                         }
                     })
-                this.setState({ pokemon: newPokemon })
+                this.setState(() => ({ pokemon: newPokemon }));
             })
-        } else if (this.state.typeFilter1 !== "" && this.state.typeFilter2 !== ""){
-            this.props.fetchByType(this.state.typeFilter2)
-                .then(() => this.props.fetchByType(this.state.typeFilter1)
+        } else if (typeFilter1 !== "" && typeFilter2 !== ""){
+            this.props.fetchByType(typeFilter2)
+                .then(() => this.props.fetchByType(typeFilter1)
                     .then(() => {
-                        let allPokemon = Object.values(this.props.pokemon)
-                        let newPokemon = []
+                        let allPokemon = Object.values(this.props.pokemon);
+                        let newPokemon = [];
                         allPokemon.forEach(pokemon => {
                             if (pokemon.types) {
-                                if (pokemon.types.includes(this.state.typeFilter2) && pokemon.types.includes(this.state.typeFilter1)) {
-                                    newPokemon.push(pokemon)
+                                if (pokemon.types.includes(typeFilter2) && pokemon.types.includes(typeFilter1)) {
+                                    newPokemon.push(pokemon);
                                 }
                             }
-                        })
-                        this.setState({ pokemon: newPokemon })
-                    }))
+                        });
+                        this.setState(() => ({ pokemon: newPokemon }));
+                    }));
+        } else {
+            this.setState((state, props) => ({ pokemon: Object.values(props.pokemon)}));
         }
     }
     
@@ -174,10 +184,26 @@ class TeamBuilder extends React.Component {
         createTeam(newTeam);
     }   
 
-    handleTypeFilter(e){
-        this.setState({typeFilter1: 'fire'}, () => {
-            this.filterByType();
+    handleOpenFilter(filter){
+        let openFilter = this.state.openFilter;
+        openFilter.name = filter;
+        this.setState({
+            openFilter,
         });
+    }
+
+    handleTypeFilter(filter, type){
+        this.setState(() => ({
+            [filter]: type 
+        }));
+        this.filterByType();
+    }
+
+    clearFilter(filter){
+        this.setState(() => ({
+            [filter]: "",
+        })); 
+        this.filterByType();
     }
 
     updatePokeAttrs(){
@@ -185,7 +211,9 @@ class TeamBuilder extends React.Component {
     }
 
     render(){
-        const { pokemon, team } = this.state;
+        console.log(this.props.pokemon);
+        console.log("2", this.state.typeFilter2);
+        const { pokemon, team, openFilter } = this.state;
         const { fetchPokemon, fetchItem, fetchItems, fetchMove, fetchAbility, } = this.props;
         const pokemonComponents = pokemon.map(poke => {
             return(
@@ -208,8 +236,8 @@ class TeamBuilder extends React.Component {
                     </ul>
                 </div>
                 <PokemonAttributes
-                    //pass in the pokemon's current attributes, call it pokeAttrs
                     updatePokeAttrs={this.updatePokeAttrs}
+                    pokeAttrs={this.state.pokeAttrs}
                 />
                 <div className="filters">
                     <form onSubmit={this.handleSubmit}>
@@ -217,10 +245,17 @@ class TeamBuilder extends React.Component {
                         <input className="search-button" type="submit" value="Search"/>
                     </form>
                     <div>
-                        <div>filter 1</div>
-                        <div>filter 2</div>
-                        <div>filter 3</div>
+                        <div onClick={() => this.handleOpenFilter("typeFilter1")}>filter 1
+                            <h3 onClick={() => this.clearFilter("typeFilter1")}>X</h3>
+                        </div>
+                        <div onClick={() => this.handleOpenFilter("typeFilter2")}>filter 2
+                            <h3 onClick={() => this.clearFilter("typeFilter2")}>X</h3>
+                        </div>
                     </div>
+                    <Filter handleTypeFilter={this.handleTypeFilter} 
+                            filterByType={this.filterByType}
+                            name={openFilter.name}
+                            />
                 </div>
                 <div>
                     <ul className="pokemon-index">

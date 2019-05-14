@@ -37,12 +37,15 @@ class PokemonAttributes extends React.Component {
                     {ability.name}
                 </input>)
         })
+
+        debugger;
         
         return(
             <div>
                 {pokemon.name}
                 {pokemon.types.join(" ")}
                 <div>
+                    <h2>Moves</h2>
                     <select name="move-one" onChange={this.props.updateAttrs}>
                         {pokemon.moves.map(idx => {
                             return <option value={idx.move.name}>{idx.move.name}</option>
@@ -66,9 +69,11 @@ class PokemonAttributes extends React.Component {
                     
                 </div>
                 <div>
+                    <h2>Abilities</h2>
                     {abilities}
                 </div>
                 <div>
+                    <h2>Items</h2>
                     <input type="text" onChange={this.updateSearch}></input>
                     <select name="items" size="6" onChange={this.props.updateAttrs}>
                         {this.props.items.map(item => {
