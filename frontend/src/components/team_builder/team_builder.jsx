@@ -87,7 +87,7 @@ class TeamBuilder extends React.Component {
             });
             io.observe(target);
         };
-        targets.forEach(lazyLoad);
+        targets.forEach(target => lazyLoad(target));
     }
 
     handleScroll() {
