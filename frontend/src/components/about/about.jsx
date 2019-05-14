@@ -29,7 +29,7 @@ class About extends React.Component {
                     </div>
                     <div className="row last">
                         <p>To get started, explore created teams, or sign up and begin creating your own teams. 
-                            Teams are comprised of up to six pokemon. Make sure to keep an eye on your team's strenghts, 
+                            Teams are comprised of up to six pokemon. Make sure to keep an eye on your team's strengths, 
                             weaknesses, and stats. A balanced team is a happy team.
                         </p>
                     </div>
