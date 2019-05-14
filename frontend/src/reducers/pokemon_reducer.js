@@ -17,8 +17,8 @@ const pokemonReducer = (state = {}, action) => {
         typesArr.push(type.type.name)
       });
 
-
       let pokemon = {
+        id: data.id,
         name: data.name, 
         abilities: data.abilities, 
         moves: data.moves, 
@@ -31,6 +31,7 @@ const pokemonReducer = (state = {}, action) => {
       Object.values(action.pokemon.data.results).forEach(pokemon => {
         let id = idParse(pokemon)
         emptyState[id] = { 
+          id: id,
           name: pokemon.name, 
           sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+ id + ".png"}
       })
@@ -43,6 +44,7 @@ const pokemonReducer = (state = {}, action) => {
           state[id].types.push(action.pokemon.data.name)
         } else {
           emptyState[id] = {
+            id: id,
             name: pokemon.pokemon.name,
             sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + id + ".png",
             types: [action.pokemon.data.name]
