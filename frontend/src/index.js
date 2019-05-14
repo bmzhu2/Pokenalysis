@@ -33,14 +33,12 @@ document.addEventListener('DOMContentLoaded', ()=> {
     store = configureStore();
   }
 
-
   //DELETE LATER
   window.getState = store.getState
   window.dispatch = store.dispatch
   window.createTeam = createTeam
   window.signup = signup
   window.login = login
-  // window.fetchUser = fetchUser
 
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store} />, root)
