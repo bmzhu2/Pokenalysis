@@ -10,8 +10,9 @@ const validateLoginInput = require('../../validation/login');
 
 router.get("/:id", (req, res) => {
   User.findById(req.params.id)
-    .then(user => res.json(team))
-    .catch(err => 
+    .then(user => res.json({  username: user.username,
+                              userId: user._id } 
+    )) .catch(err => 
       res.status(404).json({ nouserfound: 'No user found with that ID'})
     );
 });

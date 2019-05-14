@@ -28,7 +28,6 @@ class Register extends React.Component {
         const user = Object.assign({}, this.state);
         register(user)
             .then(data => {
-                debugger
                 if (data === undefined) {
                     this.props.history.push('/');
                 } else {
