@@ -13,7 +13,7 @@ export const fetchManyPokemon = (startIdx = 0) => {
 }
 
 export const fetchAllPokemon = () => {
-  return axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=896')
+  return axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=100') //896
 }
 
 export const fetchByType = type => {

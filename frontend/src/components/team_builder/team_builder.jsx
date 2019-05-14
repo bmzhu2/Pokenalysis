@@ -3,6 +3,7 @@ import TeamSlot from './team_slot';
 import Pokemon from './pokemon';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import NavbarContainer from '../nav/navbar_container';
 import { idParse } from '../../reducers/pokemon_reducer';
 import './team_builder.css';
 
@@ -107,6 +108,7 @@ class TeamBuilder extends React.Component {
         });
         return(
             <div>
+                <NavbarContainer/>
             <div>
                 This is a sidebar
                 <ul></ul>

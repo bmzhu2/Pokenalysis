@@ -32,8 +32,8 @@ class Pokemon extends React.Component {
         const { isDragging, connectDragSource } = this.props;
         return connectDragSource(
             <li className="pokemon-container">
-                <h3>{name}</h3>
-                <img src={sprite} alt=""/>
+                <h3 className="pokemon-sprite-name">{name}</h3>
+                <img className="pokemon-index-sprite" src={sprite} alt=""/>
             </li>
         )
     }
