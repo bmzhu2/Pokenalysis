@@ -1,5 +1,5 @@
 
-import { fetchUserLikes } from '../../actions/like_actions';
+import { fetchUserLikes, fetchTeamLikes } from '../../actions/like_actions';
 import { fetchTeams } from '../../actions/team_actions';
 import { fetchUser } from '../../actions/user_actions'
 import { connect } from 'react-redux'
@@ -15,7 +15,8 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToBanana = dispatch => ({
     fetchTeams: () => dispatch(fetchTeams()),
     fetchUserLikes: username => dispatch(fetchUserLikes(username)),
-    fetchUser: username => dispatch(fetchUser(username))
+    fetchUser: username => dispatch(fetchUser(username)),
+    fetchTeamLikes: (teamId) => dispatch(fetchTeamLikes(teamId)),
 })
 
 export default connect(mapStateToProps, mapDispatchToBanana)(Profile)

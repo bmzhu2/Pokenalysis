@@ -40,6 +40,7 @@ class Profile extends React.Component{
                     <TeamItem
                         key={team._id}
                         team={team}
+                        fetchTeamLikes={this.props.fetchTeamLikes}
                     />
                 ))
             }else{
@@ -53,6 +54,7 @@ class Profile extends React.Component{
                     <TeamItem
                         key={team._id}
                         team={team}
+                        fetchTeamLikes={this.props.fetchTeamLikes}
                     />
                 ))
             }
