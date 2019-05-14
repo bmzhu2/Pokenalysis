@@ -28,7 +28,8 @@ router.post('/',
 
     const newLike = new Like({
       team: req.body.teamId,
-      user: req.user.id
+      user: req.user.id,
+      username: req.user.username
     });
 
     newLike.save().then(like => res.json(like));
