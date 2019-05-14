@@ -14,6 +14,7 @@ class TeamBuilder extends React.Component {
         this.state = {
             pokemon: [],
             team: { 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {} },
+            teamName: "",
             search: "",
         };
         this.onDrop1 = this.onDrop1.bind(this);
@@ -26,6 +27,7 @@ class TeamBuilder extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.filterPokemon = this.filterPokemon.bind(this);
         this.removeFromTeam = this.removeFromTeam.bind(this);
+        this.saveTeam = this.saveTeam.bind(this);
     }
 
     onDrop1(incomingState) {
@@ -54,8 +56,6 @@ class TeamBuilder extends React.Component {
     }
     
     componentDidMount(){
-        // window.addEventListener('scroll', this.handleScroll);
-
         this.props.fetchAllPokemon(0).then(res => {
             this.setState({                
                 pokemon: res.pokemon.data.results.map(pokemon => {
@@ -66,8 +66,7 @@ class TeamBuilder extends React.Component {
                     };
                 })
             });
-        }); 
-        
+        });  
     }
 
     handleScroll() {
@@ -78,6 +77,12 @@ class TeamBuilder extends React.Component {
         return e => this.setState({ search: e.currentTarget.value },
             this.filterPokemon);
     }
+
+    updateTeamName(){
+        return e => this.setState({
+            teamName: e.currentTarget.value
+        });
+    };
 
     filterPokemon(){
         this.setState((state,props) => {
@@ -101,7 +106,14 @@ class TeamBuilder extends React.Component {
         // should do a request?
     }
 
+    saveTeam(){
+        const { createTeam } = this.props;
+        const { team, teamName } = this.state;
+        createTeam({ name: teamName, pokemon: Object.values(team) });
+    }   
+
     render(){
+        console.log(this.state.teamName);
         const { pokemon, team } = this.state;
         const pokemonComponents = pokemon.map(poke => {
             return(
@@ -112,6 +124,8 @@ class TeamBuilder extends React.Component {
             <div>
             <div className="team-builder-container">
                 <div>
+                    <input onChange={this.updateTeamName()} type="text" placeholder={this.state.team.name}/>
+                    <input onClick={this.saveTeam} type="submit" value="Save"/>
                     <ul className="team-slots-container"> 
                         <TeamSlot id="1" onDrop={this.onDrop1} name={team[1].name} sprite={team[1].sprite} removeFromTeam={this.removeFromTeam}/>
                         <TeamSlot id="2" onDrop={this.onDrop2} name={team[2].name} sprite={team[2].sprite} removeFromTeam={this.removeFromTeam}/>
