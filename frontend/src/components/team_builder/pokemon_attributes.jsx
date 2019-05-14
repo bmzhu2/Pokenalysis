@@ -23,11 +23,13 @@ class PokemonAttributes extends React.Component {
     }
 
     render(){
-        if(!this.props.pokeAttr) {
+        if(!this.props.team[this.props.slot].pokeId) {
             return null
         }
-        const pokemon = this.props.pokemon[this.props.pokeAttr.pokeId];
-        if(!pokemon || !pokemon.pokeId) {
+        const pokeAttrs = this.props.team[this.props.slot]
+        const pokemon = this.props.pokemon[pokeAttrs.pokeId];
+        debugger;
+        if(!pokemon) {
             return null
         }
 

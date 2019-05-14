@@ -6,7 +6,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import NavbarContainer from '../nav/navbar_container';
 import Sidebar from './sidebar';
 import { idParse } from '../../reducers/pokemon_reducer';
-import PokemonAttributes from './pokemon_attributes';
+import PokemonAttributesContainer from './pokemon_attributes_container';
 import Filter from './filter';
 // import { types } from '../../util/type_util'; USE THIS WHEN UTIL FILE IS FIXED
 import './team_builder.css';
@@ -240,7 +240,7 @@ class TeamBuilder extends React.Component {
                         <TeamSlot key="team-slot-6" id="6" onDrop={this.onDrop6} id={team[6].id} name={team[6].name} sprite={team[6].sprite} removeFromTeam={this.removeFromTeam}/>
                     </ul>
                 </div>
-                <PokemonAttributes
+                <PokemonAttributesContainer
                     updatePokeAttrs={this.updatePokeAttrs}
                     team={this.state.team}
                     slot={this.state.attrId}
