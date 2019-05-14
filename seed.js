@@ -1,8 +1,9 @@
 let seeder = require('mongoose-seed');
-require('./models/User')
-require('./models/Team')
-require('./models/Comment')
+const User = require('./models/User')
+const Team = require('./models/Team')
+const Comment = require('./models/Comment')
 const db = require('./config/keys').mongoURI;
+const bcrypt = require('bcryptjs');
 
 seeder.connect(db, { useNewUrlParser: true }, function(){
     seeder.loadModels([
@@ -36,29 +37,40 @@ seeder.connect(db, { useNewUrlParser: true }, function(){
     });
 })
 
+let passwords = ['ElliotIsCool', 'GetPsyched', 'XYted', 'GetSalaMinced'];
+const newPasswords = []
+let salt
+let hash
+
+passwords.forEach(password => {
+    salt = bcrypt.genSaltSync(10);
+    hash = bcrypt.hashSync(password, salt)
+    newPasswords.push(hash)
+})
+
 const dataUsers = [
     {
         'model': 'users',
         'documents': [
             {
                 'username': 'Banana',
-                'password': 'ElliotIsCool',
-                'id': '41224d776a326fb40f000001'
-            },
-            {
-                'username': 'Zinnia',
-                'password': 'GetSalaMinced',
-                'id': '41224d776a326fb40f000000'
+                'password': newPasswords[0],
+                '_id': '41224d776a326fb40f000001'
             },
             {
                 'username': 'Sabrina',
-                'password': 'GetPsyched',
-                'id': '41224d776a326fb40f000010'
+                'password': newPasswords[1],
+                '_id': '41224d776a326fb40f000010'
             },
             {
                 'username': 'Diantha',
-                'password': 'XYted',
-                'id': '41224d776a326fb40f000020'
+                'password': newPasswords[2],
+                '_id': '41224d776a326fb40f000020'
+            },
+            {
+                'username': 'Zinnia',
+                'password': newPasswords[3],
+                '_id': '41224d776a326fb40f000000'
             }
         ]
     }
@@ -98,7 +110,7 @@ const dataTeams = [
                     }
                 ],
                 'user': '41224d776a326fb40f000000',
-                'id': '41224d776a326fb40f000030'
+                '_id': '41224d776a326fb40f000030'
             },
             {
                 'name': 'champion',
@@ -129,7 +141,7 @@ const dataTeams = [
                     }
                 ],
                 'user': '41224d776a326fb40f000001',
-                'id': '41224d776a326fb40f000002'
+                '_id': '41224d776a326fb40f000002'
             },
             {
                 'name': 'champion',
@@ -160,7 +172,7 @@ const dataTeams = [
                     }
                 ],
                 'user': '41224d776a326fb40f000001',
-                'id': '41224d776a326fb40f000100'
+                '_id': '41224d776a326fb40f000100'
             },
             {
                 'name': "mind crush",
@@ -215,7 +227,7 @@ const dataTeams = [
                     }
                 ],
                 'user': '41224d776a326fb40f000010',
-                'id': '41224d776a326fb40f000006'
+                '_id': '41224d776a326fb40f000006'
             },
             {
                 'name': 'Team Diantha',
@@ -271,7 +283,7 @@ const dataTeams = [
                     }
                 ],
                 'user': '41224d776a326fb40f000020',
-                'id': '41224d776a326fb40f000021'
+                '_id': '41224d776a326fb40f000021'
             }
         ]
     }
