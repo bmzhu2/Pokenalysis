@@ -12,9 +12,8 @@ class TeamPokemon extends React.Component {
         if (this.props.pokemon !== undefined) {
             return (
                 <div className="poke-list-container">
-                    <h1> {this.props.pokemon.name} </h1>
                     {this.props.pokemon.map( poke => (
-                        <TeamPoke poke={poke} />
+                        <TeamPoke poke={poke} key={poke._id} />
                     ))}
                 </div>
             )
