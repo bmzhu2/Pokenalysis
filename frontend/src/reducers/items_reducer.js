@@ -8,10 +8,11 @@ const itemsReducer = (state = {}, action) => {
       let data = action.item.data
 
       let item = {
+        name: data.name,
         effect: data.effect_entries[0].short_effect,
         sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/" + data.name + ".png"
       }
-      return Object.assign({}, state, { [data.name]: item })
+      return Object.assign({}, state, { [data.id]: item })
     case RECEIVE_ITEMS:
       let itemList = {}
       Object.values(action.item.data.results).forEach(item => {

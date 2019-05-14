@@ -208,10 +208,7 @@ class TeamBuilder extends React.Component {
                     </ul>
                 </div>
                 <PokemonAttributes
-                    fetchPokemon={fetchPokemon}
-                    fetchItem={fetchItem}
-                    fetchMove={fetchMove}
-                    fetchAbility={fetchAbility}
+                    //pass in the pokemon's current attributes, call it pokeAttrs
                     updatePokeAttrs={this.updatePokeAttrs}
                 />
                 <div className="filters">
