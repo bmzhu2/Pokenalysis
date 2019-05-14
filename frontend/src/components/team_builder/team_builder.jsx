@@ -15,6 +15,8 @@ class TeamBuilder extends React.Component {
             pokemon: [],
             team: { 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {} },
             search: "",
+            typeFilter1: "",
+            typeFilter2: ""
         };
         this.onDrop1 = this.onDrop1.bind(this);
         this.onDrop2 = this.onDrop2.bind(this);
@@ -25,7 +27,9 @@ class TeamBuilder extends React.Component {
         this.handleScroll = this.handleScroll.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.filterPokemon = this.filterPokemon.bind(this);
+        this.filterByType = this.filterByType.bind(this)
         this.removeFromTeam = this.removeFromTeam.bind(this);
+        this.handleTypeFilter = this.handleTypeFilter.bind(this)
     }
 
     onDrop1(incomingState) {
@@ -88,6 +92,58 @@ class TeamBuilder extends React.Component {
         });
     }
 
+    filterByType(){
+        debugger
+        if(this.state.typeFilter1 !== "" && this.state.typeFilter2 === ""){
+            let newPokemon = []
+            this.props.fetchByType(this.state.typeFilter1)
+                .then(() => {
+                let allPokemon = Object.values(this.props.pokemon)
+                console.log(allPokemon)
+                newPokemon = []
+                allPokemon.forEach(pokemon => {
+                    console.log(pokemon)
+                    if(pokemon.types){
+                        if(pokemon.types.includes(this.state.typeFilter1)){
+                            newPokemon.push(pokemon)
+                        }
+                    }
+                    
+                })
+                this.setState({pokemon: newPokemon})
+            });
+        } else if (this.state.typeFilter1 === "" && this.state.typeFilter2 !== ""){
+            this.props.fetchByType(this.state.typeFilter2)
+                .then(()=> {
+                    let allPokemon = Object.values(this.props.pokemon)
+                    let newPokemon = []
+                    allPokemon.forEach(pokemon => {
+                        if (pokemon.types) {
+                            if (pokemon.types.includes(this.state.typeFilter2)) {
+                                newPokemon.push(pokemon)
+                            }
+                        }
+                    })
+                this.setState({ pokemon: newPokemon })
+            })
+        } else if (this.state.typeFilter1 !== "" && this.state.typeFilter2 !== ""){
+            this.props.fetchByType(this.state.typeFilter2)
+                .then(() => this.props.fetchByType(this.state.typeFilter1)
+                    .then(() => {
+                        let allPokemon = Object.values(this.props.pokemon)
+                        let newPokemon = []
+                        allPokemon.forEach(pokemon => {
+                            if (pokemon.types) {
+                                if (pokemon.types.includes(this.state.typeFilter2) && pokemon.types.includes(this.state.typeFilter1)) {
+                                    newPokemon.push(pokemon)
+                                }
+                            }
+                        })
+                        this.setState({ pokemon: newPokemon })
+                    }))
+        }
+    }
+    
     removeFromTeam(id){
         const team = Object.assign({}, this.state.team, { [id]: {}});
         this.setState({
@@ -99,6 +155,12 @@ class TeamBuilder extends React.Component {
         e.preventDefault();
         // for search submit
         // should do a request?
+    }
+
+    handleTypeFilter(e){
+        this.setState({typeFilter1: 'fire'}, () => {
+            this.filterByType();
+        })
     }
 
     render(){
