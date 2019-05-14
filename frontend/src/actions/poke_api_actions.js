@@ -53,6 +53,11 @@ export const fetchManyPokemon = startIdx => dispatch => (
     .then(pokemon => dispatch(receiveManyPokemon(pokemon)))
 )
 
+export const fetchAllPokemon = () => dispatch => (
+  PokeAPIUtil.fetchAllPokemon()
+  .then(pokemon => dispatch(receiveManyPokemon(pokemon)))
+)
+
 export const fetchByType = type => dispatch => (
   PokeAPIUtil.fetchByType(type)
     .then(pokemon => dispatch(receivePokemonByType(pokemon)))

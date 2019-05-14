@@ -1,0 +1,54 @@
+.team-container {
+    display: flex;
+    overflow: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.team-slot-container {
+    display: flex;
+    justify-content: center;
+    min-width: 540px;
+    margin: none;
+}
+
+.pokemon-index {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 80px 15px 80px;
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+}
+
+.search {
+    box-sizing: border-box;
+    width: 400px;
+    height: 30px;
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 5px;
+    box-shadow: none;
+}
+
+.search-button {
+    box-sizing: border-box;
+    background-color: rgb(94, 208, 94);
+    border-radius: 50px;
+    color: whitesmoke;
+    border: none;
+    width: 80px;
+    margin: 15px;
+    height: 30px;
+    font-weight: 900;
+    font-size: 12px;
+    transition: background-color .5s ease-out;
+}
+
+.search-button:hover {
+    background-color: rgb(77, 182, 77);
+    cursor: pointer;
+    user-select: none;
+}
