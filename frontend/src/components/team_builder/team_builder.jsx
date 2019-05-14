@@ -180,6 +180,14 @@ class TeamBuilder extends React.Component {
         createTeam(newTeam);
     }   
 
+    handleOpenFilter(filter){
+        let openFilter = this.state.openFilter;
+        openFilter.name = filter;
+        this.setState({
+            openFilter,
+        });
+    }
+
     handleTypeFilter(filter, type){
         this.setState(() => ({
             [filter]: type 
@@ -191,7 +199,6 @@ class TeamBuilder extends React.Component {
     }
 
     render(){
-        console.log(this.state.pokemon);
         const { pokemon, team, openFilter } = this.state;
         const { fetchPokemon, fetchItem, fetchItems, fetchMove, fetchAbility, } = this.props;
         const pokemonComponents = pokemon.map(poke => {
@@ -227,8 +234,8 @@ class TeamBuilder extends React.Component {
                         <input className="search-button" type="submit" value="Search"/>
                     </form>
                     <div>
-                        <div>filter 1</div>
-                        <div>filter 2</div>
+                        <div onClick={() => this.handleOpenFilter("typeFilter1")}>filter 1</div>
+                        <div onClick={() => this.handleOpenFilter("typeFilter2")}>filter 2</div>
                     </div>
                     <Filter handleTypeFilter={this.handleTypeFilter} 
                             filterByType={this.filterByType}

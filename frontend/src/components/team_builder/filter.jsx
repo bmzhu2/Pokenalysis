@@ -19,6 +19,7 @@ class Filter extends React.Component {
         });
         return(
             <div>
+                <h2>{name}</h2>
                 <ul>
                     {filterTypes}
                 </ul>
