@@ -28,7 +28,6 @@ class Pokemon extends React.Component {
     componentDidMount(){
         const lazyLoad = target => {
             const io = new IntersectionObserver((entries, observer) => {
-                console.log('is observing');
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const img = entry.target;

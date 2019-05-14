@@ -86,7 +86,7 @@ class TeamBuilder extends React.Component {
         return e => this.setState({
             teamName: e.currentTarget.value
         });
-    };
+    }
 
     filterPokemon(){
         this.setState((state,props) => {
@@ -98,7 +98,6 @@ class TeamBuilder extends React.Component {
     }
 
     filterByType(){
-        debugger
         if(this.state.typeFilter1 !== "" && this.state.typeFilter2 === ""){
             let newPokemon = []
             this.props.fetchByType(this.state.typeFilter1)
@@ -165,13 +164,13 @@ class TeamBuilder extends React.Component {
     saveTeam(){
         const { createTeam } = this.props;
         const { team, teamName } = this.state;
-        debugger
         createTeam({ name: teamName, pokemon: Object.values(team) });
     }   
+
     handleTypeFilter(e){
         this.setState({typeFilter1: 'fire'}, () => {
             this.filterByType();
-        })
+        });
     }
 
     render(){
