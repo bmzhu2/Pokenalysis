@@ -18,7 +18,4 @@ const mapDispatchToBanana = dispatch => ({
     fetchUser: userId => dispatch(fetchUser(userId))
 })
 
-export default connect({
-    mapStateToProps,
-    mapDispatchToBanana
-})(Profile)
+export default connect(mapStateToProps, mapDispatchToBanana)(Profile)

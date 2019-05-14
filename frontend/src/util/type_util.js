@@ -1,7 +1,37 @@
 export const types = ['normal', 'fighting', 'flying', 'poison', 'ground', 'rock', 'bug', 'ghost', 'steel',
                 'fire', 'water', 'grass', 'electric', 'psychic', 'ice', 'dragon', 'dark', 'fairy']
 
-export const teamCoverageAnalysis = (team, moveList) => {
+export const teamMoveClassAnalysis = (team, moveList => {
+  let physicalMoves = 0;
+  let specialMoves = 0;
+
+  team.pokemon.forEach(pokemon => {
+    if (moveList[pokemon.move1] === "physical") {
+      physicalMoves += 1
+    } else if (moveList[pokemon.move1] === "special") {
+      specialMoves += 1
+    }
+    if (moveList[pokemon.move2] === "physical") {
+      physicalMoves += 1
+    } else if (moveList[pokemon.move2] === "special") {
+      specialMoves += 1
+    }
+    if (moveList[pokemon.move3] === "physical") {
+      physicalMoves += 1
+    } else if (moveList[pokemon.move3] === "special") {
+      specialMoves += 1
+    }
+    if (moveList[pokemon.move4] === "physical") {
+      physicalMoves += 1
+    } else if (moveList[pokemon.move4] === "special") {
+      specialMoves += 1
+    }
+  })
+
+  return {physical: physicalMoves, special: specialMoves}
+})
+
+export const teamOffensiveCoverage = (team, moveList) => {
   let totalCoverage = {}
   team.pokemon.forEach(pokemon => {
     let coverage = pokemonCoverageAnalysis(pokemon, moveList)
@@ -17,7 +47,7 @@ export const teamCoverageAnalysis = (team, moveList) => {
   return totalCoverage;
 }
 
-const pokemonCoverageAnalysis = (pokemon, moveList) => {
+const pokemonCoverageAnalysis = (pokemon, moveList, pokeList) => {
   let moveTypes = [];
   if (moveList[pokemon.move1].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move1].type)) {
     moveTypes.push(pokemon.move1.type)
@@ -36,14 +66,15 @@ const pokemonCoverageAnalysis = (pokemon, moveList) => {
   types.forEach(type => {
     let coverage = 0;
     moveTypes.forEach(moveType => {
-      if (coverage[type] === 3 || damageRelations[type].double_damage_from.includes(moveType)) {
-        coverage[type] = 3;
-      } else if (coverage[type] < 2 && damageRelations[type].half_damage_from.includes(moveType)) {
-        coverage[type] = 1;
-      } else if (coverage[type] < 1 && damageRelations[type].no_damage_from.includes(moveType)) {
+      let stab = pokeList[pokemon.pokeId].types.includes(moveType) ? 1 : 0
+      if (coverage < 6 || damageRelations[type].double_damage_from.includes(moveType)) {
+        coverage[type] = 5 + stab;
+      } else if (coverage < 2 && damageRelations[type].half_damage_from.includes(moveType)) {
+        coverage[type] = 1 + stab;
+      } else if (coverage < 1 && damageRelations[type].no_damage_from.includes(moveType)) {
         coverage[type] = 0;
-      } else {
-        coverage = 2;
+      } else if (coverage < 4) {
+        coverage = 3 + stab;
       }
     })
 
@@ -53,10 +84,11 @@ const pokemonCoverageAnalysis = (pokemon, moveList) => {
   return totalCoverage
 }
 
-export const teamDefensiveAnalysis = (team, pokeList) => {
-  defensiveStats = {}
+export const teamDefensiveCoverage = (team, pokeList) => {
+  let defensiveCoverage = {};
+  let unchecked = new Set(types);
   types.forEach(type => {
-    defensiveStats[type] = 0
+    defensiveCoverage[type] = 0;
   })
   
   team.pokemon.forEach(pokemon => {
@@ -74,19 +106,24 @@ export const teamDefensiveAnalysis = (team, pokeList) => {
     }
     types.forEach(type => {
       if(damageRelation.quad_damage_from.includes(type)) {
-        defensiveStats[type] -= 1
+        defensiveCoverage[type] -= 1
       } else if (damageRelation.double_damage_from.includes(type)) {
-        defensiveStats[type] -= .75
+        defensiveCoverage[type] -= .75
       } else if (damageRelation.half_damage_from.includes(type)) {
-        defensiveStats[type] += .5
+        defensiveCoverage[type] += .5
+        unchecked.includes(type) ? unchecked.delete(type) : null
       } else if (damageRelation.fourth_damage_from.includes(type)) {
-        defensiveStats[type] += .75
+        defensiveCoverage[type] += .75
+        unchecked.includes(type) ? unchecked.delete(type) : null
       } else if (damageRelation.no_damage_from.includes(type)) {
-        defensiveStats[type] += 1.5
+        defensiveCoverage[type] += 1.5
+        unchecked.includes(type) ? unchecked.delete(type) : null
+      } else {
+        defensiveCoverage[type] -= -.25
       }
     })
 
-    return defensiveStats
+    return {coverage: defensiveCoverage, unchecked: unchecked}
   })
 }
 

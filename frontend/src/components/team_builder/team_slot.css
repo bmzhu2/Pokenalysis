@@ -1,0 +1,58 @@
+.team-slot-sprite {
+    height: 150px;
+    width: 150px;
+    object-fit: contain;  
+    position: absolute;
+    transform: translateY(-15px);
+    transition: .2s;
+}
+
+.team-slot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    height: 150px;
+    width: 150px;
+    margin: 10px;
+    background-color: #e9e8e8;
+}
+
+.team-slot-sprite:hover {
+    user-select: none;
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.team-slot-name {
+    position: relative;
+    color: white;
+    font-size: 24px;
+    bottom: -50px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.plus {
+    box-sizing: border-box;
+    color: grey;
+    text-align: center;
+    font-size: 40px;
+    height: 20px;
+    width: 20px;
+}
+
+.x {
+    font-size: 14px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    z-index: 2;
+}
+
+.x:hover {
+    cursor: pointer;
+    user-select: none;
+}
+
+.none {
+    opacity: 0;
+}
+

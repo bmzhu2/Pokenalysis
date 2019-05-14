@@ -21,6 +21,12 @@ class Splash extends React.Component {
                     <div className="row">
                         <h2>the social Pokemon team-builder</h2>                    
                     </div>
+                    <div className="row">
+                        <Link className="link-button" to={'/feed'}>Browse Teams</Link>
+                    </div>
+                    <div className="row">
+                        <Link className="link-button" to={'/'}>About Pokenalysis</Link>
+                    </div>
                 </div>
             </div>
         );

@@ -13,6 +13,7 @@ import SplashContainer from './splash/splash_container';
 import LoginContainer from './forms/login_container';
 import RegisterContainer from './forms/register_container';
 import NavBarContainer from './nav/navbar_container'
+import FeedContainer from './feed/feed_container';
 import ProfileContainer from './profile/profile_container'
 
 const App = () => (
@@ -22,6 +23,8 @@ const App = () => (
     </header>
     <Switch>
       <Route exact path="/team-builder" component={teamBuilderContainer}/>
+      <Route exact path="/feed" component={FeedContainer} />
+
       <AuthRoute exact path="/login" component={LoginContainer}/>
       <AuthRoute exact path="/register" component={RegisterContainer}/>
       <Route path = "/users/:userId" component={ProfileContainer} />

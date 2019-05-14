@@ -1,13 +1,13 @@
 import React from 'react';
 import { DragSource } from 'react-dnd';
-
+import './pokemon.css';
 const Types = {
     POKEMON: 'pokemon',
 };
 
 const pokemonSource = {
     beginDrag(props, monitor, component){
-        const pokemon = { name: props.name };
+        const pokemon = { name: props.name, sprite: props.sprite };
         return pokemon;
     },
 
@@ -28,13 +28,13 @@ class Pokemon extends React.Component {
 
 
     render() {
-        const { name } = this.props;
+        const { name, sprite } = this.props;
         const { isDragging, connectDragSource } = this.props;
-
         return connectDragSource(
-            <div>
-                This is a draggable { name }
-            </div>
+            <li className="pokemon-container">
+                <h3 className="pokemon-sprite-name">{name}</h3>
+                <img className="pokemon-index-sprite" src={sprite} alt=""/>
+            </li>
         )
     }
 }
