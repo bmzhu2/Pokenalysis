@@ -322,6 +322,7 @@ const dataComments = [
             {
                 'team': '41224d776a326fb40f000002',
                 'user': '41224d776a326fb40f000000',
+                'username': 'Zinnia',
                 'text': 'Garchomp is OP'
             }
         ]

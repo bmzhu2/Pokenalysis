@@ -21,20 +21,20 @@ const removeLike = likeId => ({
 
 export const fetchTeamLikes = teamId => dispatch => (
     APIUtil.fetchTeamLikes(teamId)
-        .then(likes => dispatch(receiveLikes(likes)))
+        .then(likes => dispatch(receiveLikes(likes.data)))
 )
 
 export const fetchUserLikes = userId => dispatch => (
     APIUtil.fetchUserLikes(userId)
-        .then(likes => dispatch(receiveLikes(likes)))
+        .then(likes => dispatch(receiveLikes(likes.data)))
 )
 
 export const createLike = teamId => dispatch => (
     APIUtil.createLike(teamId)
-        .then(like => dispatch(receiveLike(like)))
+        .then(like => dispatch(receiveLike(like.data)))
 )
 
 export const deleteLike = likeId => dispatch => (
     APIUtil.deleteLike(likeId)
-        .then(likeId => dispatch(removeLike(likeId)))
+        .then(likeId => dispatch(removeLike(likeId.data)))
 )
