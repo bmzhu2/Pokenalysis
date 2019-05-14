@@ -66,12 +66,11 @@ class TeamBuilder extends React.Component {
                     };
                 })
             });
-        });
-        
+        });   
     }
 
     handleScroll() {
-        this.setState(() => ({ scrollPosition: window.pageYOffset }));
+        this.setState(({ scrollPosition: window.pageYOffset }));
     }
 
     updateSearch(){
