@@ -10,9 +10,9 @@ class Profile extends React.Component{
     }
 
     componentDidMount(){
-        this.props.fetchUserLikes(this.props.match.params.userId);
+        this.props.fetchUserLikes(this.props.match.params.username);
         this.props.fetchTeams();
-        this.props.fetchUser(this.props.match.params.userId);
+        this.props.fetchUser(this.props.match.params.username);
     }
 
     handleSwitch(){
@@ -35,6 +35,7 @@ class Profile extends React.Component{
                 likedTeamsButton = <div onClick={this.handleSwitch} className='active-profile-button'>
                     Liked Teams
                 </div>;
+                // Object.
             }else{
                 myTeamsButton = <div className='active-profile-button' onClick={this.handleSwitch} >
                     My Teams
@@ -44,12 +45,11 @@ class Profile extends React.Component{
                 </div>;
             }
 
-            debugger;
             
             return(
                 <div className="profile-container">
                     <div>
-                        {this.props.user}
+                        {this.props.match.params.username}
                     </div>
                     <div>
                         {myTeamsButton}
