@@ -5,29 +5,14 @@ class TeamItem extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            username: ""
-        }
-    }
-
-    componentDidMount() {
-        this.props.fetchUser(this.props.team.user)        
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if(prevProps.users !== this.props.users) {
-            this.setState({
-                username: this.props.users[this.props.team.user]
-            })
-        }
     }
 
     render() {
-        if ( this.props.team !== undefined && this.state.username !== ""){
+        if ( this.props.team !== undefined){
             return(
                 <div className="team-container">
                     <h1> {this.props.team.name} </h1>
-                    <h2> by: {this.state.username} </h2>
+                    <h2> by: {this.props.team.username} </h2>
                     <TeamPokemon pokemon={this.props.team.pokemon} />
                 </div>
             )
