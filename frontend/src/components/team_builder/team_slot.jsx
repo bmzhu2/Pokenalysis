@@ -1,6 +1,7 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
 import { DropTarget } from 'react-dnd';
+import './team_slot.css';
 
 const Types = {
     POKEMON: 'pokemon',
@@ -31,10 +32,11 @@ class TeamSlot extends React.Component {
         const { name, sprite } = this.props;
         const { isOver, canDrop, connectDropTarget, item } = this.props;
         return connectDropTarget(
-            <li className="team-slot"> 
-                +
-                <h3>{name}</h3>
-                <img src={sprite} alt=""/>
+            <li className="team-slot">
+                <p className={sprite ? "none" : "plus"}>+</p> 
+                <p onClick={this.removeFromTeam} className={sprite ? "x" : "none"}>x</p> 
+                <h3 className="team-slot-name">{name}</h3>
+                <img className={sprite ? "team-slot-sprite" : ""} src={sprite} alt=""/>
             </li>
         )
     }

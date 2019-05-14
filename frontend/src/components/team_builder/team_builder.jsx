@@ -4,6 +4,7 @@ import Pokemon from './pokemon';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import NavbarContainer from '../nav/navbar_container';
+import Sidebar from './sidebar';
 import { idParse } from '../../reducers/pokemon_reducer';
 import './team_builder.css';
 
@@ -12,14 +13,7 @@ class TeamBuilder extends React.Component {
         super(props);
         this.state = {
             pokemon: [],
-            team: {
-                1: {},
-                2: {},
-                3: {},
-                4: {},
-                5: {},
-                6: {}
-            },
+            team: { 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {} },
             search: "",
         };
         this.onDrop1 = this.onDrop1.bind(this);
@@ -110,8 +104,7 @@ class TeamBuilder extends React.Component {
             <div>
                 <NavbarContainer/>
             <div>
-                This is a sidebar
-                <ul></ul>
+                <Sidebar/>
             </div>
             <div className="team-builder-container">
                 <div>
