@@ -87,7 +87,8 @@ const dataTeams = [
                         'ability': 'strong-jaw'
                     }
                 ],
-                'user': '41224d776a326fb40f000000'
+                'user': '41224d776a326fb40f000000',
+                'username': 'Zinnia'
             },
             {
                 'name': 'champion',
@@ -118,7 +119,8 @@ const dataTeams = [
                     }
                 ],
                 'user': '41224d776a326fb40f000001',
-                'id': '41224d776a326fb40f000002'
+                'id': '41224d776a326fb40f000002',
+                'username': 'Banana'
             }
         ]
     }

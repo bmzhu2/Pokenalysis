@@ -43,11 +43,13 @@ class Profile extends React.Component{
                     Liked Teams
                 </div>;
             }
+
+            debugger;
             
             return(
                 <div className="profile-container">
                     <div>
-                        {this.props.user.username}
+                        {this.props.user}
                     </div>
                     <div>
                         {myTeamsButton}

@@ -14,8 +14,8 @@ router.get('/', (req, res) => {
 });
 
 
-router.get('/user/:user_id', (req, res) => {
-  Team.find({ user: req.params.user_id })
+router.get('/user/:username', (req, res) => {
+  Team.find({ username: req.params.username })
     .then(teams => res.json(teams))
     .catch(err =>
       res.status(404).json({ noteamsfound: 'No teams found from that user' }
