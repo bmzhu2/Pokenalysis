@@ -97,7 +97,8 @@ const dataTeams = [
                         'ability': 'strong-jaw'
                     }
                 ],
-                'user': '41224d776a326fb40f000000'
+                'user': '41224d776a326fb40f000000',
+                'id': '41224d776a326fb40f000030'
             },
             {
                 'name': 'champion',
@@ -129,6 +130,37 @@ const dataTeams = [
                 ],
                 'user': '41224d776a326fb40f000001',
                 'id': '41224d776a326fb40f000002'
+            },
+            {
+                'name': 'champion',
+                'pokemon': [
+                    {
+                        'pokeId': 637,
+                        'move1': 'quiver-dance',
+                        'move2': 'fire-blast',
+                        'move3': 'psychic',
+                        'move4': 'bug-buzz',
+                        'ability': 'flame-body'
+                    },
+                    {
+                        'pokeId': 465,
+                        'move1': 'knock-off',
+                        'move2': 'giga-drain',
+                        'move3': 'earthquake',
+                        'move4': 'sludge-bomb',
+                        'ability': 'regenerator'
+                    },
+                    {
+                        'pokeId': 10075,
+                        'move1': 'moonblast',
+                        'move2': 'earth-power',
+                        'move3': 'diamond-storm',
+                        'move4': 'protect',
+                        'ability': 'magic-bounce'
+                    }
+                ],
+                'user': '41224d776a326fb40f000001',
+                'id': '41224d776a326fb40f000100'
             },
             {
                 'name': "mind crush",
