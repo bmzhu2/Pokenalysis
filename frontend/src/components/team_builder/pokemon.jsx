@@ -7,7 +7,7 @@ const Types = {
 
 const pokemonSource = {
     beginDrag(props, monitor, component){
-        const pokemon = { name: props.name, sprite: props.sprite };
+        const pokemon = { name: props.name, sprite: props.sprite, pokeId: props.id };
         return pokemon;
     },
 
@@ -28,7 +28,6 @@ class Pokemon extends React.Component {
     componentDidMount(){
         const lazyLoad = target => {
             const io = new IntersectionObserver((entries, observer) => {
-                console.log('is observing');
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const img = entry.target;
