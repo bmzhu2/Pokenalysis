@@ -1,8 +1,6 @@
 export const userTeams = (teams, userId) => {
     let newTeams = []
 
-    debugger;
-
     Object.values(teams).forEach(team => {
         if(team.user === userId){
             newTeams.push(team)

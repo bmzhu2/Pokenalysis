@@ -4,7 +4,11 @@ const Schema = mongoose.Schema;
 const PokemonSchema = new Schema({
   pokeId: {
     type: Number,
-    required: true,
+    required: true
+  },
+  name: {
+    type: String,
+    required: true
   },
   move1: {
     type: String
@@ -38,6 +42,10 @@ const TeamSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'users'
+  },
+  username: {
+    type: String,
+    required: true
   },
   name: {
     type: String,
