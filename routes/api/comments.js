@@ -14,8 +14,8 @@ router.get('team/:team_id', (req, res) => {
     );
 })
 
-router.get('/user/:user_id', (req, res) => {
-  Comment.find({ user: req.params.user_id })
+router.get('/user/:username', (req, res) => {
+  Comment.find({ username: req.params.username })
     .then(comments => res.json(comments))
     .catch(err =>
       res.status(404).json({ nocommentsfound: 'No comments found from that user' }
@@ -43,7 +43,8 @@ router.post('/',
     const newComment = new Comment({
       text: req.body.text,
       team: req.body.teamId,
-      user: req.user.id
+      user: req.user.id,
+      username: req.user.username
     });
 
     newComment.save().then(comment => res.json(comment));

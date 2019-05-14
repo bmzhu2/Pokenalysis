@@ -10,9 +10,9 @@ class Profile extends React.Component{
     }
 
     componentDidMount(){
-        this.props.fetchUserLikes(this.props.match.params.userId);
+        this.props.fetchUser(this.props.match.params.username);
+        this.props.fetchUserLikes(this.props.match.params.username);
         this.props.fetchTeams();
-        this.props.fetchUser(this.props.match.params.userId);
     }
 
     handleSwitch(){
@@ -44,12 +44,11 @@ class Profile extends React.Component{
                 </div>;
             }
 
-            debugger;
             
             return(
                 <div className="profile-container">
                     <div>
-                        {this.props.user}
+                        {this.props.match.params.username}
                     </div>
                     <div>
                         {myTeamsButton}
