@@ -1,7 +1,96 @@
 export const types = ['normal', 'fighting', 'flying', 'poison', 'ground', 'rock', 'bug', 'ghost', 'steel',
                 'fire', 'water', 'grass', 'electric', 'psychic', 'ice', 'dragon', 'dark', 'fairy']
 
-export const dualTypeDamageTakenRelation = (type1, type2) => {
+export const teamCoverageAnalysis = (team, moveList) => {
+  let totalCoverage = {}
+  team.pokemon.forEach(pokemon => {
+    let coverage = pokemonCoverageAnalysis(pokemon, moveList)
+    types.forEach(type => {
+      totalCoverage[type] += coverage[type]
+    })
+  })
+
+  types.forEach(type => {
+    totalCoverage[type] /= 6
+  })
+
+  return totalCoverage;
+}
+
+const pokemonCoverageAnalysis = (pokemon, moveList) => {
+  let moveTypes = [];
+  if (moveList[pokemon.move1].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move1].type)) {
+    moveTypes.push(pokemon.move1.type)
+  }
+  if (moveList[pokemon.move2].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move2].type)) {
+    moveTypes.push(pokemon.move2.type)
+  }
+  if (moveList[pokemon.move3].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move3].type)) {
+    moveTypes.push(pokemon.move3.type)
+  }
+  if (moveList[pokemon.move4].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move4].type)) {
+    moveTypes.push(pokemon.move4.type)
+  }
+
+  let totalCoverage = {};
+  types.forEach(type => {
+    let coverage = 0;
+    moveTypes.forEach(moveType => {
+      if (coverage[type] === 3 || damageRelations[type].double_damage_from.includes(moveType)) {
+        coverage[type] = 3;
+      } else if (coverage[type] < 2 && damageRelations[type].half_damage_from.includes(moveType)) {
+        coverage[type] = 1;
+      } else if (coverage[type] < 1 && damageRelations[type].no_damage_from.includes(moveType)) {
+        coverage[type] = 0;
+      } else {
+        coverage = 2;
+      }
+    })
+
+    totalCoverage[type].push(coverage);
+  })
+
+  return totalCoverage
+}
+
+export const teamDefensiveAnalysis = (team, pokeList) => {
+  defensiveStats = {}
+  types.forEach(type => {
+    defensiveStats[type] = 0
+  })
+  
+  team.pokemon.forEach(pokemon => {
+    if (!pokemon.pokeId) {
+      continue
+    }
+
+    const type1 = pokeList[pokemon.pokeId].types[0];
+    const type2 = pokeList[pokemon.pokeId].types[1];
+    let damageRelation;
+    if (!type2) {
+      damageRelation = damageRelations[type1]
+    } else {
+      damageRelation = dualTypeDamageTakenRelation(type1, type2)
+    }
+    types.forEach(type => {
+      if(damageRelation.quad_damage_from.includes(type)) {
+        defensiveStats[type] -= 1
+      } else if (damageRelation.double_damage_from.includes(type)) {
+        defensiveStats[type] -= .75
+      } else if (damageRelation.half_damage_from.includes(type)) {
+        defensiveStats[type] += .5
+      } else if (damageRelation.fourth_damage_from.includes(type)) {
+        defensiveStats[type] += .75
+      } else if (damageRelation.no_damage_from.includes(type)) {
+        defensiveStats[type] += 1.5
+      }
+    })
+
+    return defensiveStats
+  })
+}
+
+const dualTypeDamageTakenRelation = (type1, type2) => {
   let relation = {
     quad_damage_from: [],
     double_damage_from: [],
@@ -56,7 +145,7 @@ const dualTypeDamageTaken = (type1, type2, moveType) => {
   }
 }
 
-export const damageRelations = {
+const damageRelations = {
   normal: {
     double_damage_from: ['fighting'],
     half_damage_from: [],

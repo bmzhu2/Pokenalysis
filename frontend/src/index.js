@@ -11,7 +11,6 @@ import { logout, signup, login } from './actions/session_actions'
 import {setAuthToken} from './util/session_api_util'
 import { createTeam } from './actions/team_actions'
 
-
 document.addEventListener('DOMContentLoaded', ()=> {
   let store;
 
@@ -41,6 +40,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
   window.createTeam = createTeam
   window.signup = signup
   window.login = login
+  window.fetchUser = fetchUser
 
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store} />, root)

@@ -14,6 +14,7 @@ import LoginContainer from './forms/login_container';
 import RegisterContainer from './forms/register_container';
 import NavBarContainer from './nav/navbar_container'
 import FeedContainer from './feed/feed_container';
+import ProfileContainer from './profile/profile_container'
 
 const App = () => (
   <div id="app">
@@ -26,6 +27,7 @@ const App = () => (
 
       <AuthRoute exact path="/login" component={LoginContainer}/>
       <AuthRoute exact path="/register" component={RegisterContainer}/>
+      <Route path = "/users/:userId" component={ProfileContainer} />
       <Route exact path="/" component={SplashContainer} />
     </Switch>
   </div>
