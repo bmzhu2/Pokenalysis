@@ -14,8 +14,8 @@ router.get('team/:team_id', (req, res) => {
     );
 })
 
-router.get('/user/:user_id', (req, res) => {
-  Comment.find({ user: req.params.user_id })
+router.get('/user/:username', (req, res) => {
+  Comment.find({ username: req.params.username })
     .then(comments => res.json(comments))
     .catch(err =>
       res.status(404).json({ nocommentsfound: 'No comments found from that user' }

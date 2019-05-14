@@ -8,12 +8,12 @@ const passport = require('passport');
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
 
-router.get("/:id", (req, res) => {
-  User.findById(req.params.id)
+router.get("/:username", (req, res) => {
+  User.findOne({username: req.params.username})
     .then(user => res.json({  username: user.username,
                               userId: user._id } 
     )) .catch(err => 
-      res.status(404).json({ nouserfound: 'No user found with that ID'})
+      res.status(404).json({ nouserfound: 'No user found with that username'})
     );
 });
 
