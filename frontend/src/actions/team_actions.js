@@ -21,29 +21,30 @@ const removeTeam = teamId => ({
 
 export const fetchTeams = () => dispatch => (
     APIUtil.fetchTeams()
-        .then(teams => dispatch(receiveTeams(teams)))
+        .then(teams => dispatch(receiveTeams(teams.data)))
 )
 
 export const fetchTeam = (teamId) => dispatch => (
     APIUtil.fetchTeam(teamId)
-        .then(team => dispatch(receiveTeam(team)))
+        .then(team => dispatch(receiveTeam(team.data)))
 )
 
 export const fetchUserTeams = userId => dispatch => (
     APIUtil.fetchUserTeams(userId)
-        .then(teams  => dispatch(receiveTeams(teams)))
+        .then(teams  => dispatch(receiveTeams(teams.data)))
 )
 
 export const createTeam = team => dispatch => (
     APIUtil.createTeam(team)
-        .then(team => dispatch(receiveTeam(team)))
+        .then(team => dispatch(receiveTeam(team.data)))
 )
 
 export const updateTeam = team => dispatch => (
     APIUtil.updateTeam(team)
-        .then(team => dispatch(receiveTeam(team)))
+        .then(team => dispatch(receiveTeam(team.data)))
 )
 
-export const deleteTeam = teamId => dispatch => (    APIUtil.deleteTeam(teamId)
+export const deleteTeam = teamId => dispatch => (    
+    APIUtil.deleteTeam(teamId)
         .then(teamId => dispatch(removeTeam(teamId)))
 )
