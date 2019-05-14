@@ -9,8 +9,7 @@ import jwt_decode from 'jwt-decode';
 
 import { logout, signup, login } from './actions/session_actions'
 import {setAuthToken} from './util/session_api_util'
-import { createTeam, fetchTeams, fetchTeam} from './actions/team_actions'
-import {fetchPokemon} from './actions/poke_api_actions'
+import { createTeam} from './actions/team_actions'
 
 document.addEventListener('DOMContentLoaded', ()=> {
   let store;
@@ -40,9 +39,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
   window.createTeam = createTeam
   window.signup = signup
   window.login = login
-  window.fetchTeams = fetchTeams
-  window.fetchTeam = fetchTeam
-  window.fetchPokemon = fetchPokemon
 
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store} />, root)
