@@ -7,7 +7,8 @@ import NavbarContainer from '../nav/navbar_container';
 import Sidebar from './sidebar';
 import { idParse } from '../../reducers/pokemon_reducer';
 import PokemonAttributes from './pokemon_attributes';
-// import { types } from '../../util/type_util';
+import Filter from './filter';
+// import { types } from '../../util/type_util'; USE THIS WHEN UTIL FILE IS FIXED
 import './team_builder.css';
 
 class TeamBuilder extends React.Component {
@@ -20,7 +21,10 @@ class TeamBuilder extends React.Component {
             pokeAttrs: { 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {} },
             search: "",
             typeFilter1: "",
-            typeFilter2: ""
+            typeFilter2: "",
+            openFilter: {
+                name: "typeFilter1",
+            }
         };
         this.onDrop1 = this.onDrop1.bind(this);
         this.onDrop2 = this.onDrop2.bind(this);
@@ -174,9 +178,9 @@ class TeamBuilder extends React.Component {
         createTeam(newTeam);
     }   
 
-    handleTypeFilter(e){
-        this.setState({typeFilter1: 'fire'}, () => {
-            this.filterByType();
+    handleTypeFilter(filter, type){
+        this.setState({
+            [filter]: type 
         });
     }
 
@@ -185,7 +189,8 @@ class TeamBuilder extends React.Component {
     }
 
     render(){
-        const { pokemon, team } = this.state;
+        console.log(this.state.typeFilter1);
+        const { pokemon, team, openFilter } = this.state;
         const { fetchPokemon, fetchItem, fetchItems, fetchMove, fetchAbility, } = this.props;
         const pokemonComponents = pokemon.map(poke => {
             return(
@@ -222,8 +227,11 @@ class TeamBuilder extends React.Component {
                     <div>
                         <div>filter 1</div>
                         <div>filter 2</div>
-                        <div>filter 3</div>
                     </div>
+                    <Filter handleTypeFilter={this.handleTypeFilter} 
+                            filterByType={this.filterByType}
+                            name={openFilter.name}
+                            />
                 </div>
                 <div>
                     <ul className="pokemon-index">
