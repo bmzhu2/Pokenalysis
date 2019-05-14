@@ -7,8 +7,8 @@
 }
 
 .pokemon-index-sprite {
-    height: 70px;
-    width: 70px;
+    height: inherit;
+    width: inherit;
     object-fit: contain;  
     position: absolute;
     transition: .2s;
