@@ -10,7 +10,6 @@ import jwt_decode from 'jwt-decode';
 import { logout, signup, login } from './actions/session_actions'
 import {setAuthToken} from './util/session_api_util'
 import { createTeam } from './actions/team_actions'
-import { fetchUser } from './actions/user_actions'
 
 document.addEventListener('DOMContentLoaded', ()=> {
   let store;
