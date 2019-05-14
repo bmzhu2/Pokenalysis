@@ -7,7 +7,7 @@ const Types = {
 
 const pokemonSource = {
     beginDrag(props, monitor, component){
-        const pokemon = { name: props.name };
+        const pokemon = { name: props.name, sprite: props.sprite };
         return pokemon;
     },
 
@@ -28,13 +28,13 @@ class Pokemon extends React.Component {
 
 
     render() {
-        const { name } = this.props;
+        const { name, sprite } = this.props;
         const { isDragging, connectDragSource } = this.props;
-
         return connectDragSource(
-            <div>
-                This is a draggable { name }
-            </div>
+            <li className="pokemon-container">
+                <h3>{name}</h3>
+                <img src={sprite} alt=""/>
+            </li>
         )
     }
 }

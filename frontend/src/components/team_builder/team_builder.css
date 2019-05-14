@@ -1,0 +1,30 @@
+.team-slot-container {
+    display: flex;
+    overflow: auto;
+    min-width: 1025px;
+    justify-content: center;
+}
+
+.team-slot {
+    border-radius: 100%;
+    height: 150px;
+    width: 150px;
+    margin: 10px;
+    background-color: #dddddd;
+    text-align: center;
+}
+
+.pokemon-index {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 15px 80px 15px 80px;
+}
+
+.pokemon-container {
+    border-radius: 100%;
+    height: 70px;
+    width: 70px;
+    margin: 15px;
+    background-color: rgb(201, 59, 59);
+}

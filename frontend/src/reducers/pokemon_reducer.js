@@ -1,10 +1,10 @@
 import { RECEIVE_POKEMON, RECEIVE_MANY_POKEMON, RECEIVE_POKEMON_BY_TYPE } from '../actions/poke_api_actions'
 
-const idParse = pokemon => {
+export const idParse = pokemon => {
   let urlSplit = pokemon.url.split("/");
   urlSplit.pop();
   return urlSplit.pop();
-}
+};
 
 const pokemonReducer = (state = {}, action) => {
   Object.freeze(state);
@@ -15,7 +15,7 @@ const pokemonReducer = (state = {}, action) => {
       let typesArr = [];
       data.types.forEach(type => {
         typesArr.push(type.type.name)
-      })
+      });
 
 
       let pokemon = {

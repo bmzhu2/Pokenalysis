@@ -18,6 +18,7 @@ function collect(connect, monitor){
         connectDropTarget: connect.dropTarget(),
         isOver: monitor.isOver(),
         canDrop: monitor.canDrop(),
+        item: monitor.getItem(),
     });
 }
 
@@ -27,13 +28,14 @@ class TeamSlot extends React.Component {
     }
 
     render(){
-        const { name } = this.props;
-        const { isOver, canDrop, connectDropTarget } = this.props;
-
+        const { name, sprite } = this.props;
+        const { isOver, canDrop, connectDropTarget, item } = this.props;
         return connectDropTarget(
-            <div>This is a 
-                { this.props.team[0] }
-            </div>
+            <li className="team-slot"> 
+                +
+                <h3>{name}</h3>
+                <img src={sprite} alt=""/>
+            </li>
         )
     }
 }
