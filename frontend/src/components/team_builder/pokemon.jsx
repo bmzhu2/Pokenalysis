@@ -7,7 +7,7 @@ const Types = {
 
 const pokemonSource = {
     beginDrag(props, monitor, component){
-        const pokemon = { name: props.name, sprite: props.sprite };
+        const pokemon = { name: props.name, sprite: props.sprite, pokeId: props.id };
         return pokemon;
     },
 

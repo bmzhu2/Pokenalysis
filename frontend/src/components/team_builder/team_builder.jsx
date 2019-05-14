@@ -6,6 +6,8 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import NavbarContainer from '../nav/navbar_container';
 import Sidebar from './sidebar';
 import { idParse } from '../../reducers/pokemon_reducer';
+import PokemonAttributes from './pokemon_attributes';
+// import { types } from '../../util/type_util';
 import './team_builder.css';
 
 class TeamBuilder extends React.Component {
@@ -13,8 +15,9 @@ class TeamBuilder extends React.Component {
         super(props);
         this.state = {
             pokemon: [],
-            team: { 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {} },
             teamName: "",
+            team: { 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {} },
+            pokeAttrs: { 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {} },
             search: "",
             typeFilter1: "",
             typeFilter2: ""
@@ -65,6 +68,7 @@ class TeamBuilder extends React.Component {
                 pokemon: res.pokemon.data.results.map(pokemon => {
                     let id = idParse(pokemon);
                     return {
+                        id,
                         name: pokemon.name,
                         sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + id + ".png"
                     };
@@ -103,10 +107,8 @@ class TeamBuilder extends React.Component {
             this.props.fetchByType(this.state.typeFilter1)
                 .then(() => {
                 let allPokemon = Object.values(this.props.pokemon)
-                console.log(allPokemon)
                 newPokemon = []
                 allPokemon.forEach(pokemon => {
-                    console.log(pokemon)
                     if(pokemon.types){
                         if(pokemon.types.includes(this.state.typeFilter1)){
                             newPokemon.push(pokemon)
@@ -164,7 +166,12 @@ class TeamBuilder extends React.Component {
     saveTeam(){
         const { createTeam } = this.props;
         const { team, teamName } = this.state;
-        createTeam({ name: teamName, pokemon: Object.values(team) });
+        let pokemon = Object.values(team);
+        const nullifiedPokes = pokemon.map(poke => {
+            return (!Object.values(poke).length) ? { pokeId: 0, name: "Missingno" } : poke;
+        });
+        const newTeam = { name: teamName, pokemon: nullifiedPokes };
+        createTeam(newTeam);
     }   
 
     handleTypeFilter(e){
@@ -173,29 +180,40 @@ class TeamBuilder extends React.Component {
         });
     }
 
+    updatePokeAttrs(){
+        //set state of attrs here
+    }
+
     render(){
         const { pokemon, team } = this.state;
+        const { fetchPokemon, fetchItem, fetchItems, fetchMove, fetchAbility, } = this.props;
         const pokemonComponents = pokemon.map(poke => {
             return(
-                <Pokemon key={poke.name} name={poke.name} sprite={poke.sprite}/>
+                <Pokemon key={poke.name} name={poke.name} sprite={poke.sprite} id={poke.id}/>
             );
         });
         return(
             <div>
             <div className="team-builder-container">
                 <div>
-                    <input onChange={this.updateTeamName()} type="text" placeholder={this.state.team.name}/>
+                    <input onChange={this.updateTeamName()} type="text" placeholder={this.state.teamName}/>
                     <input onClick={this.saveTeam} type="submit" value="Save"/>
                     <ul className="team-slots-container"> 
-                        <TeamSlot id="1" onDrop={this.onDrop1} name={team[1].name} sprite={team[1].sprite} removeFromTeam={this.removeFromTeam}/>
-                        <TeamSlot id="2" onDrop={this.onDrop2} name={team[2].name} sprite={team[2].sprite} removeFromTeam={this.removeFromTeam}/>
-                        <TeamSlot id="3" onDrop={this.onDrop3} name={team[3].name} sprite={team[3].sprite} removeFromTeam={this.removeFromTeam}/>
-                        <TeamSlot id="4" onDrop={this.onDrop4} name={team[4].name} sprite={team[4].sprite} removeFromTeam={this.removeFromTeam}/>
-                        <TeamSlot id="5" onDrop={this.onDrop5} name={team[5].name} sprite={team[5].sprite} removeFromTeam={this.removeFromTeam}/>
-                        <TeamSlot id="6" onDrop={this.onDrop6} name={team[6].name} sprite={team[6].sprite} removeFromTeam={this.removeFromTeam}/>
+                        <TeamSlot key="team-slot-1" id="1" onDrop={this.onDrop1} id={team[1].id} name={team[1].name} sprite={team[1].sprite} removeFromTeam={this.removeFromTeam}/>
+                        <TeamSlot key="team-slot-2" id="2" onDrop={this.onDrop2} id={team[2].id} name={team[2].name} sprite={team[2].sprite} removeFromTeam={this.removeFromTeam}/>
+                        <TeamSlot key="team-slot-3" id="3" onDrop={this.onDrop3} id={team[3].id} name={team[3].name} sprite={team[3].sprite} removeFromTeam={this.removeFromTeam}/>
+                        <TeamSlot key="team-slot-4" id="4" onDrop={this.onDrop4} id={team[4].id} name={team[4].name} sprite={team[4].sprite} removeFromTeam={this.removeFromTeam}/>
+                        <TeamSlot key="team-slot-5" id="5" onDrop={this.onDrop5} id={team[5].id} name={team[5].name} sprite={team[5].sprite} removeFromTeam={this.removeFromTeam}/>
+                        <TeamSlot key="team-slot-6" id="6" onDrop={this.onDrop6} id={team[6].id} name={team[6].name} sprite={team[6].sprite} removeFromTeam={this.removeFromTeam}/>
                     </ul>
                 </div>
-                <div>Additional team info that will only be visible when selected</div>
+                <PokemonAttributes
+                    fetchPokemon={fetchPokemon}
+                    fetchItem={fetchItem}
+                    fetchMove={fetchMove}
+                    fetchAbility={fetchAbility}
+                    updatePokeAttrs={this.updatePokeAttrs}
+                />
                 <div className="filters">
                     <form onSubmit={this.handleSubmit}>
                         <input className="search" onChange={this.updateSearch()} type="text" placeholder="search by name"/>
