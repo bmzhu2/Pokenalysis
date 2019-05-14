@@ -1,5 +1,6 @@
 import React from 'react'
 import TeamItem from '../feed/team_item'
+import './profile.css';
 
 class Profile extends React.Component{
     constructor(props){
@@ -62,10 +63,11 @@ class Profile extends React.Component{
             
             return(
                 <div className="profile-container">
-                    <div>
-                        {this.props.match.params.username}
+                    <div className="row">
+                        <div className="inner-row first"><h2>Trainer </h2><h1>{this.props.match.params.username}</h1></div>
+                        <div className="inner-row"><div className="profile-avatar"></div></div>
                     </div>
-                    <div>
+                    <div className="button-row">
                         {myTeamsButton}
                         {likedTeamsButton}
                     </div>
