@@ -18,7 +18,7 @@ class TeamBuilder extends React.Component {
             pokemon: [],
             teamName: "",
             team: { 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {} },
-            pokeAttrs: { 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {} },
+            attrId: "1",
             search: "",
             typeFilter1: "",
             typeFilter2: "",
@@ -39,6 +39,7 @@ class TeamBuilder extends React.Component {
         this.removeFromTeam = this.removeFromTeam.bind(this);
         this.saveTeam = this.saveTeam.bind(this);
         this.handleTypeFilter = this.handleTypeFilter.bind(this);
+        this.sendAttrId = this.sendAttrId.bind(this);
     }
 
     onDrop1(incomingState) {
@@ -204,8 +205,14 @@ class TeamBuilder extends React.Component {
         this.filterByType();
     }
 
-    updatePokeAttrs(){
-        //set state of attrs here
+    updatePokeAttrs(id, attrs){
+        let team = this.state.team;
+        team[id] = attrs;
+        this.setState(() => ({ team }));
+    }
+
+    sendAttrId(id){
+        this.setState(() => ({ attrId: id }));
     }
 
     render(){
@@ -223,7 +230,7 @@ class TeamBuilder extends React.Component {
                     <input onChange={this.updateTeamName()} type="text" placeholder={this.state.teamName}/>
                     <input onClick={this.saveTeam} type="submit" value="Save"/>
                     <ul className="team-slots-container"> 
-                        <TeamSlot key="team-slot-1" id="1" onDrop={this.onDrop1} id={team[1].id} name={team[1].name} sprite={team[1].sprite} removeFromTeam={this.removeFromTeam}/>
+                        <TeamSlot onClick={() => this.sendAttrId("1")} key="team-slot-1" id="1" onDrop={this.onDrop1} id={team[1].id} name={team[1].name} sprite={team[1].sprite} removeFromTeam={this.removeFromTeam}/>
                         <TeamSlot key="team-slot-2" id="2" onDrop={this.onDrop2} id={team[2].id} name={team[2].name} sprite={team[2].sprite} removeFromTeam={this.removeFromTeam}/>
                         <TeamSlot key="team-slot-3" id="3" onDrop={this.onDrop3} id={team[3].id} name={team[3].name} sprite={team[3].sprite} removeFromTeam={this.removeFromTeam}/>
                         <TeamSlot key="team-slot-4" id="4" onDrop={this.onDrop4} id={team[4].id} name={team[4].name} sprite={team[4].sprite} removeFromTeam={this.removeFromTeam}/>
@@ -233,7 +240,8 @@ class TeamBuilder extends React.Component {
                 </div>
                 <PokemonAttributes
                     updatePokeAttrs={this.updatePokeAttrs}
-                    pokeAttrs={this.state.pokeAttrs}
+                    team={this.state.team}
+                    slot={this.state.attrId}
                 />
                 <div className="filters">
                     <form onSubmit={this.handleSubmit}>
