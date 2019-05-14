@@ -1,8 +1,15 @@
-.team-slot-container {
+.team-builder-container
+.team-container {
     display: flex;
     overflow: auto;
-    min-width: 1025px;
+    flex-wrap: wrap;
     justify-content: center;
+}
+.team-slot-container {
+    display: flex;
+    justify-content: center;
+    min-width: 540px;
+    margin: none;
 }
 
 .team-slot {
@@ -28,3 +35,20 @@
     margin: 15px;
     background-color: rgb(201, 59, 59);
 }
+
+.filters {
+    display: flex;
+    justify-content: center;
+}
+
+.search {
+    box-sizing: border-box;
+    width: 400px;
+    height: 60px;
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 5px;
+    box-shadow: none;
+}
+
+

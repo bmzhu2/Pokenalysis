@@ -18,7 +18,8 @@ class TeamBuilder extends React.Component {
                 4: {},
                 5: {},
                 6: {}
-            }
+            },
+            search: "",
         };
         this.onDrop1 = this.onDrop1.bind(this);
         this.onDrop2 = this.onDrop2.bind(this);
@@ -27,6 +28,8 @@ class TeamBuilder extends React.Component {
         this.onDrop5 = this.onDrop5.bind(this);
         this.onDrop6 = this.onDrop6.bind(this);
         this.handleScroll = this.handleScroll.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.filterPokemon = this.filterPokemon.bind(this);
     }
 
     onDrop1(incomingState) {
@@ -75,7 +78,27 @@ class TeamBuilder extends React.Component {
         this.setState(() => ({ scrollPosition: window.pageYOffset }));
     }
 
+    updateSearch(){
+        return e => this.setState({ search: e.currentTarget.value },
+            this.filterPokemon);
+    }
+
+    filterPokemon(){
+        this.setState((state,props) => {
+            const pokemon = Object.values(props.pokemon).filter(poke => (
+                poke.name.includes(state.search)
+            ));
+            return { pokemon };
+        });
+    }
+    
+    handleSubmit(e){
+        e.preventDefault();
+        console.log(this.state.search);
+    }
+
     render(){
+        console.log(this.state.search);
         const { pokemon, team } = this.state;
         const pokemonComponents = pokemon.map(poke => {
             return(
@@ -88,23 +111,32 @@ class TeamBuilder extends React.Component {
                 This is a sidebar
                 <ul></ul>
             </div>
-            <div>
-                <div>This is the main wrapper for the team
-                    <ul className="team-slot-container"> 
+            <div className="team-builder-container">
+                <div>
+                    <ul className="team-container"> 
+                    <div className="team-slot-container">
                         <TeamSlot onDrop={this.onDrop1} name={team[1].name} sprite={team[1].sprite}/>
                         <TeamSlot onDrop={this.onDrop2} name={team[2].name} sprite={team[2].sprite}/>
                         <TeamSlot onDrop={this.onDrop3} name={team[3].name} sprite={team[3].sprite}/>
+                    </div>
+                    <div className="team-slot-container">
                         <TeamSlot onDrop={this.onDrop4} name={team[4].name} sprite={team[4].sprite}/>
                         <TeamSlot onDrop={this.onDrop5} name={team[5].name} sprite={team[5].sprite}/>
                         <TeamSlot onDrop={this.onDrop6} name={team[6].name} sprite={team[6].sprite}/>
+                    </div>
                     </ul>
                 </div>
                 <div>Additional team info that will only be visible when selected</div>
-                <div>
-                    <div>SEARCH</div>
-                    <div>filter 1</div>
-                    <div>filter 2</div>
-                    <div>filter 3</div>
+                <div className="filters">
+                    <form onSubmit={this.handleSubmit}>
+                        <input className="search" onChange={this.updateSearch()} type="text" placeholder="search by name"/>
+                        <input className="search-button" type="submit" value="Search"/>
+                    </form>
+                    <div>
+                        <div>filter 1</div>
+                        <div>filter 2</div>
+                        <div>filter 3</div>
+                    </div>
                 </div>
                 <div>
                     <ul className="pokemon-index">
