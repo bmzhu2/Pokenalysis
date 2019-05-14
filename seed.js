@@ -85,6 +85,7 @@ const dataTeams = [
                 'pokemon': [
                     {
                         'pokeId': 10089,
+                        'name': 'salamence-mega',
                         'move1': 'dragon-claw',
                         'move2': 'crunch',
                         'move3': 'fire fang',
@@ -94,6 +95,7 @@ const dataTeams = [
                     },
                     {
                         'pokeId': 334,
+                        'name': 'altaria',
                         'move1': 'dragon-pulse',
                         'move2': 'flamethrower',
                         'move3': 'moonblast',
@@ -102,6 +104,7 @@ const dataTeams = [
                     },
                     {
                         'pokeId': 697,
+                        'name': 'tyrantrum',
                         'move1': 'dragon claw',
                         'move2': 'crunch',
                         'move3': 'eartchquake',
@@ -110,6 +113,7 @@ const dataTeams = [
                     }
                 ],
                 'user': '41224d776a326fb40f000000',
+                'username': 'Zinnia',
                 '_id': '41224d776a326fb40f000030'
             },
             {
@@ -117,6 +121,7 @@ const dataTeams = [
                 'pokemon': [
                     {
                         'pokeId': 448,
+                        'name': 'lucario',
                         'move1': 'aura-sphere',
                         'move2': 'dragon-pulse',
                         'move3': 'psychic',
@@ -125,6 +130,7 @@ const dataTeams = [
                     },
                     {
                         'pokeId': 350,
+                        'name': 'milotic',
                         'move1': 'surf',
                         'move2': 'ice-beam',
                         'move3': 'mirror-coat',
@@ -133,6 +139,7 @@ const dataTeams = [
                     },
                     {
                         'pokeId': 445,
+                        'name': 'garchomp',
                         'move1': 'dragon-rush',
                         'move2': 'brick-break',
                         'move3': 'eartchquake',
@@ -141,6 +148,7 @@ const dataTeams = [
                     }
                 ],
                 'user': '41224d776a326fb40f000001',
+                'username': 'Banana',
                 '_id': '41224d776a326fb40f000002'
             },
             {
@@ -148,6 +156,7 @@ const dataTeams = [
                 'pokemon': [
                     {
                         'pokeId': 637,
+                        'name': 'volcarona',
                         'move1': 'quiver-dance',
                         'move2': 'fire-blast',
                         'move3': 'psychic',
@@ -156,6 +165,7 @@ const dataTeams = [
                     },
                     {
                         'pokeId': 465,
+                        'name': 'tangrowth',
                         'move1': 'knock-off',
                         'move2': 'giga-drain',
                         'move3': 'earthquake',
@@ -164,6 +174,7 @@ const dataTeams = [
                     },
                     {
                         'pokeId': 10075,
+                        'name': 'diancie-mega',
                         'move1': 'moonblast',
                         'move2': 'earth-power',
                         'move3': 'diamond-storm',
@@ -172,6 +183,7 @@ const dataTeams = [
                     }
                 ],
                 'user': '41224d776a326fb40f000001',
+                'username': 'Banana',
                 '_id': '41224d776a326fb40f000100'
             },
             {
@@ -179,6 +191,7 @@ const dataTeams = [
                 'pokemon':[
                     {
                         'pokeId': 124,
+                        'name': 'jynx',
                         'move1': 'psychic',
                         'move2': 'focus-blast',
                         'move3': 'blizzard',
@@ -187,6 +200,7 @@ const dataTeams = [
                     },
                     {
                         'pokeId': 202,
+                        'name': 'wobbuffet',
                         'move1': 'counter',
                         'move2': 'destiny-bond',
                         'move3': 'mirror-coat',
@@ -195,6 +209,7 @@ const dataTeams = [
                     },
                     {
                         'pokeId': 475,
+                        'name': 'gallade',
                         'move1': 'stone-edge',
                         'move2': 'psycho-cut',
                         'move3': 'night-slash',
@@ -202,7 +217,8 @@ const dataTeams = [
                         'ability': 'steadfast'
                     },
                     {
-                        'pokeId': 065,
+                        'pokeId': 65,
+                        'name': 'alakazam',
                         'move1': 'gravity',
                         'move2': 'psychic',
                         'move3': 'focus-blast',
@@ -211,6 +227,7 @@ const dataTeams = [
                     },
                     {
                         'pokeId': 196,
+                        'name': 'espeon',
                         'move1': 'calm-mind',
                         'move2': 'psychic',
                         'move3': 'shadow-ball',
@@ -219,6 +236,7 @@ const dataTeams = [
                     },
                     {
                         'pokeId': 122,
+                        'name': 'mr-mime',
                         'move1': 'reflect',
                         'move2': 'psychic',
                         'move3': 'thunder',
@@ -227,6 +245,7 @@ const dataTeams = [
                     }
                 ],
                 'user': '41224d776a326fb40f000010',
+                'username': 'Sabrina',
                 '_id': '41224d776a326fb40f000006'
             },
             {
@@ -234,6 +253,7 @@ const dataTeams = [
                 'pokemon': [
                     {
                         'pokeId': 701,
+                        'name': 'hawlucha',
                         'move1': 'swords-dance',
                         'move2': 'flying-press',
                         'move3': 'x-scissor',
@@ -242,6 +262,7 @@ const dataTeams = [
                     },
                     {
                         'pokeId': 697,
+                        'name': 'tyrantrum',
                         'move1': 'head-smash',
                         'move2': 'earthquake',
                         'move3': 'dragon-claw',
@@ -250,6 +271,7 @@ const dataTeams = [
                     },
                     {
                         'pokeId': 699,
+                        'name': 'aurorus',
                         'move1': 'thunder',
                         'move2': 'blizzard',
                         'move3': 'light-screen',
@@ -258,6 +280,7 @@ const dataTeams = [
                     },
                     {
                         'pokeId': 706,
+                        'name': 'goodra',
                         'move1': 'dragon-pulse',
                         'move2': 'muddy-water',
                         'move3': 'focus-blast',
@@ -266,6 +289,7 @@ const dataTeams = [
                     },
                     {
                         'pokeId': 711,
+                        'name': 'gourgeist-average',
                         'move1': 'trick-or-treat',
                         'move2': 'phantom-force',
                         'move3': 'shadow-sneak',
@@ -274,6 +298,7 @@ const dataTeams = [
                     },
                     {
                         'pokeId': 10051,
+                        'name': 'gardevoir-mega',
                         'move1': 'moonblast',
                         'move2': 'psychic',
                         'move3': 'shadow-ball',
@@ -283,6 +308,7 @@ const dataTeams = [
                     }
                 ],
                 'user': '41224d776a326fb40f000020',
+                'username': 'Diantha',
                 '_id': '41224d776a326fb40f000021'
             }
         ]

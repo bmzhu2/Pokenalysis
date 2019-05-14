@@ -29,12 +29,12 @@ class TeamSlot extends React.Component {
     }
 
     render(){
-        const { name, sprite } = this.props;
-        const { isOver, canDrop, connectDropTarget, item } = this.props;
+        const { id, name, sprite, removeFromTeam } = this.props;
+        const { isOver, canDrop, connectDropTarget } = this.props;
         return connectDropTarget(
             <li className="team-slot">
                 <p className={sprite ? "none" : "plus"}>+</p> 
-                <p onClick={this.removeFromTeam} className={sprite ? "x" : "none"}>x</p> 
+                <p onClick={() => removeFromTeam(id)} className={sprite ? "x" : "none"}>x</p> 
                 <h3 className="team-slot-name">{name}</h3>
                 <img className={sprite ? "team-slot-sprite" : ""} src={sprite} alt=""/>
             </li>

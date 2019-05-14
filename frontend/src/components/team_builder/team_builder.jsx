@@ -28,6 +28,8 @@ class TeamBuilder extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.filterPokemon = this.filterPokemon.bind(this);
         this.filterByType = this.filterByType.bind(this)
+        this.removeFromTeam = this.removeFromTeam.bind(this);
+        this.handleTypeFilter = this.handleTypeFilter.bind(this)
     }
 
     onDrop1(incomingState) {
@@ -56,7 +58,7 @@ class TeamBuilder extends React.Component {
     }
     
     componentDidMount(){
-        window.addEventListener('scroll', this.handleScroll);
+        // window.addEventListener('scroll', this.handleScroll);
 
         this.props.fetchAllPokemon(0).then(res => {
             this.setState({                
@@ -68,12 +70,12 @@ class TeamBuilder extends React.Component {
                     };
                 })
             });
-        });
+        }); 
         
     }
 
     handleScroll() {
-        this.setState(() => ({ scrollPosition: window.pageYOffset }));
+        this.setState(({ scrollPosition: window.pageYOffset }));
     }
 
     updateSearch(){
@@ -93,57 +95,75 @@ class TeamBuilder extends React.Component {
     filterByType(){
         debugger
         if(this.state.typeFilter1 !== "" && this.state.typeFilter2 === ""){
-            this.props.fetchByType(this.state.typeFilter1);
-            let allPokemon = Object.values(this.props.pokemon)
             let newPokemon = []
-            allPokemon.forEach(pokemon => {
-                if(pokemon.type){
-                    if(pokemon.type.includes(this.state.typeFilter1)){
-                        newPokemon.push(pokemon)
+            this.props.fetchByType(this.state.typeFilter1)
+                .then(() => {
+                let allPokemon = Object.values(this.props.pokemon)
+                console.log(allPokemon)
+                newPokemon = []
+                allPokemon.forEach(pokemon => {
+                    console.log(pokemon)
+                    if(pokemon.types){
+                        if(pokemon.types.includes(this.state.typeFilter1)){
+                            newPokemon.push(pokemon)
+                        }
                     }
-                }
-            })
-            this.setState({pokemon: newPokemon})
+                    
+                })
+                this.setState({pokemon: newPokemon})
+            });
         } else if (this.state.typeFilter1 === "" && this.state.typeFilter2 !== ""){
-            this.props.fetchByType(this.state.typeFilter2);
-            let allPokemon = Object.values(this.props.pokemon)
-            let newPokemon = []
-            allPokemon.forEach(pokemon => {
-                if (pokemon.type) {
-                    if (pokemon.type.includes(this.state.typeFilter2)) {
-                        newPokemon.push(pokemon)
-                    }
-                }
+            this.props.fetchByType(this.state.typeFilter2)
+                .then(()=> {
+                    let allPokemon = Object.values(this.props.pokemon)
+                    let newPokemon = []
+                    allPokemon.forEach(pokemon => {
+                        if (pokemon.types) {
+                            if (pokemon.types.includes(this.state.typeFilter2)) {
+                                newPokemon.push(pokemon)
+                            }
+                        }
+                    })
+                this.setState({ pokemon: newPokemon })
             })
-            this.setState({ pokemon: newPokemon })
         } else if (this.state.typeFilter1 !== "" && this.state.typeFilter2 !== ""){
-            this.props.fetchByType(this.state.typeFilter2);
-            this.props.fetchByType(this.state.typeFilter1);
-            let allPokemon = Object.values(this.props.pokemon)
-            let newPokemon = []
-            allPokemon.forEach(pokemon => {
-                if (pokemon.type) {
-                    if (pokemon.type.includes(this.state.typeFilter2) && pokemon.type.includes(this.state.typeFilter1)) {
-                        newPokemon.push(pokemon)
-                    }
-                }
-            })
-            this.setState({ pokemon: newPokemon })
+            this.props.fetchByType(this.state.typeFilter2)
+                .then(() => this.props.fetchByType(this.state.typeFilter1)
+                    .then(() => {
+                        let allPokemon = Object.values(this.props.pokemon)
+                        let newPokemon = []
+                        allPokemon.forEach(pokemon => {
+                            if (pokemon.types) {
+                                if (pokemon.types.includes(this.state.typeFilter2) && pokemon.types.includes(this.state.typeFilter1)) {
+                                    newPokemon.push(pokemon)
+                                }
+                            }
+                        })
+                        this.setState({ pokemon: newPokemon })
+                    }))
         }
+    }
+    
+    removeFromTeam(id){
+        const team = Object.assign({}, this.state.team, { [id]: {}});
+        this.setState({
+            team,
+        });
     }
 
     handleSubmit(e){
         e.preventDefault();
-        console.log(this.state.search);
+        // for search submit
+        // should do a request?
     }
 
     handleTypeFilter(e){
-        this.setState({typeFilter1: ''})
-        this.filterByType();
+        this.setState({typeFilter1: 'fire'}, () => {
+            this.filterByType();
+        })
     }
 
     render(){
-        console.log(this.state.search);
         const { pokemon, team } = this.state;
         const pokemonComponents = pokemon.map(poke => {
             return(
@@ -152,23 +172,15 @@ class TeamBuilder extends React.Component {
         });
         return(
             <div>
-                <NavbarContainer/>
-            <div>
-                <Sidebar/>
-            </div>
             <div className="team-builder-container">
                 <div>
-                    <ul className="team-container"> 
-                    <div className="team-slot-container">
-                        <TeamSlot onDrop={this.onDrop1} name={team[1].name} sprite={team[1].sprite}/>
-                        <TeamSlot onDrop={this.onDrop2} name={team[2].name} sprite={team[2].sprite}/>
-                        <TeamSlot onDrop={this.onDrop3} name={team[3].name} sprite={team[3].sprite}/>
-                    </div>
-                    <div className="team-slot-container">
-                        <TeamSlot onDrop={this.onDrop4} name={team[4].name} sprite={team[4].sprite}/>
-                        <TeamSlot onDrop={this.onDrop5} name={team[5].name} sprite={team[5].sprite}/>
-                        <TeamSlot onDrop={this.onDrop6} name={team[6].name} sprite={team[6].sprite}/>
-                    </div>
+                    <ul className="team-slots-container"> 
+                        <TeamSlot id="1" onDrop={this.onDrop1} name={team[1].name} sprite={team[1].sprite} removeFromTeam={this.removeFromTeam}/>
+                        <TeamSlot id="2" onDrop={this.onDrop2} name={team[2].name} sprite={team[2].sprite} removeFromTeam={this.removeFromTeam}/>
+                        <TeamSlot id="3" onDrop={this.onDrop3} name={team[3].name} sprite={team[3].sprite} removeFromTeam={this.removeFromTeam}/>
+                        <TeamSlot id="4" onDrop={this.onDrop4} name={team[4].name} sprite={team[4].sprite} removeFromTeam={this.removeFromTeam}/>
+                        <TeamSlot id="5" onDrop={this.onDrop5} name={team[5].name} sprite={team[5].sprite} removeFromTeam={this.removeFromTeam}/>
+                        <TeamSlot id="6" onDrop={this.onDrop6} name={team[6].name} sprite={team[6].sprite} removeFromTeam={this.removeFromTeam}/>
                     </ul>
                 </div>
                 <div>Additional team info that will only be visible when selected</div>
