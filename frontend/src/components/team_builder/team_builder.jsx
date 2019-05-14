@@ -109,11 +109,11 @@ class TeamBuilder extends React.Component {
     saveTeam(){
         const { createTeam } = this.props;
         const { team, teamName } = this.state;
+        debugger
         createTeam({ name: teamName, pokemon: Object.values(team) });
     }   
 
     render(){
-        console.log(this.state.teamName);
         const { pokemon, team } = this.state;
         const pokemonComponents = pokemon.map(poke => {
             return(
