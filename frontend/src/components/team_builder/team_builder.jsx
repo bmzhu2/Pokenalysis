@@ -44,26 +44,32 @@ class TeamBuilder extends React.Component {
 
     onDrop1(incomingState) {
         const team = Object.assign({}, this.state.team, { 1: incomingState });
+        this.props.fetchPokemon(incomingState.name);
         this.setState({ team });
     }
     onDrop2(incomingState) {
         const team = Object.assign({}, this.state.team, { 2: incomingState });
+        this.props.fetchPokemon(incomingState.name);
         this.setState({ team });
     }
     onDrop3(incomingState) {
         const team = Object.assign({}, this.state.team, { 3: incomingState });
+        this.props.fetchPokemon(incomingState.name);
         this.setState({ team });
     }
     onDrop4(incomingState) {
         const team = Object.assign({}, this.state.team, { 4: incomingState });
+        this.props.fetchPokemon(incomingState.name);
         this.setState({ team });
     }
     onDrop5(incomingState) {
         const team = Object.assign({}, this.state.team, { 5: incomingState });
+        this.props.fetchPokemon(incomingState.name);
         this.setState({ team });
     }
     onDrop6(incomingState) {
         const team = Object.assign({}, this.state.team, { 6: incomingState });
+        this.props.fetchPokemon(incomingState.name);
         this.setState({ team });
     }
     
@@ -216,6 +222,7 @@ class TeamBuilder extends React.Component {
     }
 
     render(){
+        console.log(this.state.team);
         const { pokemon, team, openFilter } = this.state;
         const { fetchPokemon, fetchItem, fetchItems, fetchMove, fetchAbility, } = this.props;
         const pokemonComponents = pokemon.map(poke => {
