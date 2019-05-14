@@ -2,7 +2,7 @@ let seeder = require('mongoose-seed');
 const User = require('./models/User')
 const Team = require('./models/Team')
 const Comment = require('./models/Comment')
-const db = require('./config/keys_prod').mongoURI;
+const db = require('./config/keys').mongoURI;
 const bcrypt = require('bcryptjs');
 
 seeder.connect(db, { useNewUrlParser: true }, function(){
