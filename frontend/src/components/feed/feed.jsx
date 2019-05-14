@@ -20,7 +20,8 @@ class Feed extends React.Component {
                 <TeamFeed 
                     teams={this.props.teams} 
                     users={this.props.users}
-                    fetchUser={this.props.fetchUser} />
+                    fetchTeamLikes={this.props.fetchTeamLikes}
+                />
             </div>
         )
     }

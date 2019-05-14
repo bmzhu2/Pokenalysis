@@ -11,7 +11,7 @@
     flex-wrap: wrap;
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
-    height: 20vw;
+    height: 24vw;
     min-width: 50vw;
     width: 66vw;
     justify-content: center;
@@ -30,14 +30,46 @@
     width: 100%;
 }
 
-.team-container > h1 {
-    font-size: 5vw;
-    font-weight:700;
+.team-top {
+    display: flex;
+    justify-content: center;
+    min-width: 100%;
+    flex-wrap: wrap;
+    padding-top: 20px;
+    margin-top: -20px;
+    margin-bottom: 25px;
+    background-color: #fb6262;
+    color: rgb(249, 245, 245);
 }
 
-.team-container > h2 {
+.team-top a {
+    text-decoration: none;
+}
+
+.team-top  h2 {
+    color: rgb(249, 245, 245);
+}
+
+.team-container > .row {
+    color: #757575;
+    font-size: 1.5vw;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 1.5vw;
+}
+
+.team-container  h1 {
+    text-align: center;
+    font-size: 5vw;
+    font-weight:700;
+    min-width: 100%;
+}
+
+.team-container  h2 {
+    text-align: center;
     font-size: 2.5vw;
     font-weight: 100;
+    min-width: 100%;
     margin-bottom: 1vw;
 }
 
@@ -45,9 +77,14 @@
     text-align: center;
 }
 
-.poke-container > h3 {
-    margin-top: 5px;
-    font-size: 2vw;
+.poke-container  h3 {
+    text-align: center;
+    padding-top: 6px;
+    width: 8vw;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 1.3vw;
+    min-width: 100%;
 }
 
 .poke-circle{
@@ -56,7 +93,7 @@
     margin: 0px 1vw;
     width: 8vw;
     height: 8vw;
-    background-color: rgb(251, 97, 98);
+    background-color: rgb(112, 214, 255);
     -moz-box-shadow:    inset 0 0 7px 0px #0000004a;
     -webkit-box-shadow: inset 0 0 7px 0px #0000004a;
     box-shadow:         inset 0 0 7px 0px #0000004a;
