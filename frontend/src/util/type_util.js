@@ -1,5 +1,5 @@
 export const types = ['normal', 'fighting', 'flying', 'poison', 'ground', 'rock', 'bug', 'ghost', 'steel',
-                'fire', 'water', 'grass', 'electric', 'psychic', 'ice', 'dragon', 'dark', 'fairy']
+                'fire', 'water', 'grass', 'electric', 'psychic', 'ice', 'dragon', 'dark', 'fairy'];
 
 export const teamMoveClassAnalysis = (team, moveList => {
   let physicalMoves = 0;
@@ -93,7 +93,7 @@ export const teamDefensiveCoverage = (team, pokeList) => {
   
   team.pokemon.forEach(pokemon => {
     if (!pokemon.pokeId) {
-      continue
+      continue;
     }
 
     const type1 = pokeList[pokemon.pokeId].types[0];
