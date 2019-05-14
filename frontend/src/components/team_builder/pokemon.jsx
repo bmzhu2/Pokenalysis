@@ -1,6 +1,6 @@
 import React from 'react';
 import { DragSource } from 'react-dnd';
-
+import './pokemon.css';
 const Types = {
     POKEMON: 'pokemon',
 };

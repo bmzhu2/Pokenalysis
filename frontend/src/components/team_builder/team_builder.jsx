@@ -60,7 +60,7 @@ class TeamBuilder extends React.Component {
     componentDidMount(){
         window.addEventListener('scroll', this.handleScroll);
 
-        this.props.fetchManyPokemon(0).then(res => {
+        this.props.fetchAllPokemon(0).then(res => {
             this.setState({                
                 pokemon: res.pokemon.data.results.map(pokemon => {
                     let id = idParse(pokemon);
@@ -91,7 +91,7 @@ class TeamBuilder extends React.Component {
             return { pokemon };
         });
     }
-    
+
     handleSubmit(e){
         e.preventDefault();
         console.log(this.state.search);

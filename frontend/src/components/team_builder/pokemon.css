@@ -1,0 +1,7 @@
+.pokemon-container {
+    border-radius: 100%;
+    height: 70px;
+    width: 70px;
+    margin: 15px;
+    background-color: rgb(201, 59, 59);
+}

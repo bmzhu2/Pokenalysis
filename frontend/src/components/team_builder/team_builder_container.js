@@ -11,6 +11,7 @@ import {
 import { 
     fetchPokemon,
     fetchManyPokemon,
+    fetchAllPokemon,
     fetchByType,
     fetchItem,
     fetchItems,
@@ -39,6 +40,7 @@ const mapDispatchToProps = dispatch => {
         deleteTeam: teamId => dispatch(deleteTeam(teamId)),
 
         fetchPokemon: name => dispatch(fetchPokemon(name)),
+        fetchAllPokemon: () => dispatch(fetchAllPokemon()),
         fetchManyPokemon: startIdx => dispatch(fetchManyPokemon(startIdx)),
         fetchByType: type => dispatch(fetchByType(type)),
 
