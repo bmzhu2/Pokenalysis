@@ -80,6 +80,10 @@
     transition: background-color .5s ease-out;
 }
 
+.active-profile-button:hover{
+    background-color: rgb(103, 196, 103) ;
+}
+
 .disabled-profile-button{
     margin: 20px 20px 5px 20px;
     background-color: rgb(94, 208, 94) ;
