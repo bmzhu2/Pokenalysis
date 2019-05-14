@@ -91,6 +91,7 @@ class TeamBuilder extends React.Component {
     }
 
     filterByType(){
+        debugger
         if(this.state.typeFilter1 !== "" && this.state.typeFilter2 === ""){
             this.props.fetchByType(this.state.typeFilter1);
             let allPokemon = Object.values(this.props.pokemon)
@@ -136,9 +137,13 @@ class TeamBuilder extends React.Component {
         console.log(this.state.search);
     }
 
+    handleTypeFilter(e){
+        this.setState({typeFilter1: ''})
+        this.filterByType();
+    }
+
     render(){
         console.log(this.state.search);
-        this.filterByType()
         const { pokemon, team } = this.state;
         const pokemonComponents = pokemon.map(poke => {
             return(
