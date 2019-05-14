@@ -54,7 +54,7 @@ class TeamBuilder extends React.Component {
     }
     
     componentDidMount(){
-        window.addEventListener('scroll', this.handleScroll);
+        // window.addEventListener('scroll', this.handleScroll);
 
         this.props.fetchAllPokemon(0).then(res => {
             this.setState({                
@@ -66,7 +66,28 @@ class TeamBuilder extends React.Component {
                     };
                 })
             });
-        });   
+        }); 
+        
+        const targets = document.querySelectorAll('img');
+
+        const lazyLoad = target => {
+            const io = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    console.log(entry);
+
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        const src = img.getAttribute('data-lazy');
+
+                        img.setAttribute('src', src);
+
+                        observer.disconnect();
+                    }
+                });
+            });
+            io.observe(target);
+        };
+        targets.forEach(lazyLoad);
     }
 
     handleScroll() {
@@ -109,9 +130,6 @@ class TeamBuilder extends React.Component {
         });
         return(
             <div>
-            <div>
-                <Sidebar/>
-            </div>
             <div className="team-builder-container">
                 <div>
                     <ul className="team-slots-container"> 

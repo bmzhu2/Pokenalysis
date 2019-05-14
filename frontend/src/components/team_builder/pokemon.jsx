@@ -25,7 +25,9 @@ class Pokemon extends React.Component {
         super(props);
     }
 
-
+    componentDidMount(){
+  
+    }
 
     render() {
         const { name, sprite } = this.props;
@@ -33,7 +35,7 @@ class Pokemon extends React.Component {
         return connectDragSource(
             <li className="pokemon-container">
                 <h3 className="pokemon-sprite-name">{name}</h3>
-                <img className="pokemon-index-sprite" src={sprite} alt=""/>
+                <img className="pokemon-index-sprite" src="https://cdn.vox-cdn.com/uploads/chorus_asset/file/13144987/jbareham_180922_0802_pokeball.png" data-lazy={sprite} alt="pokeball"/>
             </li>
         )
     }
