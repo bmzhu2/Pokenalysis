@@ -1,7 +1,7 @@
 export const types = ['normal', 'fighting', 'flying', 'poison', 'ground', 'rock', 'bug', 'ghost', 'steel',
                 'fire', 'water', 'grass', 'electric', 'psychic', 'ice', 'dragon', 'dark', 'fairy'];
 
-export const teamMoveClassAnalysis = (team, moveList => {
+export const teamMoveClassAnalysis = (team, moveList) => {
   let physicalMoves = 0;
   let specialMoves = 0;
 
@@ -29,7 +29,7 @@ export const teamMoveClassAnalysis = (team, moveList => {
   })
 
   return {physical: physicalMoves, special: specialMoves}
-})
+};
 
 export const teamOffensiveCoverage = (team, moveList) => {
   let totalCoverage = {}
@@ -93,37 +93,37 @@ export const teamDefensiveCoverage = (team, pokeList) => {
   
   team.pokemon.forEach(pokemon => {
     if (!pokemon.pokeId) {
-      continue;
-    }
-
-    const type1 = pokeList[pokemon.pokeId].types[0];
-    const type2 = pokeList[pokemon.pokeId].types[1];
-    let damageRelation;
-    if (!type2) {
-      damageRelation = damageRelations[type1]
-    } else {
-      damageRelation = dualTypeDamageTakenRelation(type1, type2)
-    }
-    types.forEach(type => {
-      if(damageRelation.quad_damage_from.includes(type)) {
-        defensiveCoverage[type] -= 1
-      } else if (damageRelation.double_damage_from.includes(type)) {
-        defensiveCoverage[type] -= .75
-      } else if (damageRelation.half_damage_from.includes(type)) {
-        defensiveCoverage[type] += .5
-        unchecked.includes(type) ? unchecked.delete(type) : null
-      } else if (damageRelation.fourth_damage_from.includes(type)) {
-        defensiveCoverage[type] += .75
-        unchecked.includes(type) ? unchecked.delete(type) : null
-      } else if (damageRelation.no_damage_from.includes(type)) {
-        defensiveCoverage[type] += 1.5
-        unchecked.includes(type) ? unchecked.delete(type) : null
+      const type1 = pokeList[pokemon.pokeId].types[0];
+      const type2 = pokeList[pokemon.pokeId].types[1];
+      let damageRelation;
+      if (!type2) {
+        damageRelation = damageRelations[type1]
       } else {
-        defensiveCoverage[type] -= -.25
+        damageRelation = dualTypeDamageTakenRelation(type1, type2)
       }
-    })
+      types.forEach(type => {
+        if (damageRelation.quad_damage_from.includes(type)) {
+          defensiveCoverage[type] -= 1
+        } else if (damageRelation.double_damage_from.includes(type)) {
+          defensiveCoverage[type] -= .75
+        } else if (damageRelation.half_damage_from.includes(type)) {
+          defensiveCoverage[type] += .5
+          unchecked.includes(type) ? unchecked.delete(type) : null
+        } else if (damageRelation.fourth_damage_from.includes(type)) {
+          defensiveCoverage[type] += .75
+          unchecked.includes(type) ? unchecked.delete(type) : null
+        } else if (damageRelation.no_damage_from.includes(type)) {
+          defensiveCoverage[type] += 1.5
+          unchecked.includes(type) ? unchecked.delete(type) : null
+        } else {
+          defensiveCoverage[type] -= -.25
+        }
+      })
 
-    return {coverage: defensiveCoverage, unchecked: unchecked}
+      return { coverage: defensiveCoverage, unchecked: unchecked }
+    }
+
+    
   })
 }
 

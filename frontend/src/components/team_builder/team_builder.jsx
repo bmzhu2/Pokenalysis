@@ -9,6 +9,7 @@ import { idParse } from '../../reducers/pokemon_reducer';
 import PokemonAttributes from './pokemon_attributes';
 // import { types } from '../../util/type_util';
 import './team_builder.css';
+import StatCharts from './stat_charts'
 
 class TeamBuilder extends React.Component {
     constructor(props){
@@ -214,6 +215,9 @@ class TeamBuilder extends React.Component {
                     fetchAbility={fetchAbility}
                     updatePokeAttrs={this.updatePokeAttrs}
                 />
+                <div>
+                    <StatCharts team={this.state.team} pokemon={this.props.pokemon} />
+                </div>
                 <div className="filters">
                     <form onSubmit={this.handleSubmit}>
                         <input className="search" onChange={this.updateSearch()} type="text" placeholder="search by name"/>
