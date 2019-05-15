@@ -92,10 +92,11 @@ export const teamDefensiveCoverage = (team, pokeList) => {
   })
   
   team.pokemon.forEach(pokemon => {
-    if (!pokemon.pokeId) {
+    if (pokemon.pokeId && pokeList[pokemon.pokeId].types) {
       const type1 = pokeList[pokemon.pokeId].types[0];
       const type2 = pokeList[pokemon.pokeId].types[1];
       let damageRelation;
+      debugger
       if (!type2) {
         damageRelation = damageRelations[type1]
       } else {
@@ -108,23 +109,20 @@ export const teamDefensiveCoverage = (team, pokeList) => {
           defensiveCoverage[type] -= .75
         } else if (damageRelation.half_damage_from.includes(type)) {
           defensiveCoverage[type] += .5
-          unchecked.includes(type) ? unchecked.delete(type) : null
+          unchecked.has(type) ? unchecked.delete(type) : null
         } else if (damageRelation.fourth_damage_from.includes(type)) {
           defensiveCoverage[type] += .75
-          unchecked.includes(type) ? unchecked.delete(type) : null
+          unchecked.has(type) ? unchecked.delete(type) : null
         } else if (damageRelation.no_damage_from.includes(type)) {
           defensiveCoverage[type] += 1.5
-          unchecked.includes(type) ? unchecked.delete(type) : null
+          unchecked.has(type) ? unchecked.delete(type) : null
         } else {
           defensiveCoverage[type] -= -.25
         }
       })
-
-      return { coverage: defensiveCoverage, unchecked: unchecked }
     }
-
-    
   })
+  return { coverage: defensiveCoverage, unchecked: unchecked }
 }
 
 const dualTypeDamageTakenRelation = (type1, type2) => {

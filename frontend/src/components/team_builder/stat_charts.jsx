@@ -1,7 +1,7 @@
 import React from 'react'
 import * as StatUtil from '../../util/stat_util'
 import * as TypeUtil from '../../util/type_util'
-import { RadarChart, HorizontalBarSeries } from 'react-vis'
+import { RadarChart, HorizontalBarSeries, XYPlot, VerticalGridLines, XAxis, YAxis} from 'react-vis'
 
 class StatChart extends React.Component{
     constructor(props){
@@ -20,7 +20,15 @@ class StatChart extends React.Component{
         } else {
             newTeam = this.props.team
         }
-        let averages = StatUtil.averageStats(newTeam, this.props.pokemon)
+        let averages = StatUtil.averageStats(newTeam, this.props.pokemon);
+        let defensiveCoverage = TypeUtil.teamDefensiveCoverage(newTeam, this.props.pokemon);
+        const defenseData = [];
+        if (defensiveCoverage.coverage){
+            let coverageValues = defensiveCoverage.coverage;
+            TypeUtil.types.forEach(type => {
+                defenseData.push({x: coverageValues[type], y: type})
+            })
+        }
         const statData = [{
             'speed': averages['speed'],
             'attack': averages['attack'],
@@ -45,8 +53,16 @@ class StatChart extends React.Component{
                     <RadarChart data={statData} domains={statDomains} height={200} width={200}/>
                 </div>
                 <div className='defensive-types'>
-                    
+                    <XYPlot height={400} width={400} yType="ordinal">
+                        <VerticalGridLines/>
+                        <HorizontalBarSeries data={defenseData} color='red'/>
+                        <XAxis/>
+                        <YAxis />
+                    </XYPlot>
                 </div> 
+                <div>
+                    <HorizontalBarSeries/>
+                </div>
             </div>
         )
     }
