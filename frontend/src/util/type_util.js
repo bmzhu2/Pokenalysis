@@ -102,14 +102,14 @@ export const teamDefensiveCoverage = (team, pokeList) => {
         damageRelation = dualTypeDamageTakenRelation(type1, type2)
       }
       types.forEach(type => {
-        if (damageRelation.quad_damage_from.includes(type)) {
+        if (type2 && damageRelation.quad_damage_from.includes(type)) {
           defensiveCoverage[type] -= 1
         } else if (damageRelation.double_damage_from.includes(type)) {
           defensiveCoverage[type] -= .75
         } else if (damageRelation.half_damage_from.includes(type)) {
           defensiveCoverage[type] += .5
           unchecked.has(type) ? unchecked.delete(type) : null
-        } else if (damageRelation.fourth_damage_from.includes(type)) {
+        } else if (type2 && damageRelation.fourth_damage_from.includes(type)) {
           defensiveCoverage[type] += .75
           unchecked.has(type) ? unchecked.delete(type) : null
         } else if (damageRelation.no_damage_from.includes(type)) {
