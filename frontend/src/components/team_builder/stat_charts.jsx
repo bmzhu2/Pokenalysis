@@ -29,7 +29,7 @@ class StatChart extends React.Component{
                 defenseData.push({x: coverageValues[type], y: type})
             })
         }
-        
+
         const statData = [{
             'speed': averages['speed'],
             'attack': averages['attack'],
@@ -62,9 +62,9 @@ class StatChart extends React.Component{
                     </XYPlot>
                 </div> 
                 <div>
-                    <XYPlot height={400} width={400} yType="ordinal">
+                    <XYPlot yType="ordinal">
                         <VerticalGridLines />
-                        <HorizontalBarSeries data={defenseData} color='red' />
+                        <HorizontalBarSeries color='red' />
                         <XAxis />
                         <YAxis />
                     </XYPlot>
