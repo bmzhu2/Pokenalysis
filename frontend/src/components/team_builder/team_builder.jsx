@@ -170,6 +170,10 @@ class TeamBuilder extends React.Component {
     }
 
     saveTeam(){
+        if(!this.props.loggedIn) {
+            this.props.openModal("login");
+            return
+        }
         const { createTeam } = this.props;
         const { team, teamName } = this.state;
         let pokemon = Object.values(team);

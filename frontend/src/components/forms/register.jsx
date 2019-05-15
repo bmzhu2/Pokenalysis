@@ -29,7 +29,7 @@ class Register extends React.Component {
     const user = Object.assign({}, this.state);
     register(user).then(data => {
       if (data === undefined) {
-        this.props.history.push("/");
+        this.closeModal();
       } else {
         console.log("error logging in");
       }
@@ -52,7 +52,7 @@ class Register extends React.Component {
     login = this.props.login.bind(this);
     login(user).then(data => {
       if (data === undefined) {
-        this.props.history.push("/");
+        this.props.closeModal();
       } else {
         console.log("error logging in");
       }
@@ -101,7 +101,9 @@ class Register extends React.Component {
             </button>
           </div>
           <div className="form-row">
-            <Link to={"/login"}>Already have an account?</Link>
+            <a onClick={() => this.props.openModal("login")}>
+              Already have an account?
+            </a>
           </div>
         </div>
       </div>

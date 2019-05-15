@@ -19,10 +19,13 @@ import {
     fetchAbility
 } from '../../actions/poke_api_actions';
 
+import { openModal } from '../../actions/modal_actions';
+
 import TeamBuilder from './team_builder';
 
 const mapStateToProps = (state, ownProps) => {
     return({
+        loggedIn: state.session.isAuthenticated,
         teams: state.entities.teams,
         pokemon: state.entities.pokemon,
         moves: state.entities.moves,
@@ -47,7 +50,9 @@ const mapDispatchToProps = dispatch => {
         fetchItem: name => dispatch(fetchItem(name)),
         fetchItems: () => dispatch(fetchItems()),
         fetchMove: name => dispatch(fetchMove(name)),
-        fetchAbility: name => dispatch(fetchAbility(name))
+        fetchAbility: name => dispatch(fetchAbility(name)),
+
+        openModal: mode => dispatch(openModal(mode))
     });
 };
 
