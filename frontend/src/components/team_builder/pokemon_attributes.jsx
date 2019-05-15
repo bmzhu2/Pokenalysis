@@ -209,7 +209,9 @@ class PokemonAttributes extends React.Component {
               </div>
               <div className="attr-col">
                 <h3>Stats</h3>
-                {stats}
+                <div className="attr-stats">
+                    {stats}
+                </div>
               </div>
             </div>
           </div>

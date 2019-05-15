@@ -42,3 +42,9 @@
   width: 72.5%;
   border-radius: 4px
 }
+
+.attr-stats {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+}
