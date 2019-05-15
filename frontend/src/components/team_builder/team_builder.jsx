@@ -233,7 +233,7 @@ class TeamBuilder extends React.Component {
     }
 
     render(){
-        const { pokemon, team, openFilter } = this.state;
+        const { pokemon, team, openFilter, typeFilter1, typeFilter2 } = this.state;
         const { fetchPokemon, fetchItem, fetchItems, fetchMove, fetchAbility, } = this.props;
         const pokemonComponents = pokemon.map(poke => {
             return(
@@ -268,17 +268,21 @@ class TeamBuilder extends React.Component {
                         <input className="search" onChange={this.updateSearch()} type="text" placeholder="search by name"/>
                         <input className="search-button" type="submit" value="Search"/>
                     </form>
-                    <div className="filter-header-container">
-                        <div className="filter-header" onClick={() => this.handleOpenFilter("typeFilter1")}>filter 1
+                    <div className="filter-headers-container">
+                        <div className="filter-header-container"onClick={() => this.handleOpenFilter("typeFilter1")}>
+                            <h2 className={(openFilter.name === "typeFilter1") ? "filter-header open" : "filter-header"}>
+                                filter 1
+                            </h2>
                             <h3 className="x" onClick={() => this.clearFilter("typeFilter1")}>X</h3>
                         </div>
-                        <div className="filter-header" onClick={() => this.handleOpenFilter("typeFilter2")}>filter 2
+                        <div className="filter-header-container" onClick={() => this.handleOpenFilter("typeFilter2")}>
+                            <h2 className={(openFilter.name === "typeFilter2") ? "filter-header open" : "filter-header"}>filter 2</h2>
                             <h3 className="x" onClick={() => this.clearFilter("typeFilter2")}>X</h3>
                         </div>
                     </div>
                 </div>
                 <Filter handleTypeFilter={this.handleTypeFilter} 
-                        filterByType={this.filterByType}
+                        typeFilter={this.state[openFilter.name]}
                         name={openFilter.name}
                         />
                 <div>

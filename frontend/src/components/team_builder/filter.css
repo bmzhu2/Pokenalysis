@@ -11,17 +11,28 @@
     font-size: 20px;
 }
 
-.filter-header-container {
+.filter-headers-container {
     display: flex;
     align-items: center;
 }
 
-.filter-header {
+.filter-header-container {
     display: flex;
+    background-color: lightblue;
+    border-radius: 50px;
+    width: 150px;
     margin-left: 10px;
-    margin-right: 10px;
-    font-family: 'Montserrat', 'sans-serif';
-    font-size: 24px;
+    margin-right: 10px; 
+    justify-content: space-between;
+}
+
+.filter-header {
+    padding: 10px;
+    color: rgb(57, 56, 73);
+}
+
+.filter-header.open {
+    color: whitesmoke;
 }
 
 .filter-header:hover {
@@ -32,6 +43,7 @@
 .filter-header .x {
     margin-left: 10px;
     margin-right: 10px;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .filter-header .x:hover {
@@ -41,12 +53,13 @@
 
 .filter-list {
     display: flex;
+    margin-top: 15px;
     flex-wrap: wrap;
-    align-items: center;
+    justify-content: flex-start;
+    margin-left: 14px;
 }
 
 .filter-item {
-    background-color: green;
     box-sizing: border-box;
     border-radius: 100%;
     height: 40px;
@@ -64,15 +77,23 @@
     
 }
 
-.filter-item h3 {
+.filter-item-container {
+    border: 4px solid #b883d600;
+}
+
+.filter-item-container.selected {
+    border: 4px solid #b883d6;
+}
+
+.filter-item-container h3 {
     color: whitesmoke;    
+    box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
     font-weight: 900;
     position: relative;
-    top: -18px;
-
-    text-align: center;
+    top: 14px;
+    text-align: center;    
     z-index: 1;
 }
 
