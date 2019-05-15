@@ -10,6 +10,17 @@ export const userTeams = (teams, username) => {
     return newTeams
 }
 
+export const userLikes = (likes, username) => {
+    let newLikes = [];
+    let likes = Object.values(likes)
+    likes.forEach(like => {
+        if (like.username === username) {
+            newLikes.push(like)
+        }
+    })
+    return newLikes
+}
+
 export const likedTeams = (entities, username) => {
     let newTeams = [];
     let likes = Object.values(entities.likes)
@@ -41,4 +52,15 @@ export const teamComments = (entities, teamId) => {
         }
     })
     return newComments
+}
+
+export const userLikes = (entities, username) => {
+    let newLikes = [];
+    let likes = Object.values(entities.likes)
+    likes.forEach(like => {
+        if (like.teamId === teamId) {
+            newLikes.push(like)
+        }
+    })
+    return newLikes
 }

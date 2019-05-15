@@ -9,13 +9,14 @@ import { fetchPokemon,
         fetchAbility
     } from '../../actions/poke_api_actions'
 import { fetchTeamLikes, createLike } from '../../actions/like_actions'
-import { teamComments, teamLikes } from '../../reducers/selectors'
+import { teamComments, teamLikes, userLikes } from '../../reducers/selectors'
 
 const mapStateToProps = (state, ownProps) => ({
     team: state.entities.teams[ownProps.match.params.teamId],
     pokemon: state.entities.pokemon,
     comments: teamComments(state.entities, ownProps.match.params.teamId),
-    likes: teamLikes(state.entities, ownProps.match.params.teamId),
+    teamLikes: teamLikes(state.entities, ownProps.match.params.teamId),
+    userLikes: userLikes(state.entities.likes, state.session.user.username),
     currentUser: state.session.user
 })
 
