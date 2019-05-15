@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { fetchTeams } from '../../actions/team_actions';
 import { fetchUser } from '../../actions/user_actions';
 import { fetchTeamLikes, createLike, fetchLikes } from '../../actions/like_actions'; 
+import { openModal } from '../../actions/modal_actions';
 import Feed from './feed';
 
 const mapStateToProps = state => {
@@ -21,6 +22,7 @@ const mapDispatchToProps = dispatch => {
         fetchTeamLikes: (teamId) => dispatch(fetchTeamLikes(teamId)),
         fetchLikes: () => dispatch(fetchLikes()),
         createLike: (teamId) => dispatch(createLike(teamId)),
+        openModal: mode => dispatch(openModal(mode))
     });
 };
 

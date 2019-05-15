@@ -25,6 +25,8 @@ class Feed extends React.Component {
                     fetchTeamLikes={this.props.fetchTeamLikes}
                     likes={this.props.likes}
                     createLike={this.props.createLike}
+                    currentUser={this.props.currentUser}
+                    openModal={this.props.openModal}
                 />
             </div>
         )

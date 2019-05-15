@@ -36,6 +36,10 @@ class TeamItem extends React.Component {
     }
 
     handleLike() {
+        if(!this.props.currentUser) {
+            this.props.openModal("login");
+            return
+        }
         console.log("liked");
         this.props.createLike(this.props.team._id).then( () => (
             this.setState({

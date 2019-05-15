@@ -21,7 +21,7 @@
 }
 
 .form-row{
-    width: 100vw;
+    width: 70vw;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -108,5 +108,10 @@
 }
 
 .form a {
+    width: auto;
     margin-top: 1vw;
+}
+
+.form a:hover {
+    cursor: pointer;
 }

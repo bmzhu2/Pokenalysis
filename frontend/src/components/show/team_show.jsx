@@ -30,6 +30,10 @@ class TeamShow extends React.Component{
 
     handleSubmit(e){
         e.preventDefault()
+        if (!this.props.loggedIn) {
+          this.props.openModal("login");
+          return;
+        }
         debugger
         const newComment = {
             text: this.state.commentText,
@@ -50,6 +54,10 @@ class TeamShow extends React.Component{
     }
 
     handleLike() {
+        if (!this.props.loggedIn) {
+            this.props.openModal("login");
+            return
+        }
         console.log("liked");
         this.props.createLike(this.props.team._id).then(() => (
             this.setState({

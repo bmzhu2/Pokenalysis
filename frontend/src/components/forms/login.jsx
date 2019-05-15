@@ -30,7 +30,7 @@ class Login extends React.Component {
         login(user)
             .then(data => {
                 if(data === undefined){
-                    this.props.history.push('/');
+                    this.props.closeModal();
                 } else {
                     console.log("error logging in");
                 }
@@ -54,7 +54,7 @@ class Login extends React.Component {
         login(user)
             .then(data => {
                 if (data === undefined) {
-                    this.props.history.push("/");
+                    this.props.closeModal();
                 } else {
                     console.log("error logging in");
                 }
@@ -101,7 +101,9 @@ class Login extends React.Component {
                 </button>
               </div>
               <div className="form-row">
-                <Link to={"/register"}>Need to create an account?</Link>
+                <a onClick={() => this.props.openModal("register")}>
+                  Need to create an account?
+                </a>
               </div>
             </div>
           </div>
