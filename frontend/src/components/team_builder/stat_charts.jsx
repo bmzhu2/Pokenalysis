@@ -3,6 +3,8 @@ import * as StatUtil from '../../util/stat_util'
 import * as TypeUtil from '../../util/type_util'
 import { RadarChart, HorizontalBarSeries, XYPlot, VerticalGridLines, XAxis, YAxis, CircularGridLines} from 'react-vis'
 import '../../../node_modules/react-vis/dist/style.css'
+import './stat_charts.css'
+
 class StatChart extends React.Component{
     constructor(props){
         super(props)
@@ -14,7 +16,7 @@ class StatChart extends React.Component{
             newTeam.pokemon = []
             Object.values(this.props.team).forEach(mon => {
                 if(mon.pokeId){
-                    newTeam.pokemon.push({pokeId: mon.pokeId})
+                    newTeam.pokemon.push(mon)
                 }
             })
         } else {
@@ -29,7 +31,7 @@ class StatChart extends React.Component{
                 defenseData.push({x: coverageValues[type], y: type})
             })
         }
-        
+        let moveTypes = TypeUtil.teamMoveClassAnalysis(newTeam, this.props.moves)
         const statData = [{
             'speed': averages['speed'],
             'attack': averages['attack'],
@@ -86,8 +88,8 @@ class StatChart extends React.Component{
                 </div> */}
 
                 <div className="move-totals">
-                    <div></div>
-                    <div></div>
+                    <div>Physical moves: {moveTypes.physical}</div>
+                    <div>Special moves: {moveTypes.special}</div>
                 </div>
             </div>
         )

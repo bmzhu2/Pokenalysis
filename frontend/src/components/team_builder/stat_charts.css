@@ -1,0 +1,18 @@
+.team-stat-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.move-totals{
+    height: 200px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.move-totals div{
+    font-size: 24px;
+    color: white;
+}

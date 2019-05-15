@@ -22,7 +22,7 @@ router.get('/team/:team_id', (req, res) => {
     );
 });
 
-router.get('/'), (req, res) => {
+router.get('/', (req, res) => {
   Like.find()
   .then(likes => res.json(likes))
   .catch(err => res.status(404).json({ nolikesfound: 'No likes found' }))
