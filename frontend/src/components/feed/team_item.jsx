@@ -28,7 +28,6 @@ class TeamItem extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         if(prevProps.liked !== this.props.liked) {
-            debugger
             this.setState({
                 liked: this.props.liked
             })

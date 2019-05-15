@@ -7,7 +7,6 @@ import './show.css';
 class TeamShow extends React.Component{
     constructor(props){
         super(props)
-        debugger
         this.state = {
             slot: null,
             commentText: "",
@@ -34,7 +33,6 @@ class TeamShow extends React.Component{
           this.props.openModal("login");
           return;
         }
-        debugger
         const newComment = {
             text: this.state.commentText,
             user: this.props.currentUser.id,
