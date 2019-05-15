@@ -22,9 +22,17 @@
 
 .pokemon-index-sprite:hover {
     user-select: none;
-    cursor: pointer;
-    transform: scale(1.2);
+    cursor: grab;
+    /* transform: scale(1.2); */
+    animation: wobble .25s infinite linear;
 }
+
+@keyframes wobble {
+   0% { transform: translateX(0%); } 
+   25% { transform: translateX(-5%) rotate(-5deg); } 
+   75% { transform: translateX(5%) rotate(5deg); } 
+   100% { transform: translateX(0%); } 
+} 
 
 .pokemon-sprite-name {
     color: white;    
