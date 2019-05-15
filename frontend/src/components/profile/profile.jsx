@@ -55,6 +55,7 @@ class Profile extends React.Component{
                     <TeamItem
                         key={team._id}
                         team={team}
+                        liked={true}
                         fetchTeamLikes={this.props.fetchTeamLikes}
                     />
                 ))
