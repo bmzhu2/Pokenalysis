@@ -9,7 +9,7 @@ class TeamShow extends React.Component{
         this.state = {
             slot: null,
             commentText: "",
-            likes: this.props.likes.length
+            likes: this.props.teamLikes.length
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleAttributes = this.handleAttributes.bind(this)
