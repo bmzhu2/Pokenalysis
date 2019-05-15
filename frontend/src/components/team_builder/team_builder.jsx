@@ -26,6 +26,7 @@ class TeamBuilder extends React.Component {
             typeFilter2: "",
             openFilter: {
                 name: "typeFilter1",
+                isOpen: true,
             }
         };
         this.onDrop1 = this.onDrop1.bind(this);
@@ -175,6 +176,7 @@ class TeamBuilder extends React.Component {
 
     handleOpenFilter(filter){
         let openFilter = this.state.openFilter;
+        openFilter.isOpen = openFilter.name !== filter ? true : openFilter.name === filter && !openFilter.isOpen ? true : false;
         openFilter.name = filter;
         this.setState({
             openFilter,
@@ -257,6 +259,7 @@ class TeamBuilder extends React.Component {
                 <Filter handleTypeFilter={this.handleTypeFilter} 
                         typeFilter={this.state[openFilter.name]}
                         name={openFilter.name}
+                        isOpen={openFilter.isOpen}
                         />
                 <div>
                     <ul className="pokemon-index">
