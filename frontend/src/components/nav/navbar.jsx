@@ -33,8 +33,8 @@ class NavBar extends React.Component {
                 <div className="navbar">
                     <Link to={'/'}> <div className="icon"></div> </Link> 
                     <div className="links">
-                        <Link to={'/register'}>Signup</Link>
-                        <Link to={'/login'}>Login</Link>
+                        <button onClick={() => this.props.openModal("register")}>Signup</button>
+                        <button onClick={() => this.props.openModal("login")}>Login</button>
                     </div>
                 </div>
             );
