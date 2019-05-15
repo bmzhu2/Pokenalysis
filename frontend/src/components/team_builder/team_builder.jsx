@@ -132,7 +132,7 @@ class TeamBuilder extends React.Component {
     async filterByType(filter, type){
         const filters = Object.assign(this.state);
         filters[filter] = type;
-        
+
         const { typeFilter1, typeFilter2 } = filters;
         
             if (typeFilter1 && !typeFilter2) {
@@ -147,7 +147,6 @@ class TeamBuilder extends React.Component {
             } else {
                 this.filterPokemon(typeFilter1, typeFilter2);
             }
-        
     }
   
     removeFromTeam(id){
