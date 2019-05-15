@@ -1,3 +1,12 @@
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-left: 120px;
+    margin-right: 100px;
+    min-width: 790px;
+}
+
 .filter-buttons-container {
     display: flex;
     flex-direction: column;
@@ -29,17 +38,31 @@
 
 .filter-header-container {
     display: flex;
-    min-width: 170px;
-    background-color: lightblue;
+    background-color: rgb(123, 174, 190);
     border-radius: 50px;
-    width: 170px;
+    width: 120px;
+    margin-left: 20px;
+    justify-content: space-between;
+
+}
+.filter-header-container.open {
+    display: flex;
+    background-color: rgb(114, 72, 153);
+    border-radius: 50px;
+    width: 120px;
     margin-left: 20px;
     justify-content: space-between;
 
 }
 
+.filter-header-container:hover {
+    cursor: pointer;
+    background-color: lightblue;
+}
+
 .filter-header {
     padding: 10px;
+    font-size: 12px;
     color: rgb(57, 56, 73);
 }
 
@@ -54,10 +77,15 @@
 
 .filter-header-container .x {
     position: relative;
-    top: 15px;
+    top: 10px;
     margin-left: 10px;
     margin-right: 10px;
+    font-size: 14px;
     font-family: 'Montserrat', sans-serif;
+}
+
+.filter-header-container .x.open {
+    color: whitesmoke;   
 }
 
 .filter-header .x:hover {
