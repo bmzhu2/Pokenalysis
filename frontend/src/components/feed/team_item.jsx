@@ -36,7 +36,7 @@ class TeamItem extends React.Component {
     }
 
     handleLike() {
-        if(!this.props.currentUser) {
+        if (Object.keys(this.props.currentUser).length === 0) {
             this.props.openModal("login");
             return
         }

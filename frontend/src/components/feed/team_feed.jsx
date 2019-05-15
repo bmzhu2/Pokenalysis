@@ -21,6 +21,8 @@ const TeamFeed = (props) => {
                                         fetchTeamLikes={props.fetchTeamLikes}
                                         createLike={props.createLike}
                                         liked={true}
+                                        currentUser={props.currentUser}
+                                        openModal={props.openModal}
                                     />)
                         } else {
                             return(
@@ -30,6 +32,8 @@ const TeamFeed = (props) => {
                                     fetchTeamLikes={props.fetchTeamLikes}
                                     createLike={props.createLike}
                                     liked={false}
+                                    currentUser={props.currentUser}
+                                    openModal={props.openModal}
                                 />
                             )
                         }  

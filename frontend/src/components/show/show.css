@@ -10,6 +10,7 @@
 
 .likes > h3 {
     width: 100%;
+    margin-top: -1.5vw;
 }
 
 .item {
