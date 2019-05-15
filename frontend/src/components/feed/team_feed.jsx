@@ -16,6 +16,8 @@ const TeamFeed = (props) => {
                             team={team}
                             fetchTeamLikes={props.fetchTeamLikes}
                             createLike={props.createLike}
+                            currentUser={props.currentUser}
+                            openModal={props.openModal}
                         />
                     ))
                 }
