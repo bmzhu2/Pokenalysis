@@ -10,6 +10,7 @@ import PokemonAttributes from './pokemon_attributes';
 import Filter from './filter';
 // import { types } from '../../util/type_util'; USE THIS WHEN UTIL FILE IS FIXED
 import './team_builder.css';
+import StatCharts from './stat_charts'
 
 class TeamBuilder extends React.Component {
     constructor(props){
@@ -250,6 +251,9 @@ class TeamBuilder extends React.Component {
                     team={this.state.team}
                     slot={this.state.attrId}
                 />
+                <div>
+                    <StatCharts team={this.state.team} pokemon={this.props.pokemon} />
+                </div>
                 <div className="filters">
                     <form onSubmit={this.handleSubmit}>
                         <input className="search" onChange={this.updateSearch()} type="text" placeholder="search by name"/>
