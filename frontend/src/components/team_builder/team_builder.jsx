@@ -123,7 +123,7 @@ class TeamBuilder extends React.Component {
         
         this.setState((state, props) => {
             const pokemon = !newFilter.length ? Object.values(props.pokemon) : Object.values(props.pokemon).filter(poke => {
-                    return !!poke.types && newFilter.every( filter => poke.types.includes(filter));
+                return !!poke.types && newFilter.every(filter => poke.types.includes(filter));
             });
             return { pokemon };
         });
@@ -133,24 +133,26 @@ class TeamBuilder extends React.Component {
         const filters = Object.assign(this.state);
         filters[filter] = type;
         const { typeFilter1, typeFilter2 } = filters;
-        switch (typeFilter1 | typeFilter2) {
-            case !typeFilter1 | typeFilter2 :
-                await this.props.fetchByType(typeFilter1);
-                this.filterPokemon(typeFilter1, typeFilter2);      
-                break;
-            case typeFilter1 | !typeFilter2 :
-                await this.props.fetchByType(typeFilter2);
-                this.filterPokemon(typeFilter1, typeFilter2);   
-                break;
-            case !typeFilter1 | !typeFilter2 :
-                await this.props.fetchByType(typeFilter1);
-                await this.props.fetchByType(typeFilter2);
+        // switch (typeFilter1 | typeFilter2) {
+        //     case !typeFilter1 | typeFilter2 :
+        //         await this.props.fetchByType(typeFilter1);
+        //         debugger
+        //         this.filterPokemon(typeFilter1, typeFilter2);      
+        //         break;
+        //     case typeFilter1 | !typeFilter2 :
+        //         await this.props.fetchByType(typeFilter2);
+        //         this.filterPokemon(typeFilter1, typeFilter2);   
+        //         break;
+        //     case !typeFilter1 | !typeFilter2 :
+        //         this.filterPokemon(typeFilter1, typeFilter2);
+        //         debugger
+        //         break;
+        //     default:
+                await this.props.fetchByType(typeFilter1).then(this.props.fetchByType(typeFilter2));
+                // debugger
                 this.filterPokemon(typeFilter1, typeFilter2);
-            break;
-            default:
-                this.filterPokemon(typeFilter1, typeFilter2);
-                break;
-        }
+                // break;
+        // }
     }
   
     removeFromTeam(id){
