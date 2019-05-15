@@ -121,7 +121,7 @@ class TeamBuilder extends React.Component {
     filterPokemon(...filters){
         this.setState((state, props) => {
             const pokemon = Object.values(props.pokemon).filter(poke => {
-                return (filters.length) ? 
+                return (filters[0] || filters[1]) ? 
                     !!poke.types && poke.types.every(type => {
                         return filters.includes(type);
                     }) :
@@ -135,6 +135,7 @@ class TeamBuilder extends React.Component {
     async filterByType(filter, type){
         const filters = Object.assign(this.state);
         filters[filter] = type;
+        console.log(filters);
         const { typeFilter1, typeFilter2 } = filters;
         switch (typeFilter1 | typeFilter2) {
             case !typeFilter1 | typeFilter2 :
@@ -146,12 +147,12 @@ class TeamBuilder extends React.Component {
                 this.filterPokemon(typeFilter2);   
                 break;
             case !typeFilter1 | !typeFilter2 :
-                await this.props.fetchByType(typeFilter2);
                 await this.props.fetchByType(typeFilter1);
-                this.filterPokemon(typeFilter1, typeFilter2);
-                break;
-            default:
+                await this.props.fetchByType(typeFilter2);
                 this.filterPokemon();
+            break;
+            default:
+                this.filterPokemon(typeFilter1, typeFilter2);
                 break;
         }
     }
