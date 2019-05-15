@@ -19,7 +19,6 @@ class Feed extends React.Component {
         return(
             <div className="content-container">
                 <TeamFeed
-                    currentUser={this.props.currentUser} 
                     teams={this.props.teams} 
                     users={this.props.users}
                     fetchTeamLikes={this.props.fetchTeamLikes}
