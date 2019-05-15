@@ -17,11 +17,15 @@ const pokemonReducer = (state = {}, action) => {
         typesArr.push(type.type.name)
       });
 
+      let moves = data.moves.map(idx => {
+        return idx.move.name
+      })
+
       let pokemon = {
         id: data.id,
         name: data.name, 
         abilities: data.abilities, 
-        moves: data.moves, 
+        moves: moves, 
         sprite: data.sprites.front_default,
         stats: data.stats, 
         types: typesArr
