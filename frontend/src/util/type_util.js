@@ -4,7 +4,6 @@ export const types = ['normal', 'fighting', 'flying', 'poison', 'ground', 'rock'
 export const teamMoveClassAnalysis = (team, moveList) => {
   let physicalMoves = 0;
   let specialMoves = 0;
-  debugger
   team.pokemon.forEach(pokemon => {
     if (moveList[pokemon.move1] && moveList[pokemon.move1].damage_class === "physical") {
       physicalMoves += 1
