@@ -54,8 +54,10 @@
     bottom: 20px;
     color: white;
     font-size: 24px;
-    bottom: -50px;
+    top: 10px;
+    left: 0px;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    z-index: 5;
 }
 
 .plus {
@@ -67,10 +69,15 @@
     width: 20px;
 }
 
-.x {
-    font-size: 24px;
-    color: black;
+.team-slot .x {
+    position: relative;
+    font-size: 40px;
+    color: red;
     z-index: 2;
+    font-family: 'Montserrat', sans-serif;
+    right: 10;
+    bottom: 10;
+
 }
 
 .x:hover {
