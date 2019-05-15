@@ -96,7 +96,6 @@ export const teamDefensiveCoverage = (team, pokeList) => {
       const type1 = pokeList[pokemon.pokeId].types[0];
       const type2 = pokeList[pokemon.pokeId].types[1];
       let damageRelation;
-      debugger
       if (!type2) {
         damageRelation = damageRelations[type1]
       } else {
