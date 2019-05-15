@@ -50,9 +50,8 @@
     margin: 10px 20px 20px 10px;
 }
 
-.form .submit{
-      margin: 20px 20px 5px 20px;
-    background-color: rgb(94, 208, 94) ;
+.form .submit, .form button{
+    margin: 20px 20px 5px 20px;
     font-family: 'Montserrat', sans-serif;
     color: whitesmoke;
     border:none;
@@ -73,8 +72,25 @@
     transition: background-color .5s ease-out;
 }
 
+.form .submit {
+    background-color: rgb(94, 208, 94) ;
+}
+
 .submit:hover {
     background-color: rgb(77, 182, 77);
+    cursor: pointer;
+}
+
+.form button {
+    background-color: rgb(86, 207, 191) ;
+}
+
+.form button:hover {
+    background-color: rgb(74, 182, 167) ;
+}
+
+.form button p {
+    margin: 0 auto;
 }
 
 .errors{
@@ -89,4 +105,8 @@
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+.form a {
+    margin-top: 1vw;
 }

@@ -6,7 +6,7 @@ const passport = require('passport');
 const Comment = require('../../models/Comment');
 const validateCommentInput = require('../../validation/comments');
 
-router.get('team/:team_id', (req, res) => {
+router.get('/team/:team_id', (req, res) => {
   Comment.find({ team: req.params.team_id })
     .then(comments => res.json(comments))
     .catch(err => 

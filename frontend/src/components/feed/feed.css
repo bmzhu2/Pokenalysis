@@ -1,3 +1,11 @@
+@media only screen and (min-width: 1200px) {
+  .team-container {
+    transform: scale(.7);
+    margin: -40px auto !important;
+    width: 65vw;
+  }
+}
+
 .teams-container{
     display: flex;
     justify-content: center;
@@ -44,6 +52,8 @@
 
 .team-top a {
     text-decoration: none;
+    width: 100%;
+    color: rgb(249, 245, 245);
 }
 
 .team-top  h2 {
