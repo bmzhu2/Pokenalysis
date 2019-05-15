@@ -23,27 +23,31 @@ class PokemonAttributes extends React.Component {
     }
 
     setMove1(e) {
-        let attrs = this.props.team[this.props.slot]
-        attrs.move1 = e.currentTarget.value
-        this.props.updatePokeAttrs(this.props.slot, attrs)
+      let attrs = this.props.team[this.props.slot]
+      attrs.move1 = e.currentTarget.value
+      this.props.fetchMove(e.currentTarget.value)
+      this.props.updatePokeAttrs(this.props.slot, attrs)
     }
 
     setMove2(e) {
-        let attrs = this.props.team[this.props.slot]
-        attrs.move2 = e.currentTarget.value
-        this.props.updatePokeAttrs(this.props.slot, attrs)
+      let attrs = this.props.team[this.props.slot]
+      attrs.move2 = e.currentTarget.value
+      this.props.fetchMove(e.currentTarget.value)
+      this.props.updatePokeAttrs(this.props.slot, attrs)
     }
 
     setMove3(e) {
-        let attrs = this.props.team[this.props.slot]
-        attrs.move3 = e.currentTarget.value
-        this.props.updatePokeAttrs(this.props.slot, attrs)
+      let attrs = this.props.team[this.props.slot]
+      attrs.move3 = e.currentTarget.value
+      this.props.fetchMove(e.currentTarget.value)
+      this.props.updatePokeAttrs(this.props.slot, attrs)
     }
 
     setMove4(e) {
-        let attrs = this.props.team[this.props.slot]
-        attrs.move4 = e.currentTarget.value
-        this.props.updatePokeAttrs(this.props.slot, attrs)
+      let attrs = this.props.team[this.props.slot]
+      attrs.move4 = e.currentTarget.value
+      this.props.fetchMove(e.currentTarget.value)
+      this.props.updatePokeAttrs(this.props.slot, attrs)
     }
     
     setAbility(e) {

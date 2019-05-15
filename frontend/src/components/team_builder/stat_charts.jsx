@@ -1,7 +1,9 @@
 import React from 'react'
 import * as StatUtil from '../../util/stat_util'
 import * as TypeUtil from '../../util/type_util'
-import { RadarChart, HorizontalBarSeries, XYPlot, VerticalGridLines, XAxis, YAxis} from 'react-vis'
+import { RadarChart, HorizontalBarSeries, XYPlot, VerticalGridLines, XAxis, YAxis, CircularGridLines} from 'react-vis'
+import '../../../node_modules/react-vis/dist/style.css'
+import './stat_charts.css'
 
 class StatChart extends React.Component{
     constructor(props){
@@ -14,7 +16,7 @@ class StatChart extends React.Component{
             newTeam.pokemon = []
             Object.values(this.props.team).forEach(mon => {
                 if(mon.pokeId){
-                    newTeam.pokemon.push({pokeId: mon.pokeId})
+                    newTeam.pokemon.push(mon)
                 }
             })
         } else {
@@ -29,7 +31,7 @@ class StatChart extends React.Component{
                 defenseData.push({x: coverageValues[type], y: type})
             })
         }
-        
+        let moveTypes = TypeUtil.teamMoveClassAnalysis(newTeam, this.props.moves)
         const statData = [{
             'speed': averages['speed'],
             'attack': averages['attack'],
@@ -51,9 +53,9 @@ class StatChart extends React.Component{
         return(
             <div className='team-stat-container'>
                 <div className='stat-averages'>
-                    <RadarChart data={statData} domains={statDomains} height={200} width={200} color='white' style={{
+                    <RadarChart data={statData} domains={statDomains} height={200} width={200} color='white' hideInnerMostValues={true} style={{
                         axes: {
-                            line: {},
+                            line: {strokeWidth: 0.5},
                             ticks: {},
                             text: {}
                         },
@@ -63,9 +65,10 @@ class StatChart extends React.Component{
                         polygons: {
                             strokeWidth: 0.5,
                             strokeOpacity: 1,
-                            fillOpacity: 0.3
+                            fillOpacity: 0.5
                         }
-                    }}/>
+                    }}>
+                    </RadarChart>
                 </div>
                 <div className='defensive-types'>
                     <XYPlot height={400} width={400} yType="ordinal">
@@ -75,13 +78,18 @@ class StatChart extends React.Component{
                         <YAxis />
                     </XYPlot>
                 </div> 
-                <div>
+                {/* <div>
                     <XYPlot height={400} width={400} yType="ordinal">
                         <VerticalGridLines />
                         <HorizontalBarSeries data={defenseData} color='red' />
                         <XAxis />
                         <YAxis />
                     </XYPlot>
+                </div> */}
+
+                <div className="move-totals">
+                    <div>Physical moves: {moveTypes.physical}</div>
+                    <div>Special moves: {moveTypes.special}</div>
                 </div>
             </div>
         )

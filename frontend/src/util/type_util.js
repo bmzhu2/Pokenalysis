@@ -4,26 +4,26 @@ export const types = ['normal', 'fighting', 'flying', 'poison', 'ground', 'rock'
 export const teamMoveClassAnalysis = (team, moveList) => {
   let physicalMoves = 0;
   let specialMoves = 0;
-
+  debugger
   team.pokemon.forEach(pokemon => {
-    if (moveList[pokemon.move1] === "physical") {
+    if (moveList[pokemon.move1] && moveList[pokemon.move1].damage_class === "physical") {
       physicalMoves += 1
-    } else if (moveList[pokemon.move1] === "special") {
+    } else if (moveList[pokemon.move1] && moveList[pokemon.move1].damage_class === "special") {
       specialMoves += 1
     }
-    if (moveList[pokemon.move2] === "physical") {
+    if (moveList[pokemon.move2] && moveList[pokemon.move2].damage_class === "physical") {
       physicalMoves += 1
-    } else if (moveList[pokemon.move2] === "special") {
+    } else if (moveList[pokemon.move2] && moveList[pokemon.move2].damage_class === "special") {
       specialMoves += 1
     }
-    if (moveList[pokemon.move3] === "physical") {
+    if (moveList[pokemon.move3] && moveList[pokemon.move3].damage_class === "physical") {
       physicalMoves += 1
-    } else if (moveList[pokemon.move3] === "special") {
+    } else if (moveList[pokemon.move3] && moveList[pokemon.move3].damage_class === "special") {
       specialMoves += 1
     }
-    if (moveList[pokemon.move4] === "physical") {
+    if (moveList[pokemon.move4] && moveList[pokemon.move4].damage_class === "physical") {
       physicalMoves += 1
-    } else if (moveList[pokemon.move4] === "special") {
+    } else if (moveList[pokemon.move4] && moveList[pokemon.move4].damage_class === "special") {
       specialMoves += 1
     }
   })
