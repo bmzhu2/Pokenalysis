@@ -1,0 +1,44 @@
+.poke-attrs{
+  width: 70vw;
+  margin: 1vw auto;
+  background: indianred;
+  border-radius: 10px;
+}
+
+.attr-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.attr-header h1 {
+  font-size: 2vw;
+}
+
+.attr-col-section {
+  display: flex;
+}
+
+.attr-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25%;
+  padding: 1vw;
+}
+
+.poke-attrs h3 {
+  text-align: center;
+  font-size: 1.5vw;
+}
+
+.poke-attrs select {
+  margin: .25vw;
+  width: 75%;
+  border-radius: 4px;
+}
+
+.poke-attrs input {
+  width: 72.5%;
+  border-radius: 4px
+}

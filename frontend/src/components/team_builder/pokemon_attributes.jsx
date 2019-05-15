@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './pokemon_attributes.css'
 
 class PokemonAttributes extends React.Component {
     constructor(props){
@@ -95,69 +95,125 @@ class PokemonAttributes extends React.Component {
                 if (!this.state.searchQuery || item.includes(this.state.searchQuery)) {
                     return <option value={item}>{item.split('-').join(" ")}</option>
                 }
-            })
-        
-        let currentItem = pokeAttrs.item ? pokeAttrs.item : <div>No item</div> 
+            }) 
 
-        let stats = 
-            pokemon.stats.reverse().map(stat => {
-                return <p>{`${stat.stat.name.split('-').join(" ")}: ${stat.base_stat}`}</p>
+
+        let stats = pokemon.stats.reverse()
+        stats = stats.map(stat => {
+                return <div>{`${stat.stat.name.split('-').join(" ")}: ${stat.base_stat}`}</div>
             })
 
         let sortedMoves = pokemon.moves.sort();
 
-        return(
-            <div>
-                <h1>{pokemon.name}</h1>
-                {pokemon.types.join(" ")}
-                <div>
-                    <h2>Moves</h2>
-                    <select name="move-one" value={pokeAttrs.move1} onChange={this.setMove1}>
-                        <option selected disabled>Select a move</option>
-                        {sortedMoves.map(move => {
-                            return <option value={move}>{move.split('-').join(" ")}</option>
-                        })}
-                    </select>
-                    <select name="move-two" value={pokeAttrs.move2} onChange={this.setMove2}>
-                        <option selected disabled>Select a move</option>
-                        {sortedMoves.map(move => {
-                            return <option value={move}>{move.split('-').join(" ")}</option>
-                        })}
-                    </select>
-                    <select name="move-three" value={pokeAttrs.move3} onChange={this.setMove3}>
-                        <option selected disabled>Select a move</option>
-                        {sortedMoves.map(move => {
-                            return <option value={move}>{move.split('-').join(" ")}</option>
-                        })}
-                    </select>
-                    <select name="move-four" value={pokeAttrs.move4} onChange={this.setMove4}>
-                        <option selected disabled>Select a move</option>
-                        {sortedMoves.map(move => {
-                            return <option value={move}>{move.split('-').join(" ")}</option>
-                        })}
-                    </select>
-                    
-                </div>
-                <div>
-                    <h2>Abilities</h2>
-                    <select name="abilities" size="3" value={pokeAttrs.ability} onChange={this.setAbility}>
-                        {abilities}
-                    </select>
-                </div>
-                <div>
-                    <h2>Items</h2>
-                    {currentItem}
-                    <input type="text" onChange={this.updateSearch}></input>
-                    <select name="items" size="6" value={pokeAttrs.item} onChange={this.setItem}>
-                        {itemsList}
-                    </select>
-                </div>
-                <div>
-                    <h2>Stats</h2>
-                    {stats}
-                </div>
+        return (
+          <div className="poke-attrs">
+            <div className="attr-header">
+              <h1>{pokemon.name}</h1>
+              {pokemon.types.join(" ")}
             </div>
-        )
+            <div className="attr-col-section">
+              <div className="attr-col">
+                <h3>Moves</h3>
+                <select
+                  name="move-one"
+                  value={pokeAttrs.move1}
+                  onChange={this.setMove1}
+                >
+                  <option>
+                    Select a move
+                  </option>
+                  {sortedMoves.map(move => {
+                    return (
+                      <option value={move}>
+                        {move.split("-").join(" ")}
+                      </option>
+                    );
+                  })}
+                </select>
+                <select
+                  name="move-two"
+                  value={pokeAttrs.move2}
+                  onChange={this.setMove2}
+                >
+                  <option>
+                    Select a move
+                  </option>
+                  {sortedMoves.map(move => {
+                    return (
+                      <option value={move}>
+                        {move.split("-").join(" ")}
+                      </option>
+                    );
+                  })}
+                </select>
+                <select
+                  name="move-three"
+                  value={pokeAttrs.move3}
+                  onChange={this.setMove3}
+                >
+                  <option>
+                    Select a move
+                  </option>
+                  {sortedMoves.map(move => {
+                    return (
+                      <option value={move}>
+                        {move.split("-").join(" ")}
+                      </option>
+                    );
+                  })}
+                </select>
+                <select
+                  name="move-four"
+                  value={pokeAttrs.move4}
+                  onChange={this.setMove4}
+                >
+                  <option>
+                    Select a move
+                  </option>
+                  {sortedMoves.map(move => {
+                    return (
+                      <option value={move}>
+                        {move.split("-").join(" ")}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+              <div className="attr-col">
+                <h3>Abilities</h3>
+                <select
+                  name="abilities"
+                  size="3"
+                  value={pokeAttrs.ability}
+                  onChange={this.setAbility}
+                >
+                  {abilities}
+                </select>
+              </div>
+              <div className="attr-col">
+                <h3>Items</h3>
+                <input
+                  type="text"
+                  value={this.state.searchQuery}
+                  onChange={this.updateSearch}
+                />
+                <select
+                  name="items"
+                  size="6"
+                  value={pokeAttrs.item}
+                  onChange={this.setItem}
+                >
+                  <option value="">None</option>
+                  {itemsList}
+                </select>
+              </div>
+              <div className="attr-col">
+                <h3>Stats</h3>
+                {stats}
+              </div>
+            </div>
+          </div>
+        );
     }
 }
 
