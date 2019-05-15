@@ -53,7 +53,7 @@ class StatChart extends React.Component{
         return(
             <div className='team-stat-container'>
                 <div className='stat-averages'>
-                    <RadarChart data={statData} domains={statDomains} height={200} width={200} color='white' hideInnerMostValues={true} style={{
+                    <RadarChart data={statData} domains={statDomains} height={200} width={200} color='white' margin={{left: 40, right: 40, top: 40, bottom: 40}} style={{
                         axes: {
                             line: {strokeWidth: 0.5},
                             ticks: {},
@@ -71,7 +71,7 @@ class StatChart extends React.Component{
                     </RadarChart>
                 </div>
                 <div className='defensive-types'>
-                    <XYPlot height={400} width={400} yType="ordinal">
+                    <XYPlot height={400} width={400} margin={{ left: 50, right: 40, top: 40, bottom: 40 }} yType="ordinal">
                         <VerticalGridLines/>
                         <HorizontalBarSeries data={defenseData} color='red'/>
                         <XAxis/>
