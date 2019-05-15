@@ -9,7 +9,7 @@ export const fetchUserLikes = userId => {
 }
 
 export const createLike = teamId => {
-    return axios.post('api/likes', teamId)
+    return axios.post('api/likes', {teamId: teamId})
 }
 
 export const deleteLike = likeId => {

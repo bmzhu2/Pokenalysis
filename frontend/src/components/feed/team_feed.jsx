@@ -15,6 +15,7 @@ const TeamFeed = (props) => {
                             key={team._id} 
                             team={team}
                             fetchTeamLikes={props.fetchTeamLikes}
+                            createLike={props.createLike}
                         />
                     ))
                 }
