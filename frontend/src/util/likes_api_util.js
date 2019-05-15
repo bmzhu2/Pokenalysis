@@ -1,5 +1,9 @@
 import axios from 'axios'
 
+export const fetchLikes = () => {
+    return axios.get('/')
+}
+
 export const fetchTeamLikes = teamId => {
     return axios.get('/api/likes/team/' + teamId)
 }

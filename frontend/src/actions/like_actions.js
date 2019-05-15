@@ -19,6 +19,11 @@ const removeLike = likeId => ({
     likeId
 })
 
+export const fetchLikes = () => dispatch => (
+    APIUtil.fetchLikes()
+        .then(likes => dispatch(receiveLikes(likes.data)))
+)
+
 export const fetchTeamLikes = teamId => dispatch => (
     APIUtil.fetchTeamLikes(teamId)
         .then(likes => dispatch(receiveLikes(likes.data)))
