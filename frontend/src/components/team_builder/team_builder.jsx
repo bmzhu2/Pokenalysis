@@ -148,7 +148,7 @@ class TeamBuilder extends React.Component {
         //         debugger
         //         break;
         //     default:
-                await this.props.fetchByType(typeFilter1).then(this.props.fetchByType(typeFilter2));
+                await this.props.fetchByType(typeFilter1).then(() => this.props.fetchByType(typeFilter2));
                 // debugger
                 this.filterPokemon(typeFilter1, typeFilter2);
                 // break;
