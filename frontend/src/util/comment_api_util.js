@@ -1,6 +1,5 @@
 import axios from  'axios'
 
-
 export const fetchTeamComments = teamId => {
     return axios.get('/api/comments/team/' + teamId)
 }
