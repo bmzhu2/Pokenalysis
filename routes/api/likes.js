@@ -15,7 +15,7 @@ router.get('/user/:username', (req, res) => {
 });
 
 router.get('/team/:team_id', (req, res) => {
-  Like.findById({ team: req.params.team_id })
+  Like.find({ team: req.params.team_id })
     .then(likes => res.json(likes))
     .catch(err =>
       res.status(404).json({ nolikesfound: 'That team currently has no likes' })
@@ -25,13 +25,11 @@ router.get('/team/:team_id', (req, res) => {
 router.post('/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-
     const newLike = new Like({
       team: req.body.teamId,
       user: req.user.id,
       username: req.user.username
     });
-
     newLike.save().then(like => res.json(like));
   }
 );

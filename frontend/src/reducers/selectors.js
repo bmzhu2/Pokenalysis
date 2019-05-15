@@ -11,6 +11,7 @@ export const userTeams = (teams, username) => {
 }
 
 export const likedTeams = (entities, username) => {
+    debugger
     let newTeams = [];
     let likes = Object.values(entities.likes)
     likes.forEach(like => {

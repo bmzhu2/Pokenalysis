@@ -11,7 +11,7 @@
     flex-wrap: wrap;
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
-    height: 24vw;
+    height: 26vw;
     min-width: 50vw;
     width: 66vw;
     justify-content: center;
@@ -55,7 +55,7 @@
     font-size: 1.5vw;
     display: flex;
     justify-content: space-evenly;
-    padding-top: .75vw;
+    padding-top: 4vw;
 }
 
 .team-container  h1 {
@@ -85,6 +85,7 @@
     margin: 0 auto;
     font-size: 1.3vw;
     min-width: 100%;
+    text-transform: capitalize;
 }
 
 .poke-circle{
@@ -114,5 +115,20 @@
     background-repeat: no-repeat;
 }
 
+.like-icon {
+    margin: 0 auto;
+    background-image: url(https://i.imgur.com/BMb6cD9.png);
+    background-size: cover;
+    width: 1.4vw;
+    height: 1.4vw;
+    margin-bottom: .2vw;
+}
 
+.like {
+    cursor: pointer;
+}
 
+.likes > * {
+    width: 12vw;
+    text-align: center;
+}

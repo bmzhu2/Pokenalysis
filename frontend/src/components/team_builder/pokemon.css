@@ -34,4 +34,5 @@
     top:74px;
     text-align: center;
     z-index: 1;
+    text-transform: capitalize;
 }
