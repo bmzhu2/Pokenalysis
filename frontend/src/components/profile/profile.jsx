@@ -45,7 +45,6 @@ class Profile extends React.Component{
                     />
                 ))
             }else{
-                debugger
                 myTeamsButton = <div className='active-profile-button' onClick={this.handleSwitch} >
                     {this.props.match.params.username}'s Teams
                 </div>
