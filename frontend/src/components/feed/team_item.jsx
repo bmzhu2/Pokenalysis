@@ -39,7 +39,6 @@ class TeamItem extends React.Component {
             this.props.openModal("login");
             return
         }
-        console.log("liked");
         this.props.createLike(this.props.team._id).then( () => (
             this.setState({
                 likes: this.state.likes + 1,
@@ -49,7 +48,6 @@ class TeamItem extends React.Component {
     }
 
     handleUnLike() {
-        console.log("unliked");
         // this.props.createLike(this.props.team._id).then(() => (
             this.setState({
                 likes: this.state.likes - 1,
