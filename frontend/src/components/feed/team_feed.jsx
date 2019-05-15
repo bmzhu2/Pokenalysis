@@ -9,10 +9,16 @@ const TeamFeed = (props) => {
     } else {
         return(
             <div className='teams-container'>
-                {
+                {   
                     Object.values(props.teams).map((team) =>  {
+                        let currentUser;
+                        if (props.currentUser === undefined) {
+                            currentUser = {}
+                        } else {
+                            currentUser = props.currentUser;
+                        }
                         let liked = Object.values(props.likes).some( like => (
-                            like.team === team._id && like.user === props.currentUser.id
+                            like.team === team._id && like.user === currentUser.id
                         ));
                         if (liked) {
                             return (<TeamItem
@@ -21,7 +27,7 @@ const TeamFeed = (props) => {
                                         fetchTeamLikes={props.fetchTeamLikes}
                                         createLike={props.createLike}
                                         liked={true}
-                                        currentUser={props.currentUser}
+                                        currentUser={currentUser}
                                         openModal={props.openModal}
                                     />)
                         } else {
@@ -32,7 +38,7 @@ const TeamFeed = (props) => {
                                     fetchTeamLikes={props.fetchTeamLikes}
                                     createLike={props.createLike}
                                     liked={false}
-                                    currentUser={props.currentUser}
+                                    currentUser={currentUser}
                                     openModal={props.openModal}
                                 />
                             )
