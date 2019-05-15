@@ -26,10 +26,11 @@ class TeamItem extends React.Component {
     handleLike() {
         console.log("liked");
         debugger
-        this.props.createLike(this.props.team._id);
-        this.setState({
-            likes: this.state.likes + 1
-        });
+        this.props.createLike(this.props.team._id).then( () => (
+            this.setState({
+                likes: this.state.likes + 1
+            })
+        ));
     }
 
     render() {
