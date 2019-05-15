@@ -9,7 +9,7 @@ class TeamItem extends React.Component {
         super(props);
         this.state = {
             likes: 0,
-            liked: false
+            liked: this.props.liked
         }
         this.handleLike = this.handleLike.bind(this);
         this.handleUnLike = this.handleUnLike.bind(this);
@@ -26,8 +26,17 @@ class TeamItem extends React.Component {
         })  
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps.liked !== this.props.liked) {
+            debugger
+            this.setState({
+                liked: this.props.liked
+            })
+        }
+    }
+
     handleLike() {
-        if(!this.props.currentUser) {
+        if (Object.keys(this.props.currentUser).length === 0) {
             this.props.openModal("login");
             return
         }
@@ -59,7 +68,7 @@ class TeamItem extends React.Component {
                     </div>
         } else {
             like = <div className="row-item like" onClick={this.handleUnLike}>
-                <div className="like-icon"></div>
+                <div className="unlike-icon"></div>
                 <h3>UnLike Team</h3>
             </div>
         }

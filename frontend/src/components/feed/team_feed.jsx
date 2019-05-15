@@ -10,16 +10,34 @@ const TeamFeed = (props) => {
         return(
             <div className='teams-container'>
                 {
-                    Object.values(props.teams).map((team) => (
-                        <TeamItem 
-                            key={team._id} 
-                            team={team}
-                            fetchTeamLikes={props.fetchTeamLikes}
-                            createLike={props.createLike}
-                            currentUser={props.currentUser}
-                            openModal={props.openModal}
-                        />
-                    ))
+                    Object.values(props.teams).map((team) =>  {
+                        let liked = Object.values(props.likes).some( like => (
+                            like.team === team._id && like.user === props.currentUser.id
+                        ));
+                        if (liked) {
+                            return (<TeamItem
+                                        key={team._id}
+                                        team={team}
+                                        fetchTeamLikes={props.fetchTeamLikes}
+                                        createLike={props.createLike}
+                                        liked={true}
+                                        currentUser={props.currentUser}
+                                        openModal={props.openModal}
+                                    />)
+                        } else {
+                            return(
+                                <TeamItem 
+                                    key={team._id} 
+                                    team={team}
+                                    fetchTeamLikes={props.fetchTeamLikes}
+                                    createLike={props.createLike}
+                                    liked={false}
+                                    currentUser={props.currentUser}
+                                    openModal={props.openModal}
+                                />
+                            )
+                        }  
+                    })
                 }
             </div>
         )

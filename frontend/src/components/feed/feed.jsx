@@ -12,15 +12,17 @@ class Feed extends React.Component {
 
     componentDidMount() {
         this.props.fetchTeams();
+        this.props.fetchLikes();
     }
 
     render() {
         return(
             <div className="content-container">
-                <TeamFeed 
+                <TeamFeed
                     teams={this.props.teams} 
                     users={this.props.users}
                     fetchTeamLikes={this.props.fetchTeamLikes}
+                    likes={this.props.likes}
                     createLike={this.props.createLike}
                     currentUser={this.props.currentUser}
                     openModal={this.props.openModal}

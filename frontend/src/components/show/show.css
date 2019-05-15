@@ -1,0 +1,29 @@
+.poke-row{
+    display: flex;
+    justify-content: center;
+    margin: 4vw 0;
+}
+
+.likes {
+    flex-wrap: wrap;
+}
+
+.likes > h3 {
+    width: 100%;
+    margin-top: -1.5vw;
+}
+
+.item {
+    flex-wrap: wrap;
+    margin-bottom: 2vw;
+    margin-top:4vw;
+}
+
+.item > h3 {
+    width: 100%;
+}
+
+.team-show {
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}

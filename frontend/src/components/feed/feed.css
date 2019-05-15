@@ -66,6 +66,7 @@
     display: flex;
     justify-content: space-evenly;
     padding-top: 4vw;
+    align-items: center;
 }
 
 .team-container  h1 {
@@ -133,6 +134,17 @@
     height: 1.4vw;
     margin-bottom: .2vw;
 }
+
+.unlike-icon {
+    margin: 0 auto;
+    background-image: url(https://i.imgur.com/BMb6cD9.png);
+    transform: rotateX(180deg);
+    background-size: cover;
+    width: 1.4vw;
+    height: 1.4vw;
+    margin-bottom: .2vw;
+}
+
 
 .like {
     cursor: pointer;
