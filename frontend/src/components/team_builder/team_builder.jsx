@@ -8,6 +8,7 @@ import Sidebar from './sidebar';
 import { idParse } from '../../reducers/pokemon_reducer';
 import PokemonAttributesContainer from './pokemon_attributes_container';
 import Filter from './filter';
+import './filter.css';
 // import { types } from '../../util/type_util'; USE THIS WHEN UTIL FILE IS FIXED
 import './team_builder.css';
 import StatCharts from './stat_charts'
@@ -232,7 +233,6 @@ class TeamBuilder extends React.Component {
     }
 
     render(){
-        console.log(this.state.team);
         const { pokemon, team, openFilter } = this.state;
         const { fetchPokemon, fetchItem, fetchItems, fetchMove, fetchAbility, } = this.props;
         const pokemonComponents = pokemon.map(poke => {
@@ -268,19 +268,19 @@ class TeamBuilder extends React.Component {
                         <input className="search" onChange={this.updateSearch()} type="text" placeholder="search by name"/>
                         <input className="search-button" type="submit" value="Search"/>
                     </form>
-                    <div>
-                        <div onClick={() => this.handleOpenFilter("typeFilter1")}>filter 1
-                            <h3 onClick={() => this.clearFilter("typeFilter1")}>X</h3>
+                    <div className="filter-header-container">
+                        <div className="filter-header" onClick={() => this.handleOpenFilter("typeFilter1")}>filter 1
+                            <h3 className="x" onClick={() => this.clearFilter("typeFilter1")}>X</h3>
                         </div>
-                        <div onClick={() => this.handleOpenFilter("typeFilter2")}>filter 2
-                            <h3 onClick={() => this.clearFilter("typeFilter2")}>X</h3>
+                        <div className="filter-header" onClick={() => this.handleOpenFilter("typeFilter2")}>filter 2
+                            <h3 className="x" onClick={() => this.clearFilter("typeFilter2")}>X</h3>
                         </div>
                     </div>
-                    <Filter handleTypeFilter={this.handleTypeFilter} 
-                            filterByType={this.filterByType}
-                            name={openFilter.name}
-                            />
                 </div>
+                <Filter handleTypeFilter={this.handleTypeFilter} 
+                        filterByType={this.filterByType}
+                        name={openFilter.name}
+                        />
                 <div>
                     <ul className="pokemon-index">
                         {pokemonComponents}

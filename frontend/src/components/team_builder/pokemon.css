@@ -22,9 +22,17 @@
 
 .pokemon-index-sprite:hover {
     user-select: none;
-    cursor: pointer;
-    transform: scale(1.2);
+    cursor: grab;
+    /* transform: scale(1.2); */
+    animation: wobble .25s infinite linear;
 }
+
+@keyframes wobble {
+   0% { transform: translateX(0%); } 
+   25% { transform: translateX(-5%) rotate(-5deg); } 
+   75% { transform: translateX(5%) rotate(5deg); } 
+   100% { transform: translateX(0%); } 
+} 
 
 .pokemon-sprite-name {
     color: white;    
@@ -35,4 +43,14 @@
     text-align: center;
     z-index: 1;
     text-transform: capitalize;
+}
+
+.loading {
+  animation: rotation 2s infinite linear;
+}
+
+@keyframes rotation {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(360deg); }
+    100% { transform: rotate(0deg); }
 }

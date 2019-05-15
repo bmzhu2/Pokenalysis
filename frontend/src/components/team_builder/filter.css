@@ -1,0 +1,99 @@
+.filter-buttons-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 15px 80px 15px 80px;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter-buttons-container h2 {
+    font-size: 20px;
+}
+
+.filter-header-container {
+    display: flex;
+    align-items: center;
+}
+
+.filter-header {
+    display: flex;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: 'Montserrat', 'sans-serif';
+    font-size: 24px;
+}
+
+.filter-header:hover {
+    cursor: pointer;
+    user-select: none;
+}
+
+.filter-header .x {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.filter-header .x:hover {
+    cursor: pointer;
+    user-select: none;
+}
+
+.filter-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.filter-item {
+    background-color: green;
+    box-sizing: border-box;
+    border-radius: 100%;
+    height: 40px;
+    width: 40px;
+    margin: 20px 7px 10px 7px;
+    border: 4px solid rgba(0, 128, 0, 0);
+    transition: border .3s;
+}
+
+.filter-item:hover {
+    cursor: pointer;
+    user-select: none;
+    border: 4px solid #5ed05e;
+    font-size: 12px;
+    
+}
+
+.filter-item h3 {
+    color: whitesmoke;    
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    position: relative;
+    top: -18px;
+
+    text-align: center;
+    z-index: 1;
+}
+
+#normal { background-color: #f5deb3; }
+#fighting { background-color: #C22E28; }
+#fire { background-color: #EE8130; }
+#water { background-color: #6390F0; }
+#grass { background-color: #7AC74C; }
+#electric { background-color: #F7D02C; }
+#ice { background-color: #96D9D6; }
+#poison { background-color: #A33EA1; }
+#ground { background-color: #E2BF65; }
+#flying { background-color: #A98FF3; }
+#psychic { background-color: #F95587; }
+#bug { background-color: #A6B91A; }
+#rock { background-color: #B6A136; }
+#ghost { background-color: #735797; }
+#dragon { background-color: #6F35FC; }
+#dark { background-color: #705746; }
+#steel { background-color: #B7B7CE; }
+#fairy { background-color: #D685AD; }
+
+
+
