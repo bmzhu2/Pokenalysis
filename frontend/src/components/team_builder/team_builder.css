@@ -52,15 +52,6 @@
     margin: 0 80px 15px 80px;
 }
 
-.filters {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-left: 120px;
-    margin-right: 100px;
-    min-width: 900px;
-}
-
 .filters form {
     min-width: 510px;
 }

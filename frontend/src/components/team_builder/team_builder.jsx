@@ -246,17 +246,17 @@ class TeamBuilder extends React.Component {
                         <input className="search-button" type="submit" value="Search"/>
                     </form>
                     <div className="filter-headers-container">
-                        <div className="filter-header-container"onClick={() => this.handleOpenFilter("typeFilter1")}>
-                            <h2 className={(openFilter.name === "typeFilter1") ? "filter-header open" : "filter-header"}>
+                        <div className={(openFilter.name === "typeFilter1" && openFilter.isOpen) ? "filter-header-container open" : "filter-header-container"} onClick={() => this.handleOpenFilter("typeFilter1")}>
+                                <h2 className={(openFilter.name === "typeFilter1" && openFilter.isOpen) ? "filter-header open" : "filter-header"}>
                                 { `${typeFilter1 || "filter 1"}` } 
                             </h2>
-                            <h3 className="x" onClick={() => this.clearFilter("typeFilter1")}>X</h3>
+                            <h3 className={openFilter.name === "typeFilter1" && openFilter.isOpen ? "x open" : "x"} onClick={() => this.clearFilter("typeFilter1")}>X</h3>
                         </div>
-                        <div className="filter-header-container" onClick={() => this.handleOpenFilter("typeFilter2")}>
-                            <h2 className={(openFilter.name === "typeFilter2") ? "filter-header open" : "filter-header"}>
+                        <div className={(openFilter.name === "typeFilter2" && openFilter.isOpen) ? "filter-header-container open" : "filter-header-container"} onClick={() => this.handleOpenFilter("typeFilter2")}>
+                            <h2 className={(openFilter.name === "typeFilter2" && openFilter.isOpen) ? "filter-header open" : "filter-header"}>
                                 {`${typeFilter2 || "filter 2"}`}
                             </h2>
-                            <h3 className="x" onClick={() => this.clearFilter("typeFilter2")}>X</h3>
+                                <h3 className={(openFilter.name === "typeFilter2" && openFilter.isOpen) ? "x open" : 'x'} onClick={() => this.clearFilter("typeFilter2")}>X</h3>
                         </div>
                     </div>
                 </div>
