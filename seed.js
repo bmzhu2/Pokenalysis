@@ -324,6 +324,12 @@ const dataComments = [
                 'user': '41224d776a326fb40f000000',
                 'username': 'Zinnia',
                 'text': 'Garchomp is OP'
+            },
+            {
+                'team': '41224d776a326fb40f000021',
+                'username': 'Banana',
+                'user': '41224d776a326fb40f000001',
+                'text': 'Mega Gardevoir with no normal type moves?'
             }
         ]
     }
