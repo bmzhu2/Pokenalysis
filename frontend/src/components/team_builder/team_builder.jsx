@@ -132,27 +132,22 @@ class TeamBuilder extends React.Component {
     async filterByType(filter, type){
         const filters = Object.assign(this.state);
         filters[filter] = type;
+        
         const { typeFilter1, typeFilter2 } = filters;
-        // switch (typeFilter1 | typeFilter2) {
-        //     case !typeFilter1 | typeFilter2 :
-        //         await this.props.fetchByType(typeFilter1);
-        //         debugger
-        //         this.filterPokemon(typeFilter1, typeFilter2);      
-        //         break;
-        //     case typeFilter1 | !typeFilter2 :
-        //         await this.props.fetchByType(typeFilter2);
-        //         this.filterPokemon(typeFilter1, typeFilter2);   
-        //         break;
-        //     case !typeFilter1 | !typeFilter2 :
-        //         this.filterPokemon(typeFilter1, typeFilter2);
-        //         debugger
-        //         break;
-        //     default:
+        
+            if (typeFilter1 && !typeFilter2) {
+                await this.props.fetchByType(typeFilter1);
+                this.filterPokemon(typeFilter1, typeFilter2);      
+            } else if (!typeFilter1 && typeFilter2) {
+                await this.props.fetchByType(typeFilter2);
+                this.filterPokemon(typeFilter1, typeFilter2);   
+            } else if (typeFilter1 && typeFilter2) {
                 await this.props.fetchByType(typeFilter1).then(() => this.props.fetchByType(typeFilter2));
-                // debugger
                 this.filterPokemon(typeFilter1, typeFilter2);
-                // break;
-        // }
+            } else {
+                this.filterPokemon(typeFilter1, typeFilter2);
+            }
+        
     }
   
     removeFromTeam(id){
