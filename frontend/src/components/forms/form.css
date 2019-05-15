@@ -39,22 +39,34 @@
 }
 
 .form input{
+    font-size: 2vw;
+    text-align: center;
     border-radius: 50px;
     border:none;
     outline: none;
     padding: 10px 10px;
     border: 1px solid rgb(201, 201, 201);
     background-color: white;
-    margin: 10px 20px;
+    margin: 10px 20px 20px 10px;
 }
 
 .form .submit{
+      margin: 20px 20px 5px 20px;
     background-color: rgb(94, 208, 94) ;
+    font-family: 'Montserrat', sans-serif;
     color: whitesmoke;
     border:none;
-    width: 52%;
+    width: 16vw;
+    min-width: 160px;
+    text-align: center;
     font-weight: 900;
-    font-size: 12px;
+    font-size: 14px;
+    padding: 20px 6px;
+    text-decoration: none;
+    border-radius: 50px;
+    -webkit-box-shadow: 0px 1.5px 10px 1px #0c0c0c29;
+    -moz-box-shadow: 0px 1.5px 10px 1px #0c0c0c29;
+    box-shadow: 0px 1.5px 10px 1px #0c0c0c29;
     -webkit-transition: background-color .5s ease-out;
     -moz-transition: background-color .5s ease-out;
     -o-transition: background-color .5s ease-out;

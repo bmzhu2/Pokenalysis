@@ -7,6 +7,7 @@ const movesReducer = (state = {}, action) => {
       let data = action.move.data
 
       let move = {
+        name: data.name,
         accuracy: data.accuracy,
         damage_class: data.damage_class.name,
         effect: data.effect_entries[0].short_effect,

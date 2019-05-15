@@ -26,7 +26,7 @@ class Splash extends React.Component {
                         <Link className="link-button" to={'/team-builder'}>Create a Team</Link>
                     </div>
                     <div className="row">
-                        <Link className="link-button" to={'/'}>About Pokenalysis</Link>
+                        <Link className="link-button" to={'/about'}>About Pokenalysis</Link>
                     </div>
                 </div>
             </div>

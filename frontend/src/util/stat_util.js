@@ -13,11 +13,12 @@ export const parseStats = statsArray => {
 
 const extractStats = (team, pokemon) => {
     let pokeStats = [];
-
     team.pokemon.forEach(mon => {
-        let stats = pokemon[mon.pokeId].stats;
-        stats = parseStats(stats);
-        pokeStats.push(stats);
+        if (pokemon[mon.pokeId].stats){
+            let stats = pokemon[mon.pokeId].stats;
+            stats = parseStats(stats);
+            pokeStats.push(stats);
+        }
     })
 
     return pokeStats
