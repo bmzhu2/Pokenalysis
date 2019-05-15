@@ -54,17 +54,31 @@
 
 .filters {
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-left: 120px;
+    margin-right: 100px;
+    min-width: 900px;
+}
+
+.filters form {
+    min-width: 510px;
 }
 
 .search {
     box-sizing: border-box;
     width: 400px;
-    height: 30px;
+    height: 40px;
     padding: 15px;
     font-size: 20px;
     border-radius: 5px;
     box-shadow: none;
+    border: none;
+    background-color: #dddddd;
+}
+
+.search:focus {
+    outline: none;
 }
 
 .search-button {

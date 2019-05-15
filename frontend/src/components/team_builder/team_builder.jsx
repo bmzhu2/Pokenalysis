@@ -26,6 +26,7 @@ class TeamBuilder extends React.Component {
             typeFilter2: "",
             openFilter: {
                 name: "typeFilter1",
+                isOpen: true,
             }
         };
         this.onDrop1 = this.onDrop1.bind(this);
@@ -119,15 +120,12 @@ class TeamBuilder extends React.Component {
     }
 
     filterPokemon(...filters){
+        const newFilter = filters[0] && filters[1] ? filters : filters[0] ? [filters[0]] : filters[1] ? [filters[1]] : [];
+        
         this.setState((state, props) => {
-            const pokemon = Object.values(props.pokemon).filter(poke => {
-                return (filters.length) ? 
-                    !!poke.types && poke.types.every(type => {
-                        return filters.includes(type);
-                    }) :
-                    poke;
+            const pokemon = !newFilter.length ? Object.values(props.pokemon) : Object.values(props.pokemon).filter(poke => {
+                return !!poke.types && newFilter.every(filter => poke.types.includes(filter));
             });
-    
             return { pokemon };
         });
     }
@@ -135,25 +133,21 @@ class TeamBuilder extends React.Component {
     async filterByType(filter, type){
         const filters = Object.assign(this.state);
         filters[filter] = type;
+
         const { typeFilter1, typeFilter2 } = filters;
-        switch (typeFilter1 | typeFilter2) {
-            case !typeFilter1 | typeFilter2 :
+        
+            if (typeFilter1 && !typeFilter2) {
                 await this.props.fetchByType(typeFilter1);
-                this.filterPokemon(typeFilter1);      
-                break;
-            case typeFilter1 | !typeFilter2 :
+                this.filterPokemon(typeFilter1, typeFilter2);      
+            } else if (!typeFilter1 && typeFilter2) {
                 await this.props.fetchByType(typeFilter2);
-                this.filterPokemon(typeFilter2);   
-                break;
-            case !typeFilter1 | !typeFilter2 :
-                await this.props.fetchByType(typeFilter2);
-                await this.props.fetchByType(typeFilter1);
+                this.filterPokemon(typeFilter1, typeFilter2);   
+            } else if (typeFilter1 && typeFilter2) {
+                await this.props.fetchByType(typeFilter1).then(() => this.props.fetchByType(typeFilter2));
                 this.filterPokemon(typeFilter1, typeFilter2);
-                break;
-            default:
-                this.filterPokemon();
-                break;
-        }
+            } else {
+                this.filterPokemon(typeFilter1, typeFilter2);
+            }
     }
   
     removeFromTeam(id){
@@ -186,6 +180,7 @@ class TeamBuilder extends React.Component {
 
     handleOpenFilter(filter){
         let openFilter = this.state.openFilter;
+        openFilter.isOpen = openFilter.name !== filter ? true : openFilter.name === filter && !openFilter.isOpen ? true : false;
         openFilter.name = filter;
         this.setState({
             openFilter,
@@ -268,6 +263,7 @@ class TeamBuilder extends React.Component {
                 <Filter handleTypeFilter={this.handleTypeFilter} 
                         typeFilter={this.state[openFilter.name]}
                         name={openFilter.name}
+                        isOpen={openFilter.isOpen}
                         />
                 <div>
                     <ul className="pokemon-index">
