@@ -4,23 +4,20 @@ const types = ['normal', 'fighting', 'flying', 'poison', 'ground', 'rock', 'bug'
     'fire', 'water', 'grass', 'electric', 'psychic', 'ice', 'dragon', 'dark', 'fairy'];
 
 class Filter extends React.Component {
-    constructor(props){
-        super(props);
-        
-    }
-    
     render(){
-        const { filterByType, handleTypeFilter, name } = this.props;
+        const { handleTypeFilter, name, typeFilter } = this.props;
         const filterTypes = types.map(type => {
             return (
-                <li key={type} id={type} className="filter-item" onClick={() => handleTypeFilter(name, type)}>
+                <li key={type} 
+                    className={(typeFilter === type) ? "filter-item-container selected" : "filter-item-container"} 
+                    onClick={() => handleTypeFilter(name, type)}>
                     <h3>{type}</h3>
+                    <div className="filter-item" id={type}></div>
                 </li>
             )
         });
         return(
             <div className="filter-buttons-container">
-                <h2>{name}</h2>
                 <ul className="filter-list">
                     {filterTypes}
                 </ul>

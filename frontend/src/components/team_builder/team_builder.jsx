@@ -233,7 +233,7 @@ class TeamBuilder extends React.Component {
     }
 
     render(){
-        const { pokemon, team, openFilter } = this.state;
+        const { pokemon, team, openFilter, typeFilter1, typeFilter2 } = this.state;
         const { fetchPokemon, fetchItem, fetchItems, fetchMove, fetchAbility, } = this.props;
         const pokemonComponents = pokemon.map(poke => {
             return(
@@ -244,8 +244,10 @@ class TeamBuilder extends React.Component {
             <div>
             <div className="team-builder-container">
                 <div>
-                    <input onChange={this.updateTeamName()} type="text" placeholder={this.state.teamName}/>
-                    <input onClick={this.saveTeam} type="submit" value="Save"/>
+                    <div className="name-submit-container">
+                        <input className="team-name" onChange={this.updateTeamName()} type="text" placeholder={"New Team"}/>
+                        <input className="submit-team" onClick={this.saveTeam} type="submit" value="Save"/>
+                    </div>
                     <ul className="team-slots-container"> 
                         <TeamSlot setAttrId={() => this.sendAttrId("1")} key="team-slot-1" id="1" onDrop={this.onDrop1} pokeId={team[1].id} name={team[1].name} sprite={team[1].sprite} removeFromTeam={this.removeFromTeam}/>
                         <TeamSlot setAttrId={() => this.sendAttrId("2")} key="team-slot-2" id="2" onDrop={this.onDrop2} pokeId={team[2].id} name={team[2].name} sprite={team[2].sprite} removeFromTeam={this.removeFromTeam}/>
@@ -264,21 +266,27 @@ class TeamBuilder extends React.Component {
                     <StatCharts team={this.state.team} pokemon={this.props.pokemon} />
                 </div> */}
                 <div className="filters">
-                    <form onSubmit={this.handleSubmit}>
+                    <form conSubmit={this.handleSubmit}>
                         <input className="search" onChange={this.updateSearch()} type="text" placeholder="search by name"/>
                         <input className="search-button" type="submit" value="Search"/>
                     </form>
-                    <div className="filter-header-container">
-                        <div className="filter-header" onClick={() => this.handleOpenFilter("typeFilter1")}>filter 1
+                    <div className="filter-headers-container">
+                        <div className="filter-header-container"onClick={() => this.handleOpenFilter("typeFilter1")}>
+                            <h2 className={(openFilter.name === "typeFilter1") ? "filter-header open" : "filter-header"}>
+                                { `${typeFilter1 || "filter 1"}` } 
+                            </h2>
                             <h3 className="x" onClick={() => this.clearFilter("typeFilter1")}>X</h3>
                         </div>
-                        <div className="filter-header" onClick={() => this.handleOpenFilter("typeFilter2")}>filter 2
+                        <div className="filter-header-container" onClick={() => this.handleOpenFilter("typeFilter2")}>
+                            <h2 className={(openFilter.name === "typeFilter2") ? "filter-header open" : "filter-header"}>
+                                {`${typeFilter2 || "filter 2"}`}
+                            </h2>
                             <h3 className="x" onClick={() => this.clearFilter("typeFilter2")}>X</h3>
                         </div>
                     </div>
                 </div>
                 <Filter handleTypeFilter={this.handleTypeFilter} 
-                        filterByType={this.filterByType}
+                        typeFilter={this.state[openFilter.name]}
                         name={openFilter.name}
                         />
                 <div>
