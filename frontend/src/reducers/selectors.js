@@ -12,8 +12,8 @@ export const userTeams = (teams, username) => {
 
 export const userLikes = (likes, username) => {
     let newLikes = [];
-    let likesValues = Object.values(likes)
-    likesValues.forEach(like => {
+    let userLikes = Object.values(likes)
+    userLikes.forEach(like => {
         if (like.username === username) {
             newLikes.push(like)
         }
