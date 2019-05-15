@@ -29,7 +29,7 @@ class Register extends React.Component {
     const user = Object.assign({}, this.state);
     register(user).then(data => {
       if (data === undefined) {
-        this.closeModal();
+        this.props.closeModal();
       } else {
         console.log("error logging in");
       }
