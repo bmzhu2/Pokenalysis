@@ -16,7 +16,7 @@ const itemsReducer = (state = {}, action) => {
     case RECEIVE_ITEMS:
       let itemList = {}
       Object.values(action.item.data.results).forEach(item => {
-        itemList[item.name] = {}
+        itemList[item.name] = {name: item.name}
       })
 
       return Object.assign({}, state, itemList)
