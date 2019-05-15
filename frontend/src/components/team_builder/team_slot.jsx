@@ -26,10 +26,25 @@ function collect(connect, monitor){
 class TeamSlot extends React.Component {
     constructor(props){
         super(props);
+        
+        this.state = {
+            isHovered: false,
+        };
+
+    }
+
+    componentDidUpdate(prevProps){
+        if (!prevProps.isOver && this.props.isOver) {
+            this.setState({ isHovered: true });
+        }
+
+        if (prevProps.isOver && !this.props.isOver) {
+            this.setState({ isHovered: false });
+        }
     }
 
     render(){
-        const { id, name, sprite, removeFromTeam } = this.props;
+        const { id, pokeId, name, sprite, removeFromTeam } = this.props;
         const { isOver, canDrop, connectDropTarget } = this.props;
         return connectDropTarget(
             <li className="team-slot">

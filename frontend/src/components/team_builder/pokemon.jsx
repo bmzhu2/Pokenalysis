@@ -38,7 +38,7 @@ class Pokemon extends React.Component {
                         observer.disconnect();
                     }
                 });
-            }, { root: null, rootMargin: '0px', threshold: 1.0 });
+            });
             io.observe(target);
 
         };

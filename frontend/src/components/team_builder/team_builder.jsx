@@ -6,10 +6,11 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import NavbarContainer from '../nav/navbar_container';
 import Sidebar from './sidebar';
 import { idParse } from '../../reducers/pokemon_reducer';
-import PokemonAttributes from './pokemon_attributes';
+import PokemonAttributesContainer from './pokemon_attributes_container';
 import Filter from './filter';
 // import { types } from '../../util/type_util'; USE THIS WHEN UTIL FILE IS FIXED
 import './team_builder.css';
+import StatCharts from './stat_charts'
 
 class TeamBuilder extends React.Component {
     constructor(props){
@@ -85,7 +86,9 @@ class TeamBuilder extends React.Component {
                     };
                 })
             });
-        });  
+        });
+
+        this.props.fetchItems()
     }
 
     handleScroll() {
@@ -237,19 +240,22 @@ class TeamBuilder extends React.Component {
                     <input onChange={this.updateTeamName()} type="text" placeholder={this.state.teamName}/>
                     <input onClick={this.saveTeam} type="submit" value="Save"/>
                     <ul className="team-slots-container"> 
-                        <TeamSlot onClick={() => this.sendAttrId("1")} key="team-slot-1" id="1" onDrop={this.onDrop1} id={team[1].id} name={team[1].name} sprite={team[1].sprite} removeFromTeam={this.removeFromTeam}/>
-                        <TeamSlot key="team-slot-2" id="2" onDrop={this.onDrop2} id={team[2].id} name={team[2].name} sprite={team[2].sprite} removeFromTeam={this.removeFromTeam}/>
-                        <TeamSlot key="team-slot-3" id="3" onDrop={this.onDrop3} id={team[3].id} name={team[3].name} sprite={team[3].sprite} removeFromTeam={this.removeFromTeam}/>
-                        <TeamSlot key="team-slot-4" id="4" onDrop={this.onDrop4} id={team[4].id} name={team[4].name} sprite={team[4].sprite} removeFromTeam={this.removeFromTeam}/>
-                        <TeamSlot key="team-slot-5" id="5" onDrop={this.onDrop5} id={team[5].id} name={team[5].name} sprite={team[5].sprite} removeFromTeam={this.removeFromTeam}/>
-                        <TeamSlot key="team-slot-6" id="6" onDrop={this.onDrop6} id={team[6].id} name={team[6].name} sprite={team[6].sprite} removeFromTeam={this.removeFromTeam}/>
+                        <TeamSlot onClick={() => this.sendAttrId("1")} key="team-slot-1" id="1" onDrop={this.onDrop1} pokeId={team[1].id} name={team[1].name} sprite={team[1].sprite} removeFromTeam={this.removeFromTeam}/>
+                        <TeamSlot onClick={() => this.sendAttrId("2")} key="team-slot-2" id="2" onDrop={this.onDrop2} pokeId={team[2].id} name={team[2].name} sprite={team[2].sprite} removeFromTeam={this.removeFromTeam}/>
+                        <TeamSlot onClick={() => this.sendAttrId("3")} key="team-slot-3" id="3" onDrop={this.onDrop3} pokeId={team[3].id} name={team[3].name} sprite={team[3].sprite} removeFromTeam={this.removeFromTeam}/>
+                        <TeamSlot onClick={() => this.sendAttrId("4")} key="team-slot-4" id="4" onDrop={this.onDrop4} pokeId={team[4].id} name={team[4].name} sprite={team[4].sprite} removeFromTeam={this.removeFromTeam}/>
+                        <TeamSlot onClick={() => this.sendAttrId("5")} key="team-slot-5" id="5" onDrop={this.onDrop5} pokeId={team[5].id} name={team[5].name} sprite={team[5].sprite} removeFromTeam={this.removeFromTeam}/>
+                        <TeamSlot onClick={() => this.sendAttrId("6")} key="team-slot-6" id="6" onDrop={this.onDrop6} pokeId={team[6].id} name={team[6].name} sprite={team[6].sprite} removeFromTeam={this.removeFromTeam}/>
                     </ul>
                 </div>
-                <PokemonAttributes
+                <PokemonAttributesContainer
                     updatePokeAttrs={this.updatePokeAttrs}
                     team={this.state.team}
                     slot={this.state.attrId}
                 />
+                <div>
+                    <StatCharts team={this.state.team} pokemon={this.props.pokemon} />
+                </div>
                 <div className="filters">
                     <form onSubmit={this.handleSubmit}>
                         <input className="search" onChange={this.updateSearch()} type="text" placeholder="search by name"/>
