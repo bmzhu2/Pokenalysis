@@ -51,7 +51,21 @@ class StatChart extends React.Component{
         return(
             <div className='team-stat-container'>
                 <div className='stat-averages'>
-                    <RadarChart data={statData} domains={statDomains} height={200} width={200}/>
+                    <RadarChart data={statData} domains={statDomains} height={200} width={200} color='white' style={{
+                        axes: {
+                            line: {},
+                            ticks: {},
+                            text: {}
+                        },
+                        labels: {
+                            fontSize: 10
+                        },
+                        polygons: {
+                            strokeWidth: 0.5,
+                            strokeOpacity: 1,
+                            fillOpacity: 0.3
+                        }
+                    }}/>
                 </div>
                 <div className='defensive-types'>
                     <XYPlot height={400} width={400} yType="ordinal">
