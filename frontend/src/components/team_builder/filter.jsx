@@ -18,7 +18,6 @@ class Filter extends React.Component {
         });
         return(
             <div className="filter-buttons-container">
-                <h2>{name}</h2>
                 <ul className="filter-list">
                     {filterTypes}
                 </ul>

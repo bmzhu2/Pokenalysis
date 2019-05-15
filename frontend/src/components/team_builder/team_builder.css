@@ -1,8 +1,48 @@
-.team-slots-container {
-    display: flex;
-    overflow: auto;
-    flex-wrap: wrap;
-    justify-content: center;
+.name-submit-container {
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 80px 5px 80px;
+}
+
+.submit-team {
+    margin: 20px 0 0 20px;
+    background-color: rgb(94, 208, 94);
+    font-family: 'Montserrat', sans-serif;
+    color: whitesmoke;
+    border: none;
+    width: 16vw;
+    min-width: 160px;
+    text-align: center;
+    font-weight: 900;
+    font-size: 14px;
+    padding: 20px 6px;
+    text-decoration: none;
+    border-radius: 50px;
+    box-shadow: 0px 1.5px 10px 1px #0c0c0c29;
+    transition: background-color .5s ease-out;
+}
+
+.submit-team:hover {
+    background-color: rgb(77, 182, 77);
+}
+
+
+.team-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    padding: 5px 5px 5px 0;
+    background-color: inherit;
+    width: 50%;
+    min-width: 200px;
+    border: none;
+    color: whitesmoke;
+
+}
+
+.team-name:focus {
+    outline: none;
+    background-color: rgb(17, 17, 63); 
 }
 
 .pokemon-index {
