@@ -49,19 +49,27 @@ class PokemonAttributes extends React.Component {
     setAbility(e) {
         let attrs = this.props.team[this.props.slot]
         attrs.ability = e.currentTarget.value
-        this.props.updateAttrs(this.props.slot, attrs)
+        this.props.updatePokeAttrs(this.props.slot, attrs)
     }
 
     setItem(e) {
         let attrs = this.props.team[this.props.slot];
         attrs.item = e.currentTarget.value;
-        this.props.updateAttrs(this.props.slot, attrs)
+        this.props.updatePokeAttrs(this.props.slot, attrs)
     }
 
     updateSearch(e) {
         this.setState({
             searchQuery: e.target.value
         })
+    }
+
+    componentDidUpdate(prevProps) {
+        if(this.props.slot !== prevProps.slot) {
+            this.setState({
+                searchQuery: ""
+            })
+        }
     }
 
     render(){
@@ -75,17 +83,11 @@ class PokemonAttributes extends React.Component {
         }
 
         let abilities = pokemon.abilities.map(ability => {
-            return  (
-                <label>
-                    {ability.ability.name.split('-').join(" ")}
-                    <input 
-                        type="radio" 
-                        name="ability" 
-                        value={ability.ability.name} 
-                        onClick={this.setAbility}
-                    ></input>
-                </label>
-                )
+            return (
+              <option value={ability.ability.name}>
+                {ability.ability.name.split("-").join(" ")}
+              </option>
+            );
         })
 
         let itemsList = 
@@ -93,11 +95,9 @@ class PokemonAttributes extends React.Component {
                 if (!this.state.searchQuery || item.includes(this.state.searchQuery)) {
                     return <option value={item}>{item.split('-').join(" ")}</option>
                 }
-            //    return ( !this.state.searchQuery ||item.includes(this.state.searchQuery)) ? 
-            //     <option value={item} >{item.split('-').join(" ")}</option> : <div></div>
             })
         
-        let currentItem = pokemon.item ? pokemon.item : <div>No item</div> 
+        let currentItem = pokeAttrs.item ? pokeAttrs.item : <div>No item</div> 
 
         let stats = 
             pokemon.stats.reverse().map(stat => {
@@ -112,25 +112,25 @@ class PokemonAttributes extends React.Component {
                 {pokemon.types.join(" ")}
                 <div>
                     <h2>Moves</h2>
-                    <select name="move-one" value={pokemon.move1} onChange={this.setMove1}>
+                    <select name="move-one" value={pokeAttrs.move1} onChange={this.setMove1}>
                         <option selected disabled>Select a move</option>
                         {sortedMoves.map(move => {
                             return <option value={move}>{move.split('-').join(" ")}</option>
                         })}
                     </select>
-                    <select name="move-two" value={pokemon.move2} onChange={this.setMove2}>
+                    <select name="move-two" value={pokeAttrs.move2} onChange={this.setMove2}>
                         <option selected disabled>Select a move</option>
                         {sortedMoves.map(move => {
                             return <option value={move}>{move.split('-').join(" ")}</option>
                         })}
                     </select>
-                    <select name="move-three" value={pokemon.move3} onChange={this.setMove3}>
+                    <select name="move-three" value={pokeAttrs.move3} onChange={this.setMove3}>
                         <option selected disabled>Select a move</option>
                         {sortedMoves.map(move => {
                             return <option value={move}>{move.split('-').join(" ")}</option>
                         })}
                     </select>
-                    <select name="move-four" value={pokemon.move4} onChange={this.setMove4}>
+                    <select name="move-four" value={pokeAttrs.move4} onChange={this.setMove4}>
                         <option selected disabled>Select a move</option>
                         {sortedMoves.map(move => {
                             return <option value={move}>{move.split('-').join(" ")}</option>
@@ -140,13 +140,15 @@ class PokemonAttributes extends React.Component {
                 </div>
                 <div>
                     <h2>Abilities</h2>
-                    {abilities}
+                    <select name="abilities" size="3" value={pokeAttrs.ability} onChange={this.setAbility}>
+                        {abilities}
+                    </select>
                 </div>
                 <div>
                     <h2>Items</h2>
                     {currentItem}
                     <input type="text" onChange={this.updateSearch}></input>
-                    <select name="items" size="6" value={pokemon.item} onChange={this.setItems}>
+                    <select name="items" size="6" value={pokeAttrs.item} onChange={this.setItem}>
                         {itemsList}
                     </select>
                 </div>
