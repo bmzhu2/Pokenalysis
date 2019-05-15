@@ -8,11 +8,13 @@ class TeamShow extends React.Component{
         super(props)
         this.state = {
             slot: null,
-            commentText: ""
+            commentText: "",
+            likes: this.props.likes.length
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleAttributes = this.handleAttributes.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.handleLike = this.handleLike.bind(this)
     }
 
     componentDidMount(){
@@ -43,6 +45,15 @@ class TeamShow extends React.Component{
         this.setState({slot: e.currentTarget.value});
     }
 
+    handleLike() {
+        console.log("liked");
+        this.props.createLike(this.props.team._id).then(() => (
+            this.setState({
+                likes: this.state.likes + 1
+            })
+        ));
+    }
+
     render(){
         if(this.props.team){
             let newForm = null
@@ -61,7 +72,11 @@ class TeamShow extends React.Component{
                     </ul>
                     <ShowAttributes pokemon={this.props.team.pokemon[this.state.slot]} />
                     <div>
-                        Number Of Likes {this.props.likes.length}
+                        Number Of Likes {this.state.likes}
+                    </div>
+                    <div className="row-item like" onClick={this.handleLike}>
+                        <div className="like-icon"></div>
+                        <h3>Like this Team</h3>
                     </div>
                     <div>
                         {this.props.comments.map(comment => {
