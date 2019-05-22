@@ -28,6 +28,9 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     margin-left: 27px;
+    background-color: rgb(42, 42, 94);
+    padding: 10px;
+    border-radius: 25px;
 }
 
 .filter-headers-container {
@@ -47,7 +50,7 @@
 }
 .filter-header-container.open {
     display: flex;
-    background-color: rgb(114, 72, 153);
+    background-color: rgb(42, 42, 94);
     border-radius: 50px;
     width: 120px;
     margin-left: 20px;
