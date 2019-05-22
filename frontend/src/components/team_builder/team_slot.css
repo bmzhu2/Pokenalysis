@@ -38,7 +38,7 @@
 .stats-button:hover {
     cursor: pointer;
     user-select: none;
-    background-color: #c04c4c;
+    background-color: #d65e5e;
 }
 
 .team-slot {
@@ -85,13 +85,14 @@
 }
 
 .plus {
-    box-sizing: border-box;
     color: grey;
-    text-align: center;
     font-size: 40px;
-    height: 20px;
-    width: 20px;
 }
+
+.plus:hover {
+    user-select: none;
+}
+
 
 .team-slot .x {
     position: relative;
@@ -111,5 +112,7 @@
 
 .none {
     opacity: 0;
+    height: 0;
+    width: 0;
 }
 
