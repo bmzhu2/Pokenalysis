@@ -48,16 +48,16 @@ export const teamOffensiveCoverage = (team, moveList) => {
 
 const pokemonCoverageAnalysis = (pokemon, moveList, pokeList) => {
   let moveTypes = [];
-  if (moveList[pokemon.move1].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move1].type)) {
+  if (pokemon.move1 && moveList[pokemon.move1].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move1].type)) {
     moveTypes.push(pokemon.move1.type)
   }
-  if (moveList[pokemon.move2].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move2].type)) {
+  if (pokemon.move2 && moveList[pokemon.move2].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move2].type)) {
     moveTypes.push(pokemon.move2.type)
   }
-  if (moveList[pokemon.move3].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move3].type)) {
+  if (pokemon.move3 && moveList[pokemon.move3].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move3].type)) {
     moveTypes.push(pokemon.move3.type)
   }
-  if (moveList[pokemon.move4].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move4].type)) {
+  if (pokemon.move4 && moveList[pokemon.move4].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move4].type)) {
     moveTypes.push(pokemon.move4.type)
   }
 

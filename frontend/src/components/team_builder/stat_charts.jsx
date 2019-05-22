@@ -48,30 +48,31 @@ class StatChart extends React.Component{
             { name: 'special-defense', domain: [0, 200] },
             { name: 'defense', domain: [0, 200] },
             { name: 'hp', domain: [0, 200] },
-            { name: 'stat-total', domain: [0, 700] }
+            { name: 'stat-total', domain: [0, 800] }
         ]
         return(
             <div className='team-stat-container'>
                 <div className='stat-averages'>
-                    <RadarChart data={statData} domains={statDomains} height={200} width={200} color='white' margin={{left: 40, right: 40, top: 40, bottom: 40}} style={{
+                    <RadarChart data={statData} domains={statDomains} height={320} width={320} color='white' margin={{left: 40, right: 40, top: 40, bottom: 40}} style={{
                         axes: {
                             line: {strokeWidth: 0.5},
                             ticks: {},
                             text: {}
                         },
                         labels: {
-                            fontSize: 10
+                            fontSize: 12
                         },
                         polygons: {
-                            strokeWidth: 0.5,
+                            strokeWidth: 1,
                             strokeOpacity: 1,
                             fillOpacity: 0.5
                         }
-                    }}>
+                    }}
+                    animation='noWobble'>
                     </RadarChart>
                 </div>
                 <div className='defensive-types'>
-                    <XYPlot height={400} width={400} margin={{ left: 50, right: 40, top: 40, bottom: 40 }} yType="ordinal">
+                    <XYPlot height={400} width={400} margin={{ left: 50, right: 40, top: 40, bottom: 40 }} yType="ordinal" animation="noWobble">
                         <VerticalGridLines/>
                         <HorizontalBarSeries data={defenseData} color='red'/>
                         <XAxis/>
