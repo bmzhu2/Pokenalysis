@@ -5,7 +5,7 @@
 }
 .team-slots-container {
     display: flex;
-    margin: 24px 80px 24px 80px;
+    margin: 24px 80px 0 80px;
     overflow: none;
     flex-wrap: wrap;
     justify-content: center;
@@ -15,6 +15,30 @@
     max-width: 980px;
     border-radius: 50px;
     /* height: 16vh; */
+}
+
+.stats-button {
+    background-color: #fb6262;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    margin-bottom: 10px;
+    margin-left: 160px;
+    width: 14vw;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    padding: 6px;
+    text-align: center;
+    color: whitesmoke;
+    border: 4px solid #C22E28;
+    border-top: none;
+    box-shadow: inset 0 0 7px 0px #0000004a;
+    transition: background-color .3s ease-out;
+}
+
+.stats-button:hover {
+    cursor: pointer;
+    user-select: none;
+    background-color: #c04c4c;
 }
 
 .team-slot {

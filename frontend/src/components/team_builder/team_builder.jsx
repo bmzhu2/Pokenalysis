@@ -242,14 +242,14 @@ class TeamBuilder extends React.Component {
                     </ul>
                     </div>
                 </div>
+                <div className="stats-button" onClick={this.state.showStats ? () => this.setState({ showStats: false }) : () => this.setState({ showStats: true }) }>
+                    {statText}
+                </div>
                 <PokemonAttributesContainer
                     updatePokeAttrs={this.updatePokeAttrs}
                     team={this.state.team}
                     slot={this.state.attrId}
                 />
-                <div onClick={this.state.showStats ? () => this.setState({ showStats: false }) : () => this.setState({ showStats: true }) }>
-                    {statText}
-                </div>
                 {statistics}
                 <div className="filters">
                     <form onSubmit={this.handleSubmit}>
