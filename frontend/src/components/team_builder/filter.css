@@ -60,7 +60,11 @@
 
 .filter-header-container:hover {
     cursor: pointer;
-    background-color: lightblue;
+    background-color: rgb(92, 149, 168);
+}
+
+.filter-header-container.open:hover {
+    background-color:  rgb(30, 30, 58);
 }
 
 .filter-header {
