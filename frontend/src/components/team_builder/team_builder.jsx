@@ -2,6 +2,7 @@ import React from 'react';
 import TeamSlot from './team_slot';
 import Pokemon from './pokemon';
 import { DragDropContext } from 'react-dnd';
+import { Redirect } from 'react-router-dom';
 import HTML5Backend from 'react-dnd-html5-backend';
 import NavbarContainer from '../nav/navbar_container';
 import Sidebar from './sidebar';
@@ -28,7 +29,8 @@ class TeamBuilder extends React.Component {
                 name: "typeFilter1",
                 isOpen: true,
                 isAnimating: false
-            }
+            },
+            redirectTo: null,
         };
         this.onDrop1 = this.onDrop1.bind(this);
         this.onDrop2 = this.onDrop2.bind(this);
@@ -168,7 +170,7 @@ class TeamBuilder extends React.Component {
     saveTeam(){
         if(!this.props.loggedIn) {
             this.props.openModal("login");
-            return
+        return;
         }
         const { createTeam } = this.props;
         const { team, teamName } = this.state;
@@ -177,7 +179,7 @@ class TeamBuilder extends React.Component {
             return (!Object.values(poke).length) ? { pokeId: 0, name: "Missingno" } : poke;
         });
         const newTeam = { name: teamName, pokemon: nullifiedPokes };
-        createTeam(newTeam);
+        createTeam(newTeam).then(res => this.setState({ redirectTo: res.team._id }));
     }   
 
     handleOpenFilter(filter){
@@ -217,6 +219,9 @@ class TeamBuilder extends React.Component {
     }
 
     render(){
+        if (this.state.redirectTo){ 
+            return <Redirect to={`/teams/${this.state.redirectTo}`}/> 
+        }
         const { pokemon, team, openFilter, typeFilter1, typeFilter2 } = this.state;
         const { fetchPokemon, fetchItem, fetchItems, fetchMove, fetchAbility, } = this.props;
         const pokemonComponents = pokemon.map(poke => {
