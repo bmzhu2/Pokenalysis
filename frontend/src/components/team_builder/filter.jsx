@@ -5,7 +5,7 @@ const types = ['normal', 'fighting', 'flying', 'poison', 'ground', 'rock', 'bug'
 
 class Filter extends React.Component {
     render(){
-        const { handleTypeFilter, name, typeFilter, isOpen } = this.props;
+        const { handleTypeFilter, name, typeFilter, isOpen, isAnimating, handleAnimationEnd } = this.props;
         const filterTypes = types.map(type => {
             return (
                 <li key={type} 
@@ -17,7 +17,13 @@ class Filter extends React.Component {
             )
         });
         return(
-            <div className={isOpen ? "filter-buttons-container open" : "filter-buttons-container"}>
+            <div
+                onAnimationEnd={handleAnimationEnd} 
+                className={isOpen && isAnimating ? 
+                "filter-buttons-container open swipe-down" : 
+                isOpen && !isAnimating ? 
+                "filter-buttons-container open" :
+                "filter-buttons-container"}>
                 <ul className="filter-list">
                     {filterTypes}
                 </ul>
