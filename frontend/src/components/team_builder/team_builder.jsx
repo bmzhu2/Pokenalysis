@@ -27,6 +27,7 @@ class TeamBuilder extends React.Component {
             openFilter: {
                 name: "typeFilter1",
                 isOpen: true,
+                isAnimating: false
             }
         };
         this.onDrop1 = this.onDrop1.bind(this);
@@ -45,6 +46,7 @@ class TeamBuilder extends React.Component {
         this.sendAttrId = this.sendAttrId.bind(this);
         this.updatePokeAttrs = this.updatePokeAttrs.bind(this);
         this.filterPokemon = this.filterPokemon.bind(this);
+        this.handleAnimationEnd = this.handleAnimationEnd.bind(this);
     }
 
     onDrop1(incomingState) {
@@ -182,6 +184,7 @@ class TeamBuilder extends React.Component {
         let openFilter = this.state.openFilter;
         openFilter.isOpen = openFilter.name !== filter ? true : openFilter.name === filter && !openFilter.isOpen ? true : false;
         openFilter.name = filter;
+        openFilter.isAnimating = openFilter.isOpen ? true : false;
         this.setState({
             openFilter,
         });
@@ -190,6 +193,12 @@ class TeamBuilder extends React.Component {
     handleTypeFilter(filter, type){
         this.setState(() => ({ [filter]: type }));
         this.filterByType(filter, type);
+    }
+
+    handleAnimationEnd(){
+        const filterState = this.state.openFilter;
+        filterState.isAnimating = false;
+        this.setState({ filterState });
     }
 
     clearFilter(filter){
@@ -275,6 +284,8 @@ class TeamBuilder extends React.Component {
                         typeFilter={this.state[openFilter.name]}
                         name={openFilter.name}
                         isOpen={openFilter.isOpen}
+                        isAnimating={openFilter.isAnimating}
+                        handleAnimationEnd={this.handleAnimationEnd}
                         />
                 <div>
                     <ul className="pokemon-index">
