@@ -30,17 +30,22 @@ export const teamMoveClassAnalysis = (team, moveList) => {
   return {physical: physicalMoves, special: specialMoves}
 };
 
-export const teamOffensiveCoverage = (team, moveList) => {
+export const teamOffensiveCoverage = (team, moveList, pokeList) => {
   let totalCoverage = {}
   team.pokemon.forEach(pokemon => {
-    let coverage = pokemonCoverageAnalysis(pokemon, moveList)
+    let coverage = pokemonCoverageAnalysis(pokemon, moveList, pokeList)
     types.forEach(type => {
+      if(!totalCoverage[type]){
+        totalCoverage[type] = 0
+      }
       totalCoverage[type] += coverage[type]
     })
   })
 
   types.forEach(type => {
-    totalCoverage[type] /= 6
+    if(totalCoverage[type] > 0){
+      totalCoverage[type] /= 6
+    }
   })
 
   return totalCoverage;
@@ -48,17 +53,17 @@ export const teamOffensiveCoverage = (team, moveList) => {
 
 const pokemonCoverageAnalysis = (pokemon, moveList, pokeList) => {
   let moveTypes = [];
-  if (pokemon.move1 && moveList[pokemon.move1].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move1].type)) {
-    moveTypes.push(pokemon.move1.type)
+  if (pokemon.move1 && moveList[pokemon.move1] && moveList[pokemon.move1].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move1].type)) {
+    moveTypes.push(moveList[pokemon.move1].type)
   }
-  if (pokemon.move2 && moveList[pokemon.move2].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move2].type)) {
-    moveTypes.push(pokemon.move2.type)
+  if (pokemon.move2 && moveList[pokemon.move2] && moveList[pokemon.move2].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move2].type)) {
+    moveTypes.push(moveList[pokemon.move2].type)
   }
-  if (pokemon.move3 && moveList[pokemon.move3].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move3].type)) {
-    moveTypes.push(pokemon.move3.type)
+  if (pokemon.move3 && moveList[pokemon.move3] && moveList[pokemon.move3].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move3].type)) {
+    moveTypes.push(moveList[pokemon.move3].type)
   }
-  if (pokemon.move4 && moveList[pokemon.move4].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move4].type)) {
-    moveTypes.push(pokemon.move4.type)
+  if (pokemon.move4 && moveList[pokemon.move4] && moveList[pokemon.move4].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move4].type)) {
+    moveTypes.push(moveList[pokemon.move4].type)
   }
 
   let totalCoverage = {};
@@ -66,20 +71,18 @@ const pokemonCoverageAnalysis = (pokemon, moveList, pokeList) => {
     let coverage = 0;
     moveTypes.forEach(moveType => {
       let stab = pokeList[pokemon.pokeId].types.includes(moveType) ? 1 : 0
-      if (coverage < 6 || damageRelations[type].double_damage_from.includes(moveType)) {
-        coverage[type] = 5 + stab;
+      if (coverage < 6 && damageRelations[type].double_damage_from.includes(moveType)) {
+        coverage = 5 + stab;
       } else if (coverage < 2 && damageRelations[type].half_damage_from.includes(moveType)) {
-        coverage[type] = 1 + stab;
+        coverage = 1 + stab;
       } else if (coverage < 1 && damageRelations[type].no_damage_from.includes(moveType)) {
-        coverage[type] = 0;
+        coverage = 0;
       } else if (coverage < 4) {
         coverage = 3 + stab;
       }
     })
-
-    totalCoverage[type].push(coverage);
+    totalCoverage[type] = coverage
   })
-
   return totalCoverage
 }
 

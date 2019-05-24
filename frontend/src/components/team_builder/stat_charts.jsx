@@ -24,11 +24,22 @@ class StatChart extends React.Component{
         }
         let averages = StatUtil.averageStats(newTeam, this.props.pokemon);
         let defensiveCoverage = TypeUtil.teamDefensiveCoverage(newTeam, this.props.pokemon);
+        let offensiveCoverage  = TypeUtil.teamOffensiveCoverage(newTeam, this.props.moves, this.props.pokemon)
         const defenseData = [];
         if (defensiveCoverage.coverage){
             let coverageValues = defensiveCoverage.coverage;
             TypeUtil.types.forEach(type => {
                 defenseData.push({x: coverageValues[type], y: type})
+            })
+        }
+        const offenseData = [];
+        if (offensiveCoverage) {
+            TypeUtil.types.forEach(type => {
+                if(offensiveCoverage[type] !== undefined){
+                    offenseData.push({ x: offensiveCoverage[type], y: type })
+                } else{
+                    offenseData.push({ x: 0, y: type })
+                }
             })
         }
         let moveTypes = TypeUtil.teamMoveClassAnalysis(newTeam, this.props.moves)
@@ -79,14 +90,14 @@ class StatChart extends React.Component{
                         <YAxis />
                     </XYPlot>
                 </div> 
-                {/* <div>
-                    <XYPlot height={400} width={400} yType="ordinal">
+                <div>
+                    <XYPlot height={400} width={400} margin={{ left: 50, right: 40, top: 40, bottom: 40 }} yType="ordinal" animation="noWobble">
                         <VerticalGridLines />
-                        <HorizontalBarSeries data={defenseData} color='red' />
+                        <HorizontalBarSeries data={offenseData} color='red' />
                         <XAxis />
                         <YAxis />
                     </XYPlot>
-                </div> */}
+                </div>
 
                 <div className="move-totals">
                     <div>Physical moves: {moveTypes.physical}</div>
