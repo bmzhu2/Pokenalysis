@@ -24,11 +24,22 @@ class StatChart extends React.Component{
         }
         let averages = StatUtil.averageStats(newTeam, this.props.pokemon);
         let defensiveCoverage = TypeUtil.teamDefensiveCoverage(newTeam, this.props.pokemon);
+        let offensiveCoverage  = TypeUtil.teamOffensiveCoverage(newTeam, this.props.moves, this.props.pokemon)
         const defenseData = [];
         if (defensiveCoverage.coverage){
             let coverageValues = defensiveCoverage.coverage;
             TypeUtil.types.forEach(type => {
                 defenseData.push({x: coverageValues[type], y: type})
+            })
+        }
+        const offenseData = [];
+        if (offensiveCoverage) {
+            TypeUtil.types.forEach(type => {
+                if(offensiveCoverage[type] !== undefined){
+                    offenseData.push({ x: offensiveCoverage[type], y: type })
+                } else{
+                    offenseData.push({ x: 0, y: type })
+                }
             })
         }
         let moveTypes = TypeUtil.teamMoveClassAnalysis(newTeam, this.props.moves)
@@ -48,44 +59,45 @@ class StatChart extends React.Component{
             { name: 'special-defense', domain: [0, 200] },
             { name: 'defense', domain: [0, 200] },
             { name: 'hp', domain: [0, 200] },
-            { name: 'stat-total', domain: [0, 700] }
+            { name: 'stat-total', domain: [0, 800] }
         ]
         return(
             <div className='team-stat-container'>
                 <div className='stat-averages'>
-                    <RadarChart data={statData} domains={statDomains} height={200} width={200} color='white' margin={{left: 40, right: 40, top: 40, bottom: 40}} style={{
+                    <RadarChart data={statData} domains={statDomains} height={320} width={320} color='white' margin={{left: 40, right: 40, top: 40, bottom: 40}} style={{
                         axes: {
                             line: {strokeWidth: 0.5},
                             ticks: {},
                             text: {}
                         },
                         labels: {
-                            fontSize: 10
+                            fontSize: 12
                         },
                         polygons: {
-                            strokeWidth: 0.5,
+                            strokeWidth: 1,
                             strokeOpacity: 1,
                             fillOpacity: 0.5
                         }
-                    }}>
+                    }}
+                    animation='noWobble'>
                     </RadarChart>
                 </div>
                 <div className='defensive-types'>
-                    <XYPlot height={400} width={400} margin={{ left: 50, right: 40, top: 40, bottom: 40 }} yType="ordinal">
+                    <XYPlot height={400} width={400} margin={{ left: 50, right: 40, top: 40, bottom: 40 }} yType="ordinal" animation="noWobble">
                         <VerticalGridLines/>
                         <HorizontalBarSeries data={defenseData} color='red'/>
                         <XAxis/>
                         <YAxis />
                     </XYPlot>
                 </div> 
-                {/* <div>
-                    <XYPlot height={400} width={400} yType="ordinal">
+                <div>
+                    <XYPlot height={400} width={400} margin={{ left: 50, right: 40, top: 40, bottom: 40 }} yType="ordinal" animation="noWobble">
                         <VerticalGridLines />
-                        <HorizontalBarSeries data={defenseData} color='red' />
+                        <HorizontalBarSeries data={offenseData} color='red' />
                         <XAxis />
                         <YAxis />
                     </XYPlot>
-                </div> */}
+                </div>
 
                 <div className="move-totals">
                     <div>Physical moves: {moveTypes.physical}</div>
