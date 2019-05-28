@@ -72,7 +72,8 @@ class StatChart extends React.Component{
                             text: {}
                         },
                         labels: {
-                            fontSize: 12
+                            fontSize: 12,
+                            fontFamily: 'Montserrat, sans-serif'
                         },
                         polygons: {
                             strokeWidth: 1,
@@ -88,8 +89,8 @@ class StatChart extends React.Component{
                     <XYPlot height={400} width={400} margin={{ left: 50, right: 40, top: 20, bottom: 40 }} yType="ordinal" animation="noWobble">
                         <VerticalGridLines/>
                         <HorizontalBarSeries data={defenseData} color='red'/>
-                        <XAxis style={{ text: { fill: 'black', font: 'sans-seriff' } }}/>
-                        <YAxis style={{text: { fill: 'black', font: 'sans-seriff'}}}/>
+                        <XAxis style={{ text: { fill: 'black', fontFamily: 'Montserrat, sans-serif' } }}/>
+                        <YAxis style={{ text: { fill: 'black', fontFamily: 'Montserrat, sans-serif'}}}/>
                     </XYPlot>
                 </div> 
                 <div className='offensive-coverage'>
@@ -97,8 +98,8 @@ class StatChart extends React.Component{
                     <XYPlot height={400} width={400} margin={{ left: 50, right: 40, top: 20, bottom: 40 }} yType="ordinal" animation="noWobble">
                         <VerticalGridLines />
                         <HorizontalBarSeries data={offenseData} color='red' />
-                        <XAxis style={{ text: { fill: 'black', font: 'sans-seriff' } }}/>
-                        <YAxis style={{ text: { fill: 'black', font: 'sans-seriff' } }}/>
+                        <XAxis style={{ text: { fill: 'black', fontFamily: 'Montserrat, sans-serif' } }}/>
+                        <YAxis style={{ text: { fill: 'black', fontFamily: 'Montserrat, sans-serif' } }}/>
                     </XYPlot>
                 </div>
 
