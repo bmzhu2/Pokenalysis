@@ -64,7 +64,8 @@ class StatChart extends React.Component{
         return(
             <div className='team-stat-container'>
                 <div className='stat-averages'>
-                    <RadarChart data={statData} domains={statDomains} height={320} width={320} color='white' margin={{left: 40, right: 40, top: 40, bottom: 40}} style={{
+                    <h1>Stat Averages</h1>
+                    <RadarChart data={statData} domains={statDomains} height={320} width={320} color='white' margin={{left: 40, right: 40, top: 30, bottom: 40}} style={{
                         axes: {
                             line: {strokeWidth: 0.5},
                             ticks: {},
@@ -83,23 +84,26 @@ class StatChart extends React.Component{
                     </RadarChart>
                 </div>
                 <div className='defensive-types'>
-                    <XYPlot height={400} width={400} margin={{ left: 50, right: 40, top: 40, bottom: 40 }} yType="ordinal" animation="noWobble">
+                    <h1>Defensive Coverage</h1>
+                    <XYPlot height={400} width={400} margin={{ left: 50, right: 40, top: 20, bottom: 40 }} yType="ordinal" animation="noWobble">
                         <VerticalGridLines/>
                         <HorizontalBarSeries data={defenseData} color='red'/>
-                        <XAxis/>
-                        <YAxis />
+                        <XAxis style={{ text: { fill: 'black', font: 'sans-seriff' } }}/>
+                        <YAxis style={{text: { fill: 'black', font: 'sans-seriff'}}}/>
                     </XYPlot>
                 </div> 
-                <div>
-                    <XYPlot height={400} width={400} margin={{ left: 50, right: 40, top: 40, bottom: 40 }} yType="ordinal" animation="noWobble">
+                <div className='offensive-coverage'>
+                    <h1>Offensive Coverage</h1>
+                    <XYPlot height={400} width={400} margin={{ left: 50, right: 40, top: 20, bottom: 40 }} yType="ordinal" animation="noWobble">
                         <VerticalGridLines />
                         <HorizontalBarSeries data={offenseData} color='red' />
-                        <XAxis />
-                        <YAxis />
+                        <XAxis style={{ text: { fill: 'black', font: 'sans-seriff' } }}/>
+                        <YAxis style={{ text: { fill: 'black', font: 'sans-seriff' } }}/>
                     </XYPlot>
                 </div>
 
                 <div className="move-totals">
+                    <h1>Move Types</h1>
                     <div>Physical moves: {moveTypes.physical}</div>
                     <div>Special moves: {moveTypes.special}</div>
                 </div>

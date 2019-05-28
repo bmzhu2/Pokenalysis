@@ -7,12 +7,18 @@
 .move-totals{
     height: 200px;
     width: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
 }
 
 .move-totals div{
     font-size: 24px;
     color: white;
+    margin-top: 15px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.team-stat-container div h1{
+    text-align: center;
+    font-size: 24px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
 }
