@@ -48,7 +48,11 @@ class TeamShow extends React.Component{
     }
 
     handleAttributes(e){
-        this.setState({slot: e.currentTarget.value});
+        if (this.state.slot === e.currentTarget.value) {
+            this.setState({slot: null})
+        } else {
+            this.setState({slot: e.currentTarget.value});
+        }
     }
 
     handleLike() {
@@ -76,12 +80,12 @@ class TeamShow extends React.Component{
     render(){
         let like;
         if (this.state.liked === false) {
-            like =  <div className="row item like" onClick={this.handleLike}>
+            like =  <div className="row like" onClick={this.handleLike}>
                         <div className="like-icon"></div>
                         <h3>Like Team</h3>
                     </div>
         } else {
-            like =  <div className="row item like" onClick={this.handleUnLike}>
+            like =  <div className="row like" onClick={this.handleUnLike}>
                         <div className="unlike-icon"></div>
                         <h3>UnLike Team</h3>
                     </div>
@@ -102,21 +106,25 @@ class TeamShow extends React.Component{
                         })}
                     </ul>
                     <ShowAttributes pokemon={this.props.team.pokemon[this.state.slot]} />
-                    <div className="row likes">
-                        {like}
-                        <h3 className="team-likes">{this.state.likes} Likes </h3>
-                    </div>
-      
-                    <div>
-                        {this.props.comments.map(comment => {
-                            return(
-                                <div className='comment-index-item'>
-                                    {comment.username + ': ' + comment.text}
-                                </div>
-                            )
-                        })}
-                        {newForm}
-                    </div>
+                    <section className="lower">
+                        <section className="comments-and-likes">
+                            {newForm}
+                            <div className="likes">
+                                {like}
+                                <h3 className="team-likes">{this.state.likes} Likes </h3>
+                            </div>
+                        </section>
+        
+                        <div className="comments">
+                            {this.props.comments.map(comment => {
+                                return(
+                                    <div className='comment-index-item'>
+                                        {comment.username + ': ' + comment.text}
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </section>
                 </div>
             )
         } else{
