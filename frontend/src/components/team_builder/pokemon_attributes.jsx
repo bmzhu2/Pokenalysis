@@ -25,28 +25,44 @@ class PokemonAttributes extends React.Component {
     setMove1(e) {
       let attrs = this.props.team[this.props.slot]
       attrs.move1 = e.currentTarget.value
-      this.props.fetchMove(e.currentTarget.value)
+      if (attrs.move1 === 'Select a move') {
+        attrs.move1 = null;
+      } else {
+        this.props.fetchMove(e.currentTarget.value)
+      }
       this.props.updatePokeAttrs(this.props.slot, attrs)
     }
 
     setMove2(e) {
       let attrs = this.props.team[this.props.slot]
       attrs.move2 = e.currentTarget.value
-      this.props.fetchMove(e.currentTarget.value)
+      if (attrs.move2 === 'Select a move') {
+        attrs.move2 = null;
+      } else {
+        this.props.fetchMove(e.currentTarget.value)
+      }
       this.props.updatePokeAttrs(this.props.slot, attrs)
     }
 
     setMove3(e) {
       let attrs = this.props.team[this.props.slot]
       attrs.move3 = e.currentTarget.value
-      this.props.fetchMove(e.currentTarget.value)
+      if (attrs.move3 === 'Select a move') {
+        attrs.move3 = null;
+      } else {
+        this.props.fetchMove(e.currentTarget.value)
+      }
       this.props.updatePokeAttrs(this.props.slot, attrs)
     }
 
     setMove4(e) {
       let attrs = this.props.team[this.props.slot]
       attrs.move4 = e.currentTarget.value
-      this.props.fetchMove(e.currentTarget.value)
+      if (attrs.move4 === 'Select a move') {
+        attrs.move4 = null;
+      } else {
+        this.props.fetchMove(e.currentTarget.value)
+      }
       this.props.updatePokeAttrs(this.props.slot, attrs)
     }
     
@@ -84,6 +100,19 @@ class PokemonAttributes extends React.Component {
         const pokemon = this.props.pokemon[pokeAttrs.pokeId];
         if(!pokemon || !pokemon.abilities) {
             return null
+        }
+
+        if(!pokeAttrs.move1) {
+          pokeAttrs.move1 = "Select a move"
+        }
+        if(!pokeAttrs.move2) {
+          pokeAttrs.move2 = "Select a move"
+        }
+        if(!pokeAttrs.move3) {
+          pokeAttrs.move3 = "Select a move"
+        }
+        if(!pokeAttrs.move4) {
+          pokeAttrs.move4 = "Select a move"
         }
 
         let abilities = pokemon.abilities.map(ability => {
