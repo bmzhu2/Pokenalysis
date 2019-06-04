@@ -4,6 +4,37 @@
     margin: 4vw 0;
 }
 
+.lower {
+}
+
+.comments-and-likes {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5vw;
+}
+
+    .comments-and-likes form {
+        margin-right: 5vw;
+        display: flex;
+        flex-direction: column;
+    }
+    
+        .comments-and-likes form textarea {
+            width: 30vw;
+            height: 6vw;
+            font-size: 1em;
+        }
+    
+        .comments-and-likes form input {
+            font-size: 1em; 
+        }
+
+.like {
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-bottom: 2vw;
+}
+
 .likes {
     flex-wrap: wrap;
 }
@@ -12,6 +43,20 @@
     width: 100%;
     margin-top: -1.5vw;
 }
+
+.comments {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: 0 auto;
+}
+
+    .comment-index-item {
+        margin: .5vw 0;
+        padding: 2vw;
+        background: limegreen;
+        border-radius: 20px;
+    }
 
 .item {
     flex-wrap: wrap;
