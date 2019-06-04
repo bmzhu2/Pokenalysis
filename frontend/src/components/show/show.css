@@ -58,6 +58,11 @@
         border-radius: 20px;
     }
 
+        .comment-index-item-body {
+            padding-top: 1vw;
+            color: black;
+        }
+
 .item {
     flex-wrap: wrap;
     margin-bottom: 2vw;
