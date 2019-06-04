@@ -119,7 +119,8 @@ class TeamShow extends React.Component{
                             {this.props.comments.map(comment => {
                                 return(
                                     <div className='comment-index-item'>
-                                        {comment.username + ': ' + comment.text}
+                                        <p className='comment-index-item-user'>{comment.username}</p>
+                                        <p className='comment-index-item-body'>{comment.text}</p>
                                     </div>
                                 )
                             })}
