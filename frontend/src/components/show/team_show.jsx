@@ -43,6 +43,25 @@ class TeamShow extends React.Component{
         this.setState({commentText: ''})
     }
 
+    populateMovesNMons(){
+        this.props.team.pokemon.forEach(mon => {
+            this.props.fetchPokemon(mon.pokeId)
+            if(mon.move1){
+                this.props.fetchMove(mon.move1)
+            }
+            if (mon.move2) {
+                this.props.fetchMove(mon.move2)
+            }
+            if (mon.move3) {
+                this.props.fetchMove(mon.move3)
+            }
+            if (mon.move4) {
+                this.props.fetchMove(mon.move4)
+            }
+        })
+        this.setState({populated: true})
+    }
+
     handleChange(e){
         this.setState({commentText: e.target.value})
     }
@@ -90,6 +109,17 @@ class TeamShow extends React.Component{
                         <h3>UnLike Team</h3>
                     </div>
         }
+        let statText = "Show Stats"
+        let statistics = null
+        if(this.props.team && !this.state.populated){
+            this.populateMovesNMons()
+        }
+        if (this.state.showStats) {
+            statistics = <div>
+                <StatCharts team={this.props.team} pokemon={this.props.pokemon} moves={this.props.moves} />
+            </div>
+            statText = "Hide Stats"
+        }
         if(this.props.team){
             let newForm = null
             if(this.props.currentUser){
@@ -105,7 +135,12 @@ class TeamShow extends React.Component{
                             return <li onClick={this.handleAttributes} value={idx} ><TeamPoke poke={mon}/></li>
                         })}
                     </ul>
+                    <div className="stats-button" onClick={this.state.showStats ? () => this.setState({ showStats: false }) : () => this.setState({ showStats: true })}>
+                        {statText}
+                    </div>
+
                     <ShowAttributes pokemon={this.props.team.pokemon[this.state.slot]} />
+                    {statistics}
                     <section className="lower">
                         <section className="comments-and-likes">
                             {newForm}

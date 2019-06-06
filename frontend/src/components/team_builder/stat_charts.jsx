@@ -22,6 +22,7 @@ class StatChart extends React.Component{
         } else {
             newTeam = this.props.team
         }
+        debugger
         let averages = StatUtil.averageStats(newTeam, this.props.pokemon);
         let defensiveCoverage = TypeUtil.teamDefensiveCoverage(newTeam, this.props.pokemon);
         let offensiveCoverage  = TypeUtil.teamOffensiveCoverage(newTeam, this.props.moves, this.props.pokemon)
@@ -65,7 +66,7 @@ class StatChart extends React.Component{
             <div className='team-stat-container'>
                 <div className='stat-averages'>
                     <h1>Stat Averages</h1>
-                    <RadarChart data={statData} domains={statDomains} height={320} width={320} color='white' margin={{left: 40, right: 40, top: 30, bottom: 40}} style={{
+                    <RadarChart data={statData} domains={statDomains} height={350} width={350} color='white' margin={{left: 40, right: 40, top: 30, bottom: 40}} style={{
                         axes: {
                             line: {strokeWidth: 0.5},
                             ticks: {},
