@@ -45,9 +45,9 @@
 
 .team-slot {
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: center;
-    align-items: space-between;
-    max-width: 1600px;
     border-radius: 100%;
     height: 110px;
     width: 110px;
@@ -56,19 +56,22 @@
     box-shadow: inset 0 0 7px 0px #0000004a;
 }
 
+.team-slot-header  {
+    display: flex;
+    flex-direction: row;
+}
+
 .team-slot-sprite {
     height: inherit;
     width: inherit;
     object-fit: contain;  
-    position: absolute;
-    /* transform: translateY(-15px); */
     transition: .2s;
 }
 
 .team-slot-sprite:hover {
     user-select: none;
     cursor: pointer;
-    transform: scale(1.05);
+    transform: scale(1.10);
 }
 
 .hovered-slot {
@@ -76,14 +79,29 @@
 }
 
 .team-slot-name {
-    position: relative;
-    bottom: 20px;
     color: white;
     font-size: 24px;
-    top: 10px;
-    left: 0px;
+    height: min-content;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     z-index: 5;
+}
+
+.team-slot-name:hover {
+    user-select: none;
+    cursor: pointer;
+}
+
+.team-slot .x {
+    font-size: 30px;
+    height: min-content;
+    color: red;
+    z-index: 2;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.x:hover {
+    cursor: pointer;
+    user-select: none;
 }
 
 .plus {
@@ -96,21 +114,7 @@
 }
 
 
-.team-slot .x {
-    position: relative;
-    font-size: 40px;
-    color: red;
-    z-index: 2;
-    font-family: 'Montserrat', sans-serif;
-    right: 10;
-    bottom: 10;
 
-}
-
-.x:hover {
-    cursor: pointer;
-    user-select: none;
-}
 
 .none {
     opacity: 0;
