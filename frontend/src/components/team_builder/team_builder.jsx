@@ -27,7 +27,7 @@ class TeamBuilder extends React.Component {
             typeFilter2: "",
             openFilter: {
                 name: "typeFilter1",
-                isOpen: true,
+                isOpen: false,
                 isAnimating: false
             },
             redirectTo: null,
@@ -240,64 +240,64 @@ class TeamBuilder extends React.Component {
         return(
             <div>
             <div className="team-builder-container">
-                <div>
-                    <div className="name-submit-container">
-                        <input className="team-name" onChange={this.updateTeamName()} type="text" placeholder={"New Team"}/>
-                        <input className="submit-team" onClick={this.saveTeam} type="submit" value="Save"/>
-                    </div>
-                    <div className="team-slots-container-container">
-                        <ul className="team-slots-container"> 
-                            <TeamSlot setAttrId={() => this.sendAttrId("1")} key="team-slot-1" id="1" onDrop={this.onDrop1} pokeId={team[1].id} name={team[1].name} sprite={team[1].sprite} removeFromTeam={this.removeFromTeam}/>
-                            <TeamSlot setAttrId={() => this.sendAttrId("2")} key="team-slot-2" id="2" onDrop={this.onDrop2} pokeId={team[2].id} name={team[2].name} sprite={team[2].sprite} removeFromTeam={this.removeFromTeam}/>
-                            <TeamSlot setAttrId={() => this.sendAttrId("3")} key="team-slot-3" id="3" onDrop={this.onDrop3} pokeId={team[3].id} name={team[3].name} sprite={team[3].sprite} removeFromTeam={this.removeFromTeam}/>
-                            <TeamSlot setAttrId={() => this.sendAttrId("4")} key="team-slot-4" id="4" onDrop={this.onDrop4} pokeId={team[4].id} name={team[4].name} sprite={team[4].sprite} removeFromTeam={this.removeFromTeam}/>
-                            <TeamSlot setAttrId={() => this.sendAttrId("5")} key="team-slot-5" id="5" onDrop={this.onDrop5} pokeId={team[5].id} name={team[5].name} sprite={team[5].sprite} removeFromTeam={this.removeFromTeam}/>
-                            <TeamSlot setAttrId={() => this.sendAttrId("6")} key="team-slot-6" id="6" onDrop={this.onDrop6} pokeId={team[6].id} name={team[6].name} sprite={team[6].sprite} removeFromTeam={this.removeFromTeam}/>
-                        </ul>
-                        <div className="stats-button" onClick={this.state.showStats ? () => this.setState({ showStats: false }) : () => this.setState({ showStats: true }) }>
-                            {statText}
+                <div className="sticky-container">
+                        <div className="name-submit-container">
+                            <input className="team-name" onChange={this.updateTeamName()} type="text" placeholder={"New Team"}/>
+                            <input className="submit-team" onClick={this.saveTeam} type="submit" value="Save"/>
                         </div>
-                    </div>
-                </div>
-                <PokemonAttributesContainer
-                    updatePokeAttrs={this.updatePokeAttrs}
-                    team={this.state.team}
-                    slot={this.state.attrId}
-                />
-                {statistics}
-                <div className="filters">
-                    <form onSubmit={this.handleSubmit}>
-                        <input className="search" onChange={this.updateSearch()} type="text" placeholder="search by name"/>
-                        <input className="search-button" type="submit" value="Search"/>
-                    </form>
-                    <div className="filter-headers-container">
-                        <div className={(openFilter.name === "typeFilter1" && openFilter.isOpen) ? "filter-header-container open" : "filter-header-container"} onClick={() => this.handleOpenFilter("typeFilter1")}>
-                                <h2 className={(openFilter.name === "typeFilter1" && openFilter.isOpen) ? "filter-header open" : "filter-header"}>
-                                { `${typeFilter1 || "filter 1"}` } 
-                            </h2>
-                            <h3 className={openFilter.name === "typeFilter1" && openFilter.isOpen ? "x open" : "x"} onClick={() => this.clearFilter("typeFilter1")}>X</h3>
+                        <div className="team-slots-container-container">
+                            <ul className="team-slots-container"> 
+                                <TeamSlot setAttrId={() => this.sendAttrId("1")} key="team-slot-1" id="1" onDrop={this.onDrop1} pokeId={team[1].id} name={team[1].name} sprite={team[1].sprite} removeFromTeam={this.removeFromTeam}/>
+                                <TeamSlot setAttrId={() => this.sendAttrId("2")} key="team-slot-2" id="2" onDrop={this.onDrop2} pokeId={team[2].id} name={team[2].name} sprite={team[2].sprite} removeFromTeam={this.removeFromTeam}/>
+                                <TeamSlot setAttrId={() => this.sendAttrId("3")} key="team-slot-3" id="3" onDrop={this.onDrop3} pokeId={team[3].id} name={team[3].name} sprite={team[3].sprite} removeFromTeam={this.removeFromTeam}/>
+                                <TeamSlot setAttrId={() => this.sendAttrId("4")} key="team-slot-4" id="4" onDrop={this.onDrop4} pokeId={team[4].id} name={team[4].name} sprite={team[4].sprite} removeFromTeam={this.removeFromTeam}/>
+                                <TeamSlot setAttrId={() => this.sendAttrId("5")} key="team-slot-5" id="5" onDrop={this.onDrop5} pokeId={team[5].id} name={team[5].name} sprite={team[5].sprite} removeFromTeam={this.removeFromTeam}/>
+                                <TeamSlot setAttrId={() => this.sendAttrId("6")} key="team-slot-6" id="6" onDrop={this.onDrop6} pokeId={team[6].id} name={team[6].name} sprite={team[6].sprite} removeFromTeam={this.removeFromTeam}/>
+                            </ul>
+                            <div className="stats-button" onClick={this.state.showStats ? () => this.setState({ showStats: false }) : () => this.setState({ showStats: true }) }>
+                                {statText}
+                            </div>
                         </div>
-                        <div className={(openFilter.name === "typeFilter2" && openFilter.isOpen) ? "filter-header-container open" : "filter-header-container"} onClick={() => this.handleOpenFilter("typeFilter2")}>
-                            <h2 className={(openFilter.name === "typeFilter2" && openFilter.isOpen) ? "filter-header open" : "filter-header"}>
-                                {`${typeFilter2 || "filter 2"}`}
-                            </h2>
-                                <h3 className={(openFilter.name === "typeFilter2" && openFilter.isOpen) ? "x open" : 'x'} onClick={() => this.clearFilter("typeFilter2")}>X</h3>
-                        </div>
-                    </div>
-                </div>
-                <Filter handleTypeFilter={this.handleTypeFilter} 
-                        typeFilter={this.state[openFilter.name]}
-                        name={openFilter.name}
-                        isOpen={openFilter.isOpen}
-                        isAnimating={openFilter.isAnimating}
-                        handleAnimationEnd={this.handleAnimationEnd}
+                    <PokemonAttributesContainer
+                        updatePokeAttrs={this.updatePokeAttrs}
+                        team={this.state.team}
+                        slot={this.state.attrId}
                         />
-                <div>
-                    <ul className="pokemon-index">
-                        {pokemonComponents}
-                    </ul>
+                    {statistics}
+                    <div className="filters">
+                        <form onSubmit={this.handleSubmit}>
+                            <input className="search" onChange={this.updateSearch()} type="text" placeholder="search by name"/>
+                            <input className="search-button" type="submit" value="Search"/>
+                        </form>
+                        <div className="filter-headers-container">
+                            <div className={(openFilter.name === "typeFilter1" && openFilter.isOpen) ? "filter-header-container open" : "filter-header-container"} onClick={() => this.handleOpenFilter("typeFilter1")}>
+                                    <h2 className={(openFilter.name === "typeFilter1" && openFilter.isOpen) ? "filter-header open" : "filter-header"}>
+                                    { `${typeFilter1 || "filter 1"}` } 
+                                </h2>
+                                <h3 className={openFilter.name === "typeFilter1" && openFilter.isOpen ? "x open" : "x"} onClick={() => this.clearFilter("typeFilter1")}>X</h3>
+                            </div>
+                            <div className={(openFilter.name === "typeFilter2" && openFilter.isOpen) ? "filter-header-container open" : "filter-header-container"} onClick={() => this.handleOpenFilter("typeFilter2")}>
+                                <h2 className={(openFilter.name === "typeFilter2" && openFilter.isOpen) ? "filter-header open" : "filter-header"}>
+                                    {`${typeFilter2 || "filter 2"}`}
+                                </h2>
+                                    <h3 className={(openFilter.name === "typeFilter2" && openFilter.isOpen) ? "x open" : 'x'} onClick={() => this.clearFilter("typeFilter2")}>X</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <Filter handleTypeFilter={this.handleTypeFilter} 
+                            typeFilter={this.state[openFilter.name]}
+                            name={openFilter.name}
+                            isOpen={openFilter.isOpen}
+                            isAnimating={openFilter.isAnimating}
+                            handleAnimationEnd={this.handleAnimationEnd}
+                            />
+                    </div>
+                    <div>
+                        <ul className="pokemon-index">
+                            {pokemonComponents}
+                        </ul>
+                    </div>
                 </div>
-            </div>
             </div>
         )
     }

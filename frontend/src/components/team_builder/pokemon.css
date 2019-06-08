@@ -7,6 +7,7 @@
     -moz-box-shadow:    inset 0 0 7px 0px #0000004a;
     -webkit-box-shadow: inset 0 0 7px 0px #0000004a;
     box-shadow:         inset 0 0 7px 0px #0000004a;
+    z-index: 1 ;
 }
 
 .pokemon-index-sprite {
