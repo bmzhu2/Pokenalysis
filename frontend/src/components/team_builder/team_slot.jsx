@@ -47,13 +47,15 @@ class TeamSlot extends React.Component {
         const { id, pokeId, name, sprite, removeFromTeam } = this.props;
         const { isOver, canDrop, connectDropTarget } = this.props;
         return connectDropTarget(
-
-            <li onClick={this.props.setAttrId} className={this.state.isHovered ? "team-slot hovered-slot" : "team-slot"}>
-
-                <p className={sprite ? "none" : "plus"}>+</p> 
+            <li onClick={this.props.setAttrId} className="team-slot-o-container">
                 <p onClick={() => removeFromTeam(id)} className={sprite ? "x" : "none"}>x</p> 
-                <h3 className="team-slot-name">{name}</h3>
-                <img className={sprite ? "team-slot-sprite" : ""} src={sprite} alt=""/>
+                <div className={this.state.isHovered ? "team-slot hovered-slot" : "team-slot"}>
+                    <p className={sprite ? "none" : "plus"}>+</p>
+                    <img className={sprite ? "team-slot-sprite" : ""} src={sprite} alt=""/>
+                </div>
+                <div className="team-slot-header"> 
+                    <h3 className="team-slot-name">{name}</h3>
+                </div>
             </li>
         )
     }

@@ -2,11 +2,10 @@
     display: flex; 
     justify-content: space-between;
     align-items: center;
-    margin: 5px 80px 5px 80px;
+    margin: 10px 80px 10px 80px;
 }
 
 .submit-team {
-    margin: 20px 0 0 20px;
     background-color: rgb(94, 208, 94);
     font-family: 'Montserrat', sans-serif;
     color: whitesmoke;
