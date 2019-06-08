@@ -228,8 +228,7 @@ class TeamBuilder extends React.Component {
 
     render(){
         const { pokemon, attrId, team, openFilter, typeFilter1, typeFilter2, redirectTo, showStats, scrollY } = this.state;
-        console.log(scrollY);
-
+        
         if (redirectTo){ 
             return <Redirect to={`/teams/${redirectTo}`}/> 
         }
