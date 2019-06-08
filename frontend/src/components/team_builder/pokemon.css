@@ -10,6 +10,10 @@
     /* z-index: 1 ; */
 }
 
+.extra-pad {
+    margin-bottom: 24px;
+}
+
 .pokemon-index-sprite {
     height: inherit;
     width: inherit;
@@ -43,6 +47,10 @@
     text-align: center;
     /* z-index: 1; */
     text-transform: capitalize;
+}
+
+.long {
+    height: 15px;
 }
 
 .loading {
