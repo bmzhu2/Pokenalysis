@@ -27,6 +27,7 @@ class Pokemon extends React.Component {
             loaded: false,
         };
         this.setLoadState = this.setLoadState.bind(this);
+        this.longName = this.longName.bind(this);
     }
 
     componentDidMount(){
@@ -56,12 +57,17 @@ class Pokemon extends React.Component {
         });
     }
 
+    longName(name){
+        // return name.length > 10 ||
+        return name.includes("-");
+    }
+
     render() {
         const { name, sprite } = this.props;
         const { connectDragSource } = this.props;
         return connectDragSource(
-            <li className="pokemon-container">
-                <h3 className="pokemon-sprite-name">{name}</h3>
+            <li className={this.longName(name) ? "pokemon-container extra-pad" : "pokemon-container"}>
+                <h3 className={this.longName(name) ? "pokemon-sprite-name long" : "pokemon-sprite-name"}>{name}</h3>
                 <img ref={ref => this.imageRef = ref} 
                     onLoad={this.setLoadState}
                     className={this.state.loaded ? "pokemon-index-sprite" : "pokemon-index-sprite loading"} 
