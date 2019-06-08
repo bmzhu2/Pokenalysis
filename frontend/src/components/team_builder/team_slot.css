@@ -4,7 +4,12 @@
     border-bottom: 4px solid rgb(42, 42, 94);
     background-color: #36398a;
     opacity: none;
+    transition: .3s;
     z-index: 15;
+}
+
+.no-border {
+    border-bottom: 4px solid #36398a;
 }
 
 .team-slots-container-container {

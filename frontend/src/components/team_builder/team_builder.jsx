@@ -31,6 +31,7 @@ class TeamBuilder extends React.Component {
                 isAnimating: false
             },
             redirectTo: null,
+            scrollY: 0,
         };
         this.onDrop1 = this.onDrop1.bind(this);
         this.onDrop2 = this.onDrop2.bind(this);
@@ -38,7 +39,6 @@ class TeamBuilder extends React.Component {
         this.onDrop4 = this.onDrop4.bind(this);
         this.onDrop5 = this.onDrop5.bind(this);
         this.onDrop6 = this.onDrop6.bind(this);
-        this.handleScroll = this.handleScroll.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.searchPokemon = this.searchPokemon.bind(this);
         this.filterByType = this.filterByType.bind(this)
@@ -49,6 +49,27 @@ class TeamBuilder extends React.Component {
         this.updatePokeAttrs = this.updatePokeAttrs.bind(this);
         this.filterPokemon = this.filterPokemon.bind(this);
         this.handleAnimationEnd = this.handleAnimationEnd.bind(this);
+        this.closeFilter = this.closeFilter.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.fetchAllPokemon(0).then(res => {
+            this.setState({
+                pokemon: res.pokemon.data.results.map(pokemon => {
+                    let id = idParse(pokemon);
+                    return {
+                        id,
+                        name: pokemon.name,
+                        sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + id + ".png"
+                    };
+                })
+            });
+        });
+
+        this.props.fetchItems();
+        window.addEventListener('scroll', () => {
+            this.setState({ scrollY: window.scrollY });
+        });
     }
 
     onDrop1(incomingState) {
@@ -80,27 +101,6 @@ class TeamBuilder extends React.Component {
         const team = Object.assign({}, this.state.team, { 6: incomingState });
         this.props.fetchPokemon(incomingState.name);
         this.setState({ team });
-    }
-    
-    componentDidMount(){
-        this.props.fetchAllPokemon(0).then(res => {
-            this.setState({                
-                pokemon: res.pokemon.data.results.map(pokemon => {
-                    let id = idParse(pokemon);
-                    return {
-                        id,
-                        name: pokemon.name,
-                        sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + id + ".png"
-                    };
-                })
-            });
-        });
-
-        this.props.fetchItems();
-    }
-
-    handleScroll() {
-        this.setState(({ scrollPosition: window.pageYOffset }));
     }
 
     updateSearch(){
@@ -203,6 +203,14 @@ class TeamBuilder extends React.Component {
         this.setState({ filterState });
     }
 
+    closeFilter(){
+        const openFilter = this.state.openFilter;
+        openFilter.isOpen = false;
+        this.setState({
+            openFilter,
+        });
+    }
+
     clearFilter(filter){
         this.setState({ [filter]: "" }); 
         this.filterByType(filter, "");
@@ -219,19 +227,26 @@ class TeamBuilder extends React.Component {
     }
 
     render(){
-        if (this.state.redirectTo){ 
+        const { redirectTo, showStats, scrollY } = this.state;
+        console.log(scrollY);
+
+        if (redirectTo){ 
             return <Redirect to={`/teams/${this.state.redirectTo}`}/> 
         }
         const { pokemon, team, openFilter, typeFilter1, typeFilter2 } = this.state;
         const { fetchPokemon, fetchItem, fetchItems, fetchMove, fetchAbility, } = this.props;
         const pokemonComponents = pokemon.map(poke => {
             return(
-                <Pokemon key={poke.name} name={poke.name} sprite={poke.sprite} id={poke.id}/>
+                <Pokemon key={poke.name} 
+                    name={poke.name} 
+                    sprite={poke.sprite} 
+                    id={poke.id}
+                />
             );
         });
-        let statistics = null
-        let statText = "Show Stats"
-        if(this.state.showStats){
+        let statistics = null;
+        let statText = "Show Stats";
+        if(showStats){
             statistics = <div>
                 <StatCharts team={this.state.team} pokemon={this.props.pokemon} moves={this.props.moves}/>
             </div> 
@@ -239,8 +254,8 @@ class TeamBuilder extends React.Component {
         }
         return(
             <div>
-            <div className="team-builder-container">
-                <div className="sticky-container">
+            <div className="team-builder-container" >
+                    <div className={scrollY === 0 ? "sticky-container no-border" : "sticky-container"}>
                         <div className="name-submit-container">
                             <input className="team-name" onChange={this.updateTeamName()} type="text" placeholder={"New Team"}/>
                             <input className="submit-team" onClick={this.saveTeam} type="submit" value="Save"/>
