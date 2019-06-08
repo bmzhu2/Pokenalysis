@@ -1,5 +1,5 @@
 import React from 'react';
-import './pokemon_attributes.css'
+import './pokemon_attributes.css';
 
 class PokemonAttributes extends React.Component {
     constructor(props){
@@ -98,6 +98,7 @@ class PokemonAttributes extends React.Component {
         }
         const pokeAttrs = this.props.team[this.props.slot];
         const pokemon = this.props.pokemon[pokeAttrs.pokeId];
+        pokemon.name = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
         if(!pokemon || !pokemon.abilities) {
             return null
         }
@@ -142,7 +143,7 @@ class PokemonAttributes extends React.Component {
           <div className="poke-attrs">
             <div className="attr-header">
               <h1>{pokemon.name}</h1>
-              {pokemon.types.join(" ")}
+              <h2>{pokemon.types.join(" ")}</h2>
             </div>
             <div className="attr-col-section">
               <div className="attr-col">
