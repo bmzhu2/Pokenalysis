@@ -33,7 +33,7 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-.poke-attrs .attr-col {
+/* .poke-attrs .attr-col {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,7 +41,7 @@
   margin: 1vh;
   margin-top: none;
   padding: none;
-}
+} */
 
 .poke-attrs h3 {
   text-align: center;

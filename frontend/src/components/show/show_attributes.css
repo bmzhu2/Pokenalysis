@@ -19,12 +19,12 @@
   display: flex;
 }
 
-.attr-col-section .attr-col {
+.attr-col {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 25%;
-  padding: 1vw;
+  margin: 0.5vw;
 }
 
 .poke-attrs h3 {
