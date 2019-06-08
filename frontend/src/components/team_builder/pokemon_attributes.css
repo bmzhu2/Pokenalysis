@@ -1,4 +1,6 @@
 .poke-attrs{
+  display: flex;
+  flex-direction: column;
   width: 70vw;
   margin: 1vw auto;
   background: indianred;
@@ -8,6 +10,7 @@
 .attr-header {
   display: flex;
   flex-direction: column;
+  margin-top: 10px;
   align-items: center;
   font-family: 'Montserrat', sans-serif;
 }
@@ -30,12 +33,14 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-.attr-col {
+.poke-attrs .attr-col {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 25%;
-  padding: 1vw;
+  margin: 1vh;
+  margin-top: none;
+  padding: none;
 }
 
 .poke-attrs h3 {
