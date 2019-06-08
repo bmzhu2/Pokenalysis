@@ -227,13 +227,12 @@ class TeamBuilder extends React.Component {
     }
 
     render(){
-        const { redirectTo, showStats, scrollY } = this.state;
+        const { pokemon, attrId, team, openFilter, typeFilter1, typeFilter2, redirectTo, showStats, scrollY } = this.state;
         console.log(scrollY);
 
         if (redirectTo){ 
-            return <Redirect to={`/teams/${this.state.redirectTo}`}/> 
+            return <Redirect to={`/teams/${redirectTo}`}/> 
         }
-        const { pokemon, team, openFilter, typeFilter1, typeFilter2 } = this.state;
         const { fetchPokemon, fetchItem, fetchItems, fetchMove, fetchAbility, } = this.props;
         const pokemonComponents = pokemon.map(poke => {
             return(
@@ -248,7 +247,7 @@ class TeamBuilder extends React.Component {
         let statText = "Show Stats";
         if(showStats){
             statistics = <div>
-                <StatCharts team={this.state.team} pokemon={this.props.pokemon} moves={this.props.moves}/>
+                <StatCharts team={team} pokemon={this.props.pokemon} moves={this.props.moves}/>
             </div> 
             statText = "Hide Stats"
         }
@@ -269,14 +268,14 @@ class TeamBuilder extends React.Component {
                                 <TeamSlot setAttrId={() => this.sendAttrId("5")} key="team-slot-5" id="5" onDrop={this.onDrop5} pokeId={team[5].id} name={team[5].name} sprite={team[5].sprite} removeFromTeam={this.removeFromTeam}/>
                                 <TeamSlot setAttrId={() => this.sendAttrId("6")} key="team-slot-6" id="6" onDrop={this.onDrop6} pokeId={team[6].id} name={team[6].name} sprite={team[6].sprite} removeFromTeam={this.removeFromTeam}/>
                             </ul>
-                            <div className="stats-button" onClick={this.state.showStats ? () => this.setState({ showStats: false }) : () => this.setState({ showStats: true }) }>
+                            <div className="stats-button" onClick={showStats ? () => this.setState({ showStats: false }) : () => this.setState({ showStats: true }) }>
                                 {statText}
                             </div>
                         </div>
                     <PokemonAttributesContainer
                         updatePokeAttrs={this.updatePokeAttrs}
-                        team={this.state.team}
-                        slot={this.state.attrId}
+                        team={team}
+                        slot={attrId}
                         />
                     {statistics}
                     <div className="filters">
@@ -295,7 +294,11 @@ class TeamBuilder extends React.Component {
                                 <h2 className={(openFilter.name === "typeFilter2" && openFilter.isOpen) ? "filter-header open" : "filter-header"}>
                                     {`${typeFilter2 || "filter 2"}`}
                                 </h2>
-                                    <h3 className={(openFilter.name === "typeFilter2" && openFilter.isOpen) ? "x open" : 'x'} onClick={() => this.clearFilter("typeFilter2")}>X</h3>
+                                    <h3 className={(openFilter.name === "typeFilter2" && 
+                                        openFilter.isOpen) ? "x open" : 'x'} 
+                                        onClick={() => this.clearFilter("typeFilter2")}
+                                    >X
+                                    </h3>
                             </div>
                         </div>
                     </div>
