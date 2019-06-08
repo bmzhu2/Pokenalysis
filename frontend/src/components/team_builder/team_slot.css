@@ -71,6 +71,12 @@
     margin: 10px;
     background-color: #dddddd;
     box-shadow: inset 0 0 7px 0px #0000004a;
+    transition: .2s ease-out;
+}
+
+.minimized {
+    height: 6vh;
+    width: 6vh;
 }
 
 .team-slot-header  {
