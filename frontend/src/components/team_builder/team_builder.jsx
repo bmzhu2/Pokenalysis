@@ -30,6 +30,7 @@ class TeamBuilder extends React.Component {
                 isOpen: false,
                 isAnimating: false
             },
+            showStats: false,
             redirectTo: null,
             scrollY: 0,
         };
@@ -41,7 +42,7 @@ class TeamBuilder extends React.Component {
         this.onDrop6 = this.onDrop6.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.searchPokemon = this.searchPokemon.bind(this);
-        this.filterByType = this.filterByType.bind(this)
+        this.filterByType = this.filterByType.bind(this);
         this.removeFromTeam = this.removeFromTeam.bind(this);
         this.saveTeam = this.saveTeam.bind(this);
         this.handleTypeFilter = this.handleTypeFilter.bind(this);
@@ -73,33 +74,46 @@ class TeamBuilder extends React.Component {
     }
 
     onDrop1(incomingState) {
-        const team = Object.assign({}, this.state.team, { 1: incomingState });
-        this.props.fetchPokemon(incomingState.name);
+        const team = Object.assign({}, this.state.team, { [1]: incomingState });
+        const name = team[1].name;
+        this.props.fetchPokemon(name);    
+        team[1].name = name.charAt(0).toUpperCase() + name.slice(1);
         this.setState({ team });
     }
+
     onDrop2(incomingState) {
-        const team = Object.assign({}, this.state.team, { 2: incomingState });
-        this.props.fetchPokemon(incomingState.name);
+        const team = Object.assign({}, this.state.team, { [2]: incomingState });
+        const name = team[2].name;
+        this.props.fetchPokemon(name);
+        team[2].name = name.charAt(0).toUpperCase() + name.slice(1);
         this.setState({ team });
     }
     onDrop3(incomingState) {
-        const team = Object.assign({}, this.state.team, { 3: incomingState });
-        this.props.fetchPokemon(incomingState.name);
+        const team = Object.assign({}, this.state.team, { [3]: incomingState });
+        const name = team[3].name;
+        this.props.fetchPokemon(name);
+        team[3].name = name.charAt(0).toUpperCase() + name.slice(1);
         this.setState({ team });
     }
     onDrop4(incomingState) {
-        const team = Object.assign({}, this.state.team, { 4: incomingState });
-        this.props.fetchPokemon(incomingState.name);
+        const team = Object.assign({}, this.state.team, { [4]: incomingState });
+        const name = team[4].name;
+        this.props.fetchPokemon(name);
+        team[4].name = name.charAt(0).toUpperCase() + name.slice(1);
         this.setState({ team });
     }
     onDrop5(incomingState) {
-        const team = Object.assign({}, this.state.team, { 5: incomingState });
-        this.props.fetchPokemon(incomingState.name);
+        const team = Object.assign({}, this.state.team, { [5]: incomingState });
+        const name = team[5].name;
+        this.props.fetchPokemon(name);
+        team[5].name = name.charAt(0).toUpperCase() + name.slice(1);
         this.setState({ team });
     }
     onDrop6(incomingState) {
-        const team = Object.assign({}, this.state.team, { 6: incomingState });
-        this.props.fetchPokemon(incomingState.name);
+        const team = Object.assign({}, this.state.team, { [6]: incomingState });
+        const name = team[6].name;
+        this.props.fetchPokemon(name);
+        team[6].name = name.charAt(0).toUpperCase() + name.slice(1);
         this.setState({ team });
     }
 

@@ -6,17 +6,17 @@ const Types = {
 };
 
 const pokemonSource = {
-    beginDrag(props, monitor, component){
-        const pokemon = { name: props.name, sprite: props.sprite, pokeId: props.id };
+    beginDrag(props){
+        const { name, sprite, id } = props;
+        const pokemon = { name, sprite, pokeId: id };
         return pokemon;
-    },
+    }
 
 };
 
-const collect = (connect, monitor) => {
+    const collect = (connect) => {
     return {
         connectDragSource: connect.dragSource(),
-        // isDragging: monitor.isDragging(),
     };
 };
 
@@ -58,7 +58,7 @@ class Pokemon extends React.Component {
 
     render() {
         const { name, sprite } = this.props;
-        const { isDragging, connectDragSource } = this.props;
+        const { connectDragSource } = this.props;
         return connectDragSource(
             <li className="pokemon-container">
                 <h3 className="pokemon-sprite-name">{name}</h3>

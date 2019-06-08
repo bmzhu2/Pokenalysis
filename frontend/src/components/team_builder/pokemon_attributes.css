@@ -1,4 +1,6 @@
 .poke-attrs{
+  display: flex;
+  flex-direction: column;
   width: 70vw;
   margin: 1vw auto;
   background: indianred;
@@ -8,24 +10,38 @@
 .attr-header {
   display: flex;
   flex-direction: column;
+  margin-top: 10px;
   align-items: center;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .attr-header h1 {
   font-size: 2vw;
 }
 
+.attr-header h2 {
+  font-size: inherit;
+  color: black;
+  font-weight: normal;
+}
+
 .attr-col-section {
   display: flex;
 }
 
-.attr-col {
+.attr-col-section h3 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* .poke-attrs .attr-col {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 25%;
-  padding: 1vw;
-}
+  margin: 1vh;
+  margin-top: none;
+  padding: none;
+} */
 
 .poke-attrs h3 {
   text-align: center;
@@ -47,4 +63,5 @@
   display: flex;
   flex-direction: column-reverse;
   align-items: flex-start;
+  font-family: 'Montserrat', sans-serif;
 }
