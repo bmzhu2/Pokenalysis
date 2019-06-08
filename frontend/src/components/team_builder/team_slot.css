@@ -110,13 +110,13 @@
     cursor: pointer;
 }
 
-.team-slot-outer-container .x {
+.team-slots-container .x {
     font-size: 2.25vh;
     position: relative;
     height: min-content;
     color: maroon;
     top: 3.7vh;
-    left: 1.6vh;
+    left: 1.0vh;
     z-index: 3;
     font-family: 'Montserrat', sans-serif;
 }

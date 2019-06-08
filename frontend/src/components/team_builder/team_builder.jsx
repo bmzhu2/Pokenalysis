@@ -30,6 +30,7 @@ class TeamBuilder extends React.Component {
                 isOpen: false,
                 isAnimating: false
             },
+            showStats: false,
             redirectTo: null,
             scrollY: 0,
         };
@@ -41,7 +42,7 @@ class TeamBuilder extends React.Component {
         this.onDrop6 = this.onDrop6.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.searchPokemon = this.searchPokemon.bind(this);
-        this.filterByType = this.filterByType.bind(this)
+        this.filterByType = this.filterByType.bind(this);
         this.removeFromTeam = this.removeFromTeam.bind(this);
         this.saveTeam = this.saveTeam.bind(this);
         this.handleTypeFilter = this.handleTypeFilter.bind(this);
