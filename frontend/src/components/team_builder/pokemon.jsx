@@ -14,7 +14,7 @@ const pokemonSource = {
 
 };
 
-const collect = (connect) => {
+    const collect = (connect) => {
     return {
         connectDragSource: connect.dragSource(),
     };
