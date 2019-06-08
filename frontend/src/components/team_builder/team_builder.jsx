@@ -280,7 +280,10 @@ class TeamBuilder extends React.Component {
                                 <TeamSlot scrollY={scrollY} setAttrId={() => this.sendAttrId("5")} key="team-slot-5" id="5" onDrop={this.onDrop5} pokeId={team[5].id} name={team[5].name} sprite={team[5].sprite} removeFromTeam={this.removeFromTeam}/>
                                 <TeamSlot scrollY={scrollY} setAttrId={() => this.sendAttrId("6")} key="team-slot-6" id="6" onDrop={this.onDrop6} pokeId={team[6].id} name={team[6].name} sprite={team[6].sprite} removeFromTeam={this.removeFromTeam}/>
                             </ul>
-                            <div className="stats-button" onClick={showStats ? () => this.setState({ showStats: false }) : () => this.setState({ showStats: true }) }>
+                            <div className={scrollY ? "stats-button minimized-button" : "stats-button"} 
+                                onClick={showStats ? 
+                                () => this.setState({ showStats: false }) : 
+                                () => this.setState({ showStats: true }) }>
                                 {statText}
                             </div>
                         </div>

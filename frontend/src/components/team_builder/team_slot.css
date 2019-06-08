@@ -51,7 +51,11 @@
     border: 4px solid #C22E28;
     border-top: none;
     box-shadow: inset 0 0 7px 0px #0000004a;
-    transition: background-color .3s ease-out;
+    transition: .2s;
+}
+
+.minimized-button {
+    margin:  0 0 10px 0;
 }
 
 .stats-button:hover {
