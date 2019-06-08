@@ -81,6 +81,7 @@
 .minimized {
     height: 6vh;
     width: 6vh;
+    margin: 10px calc(10px + 3vh) 10px calc(10px + 3vh);
 }
 
 .team-slot-header  {
@@ -138,15 +139,16 @@
 
 .plus {
     color: grey;
-    font-size: 40px;
+    font-size: 4vh;
+}
+
+.minimized-plus {
+    font-size: 2vh;
 }
 
 .plus:hover {
     user-select: none;
 }
-
-
-
 
 .none {
     opacity: 0;

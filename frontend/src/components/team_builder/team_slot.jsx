@@ -54,7 +54,7 @@ class TeamSlot extends React.Component {
                     "team-slot hovered-slot minimized" : 
                     scrollY && !isHovered ? "team-slot minimized" : 
                     isHovered ? "team-slot hovered-slot" : "team-slot"}>
-                    <p className={sprite ? "none" : "plus"}>+</p>
+                    <p className={sprite ? "none" : scrollY ? "plus minimized-plus" : "plus"}>+</p>
                     <img className={sprite ? "team-slot-sprite" : ""} src={sprite} alt=""/>
                 </div>
                 <div className="team-slot-header"> 
