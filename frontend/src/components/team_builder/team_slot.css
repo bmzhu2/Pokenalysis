@@ -5,6 +5,7 @@
     background-color: #36398a;
     opacity: none;
     transition: .3s;
+    overflow: scroll;
     z-index: 15;
 }
 
@@ -34,8 +35,13 @@
     align-self: center;
 }
 
+.stats-button-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
 .stats-button {
-    align-self: center;
     background-color: #fb6262;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
@@ -79,9 +85,9 @@
 }
 
 .minimized {
-    height: 6vh;
-    width: 6vh;
-    margin: 10px calc(10px + 2vh) 10px calc(10px + 2vh);
+    height: 8vh;
+    width: 8vh;
+    margin: 10px calc(10px + 1vh) 10px calc(10px + 1vh);
 }
 
 .team-slot-header  {
