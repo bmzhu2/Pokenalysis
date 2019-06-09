@@ -282,6 +282,14 @@ class TeamBuilder extends React.Component {
                                 <TeamSlot scrollY={scrollY} setAttrId={() => this.sendAttrId("5")} key="team-slot-5" id="5" onDrop={this.onDrop5} pokeId={team[5].id} name={team[5].name} sprite={team[5].sprite} removeFromTeam={this.removeFromTeam}/>
                                 <TeamSlot scrollY={scrollY} setAttrId={() => this.sendAttrId("6")} key="team-slot-6" id="6" onDrop={this.onDrop6} pokeId={team[6].id} name={team[6].name} sprite={team[6].sprite} removeFromTeam={this.removeFromTeam}/>
                             </ul>
+                        </div>
+                        <PokemonAttributesContainer
+                        updatePokeAttrs={this.updatePokeAttrs}
+                        team={team}
+                        slot={attrId}
+                        />
+                        <StatCharts showStats={showStats} team={team} pokemon={this.props.pokemon} moves={this.props.moves} />
+                        <div className="stats-button-container">
                             <div className={scrollY ? "stats-button minimized-button" : "stats-button"} 
                                 onClick={showStats ? 
                                 () => this.setState({ showStats: false }) : 
@@ -289,43 +297,43 @@ class TeamBuilder extends React.Component {
                                 <h3>{showStats ? "Hide Stats" : "Show Stats"}</h3>
                             </div>
                         </div>
-                    <PokemonAttributesContainer
-                        updatePokeAttrs={this.updatePokeAttrs}
-                        team={team}
-                        slot={attrId}
-                        />
-                        <StatCharts showStats={showStats} team={team} pokemon={this.props.pokemon} moves={this.props.moves} />
-                    <div className="filters">
-                        <form onSubmit={this.handleSubmit}>
-                            <input className="search" onChange={this.updateSearch()} type="text" placeholder="search by name"/>
-                            <input className="search-button" type="submit" value="Search"/>
-                        </form>
-                        <div className="filter-headers-container">
-                            <div className={(openFilter.name === "typeFilter1" && openFilter.isOpen) ? "filter-header-container open" : "filter-header-container"} onClick={() => this.handleOpenFilter("typeFilter1")}>
+                        <div className="filters">
+                            <form onSubmit={this.handleSubmit}>
+                                <input className="search" onChange={this.updateSearch()} type="text" placeholder="search by name"/>
+                                <input className="search-button" type="submit" value="Search"/>
+                            </form>
+                            <div className="filter-headers-container">
+                                <div className={(openFilter.name === "typeFilter1" && 
+                                    openFilter.isOpen) ? "filter-header-container open" : 
+                                    "filter-header-container"} 
+                                    onClick={() => this.handleOpenFilter("typeFilter1")}>
                                     <h2 className={(openFilter.name === "typeFilter1" && openFilter.isOpen) ? "filter-header open" : "filter-header"}>
-                                    { `${typeFilter1 || "filter 1"}` } 
-                                </h2>
-                                <h3 className={openFilter.name === "typeFilter1" && openFilter.isOpen ? "x open" : "x"} onClick={() => this.clearFilter("typeFilter1")}>X</h3>
-                            </div>
-                            <div className={(openFilter.name === "typeFilter2" && openFilter.isOpen) ? "filter-header-container open" : "filter-header-container"} onClick={() => this.handleOpenFilter("typeFilter2")}>
-                                <h2 className={(openFilter.name === "typeFilter2" && openFilter.isOpen) ? "filter-header open" : "filter-header"}>
-                                    {`${typeFilter2 || "filter 2"}`}
-                                </h2>
+                                        { `${typeFilter1 || "filter 1"}` } 
+                                    </h2>
+                                    <h3 className={openFilter.name === "typeFilter1" && openFilter.isOpen ? "x open" : "x"} 
+                                        onClick={() => this.clearFilter("typeFilter1")}
+                                        >X
+                                    </h3>
+                                </div>
+                                <div className={(openFilter.name === "typeFilter2" && openFilter.isOpen) ? "filter-header-container open" : "filter-header-container"} onClick={() => this.handleOpenFilter("typeFilter2")}>
+                                    <h2 className={(openFilter.name === "typeFilter2" && openFilter.isOpen) ? "filter-header open" : "filter-header"}>
+                                        {`${typeFilter2 || "filter 2"}`}
+                                    </h2>
                                     <h3 className={(openFilter.name === "typeFilter2" && 
                                         openFilter.isOpen) ? "x open" : 'x'} 
                                         onClick={() => this.clearFilter("typeFilter2")}
-                                    >X
+                                        >X
                                     </h3>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <Filter handleTypeFilter={this.handleTypeFilter} 
+                        <Filter handleTypeFilter={this.handleTypeFilter} 
                             typeFilter={this.state[openFilter.name]}
                             name={openFilter.name}
                             isOpen={openFilter.isOpen}
                             isAnimating={openFilter.isAnimating}
                             handleAnimationEnd={this.handleAnimationEnd}
-                            />
+                        />
                     </div>
                     <div>
                         <ul className="pokemon-index">

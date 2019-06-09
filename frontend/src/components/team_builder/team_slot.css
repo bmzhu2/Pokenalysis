@@ -34,8 +34,13 @@
     align-self: center;
 }
 
+.stats-button-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
 .stats-button {
-    align-self: center;
     background-color: #fb6262;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
