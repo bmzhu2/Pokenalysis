@@ -172,7 +172,6 @@ class TeamBuilder extends React.Component {
     removeFromTeam(id){
         const team = Object.assign({}, this.state.team, { [id]: {}});
 
-        debugger
         this.setState({
             team,
         });
@@ -264,13 +263,9 @@ class TeamBuilder extends React.Component {
                 />
             );
         });
-        let statistics = null;
-        // if(showStats){
-        //     statistics = <div>
-        //         <StatCharts team={team} pokemon={this.props.pokemon} moves={this.props.moves}/>
-        //     </div> 
-        // }
+   
         return(
+            
             <div>
             <div className="team-builder-container" >
                     <div className={scrollY ? "sticky-container" : "sticky-container no-border"}>

@@ -11,7 +11,7 @@ class PokemonAttributes extends React.Component {
             listType: null,
             displayType: null,
             displayItem: null
-        }
+        };
 
         this.updateSearch = this.updateSearch.bind(this)
         this.setMove1 = this.setMove1.bind(this)

@@ -85,9 +85,9 @@
 }
 
 .minimized {
-    height: 6vh;
-    width: 6vh;
-    margin: 10px calc(10px + 2vh) 10px calc(10px + 2vh);
+    height: 8vh;
+    width: 8vh;
+    margin: 10px calc(10px + 1vh) 10px calc(10px + 1vh);
 }
 
 .team-slot-header  {
