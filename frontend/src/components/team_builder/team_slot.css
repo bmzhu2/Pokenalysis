@@ -5,6 +5,7 @@
     background-color: #36398a;
     opacity: none;
     transition: .3s;
+    overflow: scroll;
     z-index: 15;
 }
 

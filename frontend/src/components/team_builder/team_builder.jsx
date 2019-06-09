@@ -75,10 +75,6 @@ class TeamBuilder extends React.Component {
         });
     }
 
-    componentWillUnmount(){
-        window.removeEventListener("scroll");
-    }
-
     onDrop1(incomingState) {
         const team = Object.assign({}, this.state.team, { [1]: incomingState });
         const name = team[1].name;
@@ -175,6 +171,8 @@ class TeamBuilder extends React.Component {
   
     removeFromTeam(id){
         const team = Object.assign({}, this.state.team, { [id]: {}});
+
+        debugger
         this.setState({
             team,
         });
@@ -305,7 +303,7 @@ class TeamBuilder extends React.Component {
                                 onClick={showStats ? 
                                 () => this.setState({ showStats: false }) : 
                                 () => this.setState({ showStats: true }) }>
-                                <h3>{showStats ? "Hide Stats" : "Show Stats"}</h3>
+                                <h3>{showStats ? "Hide Stats" : "Team Stats"}</h3>
                             </div>
                         </div>
                         <div className="filters">

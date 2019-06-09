@@ -73,32 +73,34 @@ class StatChart extends React.Component{
             <div className={showStats ? 'team-stat-container' : 'team-stat-container hidden-stats'}>
                 <div className='stat-averages'>
                     <h1>Stat Averages</h1>
-                    <RadarChart data={statData} domains={statDomains} height={window.innerWidth * 0.4} width={window.innerWidth * 0.4} color='white' margin={{left: 40, right: 40, top: 30, bottom: 40}} style={{
-                        axes: {
-                            line: {strokeWidth: 0.5},
-                            ticks: {},
-                            text: {}
-                        },
-                        labels: {
-                            fontSize: 12,
-                            fontFamily: 'Montserrat, sans-serif'
-                        },
-                        polygons: {
-                            strokeWidth: 1,
-                            strokeOpacity: 1,
-                            fillOpacity: 0.5
-                        }
-                    }}
-                    animation={false}>
-                    </RadarChart>
+                    <div className="radar-container">
+                        <RadarChart data={statData} domains={statDomains} height={window.innerWidth * 0.4} width={window.innerWidth * 0.4} color='white' margin={{left: 40, right: 40, top: 30, bottom: 40}} style={{
+                            axes: {
+                                line: {strokeWidth: 0.5},
+                                ticks: {},
+                                text: {}
+                            },
+                            labels: {
+                                fontSize: 12,
+                                fontFamily: 'Montserrat, sans-serif'
+                            },
+                            polygons: {
+                                strokeWidth: 1,
+                                strokeOpacity: 1,
+                                fillOpacity: 0.5
+                            }
+                        }}
+                        animation={false}>
+                        </RadarChart>
+                    </div>
                 </div>
                 <div className="coverage-chart-container">
                     <div className="chart-header-container">
-                        <h1 className={"chart-header"} 
+                        <h1 className={defensiveChart ? "chart-header selected-chart-header" : "chart-header"} 
                             onClick={() => handleCoverageType(true)}
                             >Defensive Coverage
                         </h1>
-                        <h1 className="chart-header" 
+                            <h1 className={defensiveChart ? "chart-header" : "chart-header selected-chart-header"} 
                             onClick={() => handleCoverageType(false)}
                             >Offensive Coverage
                         </h1>
