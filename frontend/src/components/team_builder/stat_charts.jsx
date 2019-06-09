@@ -11,6 +11,7 @@ class StatChart extends React.Component{
     }
 
     render(){
+        const { showStats } = this.props;
         let newTeam = {};
         if(!this.props.team.pokemon){
             newTeam.pokemon = [];
@@ -53,16 +54,16 @@ class StatChart extends React.Component{
             'stat-total': averages['stat-total']
         }];
         const statDomains = [
-            {name: 'speed', domain: [0, 200]},
+            { name: 'speed', domain: [0, 200] },
             { name: 'attack', domain: [0, 200] },
             { name: 'special-attack', domain: [0, 200] },
             { name: 'special-defense', domain: [0, 200] },
             { name: 'defense', domain: [0, 200] },
             { name: 'hp', domain: [0, 200] },
             { name: 'stat-total', domain: [0, 800] }
-        ]
+        ];
         return(
-            <div className='team-stat-container'>
+            <div className={showStats ? 'team-stat-container' : 'team-stat-container hidden-stats'}>
                 <div className='stat-averages'>
                     <h1>Stat Averages</h1>
                     <RadarChart data={statData} domains={statDomains} height={350} width={350} color='white' margin={{left: 40, right: 40, top: 30, bottom: 40}} style={{
@@ -104,7 +105,6 @@ class StatChart extends React.Component{
                 </div>
 
                 <div className="move-totals">
-                    <h1>Move Types</h1>
                     <div>Physical moves: {moveTypes.physical}</div>
                     <div>Special moves: {moveTypes.special}</div>
                 </div>

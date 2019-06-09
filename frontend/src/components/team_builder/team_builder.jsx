@@ -260,13 +260,11 @@ class TeamBuilder extends React.Component {
             );
         });
         let statistics = null;
-        let statText = "Show Stats";
-        if(showStats){
-            statistics = <div>
-                <StatCharts team={team} pokemon={this.props.pokemon} moves={this.props.moves}/>
-            </div> 
-            statText = "Hide Stats"
-        }
+        // if(showStats){
+        //     statistics = <div>
+        //         <StatCharts team={team} pokemon={this.props.pokemon} moves={this.props.moves}/>
+        //     </div> 
+        // }
         return(
             <div>
             <div className="team-builder-container" >
@@ -288,7 +286,7 @@ class TeamBuilder extends React.Component {
                                 onClick={showStats ? 
                                 () => this.setState({ showStats: false }) : 
                                 () => this.setState({ showStats: true }) }>
-                                {statText}
+                                <h3>{showStats ? "Hide Stats" : "Show Stats"}</h3>
                             </div>
                         </div>
                     <PokemonAttributesContainer
@@ -296,7 +294,7 @@ class TeamBuilder extends React.Component {
                         team={team}
                         slot={attrId}
                         />
-                        {statistics}
+                        <StatCharts showStats={showStats} team={team} pokemon={this.props.pokemon} moves={this.props.moves} />
                     <div className="filters">
                         <form onSubmit={this.handleSubmit}>
                             <input className="search" onChange={this.updateSearch()} type="text" placeholder="search by name"/>

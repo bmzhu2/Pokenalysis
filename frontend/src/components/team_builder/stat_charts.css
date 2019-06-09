@@ -2,6 +2,12 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    height: inherit;
+}
+
+.hidden-stats {
+    max-height: 0;
+    overflow: hidden;
 }
 
 .move-totals{
