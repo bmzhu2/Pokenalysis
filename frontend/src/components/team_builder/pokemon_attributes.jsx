@@ -93,15 +93,16 @@ class PokemonAttributes extends React.Component {
     }
 
     render(){
-        if(!this.props.team[this.props.slot]) {
+      const { team, slot } = this.props; 
+        if(!team[slot]) {
             return null
         }
-        const pokeAttrs = this.props.team[this.props.slot];
+        const pokeAttrs = team[slot];
         const pokemon = this.props.pokemon[pokeAttrs.pokeId];
-        pokemon.name = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
         if(!pokemon || !pokemon.abilities) {
-            return null
+          return null
         }
+        pokemon.name = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
 
         if(!pokeAttrs.move1) {
           pokeAttrs.move1 = "Select a move"

@@ -21,7 +21,7 @@ class TeamBuilder extends React.Component {
             pokemon: [],
             teamName: "",
             team: { 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {} },
-            attrId: "0",
+            attrId: 0,
             search: "",
             typeFilter1: "",
             typeFilter2: "",
@@ -239,7 +239,13 @@ class TeamBuilder extends React.Component {
     }
 
     sendAttrId(id){
-        this.setState((this.state.attrId === id) ? { attrId: 0 } : { attrId: id });
+        this.setState(() => {
+            if (this.state.attrId === id) {
+                return { attrId: 0 } ;
+            } else {
+                return { attrId: id };
+            }
+        });
     }
 
     handleCoverageType(bool){
@@ -263,7 +269,7 @@ class TeamBuilder extends React.Component {
                 />
             );
         });
-   
+        console.log(this.state);
         return(
             
             <div>
