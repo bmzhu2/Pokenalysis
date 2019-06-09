@@ -16,6 +16,10 @@
     transition: .2s;
 }
 
+.stat-averages {
+    height: 100%;
+}
+
 .hidden-stats {
     max-height: 0;
     padding: 0;
@@ -25,20 +29,37 @@
 }
 
 .move-totals{
-    height: 200px;
-    width: 400px;
+    display: flex;
+    justify-content: center;
 }
 
 .move-totals div{
     font-size: 24px;
     color: white;
-    margin-top: 15px;
+    margin: 15px;
     font-family: 'Montserrat', sans-serif;
 }
 
-.team-stat-container div h1{
+.team-stat-container h1{
     text-align: center;
     font-size: 24px;
     color: white;
     font-family: 'Montserrat', sans-serif;
+    margin-top: 10px;
+    padding: 5px;
+}
+
+.chart-header-container {
+    display: flex;
+    justify-content: center;
+}
+
+.chart-header {
+    border: 2px solid rgb(42, 42, 94);
+    border-radius: 25px;
+}
+
+.chart-header:hover {
+    cursor: pointer;
+    user-select: none;
 }

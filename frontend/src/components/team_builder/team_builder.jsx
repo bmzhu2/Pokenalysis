@@ -33,6 +33,7 @@ class TeamBuilder extends React.Component {
             showStats: false,
             redirectTo: null,
             scrollY: 0,
+            defensiveChart: false,
         };
         this.onDrop1 = this.onDrop1.bind(this);
         this.onDrop2 = this.onDrop2.bind(this);
@@ -51,6 +52,7 @@ class TeamBuilder extends React.Component {
         this.filterPokemon = this.filterPokemon.bind(this);
         this.handleAnimationEnd = this.handleAnimationEnd.bind(this);
         this.closeFilter = this.closeFilter.bind(this);
+        this.handleCoverageType = this.handleCoverageType.bind(this);
     }
 
     componentDidMount() {
@@ -243,9 +245,14 @@ class TeamBuilder extends React.Component {
         this.setState((this.state.attrId === id) ? { attrId: 0 } : { attrId: id });
     }
 
+    handleCoverageType(bool){
+        this.setState({ defensiveChart: bool });
+    }
+
     render(){
-        const { pokemon, attrId, team, openFilter, typeFilter1, typeFilter2, redirectTo, showStats, scrollY } = this.state;
-        
+        const { pokemon, attrId, team, openFilter, typeFilter1, typeFilter2, 
+            redirectTo, showStats, scrollY, defensiveChart } = this.state;
+
         if (redirectTo){ 
             return <Redirect to={`/teams/${redirectTo}`}/> 
         }
@@ -288,7 +295,11 @@ class TeamBuilder extends React.Component {
                         team={team}
                         slot={attrId}
                         />
-                        <StatCharts showStats={showStats} team={team} pokemon={this.props.pokemon} moves={this.props.moves} />
+                        <StatCharts showStats={showStats} 
+                            defensiveChart={defensiveChart} 
+                            handleCoverageType={this.handleCoverageType}
+                            team={team} pokemon={this.props.pokemon} 
+                            moves={this.props.moves} />
                         <div className="stats-button-container">
                             <div className={scrollY ? "stats-button minimized-button" : "stats-button"} 
                                 onClick={showStats ? 
