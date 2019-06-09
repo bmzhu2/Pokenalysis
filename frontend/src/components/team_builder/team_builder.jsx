@@ -296,7 +296,7 @@ class TeamBuilder extends React.Component {
                         team={team}
                         slot={attrId}
                         />
-                    {statistics}
+                        {statistics}
                     <div className="filters">
                         <form onSubmit={this.handleSubmit}>
                             <input className="search" onChange={this.updateSearch()} type="text" placeholder="search by name"/>
