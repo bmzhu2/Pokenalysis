@@ -1,13 +1,27 @@
+.team-stat-container-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
 .team-stat-container{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: inherit;
+    padding: 10px;
+    box-shadow: inset 0 0 7px 0px #0000004a;
+    background-color: rgb(123, 174, 190);
+    border-radius: 25px;
+    border: 4px solid rgb(42, 42, 94);
+    transition: .2s;
 }
 
 .hidden-stats {
     max-height: 0;
+    padding: 0;
+    border: 0px solid #36398a;
     overflow: hidden;
+    width: 55%;
 }
 
 .move-totals{

@@ -63,6 +63,7 @@ class StatChart extends React.Component{
             { name: 'stat-total', domain: [0, 800] }
         ];
         return(
+        <div className="team-stat-container-container">
             <div className={showStats ? 'team-stat-container' : 'team-stat-container hidden-stats'}>
                 <div className='stat-averages'>
                     <h1>Stat Averages</h1>
@@ -109,6 +110,7 @@ class StatChart extends React.Component{
                     <div>Special moves: {moveTypes.special}</div>
                 </div>
             </div>
+        </div>
         )
     }
 }
