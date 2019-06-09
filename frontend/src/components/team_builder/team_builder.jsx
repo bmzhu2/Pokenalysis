@@ -73,6 +73,10 @@ class TeamBuilder extends React.Component {
         });
     }
 
+    componentWillUnmount(){
+        window.removeEventListener("scroll");
+    }
+
     onDrop1(incomingState) {
         const team = Object.assign({}, this.state.team, { [1]: incomingState });
         const name = team[1].name;
@@ -128,10 +132,10 @@ class TeamBuilder extends React.Component {
     }
 
     searchPokemon(){
-        this.setState((state,props) => {
-            const pokemon = Object.values(props.pokemon).filter(poke => (
-                poke.name.includes(state.search)
-            ));
+        this.setState((state, props) => {
+            const pokemon = Object.values(props.pokemon).filter(poke => {
+                return poke.name.includes(state.search);
+            });
             return { pokemon };
         });
     }
