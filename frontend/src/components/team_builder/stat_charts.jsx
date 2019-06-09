@@ -1,28 +1,27 @@
-import React from 'react'
-import * as StatUtil from '../../util/stat_util'
-import * as TypeUtil from '../../util/type_util'
-import { RadarChart, HorizontalBarSeries, XYPlot, VerticalGridLines, XAxis, YAxis, CircularGridLines} from 'react-vis'
-import '../../../node_modules/react-vis/dist/style.css'
-import './stat_charts.css'
+import React from 'react';
+import * as StatUtil from '../../util/stat_util';
+import * as TypeUtil from '../../util/type_util';
+import { RadarChart, HorizontalBarSeries, XYPlot, VerticalGridLines, XAxis, YAxis, CircularGridLines} from 'react-vis';
+import '../../../node_modules/react-vis/dist/style.css';
+import './stat_charts.css';
 
 class StatChart extends React.Component{
     constructor(props){
-        super(props)
+        super(props);
     }
 
     render(){
-        let newTeam = {}
+        let newTeam = {};
         if(!this.props.team.pokemon){
-            newTeam.pokemon = []
+            newTeam.pokemon = [];
             Object.values(this.props.team).forEach(mon => {
                 if(mon.pokeId){
-                    newTeam.pokemon.push(mon)
+                    newTeam.pokemon.push(mon);
                 }
-            })
+            });
         } else {
-            newTeam = this.props.team
+            newTeam = this.props.team;
         }
-        debugger
         let averages = StatUtil.averageStats(newTeam, this.props.pokemon);
         let defensiveCoverage = TypeUtil.teamDefensiveCoverage(newTeam, this.props.pokemon);
         let offensiveCoverage  = TypeUtil.teamOffensiveCoverage(newTeam, this.props.moves, this.props.pokemon)
@@ -30,20 +29,20 @@ class StatChart extends React.Component{
         if (defensiveCoverage.coverage){
             let coverageValues = defensiveCoverage.coverage;
             TypeUtil.types.forEach(type => {
-                defenseData.push({x: coverageValues[type], y: type})
-            })
+                defenseData.push({x: coverageValues[type], y: type});
+            });
         }
         const offenseData = [];
         if (offensiveCoverage) {
             TypeUtil.types.forEach(type => {
                 if(offensiveCoverage[type] !== undefined){
-                    offenseData.push({ x: offensiveCoverage[type], y: type })
+                    offenseData.push({ x: offensiveCoverage[type], y: type });
                 } else{
-                    offenseData.push({ x: 0, y: type })
+                    offenseData.push({ x: 0, y: type });
                 }
-            })
+            });
         }
-        let moveTypes = TypeUtil.teamMoveClassAnalysis(newTeam, this.props.moves)
+        let moveTypes = TypeUtil.teamMoveClassAnalysis(newTeam, this.props.moves);
         const statData = [{
             'speed': averages['speed'],
             'attack': averages['attack'],
