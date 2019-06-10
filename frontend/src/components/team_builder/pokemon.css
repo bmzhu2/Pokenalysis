@@ -31,6 +31,12 @@
     animation: wobble .25s infinite linear;
 }
 
+.team-slot-o-container:active {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}
+
 @keyframes wobble {
    0% { transform: translateX(0%); } 
    25% { transform: translateX(-5%) rotate(-5deg); } 
