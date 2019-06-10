@@ -68,7 +68,7 @@ class Pokemon extends React.Component {
     }
 
     render() {
-        const { name, sprite } = this.props;
+        const { name, sprite, isDragging } = this.props;
         const { connectDragSource } = this.props;
         return connectDragSource(
             <li className={this.longName(name) ? "pokemon-container extra-pad" : "pokemon-container"}>

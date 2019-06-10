@@ -273,6 +273,7 @@ class TeamBuilder extends React.Component {
                     sprite={poke.sprite} 
                     id={poke.id}
                     handleDrag={this.handleDrag}
+                    isDragging={isDragging}
                 />
             );
         });
