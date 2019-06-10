@@ -72,7 +72,7 @@
 
 .stat-averages > h1 {
     text-align: center;
-    font-size: 24px;
+    font-size: 20px;
     color: white;
     font-family: 'Montserrat', sans-serif;
     margin-top: 10px;
@@ -83,7 +83,7 @@
     border: 2px solid rgb(42, 42, 94);
     border-radius: 25px 25px 0px 0px /25px 25px 25px 25px;
     text-align: center;
-    font-size: 24px;
+    font-size: 20px;
     color: rgb(42, 42, 94);
     font-family: 'Montserrat', sans-serif;
     margin-top: 10px;
