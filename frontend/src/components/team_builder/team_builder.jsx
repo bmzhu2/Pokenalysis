@@ -285,26 +285,32 @@ class TeamBuilder extends React.Component {
                             <input className={scrollY ? "team-name minimized-name" : "team-name"} onChange={this.updateTeamName()} type="text" placeholder={"New Team"}/>
                             <input className={scrollY ? "submit-team minimized-submit" : "submit-team"} onClick={this.saveTeam} type="submit" value="Save"/>
                         </div>
-                        <div className="team-slots-container-container">
-                            <ul className={isDragging ? "team-slots-container is-dragging" : "team-slots-container"}> 
-                                <TeamSlot isDragging={isDragging} scrollY={scrollY} setAttrId={() => this.sendAttrId("1")} key="team-slot-1" id="1" onDrop={this.onDrop1} pokeId={team[1].id} name={team[1].name} sprite={team[1].sprite} removeFromTeam={this.removeFromTeam}/>
-                                <TeamSlot isDragging={isDragging} scrollY={scrollY} setAttrId={() => this.sendAttrId("2")} key="team-slot-2" id="2" onDrop={this.onDrop2} pokeId={team[2].id} name={team[2].name} sprite={team[2].sprite} removeFromTeam={this.removeFromTeam}/>
-                                <TeamSlot isDragging={isDragging} scrollY={scrollY} setAttrId={() => this.sendAttrId("3")} key="team-slot-3" id="3" onDrop={this.onDrop3} pokeId={team[3].id} name={team[3].name} sprite={team[3].sprite} removeFromTeam={this.removeFromTeam}/>
-                                <TeamSlot isDragging={isDragging} scrollY={scrollY} setAttrId={() => this.sendAttrId("4")} key="team-slot-4" id="4" onDrop={this.onDrop4} pokeId={team[4].id} name={team[4].name} sprite={team[4].sprite} removeFromTeam={this.removeFromTeam}/>
-                                <TeamSlot isDragging={isDragging} scrollY={scrollY} setAttrId={() => this.sendAttrId("5")} key="team-slot-5" id="5" onDrop={this.onDrop5} pokeId={team[5].id} name={team[5].name} sprite={team[5].sprite} removeFromTeam={this.removeFromTeam}/>
-                                <TeamSlot isDragging={isDragging} scrollY={scrollY} setAttrId={() => this.sendAttrId("6")} key="team-slot-6" id="6" onDrop={this.onDrop6} pokeId={team[6].id} name={team[6].name} sprite={team[6].sprite} removeFromTeam={this.removeFromTeam}/>
-                            </ul>
+                        <div className="team-and-stats-container-container">
+                            <div className={showStats ? "team-and-stats-container showing" : "team-and-stats-container"}>
+                                <div className="team-slots-container-container">
+                                    <h1 className={showStats ? "team-stats-title" : ""}>{showStats ? "Team Stats" : ""}</h1>
+                                    <ul className={showStats ? "team-slots-container transparent" : isDragging ? "team-slots-container is-dragging" : "team-slots-container"}> 
+                                        <TeamSlot isDragging={isDragging} scrollY={scrollY} setAttrId={() => this.sendAttrId("1")} key="team-slot-1" id="1" onDrop={this.onDrop1} pokeId={team[1].id} name={team[1].name} sprite={team[1].sprite} removeFromTeam={this.removeFromTeam}/>
+                                        <TeamSlot isDragging={isDragging} scrollY={scrollY} setAttrId={() => this.sendAttrId("2")} key="team-slot-2" id="2" onDrop={this.onDrop2} pokeId={team[2].id} name={team[2].name} sprite={team[2].sprite} removeFromTeam={this.removeFromTeam}/>
+                                        <TeamSlot isDragging={isDragging} scrollY={scrollY} setAttrId={() => this.sendAttrId("3")} key="team-slot-3" id="3" onDrop={this.onDrop3} pokeId={team[3].id} name={team[3].name} sprite={team[3].sprite} removeFromTeam={this.removeFromTeam}/>
+                                        <TeamSlot isDragging={isDragging} scrollY={scrollY} setAttrId={() => this.sendAttrId("4")} key="team-slot-4" id="4" onDrop={this.onDrop4} pokeId={team[4].id} name={team[4].name} sprite={team[4].sprite} removeFromTeam={this.removeFromTeam}/>
+                                        <TeamSlot isDragging={isDragging} scrollY={scrollY} setAttrId={() => this.sendAttrId("5")} key="team-slot-5" id="5" onDrop={this.onDrop5} pokeId={team[5].id} name={team[5].name} sprite={team[5].sprite} removeFromTeam={this.removeFromTeam}/>
+                                        <TeamSlot isDragging={isDragging} scrollY={scrollY} setAttrId={() => this.sendAttrId("6")} key="team-slot-6" id="6" onDrop={this.onDrop6} pokeId={team[6].id} name={team[6].name} sprite={team[6].sprite} removeFromTeam={this.removeFromTeam}/>
+                                    </ul>
+                                    <h1 className={showStats ? "team-stats-sub" : ""}>{showStats ? "Click pokemon for individual stats" : ""}</h1>
+                                </div>
+                                <PokemonAttributesContainer
+                                updatePokeAttrs={this.updatePokeAttrs}
+                                team={team}
+                                slot={attrId}
+                                />
+                                <StatCharts showStats={showStats} 
+                                    defensiveChart={defensiveChart} 
+                                    handleCoverageType={this.handleCoverageType}
+                                    team={team} pokemon={this.props.pokemon} 
+                                    moves={this.props.moves} />
+                            </div>
                         </div>
-                        <PokemonAttributesContainer
-                        updatePokeAttrs={this.updatePokeAttrs}
-                        team={team}
-                        slot={attrId}
-                        />
-                        <StatCharts showStats={showStats} 
-                            defensiveChart={defensiveChart} 
-                            handleCoverageType={this.handleCoverageType}
-                            team={team} pokemon={this.props.pokemon} 
-                            moves={this.props.moves} />
                         <div className="stats-button-container">
                             <div className={scrollY ? "stats-button minimized-button" : "stats-button"} 
                                 onClick={showStats ? 
