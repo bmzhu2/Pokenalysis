@@ -10,6 +10,10 @@
     /* z-index: 1 ; */
 }
 
+.dragging {
+    cursor: grabbing;
+}
+
 .extra-pad {
     margin-bottom: 24px;
 }
@@ -29,6 +33,12 @@
     user-select: none;
     cursor: grab;
     animation: wobble .25s infinite linear;
+}
+
+.team-slot-o-container:active {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
 }
 
 @keyframes wobble {

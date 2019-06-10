@@ -9,6 +9,54 @@
     z-index: 15;
 }
 
+.team-and-stats-container-container {
+    display: flex;
+    justify-content: center;
+}
+
+.showing {
+    background-color: rgb(123, 174, 190);
+    border: 4px solid rgb(42, 42, 94);
+    border-radius: 25px;
+}
+
+.team-and-stats-container {
+    display: flex;
+    flex-direction: column;
+    width: min-content;
+    border-radius: 25px;
+}
+
+.team-slot-o-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.team-slots-container.transparent {
+    background-color: transparent;
+    padding: 0px;
+    margin: 0px;
+}
+
+.team-stats-title {
+    height: min-content;
+    width: max-content;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    font-size: 2.5vh;
+    margin: 10px;
+}
+
+.team-stats-sub {
+    color: rgb(203, 199, 253);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5vh;
+    width: 10vh;
+    font-style: italic;
+    line-height: 1.1;
+    margin: 10px;
+}
+
 .no-border {
     border-bottom: 4px solid #36398a;
 }
@@ -16,9 +64,11 @@
 .team-slots-container-container {
     display: flex;
     width: 100%;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
+    align-items: center;
     background-color: inherit;
+    border-radius: 25px;
 }
 .team-slots-container {
     display: flex;
@@ -27,12 +77,21 @@
     overflow: none;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     background-color: white;
     min-width: 400px;
     width: max-content;
     border-radius: 50px;
     align-self: center;
+    transition: .25s;
+}
+
+.is-dragging {
+    background-color: rgb(255, 223, 223);
+}
+
+.team-slot.is-dragging-slot {
+    background-color:  rgb(240, 197, 197);  
 }
 
 .stats-button-container {
@@ -85,8 +144,8 @@
 }
 
 .minimized {
-    height: 8vh;
-    width: 8vh;
+    height: 7vh;
+    width: 7vh;
     margin: 10px calc(10px + 1vh) 10px calc(10px + 1vh);
 }
 
@@ -101,7 +160,7 @@
     height: inherit;
     width: inherit;
     object-fit: contain;  
-    transition: .2s;
+    transition: .2s ease-out;
 }
 
 .team-slot-sprite:hover {
@@ -111,7 +170,7 @@
 }
 
 .hovered-slot {
-    background-color: #9dffff;
+    background-color: #fa9090;
 }
 
 .team-slot-name {
@@ -128,14 +187,20 @@
 }
 
 .team-slots-container .x {
+    height: 0px;
     font-size: 2.25vh;
     position: relative;
-    height: min-content;
     color: maroon;
-    top: 3.7vh;
-    left: 1.0vh;
+    top: 1vh;
+    left: -5vh;
+    width: min-content;
     z-index: 3;
     font-family: 'Montserrat', sans-serif;
+    transition: .2s ease-out;
+}
+
+.x.min-x {
+    left: -3.6vh;
 }
 
 .x:hover {

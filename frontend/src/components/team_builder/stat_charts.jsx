@@ -71,7 +71,6 @@ class StatChart extends React.Component{
         return(
         <div className="team-stat-container-container">
             <div className={showStats ? 'team-stat-container' : 'team-stat-container hidden-stats'}>
-                <h1>Team Stats</h1>
                 <div className="stat-averages-container">
                     <div className='stat-averages'>
                         <h1>Stat Averages</h1>
