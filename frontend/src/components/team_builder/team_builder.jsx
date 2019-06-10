@@ -242,7 +242,7 @@ class TeamBuilder extends React.Component {
             <div className="team-builder-container">
                 <div>
                     <div className="name-submit-container">
-                        <input className="team-name" onChange={this.updateTeamName()} type="text" placeholder={"New Team"}/>
+                        <input className="team-name" onChange={this.updateTeamName()} type="text" placeholder={"New Team Name"}/>
                         <input className="submit-team" onClick={this.saveTeam} type="submit" value="Save"/>
                     </div>
                     <div className="team-slots-container-container">

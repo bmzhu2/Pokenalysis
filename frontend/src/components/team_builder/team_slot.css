@@ -1,4 +1,6 @@
 .team-slots-container-container {
+    position:relative;
+    left: 16vw;
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -6,7 +8,7 @@
 }
 .team-slots-container {
     display: flex;
-    margin: 24px 80px 0 80px;
+    margin-top: 24px;
     overflow: none;
     flex-wrap: wrap;
     justify-content: center;
@@ -23,7 +25,7 @@
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
     margin-bottom: 10px;
-    margin-left: 160px;
+    margin-left: 50px;
     width: 14vw;
     min-width: 130px;
     font-family: 'Montserrat', sans-serif;
