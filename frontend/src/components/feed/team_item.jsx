@@ -78,9 +78,7 @@ class TeamItem extends React.Component {
                     </div>
                     <TeamPokemon pokemon={this.props.team.pokemon} />
                     <div className="row likes">
-                        <div className="row-item">
-                            <h3>{this.state.likes} Likes </h3>
-                        </div>
+                        <h3>{this.state.likes} Likes </h3>
                         {like}
                         <h3>0 Comments</h3> 
                     </div>
