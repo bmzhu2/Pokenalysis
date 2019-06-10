@@ -7,6 +7,15 @@
     -moz-box-shadow:    inset 0 0 7px 0px #0000004a;
     -webkit-box-shadow: inset 0 0 7px 0px #0000004a;
     box-shadow:         inset 0 0 7px 0px #0000004a;
+    /* z-index: 1 ; */
+}
+
+.dragging {
+    cursor: grabbing;
+}
+
+.extra-pad {
+    margin-bottom: 24px;
 }
 
 .pokemon-index-sprite {
@@ -16,15 +25,20 @@
     position: relative;
     top: -14px;
     transition: .2s;
-    z-index: 3;  
+    /* z-index: 3;   */
 
 }
 
 .pokemon-index-sprite:hover {
     user-select: none;
     cursor: grab;
-    /* transform: scale(1.2); */
     animation: wobble .25s infinite linear;
+}
+
+.team-slot-o-container:active {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
 }
 
 @keyframes wobble {
@@ -41,8 +55,12 @@
     position: relative;
     top:74px;
     text-align: center;
-    z-index: 1;
+    /* z-index: 1; */
     text-transform: capitalize;
+}
+
+.long {
+    height: 15px;
 }
 
 .loading {

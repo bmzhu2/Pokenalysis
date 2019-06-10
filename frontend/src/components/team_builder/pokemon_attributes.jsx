@@ -1,5 +1,5 @@
 import React from 'react';
-import './pokemon_attributes.css'
+import './pokemon_attributes.css';
 
 class PokemonAttributes extends React.Component {
     constructor(props){
@@ -11,7 +11,7 @@ class PokemonAttributes extends React.Component {
             listType: null,
             displayType: null,
             displayItem: null
-        }
+        };
 
         this.updateSearch = this.updateSearch.bind(this)
         this.setMove1 = this.setMove1.bind(this)
@@ -93,14 +93,16 @@ class PokemonAttributes extends React.Component {
     }
 
     render(){
-        if(!this.props.team[this.props.slot]) {
+      const { team, slot } = this.props; 
+        if(!team[slot]) {
             return null
         }
-        const pokeAttrs = this.props.team[this.props.slot];
+        const pokeAttrs = team[slot];
         const pokemon = this.props.pokemon[pokeAttrs.pokeId];
         if(!pokemon || !pokemon.abilities) {
-            return null
+          return null
         }
+        pokemon.name = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
 
         if(!pokeAttrs.move1) {
           pokeAttrs.move1 = "Select a move"
@@ -115,25 +117,25 @@ class PokemonAttributes extends React.Component {
           pokeAttrs.move4 = "Select a move"
         }
 
-        let abilities = pokemon.abilities.map(ability => {
+        let abilities = pokemon.abilities.map((ability, i) => {
             return (
-              <option value={ability.ability.name}>
+              <option value={ability.ability.name} key={`${ability}-${i}`}>
                 {ability.ability.name.split("-").join(" ")}
               </option>
             );
         })
 
         let itemsList = 
-            Object.keys(this.props.items).map(item => {
+            Object.keys(this.props.items).map((item, i) => {
                 if (!this.state.searchQuery || item.includes(this.state.searchQuery)) {
-                    return <option value={item}>{item.split('-').join(" ")}</option>
+                    return <option value={item} key={`${item}-${i}`}>{item.split('-').join(" ")}</option>
                 }
             }) 
 
 
         let stats = pokemon.stats.reverse()
-        stats = stats.map(stat => {
-                return <div>{`${stat.stat.name.split('-').join(" ")}: ${stat.base_stat}`}</div>
+        stats = stats.map((stat, i) => {
+                return <div key={`${stat}-${i}`}>{`${stat.stat.name.split('-').join(" ")}: ${stat.base_stat}`}</div>
             })
 
         let sortedMoves = pokemon.moves.sort();
@@ -142,7 +144,7 @@ class PokemonAttributes extends React.Component {
           <div className="poke-attrs">
             <div className="attr-header">
               <h1>{pokemon.name}</h1>
-              {pokemon.types.join(" ")}
+              <h2>{pokemon.types.join(" ")}</h2>
             </div>
             <div className="attr-col-section">
               <div className="attr-col">
@@ -155,9 +157,9 @@ class PokemonAttributes extends React.Component {
                   <option>
                     Select a move
                   </option>
-                  {sortedMoves.map(move => {
+                  {sortedMoves.map((move, i) => {
                     return (
-                      <option value={move}>
+                      <option value={move} key={`${move}-${i}`} >
                         {move.split("-").join(" ")}
                       </option>
                     );
@@ -171,9 +173,9 @@ class PokemonAttributes extends React.Component {
                   <option>
                     Select a move
                   </option>
-                  {sortedMoves.map(move => {
+                  {sortedMoves.map((move, i) => {
                     return (
-                      <option value={move}>
+                      <option value={move} key={`${move}-${i}`}>
                         {move.split("-").join(" ")}
                       </option>
                     );
@@ -187,9 +189,9 @@ class PokemonAttributes extends React.Component {
                   <option>
                     Select a move
                   </option>
-                  {sortedMoves.map(move => {
+                  {sortedMoves.map((move, i) => {
                     return (
-                      <option value={move}>
+                      <option value={move} key={`${move}-${i}`}>
                         {move.split("-").join(" ")}
                       </option>
                     );
@@ -203,9 +205,9 @@ class PokemonAttributes extends React.Component {
                   <option>
                     Select a move
                   </option>
-                  {sortedMoves.map(move => {
+                  {sortedMoves.map((move, i) => {
                     return (
-                      <option value={move}>
+                      <option value={move} key={`${move}-${i}`}>
                         {move.split("-").join(" ")}
                       </option>
                     );

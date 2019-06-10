@@ -15,6 +15,7 @@ import { openModal } from '../../actions/modal_actions'
 const mapStateToProps = (state, ownProps) => ({
     team: state.entities.teams[ownProps.match.params.teamId],
     pokemon: state.entities.pokemon,
+    moves: state.entities.moves,
     comments: teamComments(state.entities, ownProps.match.params.teamId),
     teamLikes: teamLikes(state.entities, ownProps.match.params.teamId),
     userLikes: userLikes(state.entities.likes, state.session.user.username),

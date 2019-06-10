@@ -6,17 +6,22 @@ const Types = {
 };
 
 const pokemonSource = {
-    beginDrag(props, monitor, component){
-        const pokemon = { name: props.name, sprite: props.sprite, pokeId: props.id };
+    beginDrag(props){
+        const { name, sprite, id, handleDrag } = props;
+        handleDrag();
+        const pokemon = { name, sprite, pokeId: id };
         return pokemon;
     },
 
+    endDrag(props){
+        props.handleDrag();
+    }
+
 };
 
-const collect = (connect, monitor) => {
+const collect = (connect) => {
     return {
         connectDragSource: connect.dragSource(),
-        // isDragging: monitor.isDragging(),
     };
 };
 
@@ -27,6 +32,7 @@ class Pokemon extends React.Component {
             loaded: false,
         };
         this.setLoadState = this.setLoadState.bind(this);
+        this.longName = this.longName.bind(this);
     }
 
     componentDidMount(){
@@ -56,12 +62,17 @@ class Pokemon extends React.Component {
         });
     }
 
+    longName(name){
+        // return name.length > 10 ||
+        return name.includes("-");
+    }
+
     render() {
-        const { name, sprite } = this.props;
-        const { isDragging, connectDragSource } = this.props;
+        const { name, sprite, isDragging } = this.props;
+        const { connectDragSource } = this.props;
         return connectDragSource(
-            <li className="pokemon-container">
-                <h3 className="pokemon-sprite-name">{name}</h3>
+            <li className={this.longName(name) ? "pokemon-container extra-pad" : "pokemon-container"}>
+                <h3 className={this.longName(name) ? "pokemon-sprite-name long" : "pokemon-sprite-name"}>{name}</h3>
                 <img ref={ref => this.imageRef = ref} 
                     onLoad={this.setLoadState}
                     className={this.state.loaded ? "pokemon-index-sprite" : "pokemon-index-sprite loading"} 

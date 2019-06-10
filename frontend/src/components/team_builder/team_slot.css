@@ -1,10 +1,76 @@
+.sticky-container {
+    position: sticky;
+    top: 0;
+    border-bottom: 4px solid rgb(42, 42, 94);
+    background-color: #36398a;
+    opacity: none;
+    transition: .3s;
+    overflow: scroll;
+    z-index: 15;
+}
+
+.team-and-stats-container-container {
+    display: flex;
+    justify-content: center;
+}
+
+.showing {
+    background-color: rgb(123, 174, 190);
+    border: 4px solid rgb(42, 42, 94);
+    border-radius: 25px;
+}
+
+.team-and-stats-container {
+    display: flex;
+    flex-direction: column;
+    width: min-content;
+    border-radius: 25px;
+}
+
+.team-slot-o-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.team-slots-container.transparent {
+    background-color: transparent;
+    padding: 0px;
+    margin: 0px;
+}
+
+.team-stats-title {
+    height: min-content;
+    width: max-content;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    font-size: 2.5vh;
+    margin: 10px;
+}
+
+.team-stats-sub {
+    color: rgb(203, 199, 253);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5vh;
+    width: 10vh;
+    font-style: italic;
+    line-height: 1.1;
+    margin: 10px;
+}
+
+.no-border {
+    border-bottom: 4px solid #36398a;
+}
+
 .team-slots-container-container {
     position:relative;
     left: 16vw;
     display: flex;
     width: 100%;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
+    align-items: center;
+    background-color: inherit;
+    border-radius: 25px;
 }
 .team-slots-container {
     display: flex;
@@ -12,12 +78,27 @@
     overflow: none;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     background-color: white;
     min-width: 400px;
-    max-width: 980px;
+    width: max-content;
     border-radius: 50px;
-    /* height: 16vh; */
+    align-self: center;
+    transition: .25s;
+}
+
+.is-dragging {
+    background-color: rgb(255, 223, 223);
+}
+
+.team-slot.is-dragging-slot {
+    background-color:  rgb(240, 197, 197);  
+}
+
+.stats-button-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
 }
 
 .stats-button {
@@ -36,7 +117,11 @@
     border: 4px solid #C22E28;
     border-top: none;
     box-shadow: inset 0 0 7px 0px #0000004a;
-    transition: background-color .3s ease-out;
+    transition: .2s;
+}
+
+.minimized-button {
+    margin:  0 0 10px 0;
 }
 
 .stats-button:hover {
@@ -47,70 +132,93 @@
 
 .team-slot {
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: center;
-    align-items: space-between;
-    max-width: 1600px;
     border-radius: 100%;
-    height: 110px;
-    width: 110px;
+    height: 12vh;
+    width: 12vh;
     margin: 10px;
     background-color: #dddddd;
     box-shadow: inset 0 0 7px 0px #0000004a;
+    transition: .2s ease-out;
+}
+
+.minimized {
+    height: 7vh;
+    width: 7vh;
+    margin: 10px calc(10px + 1vh) 10px calc(10px + 1vh);
+}
+
+.team-slot-header  {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .team-slot-sprite {
     height: inherit;
     width: inherit;
     object-fit: contain;  
-    position: absolute;
-    /* transform: translateY(-15px); */
-    transition: .2s;
+    transition: .2s ease-out;
 }
 
 .team-slot-sprite:hover {
     user-select: none;
     cursor: pointer;
-    transform: scale(1.05);
+    transform: scale(1.10);
 }
 
 .hovered-slot {
-    background-color: #9dffff;
+    background-color: #fa9090;
 }
 
 .team-slot-name {
-    position: relative;
-    bottom: 20px;
-    color: white;
-    font-size: 24px;
-    top: 10px;
-    left: 0px;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.25vh;
+    height: min-content;
     z-index: 5;
 }
 
-.plus {
-    color: grey;
-    font-size: 40px;
-}
-
-.plus:hover {
+.team-slot-name:hover {
     user-select: none;
+    cursor: pointer;
 }
 
-
-.team-slot .x {
+.team-slots-container .x {
+    height: 0px;
+    font-size: 2.25vh;
     position: relative;
-    font-size: 40px;
-    color: red;
-    z-index: 2;
+    color: maroon;
+    top: 1vh;
+    left: -5vh;
+    width: min-content;
+    z-index: 3;
     font-family: 'Montserrat', sans-serif;
-    right: 10;
-    bottom: 10;
+    transition: .2s ease-out;
+}
 
+.x.min-x {
+    left: -3.6vh;
 }
 
 .x:hover {
     cursor: pointer;
+    user-select: none;
+}
+
+.plus {
+    color: grey;
+    font-size: 4vh;
+}
+
+.minimized-plus {
+    font-size: 2vh;
+}
+
+.plus:hover {
     user-select: none;
 }
 
