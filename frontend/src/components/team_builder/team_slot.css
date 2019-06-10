@@ -143,6 +143,7 @@
     color: maroon;
     top: 3.7vh;
     left: 1.0vh;
+    width: min-content;
     z-index: 3;
     font-family: 'Montserrat', sans-serif;
 }
