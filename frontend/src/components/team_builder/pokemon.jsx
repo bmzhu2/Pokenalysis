@@ -7,14 +7,19 @@ const Types = {
 
 const pokemonSource = {
     beginDrag(props){
-        const { name, sprite, id } = props;
+        const { name, sprite, id, handleDrag } = props;
+        handleDrag();
         const pokemon = { name, sprite, pokeId: id };
         return pokemon;
+    },
+
+    endDrag(props){
+        props.handleDrag();
     }
 
 };
 
-    const collect = (connect) => {
+const collect = (connect) => {
     return {
         connectDragSource: connect.dragSource(),
     };

@@ -33,6 +33,15 @@
     width: max-content;
     border-radius: 50px;
     align-self: center;
+    transition: .25s;
+}
+
+.is-dragging {
+    background-color: rgb(255, 223, 223);
+}
+
+.team-slot.is-dragging-slot {
+    background-color:  rgb(240, 197, 197);  
 }
 
 .stats-button-container {
@@ -111,7 +120,7 @@
 }
 
 .hovered-slot {
-    background-color: #9dffff;
+    background-color: #fa9090;
 }
 
 .team-slot-name {

@@ -34,7 +34,9 @@ class TeamBuilder extends React.Component {
             redirectTo: null,
             scrollY: 0,
             defensiveChart: false,
+            isDragging: false,
         };
+        this.handleDrag = this.handleDrag.bind(this);
         this.onDrop1 = this.onDrop1.bind(this);
         this.onDrop2 = this.onDrop2.bind(this);
         this.onDrop3 = this.onDrop3.bind(this);
@@ -73,6 +75,10 @@ class TeamBuilder extends React.Component {
         window.addEventListener('scroll', () => {
             this.setState({ scrollY: window.scrollY });
         });
+    }
+
+    handleDrag(){
+        this.setState( state => ({ isDragging: !state.isDragging }) );
     }
 
     onDrop1(incomingState) {
@@ -254,7 +260,7 @@ class TeamBuilder extends React.Component {
 
     render(){
         const { pokemon, attrId, team, openFilter, typeFilter1, typeFilter2, 
-            redirectTo, showStats, scrollY, defensiveChart } = this.state;
+            redirectTo, showStats, scrollY, defensiveChart, isDragging } = this.state;
 
         if (redirectTo){ 
             return <Redirect to={`/teams/${redirectTo}`}/> 
@@ -266,6 +272,7 @@ class TeamBuilder extends React.Component {
                     name={poke.name} 
                     sprite={poke.sprite} 
                     id={poke.id}
+                    handleDrag={this.handleDrag}
                 />
             );
         });
@@ -279,13 +286,13 @@ class TeamBuilder extends React.Component {
                             <input className={scrollY ? "submit-team minimized-submit" : "submit-team"} onClick={this.saveTeam} type="submit" value="Save"/>
                         </div>
                         <div className="team-slots-container-container">
-                            <ul className="team-slots-container"> 
-                                <TeamSlot scrollY={scrollY} setAttrId={() => this.sendAttrId("1")} key="team-slot-1" id="1" onDrop={this.onDrop1} pokeId={team[1].id} name={team[1].name} sprite={team[1].sprite} removeFromTeam={this.removeFromTeam}/>
-                                <TeamSlot scrollY={scrollY} setAttrId={() => this.sendAttrId("2")} key="team-slot-2" id="2" onDrop={this.onDrop2} pokeId={team[2].id} name={team[2].name} sprite={team[2].sprite} removeFromTeam={this.removeFromTeam}/>
-                                <TeamSlot scrollY={scrollY} setAttrId={() => this.sendAttrId("3")} key="team-slot-3" id="3" onDrop={this.onDrop3} pokeId={team[3].id} name={team[3].name} sprite={team[3].sprite} removeFromTeam={this.removeFromTeam}/>
-                                <TeamSlot scrollY={scrollY} setAttrId={() => this.sendAttrId("4")} key="team-slot-4" id="4" onDrop={this.onDrop4} pokeId={team[4].id} name={team[4].name} sprite={team[4].sprite} removeFromTeam={this.removeFromTeam}/>
-                                <TeamSlot scrollY={scrollY} setAttrId={() => this.sendAttrId("5")} key="team-slot-5" id="5" onDrop={this.onDrop5} pokeId={team[5].id} name={team[5].name} sprite={team[5].sprite} removeFromTeam={this.removeFromTeam}/>
-                                <TeamSlot scrollY={scrollY} setAttrId={() => this.sendAttrId("6")} key="team-slot-6" id="6" onDrop={this.onDrop6} pokeId={team[6].id} name={team[6].name} sprite={team[6].sprite} removeFromTeam={this.removeFromTeam}/>
+                            <ul className={isDragging ? "team-slots-container is-dragging" : "team-slots-container"}> 
+                                <TeamSlot isDragging={isDragging} scrollY={scrollY} setAttrId={() => this.sendAttrId("1")} key="team-slot-1" id="1" onDrop={this.onDrop1} pokeId={team[1].id} name={team[1].name} sprite={team[1].sprite} removeFromTeam={this.removeFromTeam}/>
+                                <TeamSlot isDragging={isDragging} scrollY={scrollY} setAttrId={() => this.sendAttrId("2")} key="team-slot-2" id="2" onDrop={this.onDrop2} pokeId={team[2].id} name={team[2].name} sprite={team[2].sprite} removeFromTeam={this.removeFromTeam}/>
+                                <TeamSlot isDragging={isDragging} scrollY={scrollY} setAttrId={() => this.sendAttrId("3")} key="team-slot-3" id="3" onDrop={this.onDrop3} pokeId={team[3].id} name={team[3].name} sprite={team[3].sprite} removeFromTeam={this.removeFromTeam}/>
+                                <TeamSlot isDragging={isDragging} scrollY={scrollY} setAttrId={() => this.sendAttrId("4")} key="team-slot-4" id="4" onDrop={this.onDrop4} pokeId={team[4].id} name={team[4].name} sprite={team[4].sprite} removeFromTeam={this.removeFromTeam}/>
+                                <TeamSlot isDragging={isDragging} scrollY={scrollY} setAttrId={() => this.sendAttrId("5")} key="team-slot-5" id="5" onDrop={this.onDrop5} pokeId={team[5].id} name={team[5].name} sprite={team[5].sprite} removeFromTeam={this.removeFromTeam}/>
+                                <TeamSlot isDragging={isDragging} scrollY={scrollY} setAttrId={() => this.sendAttrId("6")} key="team-slot-6" id="6" onDrop={this.onDrop6} pokeId={team[6].id} name={team[6].name} sprite={team[6].sprite} removeFromTeam={this.removeFromTeam}/>
                             </ul>
                         </div>
                         <PokemonAttributesContainer
