@@ -6,6 +6,7 @@
 
 .team-stat-container{
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
     padding: 10px;
@@ -14,6 +15,16 @@
     border-radius: 25px;
     border: 4px solid rgb(42, 42, 94);
     transition: .2s;
+}
+
+.team-stat-container > h1 {
+    font-size: 28px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.stat-averages-container {
+    display: flex;
 }
 
 .stat-averages {
@@ -46,7 +57,7 @@
 .move-totals div{
     font-size: 24px;
     color: white;
-    margin: 15px;
+    margin: 5px 10px 5px 10px;
     font-family: 'Montserrat', sans-serif;
 }
 
