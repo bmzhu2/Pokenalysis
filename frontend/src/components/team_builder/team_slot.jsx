@@ -55,8 +55,8 @@ class TeamSlot extends React.Component {
             isHovered ? "team-slot hovered-slot" : isDragging ? "team-slot is-dragging-slot" : "team-slot";
 
         return connectDropTarget(
-            <li className="team-slot-o-container">
-                <p onClick={() => removeFromTeam(id)} className={sprite ? "x" : "none"}>x</p> 
+            <li className={scrollY ? "team-slot-o-container min-container" : "team-slot-o-container"}>
+                <p onClick={() => removeFromTeam(id)} className={sprite && scrollY ? "x min-x" : sprite ? "x" : "none"}>x</p> 
                 <div className={teamSlotClass}>
                     <p className={sprite ? "none" : scrollY ? "plus minimized-plus" : "plus"}>+</p>
                     <img onClick={setAttrId} className={sprite ? "team-slot-sprite" : ""} src={sprite} alt=""/>
