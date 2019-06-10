@@ -63,10 +63,10 @@ class StatChart extends React.Component{
             { name: 'stat-total', domain: [0, 800] }
         ];
         
-        const oHeight = defensiveChart ? 0 : window.innerWidth * 0.45;
-        const oWidth = defensiveChart ? 0 : window.innerWidth * 0.55;
-        const dHeight = !defensiveChart ? 0 : window.innerWidth * 0.45;
-        const dWidth = !defensiveChart ? 0 : window.innerWidth * 0.55;
+        const oHeight = defensiveChart ? 0 : window.innerHeight * 0.55;
+        const oWidth = defensiveChart ? 0 : window.innerHeight * 0.65;
+        const dHeight = !defensiveChart ? 0 : window.innerHeight * 0.55;
+        const dWidth = !defensiveChart ? 0 : window.innerHeight * 0.65;
 
         return(
         <div className="team-stat-container-container">
@@ -76,7 +76,7 @@ class StatChart extends React.Component{
                     <div className='stat-averages'>
                         <h1>Stat Averages</h1>
                         <div className="radar-container">
-                            <RadarChart data={statData} domains={statDomains} height={window.innerWidth * 0.4} width={window.innerWidth * 0.4} color='white' margin={{left: 40, right: 40, top: 30, bottom: 40}} style={{
+                            <RadarChart data={statData} domains={statDomains} height={window.innerHeight * 0.5} width={window.innerHeight * 0.5} color='white' margin={{left: 40, right: 40, top: 30, bottom: 40}} style={{
                                 axes: {
                                     line: {strokeWidth: 0.5},
                                     ticks: {},
