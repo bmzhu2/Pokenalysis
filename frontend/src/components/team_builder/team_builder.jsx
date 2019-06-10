@@ -269,7 +269,6 @@ class TeamBuilder extends React.Component {
                 />
             );
         });
-        console.log(this.state);
         return(
             
             <div>

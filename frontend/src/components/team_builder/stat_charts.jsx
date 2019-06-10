@@ -71,63 +71,66 @@ class StatChart extends React.Component{
         return(
         <div className="team-stat-container-container">
             <div className={showStats ? 'team-stat-container' : 'team-stat-container hidden-stats'}>
-                <div className='stat-averages'>
-                    <h1>Stat Averages</h1>
-                    <div className="radar-container">
-                        <RadarChart data={statData} domains={statDomains} height={window.innerWidth * 0.4} width={window.innerWidth * 0.4} color='white' margin={{left: 40, right: 40, top: 30, bottom: 40}} style={{
-                            axes: {
-                                line: {strokeWidth: 0.5},
-                                ticks: {},
-                                text: {}
-                            },
-                            labels: {
-                                fontSize: 12,
-                                fontFamily: 'Montserrat, sans-serif'
-                            },
-                            polygons: {
-                                strokeWidth: 1,
-                                strokeOpacity: 1,
-                                fillOpacity: 0.5
-                            }
-                        }}
-                        animation={false}>
-                        </RadarChart>
+                <h1>Team Stats</h1>
+                <div className="stat-averages-container">
+                    <div className='stat-averages'>
+                        <h1>Stat Averages</h1>
+                        <div className="radar-container">
+                            <RadarChart data={statData} domains={statDomains} height={window.innerWidth * 0.4} width={window.innerWidth * 0.4} color='white' margin={{left: 40, right: 40, top: 30, bottom: 40}} style={{
+                                axes: {
+                                    line: {strokeWidth: 0.5},
+                                    ticks: {},
+                                    text: {}
+                                },
+                                labels: {
+                                    fontSize: 12,
+                                    fontFamily: 'Montserrat, sans-serif'
+                                },
+                                polygons: {
+                                    strokeWidth: 1,
+                                    strokeOpacity: 1,
+                                    fillOpacity: 0.5
+                                }
+                            }}
+                            animation={false}>
+                            </RadarChart>
+                        </div>
                     </div>
-                </div>
-                <div className="coverage-chart-container">
-                    <div className="chart-header-container">
-                        <h1 className={defensiveChart ? "chart-header selected-chart-header" : "chart-header"} 
-                            onClick={() => handleCoverageType(true)}
-                            >Defensive Coverage
-                        </h1>
-                            <h1 className={defensiveChart ? "chart-header" : "chart-header selected-chart-header"} 
-                            onClick={() => handleCoverageType(false)}
-                            >Offensive Coverage
-                        </h1>
-                    </div>
-                    <div className={'defensive-types'}>
-                        <XYPlot height={oHeight} width={oWidth} 
-                            margin={{ left: 50, right: 40, top: 20, bottom: 40 }} 
-                            yType="ordinal" animation="noWobble">
-                            <VerticalGridLines/>
-                            <HorizontalBarSeries data={defenseData} color='red'/>
-                            <XAxis style={{ text: { fill: 'black', fontFamily: 'Montserrat, sans-serif' } }}/>
-                            <YAxis style={{ text: { fill: 'black', fontFamily: 'Montserrat, sans-serif'}}}/>
-                        </XYPlot>
-                    </div> 
-                    <div className='offensive-coverage'>
-                        <XYPlot height={dHeight} width={dWidth} 
-                            margin={{ left: 50, right: 40, top: 20, bottom: 40 }} yType="ordinal" animation="noWobble">
-                            <VerticalGridLines />
-                            <HorizontalBarSeries data={offenseData} color='red' />
-                            <XAxis style={{ text: { fill: 'black', fontFamily: 'Montserrat, sans-serif' } }}/>
-                            <YAxis style={{ text: { fill: 'black', fontFamily: 'Montserrat, sans-serif' } }}/>
-                        </XYPlot>
-                    </div>
+                    <div className="coverage-chart-container">
+                        <div className="chart-header-container">
+                            <h1 className={defensiveChart ? "chart-header selected-chart-header" : "chart-header"} 
+                                onClick={() => handleCoverageType(true)}
+                                >Defensive Coverage
+                            </h1>
+                                <h1 className={defensiveChart ? "chart-header" : "chart-header selected-chart-header"} 
+                                onClick={() => handleCoverageType(false)}
+                                >Offensive Coverage
+                            </h1>
+                        </div>
+                        <div className={'defensive-types'}>
+                            <XYPlot height={oHeight} width={oWidth} 
+                                margin={{ left: 50, right: 40, top: 20, bottom: 40 }} 
+                                yType="ordinal" animation="noWobble">
+                                <VerticalGridLines/>
+                                <HorizontalBarSeries data={defenseData} color='red'/>
+                                <XAxis style={{ text: { fill: 'black', fontFamily: 'Montserrat, sans-serif' } }}/>
+                                <YAxis style={{ text: { fill: 'black', fontFamily: 'Montserrat, sans-serif'}}}/>
+                            </XYPlot>
+                        </div> 
+                        <div className='offensive-coverage'>
+                            <XYPlot height={dHeight} width={dWidth} 
+                                margin={{ left: 50, right: 40, top: 20, bottom: 40 }} yType="ordinal" animation="noWobble">
+                                <VerticalGridLines />
+                                <HorizontalBarSeries data={offenseData} color='red' />
+                                <XAxis style={{ text: { fill: 'black', fontFamily: 'Montserrat, sans-serif' } }}/>
+                                <YAxis style={{ text: { fill: 'black', fontFamily: 'Montserrat, sans-serif' } }}/>
+                            </XYPlot>
+                        </div>
 
-                    <div className="move-totals">
-                        <div>Physical moves: {moveTypes.physical}</div>
-                        <div>Special moves: {moveTypes.special}</div>
+                        <div className="move-totals">
+                            <div>Physical moves: {moveTypes.physical}</div>
+                            <div>Special moves: {moveTypes.special}</div>
+                        </div>
                     </div>
                 </div>
             </div>
