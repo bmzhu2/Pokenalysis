@@ -1,6 +1,6 @@
 .name-submit-container {
     display: flex; 
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     margin: 10px 80px 10px 80px;
 }
