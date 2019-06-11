@@ -1,7 +1,7 @@
 .filters {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-left: 120px;
     margin-right: 100px;
     min-width: 790px;

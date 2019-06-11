@@ -48,7 +48,7 @@
 }
 
 .team-stats-sub {
-    color: rgb(203, 199, 253);
+    color: #36398a;
     font-family: 'Montserrat', sans-serif;
     font-size: 1.5vh;
     width: 10vh;
@@ -72,8 +72,8 @@
 }
 .team-slots-container {
     display: flex;
-    margin: 0px 80px 0 80px;
-    padding: 0px 15px 10px 15px;
+    margin-top: 10px;
+    padding: 0 10px 0 10px;
     overflow: none;
     flex-wrap: wrap;
     justify-content: center;
@@ -105,8 +105,7 @@
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
     margin-bottom: 10px;
-    margin-right: 450px;
-    width: 12vw;
+    width: 14vw;
     min-width: 130px;
     font-family: 'Montserrat', sans-serif;
     font-size: 20px;
@@ -176,8 +175,9 @@
 .team-slot-name {
     color: black;
     font-family: 'Montserrat', sans-serif;
-    font-size: 2.25vh;
+    font-size: 2vh;
     height: min-content;
+    transform: translateY(-5px);
     z-index: 5;
 }
 
@@ -188,7 +188,7 @@
 
 .team-slots-container .x {
     height: 0px;
-    font-size: 2.25vh;
+    font-size: 2vh;
     position: relative;
     color: maroon;
     top: 1vh;

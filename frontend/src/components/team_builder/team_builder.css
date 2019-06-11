@@ -1,6 +1,6 @@
 .name-submit-container {
     display: flex; 
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     margin: 10px 80px 10px 80px;
 }
@@ -32,6 +32,27 @@
     background-color: rgb(77, 182, 77);
 }
 
+.invisible-description {
+    opacity: 0;
+}
+
+.drag-description-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.drag-description {
+    width: min-content;
+    height: 0;
+    font-size: 16px;
+    color: grey;
+    font-style: italic;
+    top: 30px;
+    font-family: 'Montserrat', sans-serif;
+    transform: translateY(-9px);
+    transition: .2s ease-out;
+}
 
 .team-name {
     font-family: 'Montserrat', sans-serif;
@@ -40,6 +61,7 @@
     background-color: inherit;
     width: 50%;
     min-width: 200px;
+    border-radius: 5px;
     border: none;
     color: whitesmoke;
     transition: .2s ease-out;

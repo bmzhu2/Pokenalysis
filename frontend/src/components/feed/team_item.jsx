@@ -1,7 +1,8 @@
 import React from 'react';
 import TeamPokemon from './team_pokemon';
 import { Link } from 'react-router-dom';
-
+import {connect} from 'react-redux';
+import {deleteTeam} from '../../actions/team_actions'
 
 class TeamItem extends React.Component {
 
@@ -69,6 +70,12 @@ class TeamItem extends React.Component {
                 <h3>UnLike Team</h3>
             </div>
         }
+        let deleteButton;
+        if (this.props.currentUser && this.props.currentUser.username === this.props.team.username) {
+            deleteButton = (<button className="team-delete" onClick={() => this.props.deleteTeam(this.props.team._id)}>
+                <i className="fas fa-trash-alt"></i></button>)
+        }
+
         if (this.props.team !== undefined && this.state.likes !== undefined){
             return(
                 <div className="team-container">
@@ -76,6 +83,7 @@ class TeamItem extends React.Component {
                         <Link to={`/teams/${this.props.team._id}`}><h1> {this.props.team.name}</h1></Link>
                         <Link to={`/users/${this.props.team.username}`}><h2> by: {this.props.team.username}</h2></Link>
                     </div>
+                    {deleteButton}
                     <TeamPokemon pokemon={this.props.team.pokemon} />
                     <div className="row likes">
                         <h3>{this.state.likes} Likes </h3>
@@ -92,4 +100,12 @@ class TeamItem extends React.Component {
     }
 }
 
-export default TeamItem;
+const mapStateToProps = state => ({
+    currentUser: state.session.user
+})
+
+const mapDispatchToProps = dispatch => ({
+    deleteTeam: id => dispatch(deleteTeam(id))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(TeamItem);

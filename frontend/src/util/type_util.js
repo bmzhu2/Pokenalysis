@@ -1,186 +1,3 @@
-export const types = ['normal', 'fighting', 'flying', 'poison', 'ground', 'rock', 'bug', 'ghost', 'steel',
-                'fire', 'water', 'grass', 'electric', 'psychic', 'ice', 'dragon', 'dark', 'fairy'];
-
-export const teamMoveClassAnalysis = (team, moveList) => {
-  let physicalMoves = 0;
-  let specialMoves = 0;
-  team.pokemon.forEach(pokemon => {
-    if (moveList[pokemon.move1] && moveList[pokemon.move1].damage_class === "physical") {
-      physicalMoves += 1
-    } else if (moveList[pokemon.move1] && moveList[pokemon.move1].damage_class === "special") {
-      specialMoves += 1
-    }
-    if (moveList[pokemon.move2] && moveList[pokemon.move2].damage_class === "physical") {
-      physicalMoves += 1
-    } else if (moveList[pokemon.move2] && moveList[pokemon.move2].damage_class === "special") {
-      specialMoves += 1
-    }
-    if (moveList[pokemon.move3] && moveList[pokemon.move3].damage_class === "physical") {
-      physicalMoves += 1
-    } else if (moveList[pokemon.move3] && moveList[pokemon.move3].damage_class === "special") {
-      specialMoves += 1
-    }
-    if (moveList[pokemon.move4] && moveList[pokemon.move4].damage_class === "physical") {
-      physicalMoves += 1
-    } else if (moveList[pokemon.move4] && moveList[pokemon.move4].damage_class === "special") {
-      specialMoves += 1
-    }
-  })
-
-  return {physical: physicalMoves, special: specialMoves}
-};
-
-export const teamOffensiveCoverage = (team, moveList, pokeList) => {
-  let totalCoverage = {}
-  team.pokemon.forEach(pokemon => {
-    let coverage = pokemonCoverageAnalysis(pokemon, moveList, pokeList)
-    types.forEach(type => {
-      if(!totalCoverage[type]){
-        totalCoverage[type] = 0
-      }
-      totalCoverage[type] += coverage[type]
-    })
-  })
-
-  types.forEach(type => {
-    if(totalCoverage[type] > 0){
-      totalCoverage[type] /= 6
-    }
-  })
-
-  return totalCoverage;
-}
-
-const pokemonCoverageAnalysis = (pokemon, moveList, pokeList) => {
-  let moveTypes = [];
-  if (pokemon.move1 && moveList[pokemon.move1] && moveList[pokemon.move1].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move1].type)) {
-    moveTypes.push(moveList[pokemon.move1].type)
-  }
-  if (pokemon.move2 && moveList[pokemon.move2] && moveList[pokemon.move2].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move2].type)) {
-    moveTypes.push(moveList[pokemon.move2].type)
-  }
-  if (pokemon.move3 && moveList[pokemon.move3] && moveList[pokemon.move3].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move3].type)) {
-    moveTypes.push(moveList[pokemon.move3].type)
-  }
-  if (pokemon.move4 && moveList[pokemon.move4] && moveList[pokemon.move4].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move4].type)) {
-    moveTypes.push(moveList[pokemon.move4].type)
-  }
-
-  let totalCoverage = {};
-  types.forEach(type => {
-    let coverage = 0;
-    moveTypes.forEach(moveType => {
-      let stab = pokeList[pokemon.pokeId].types.includes(moveType) ? 1 : 0
-      if (coverage < 6 && damageRelations[type].double_damage_from.includes(moveType)) {
-        coverage = 5 + stab;
-      } else if (coverage < 2 && damageRelations[type].half_damage_from.includes(moveType)) {
-        coverage = 1 + stab;
-      } else if (coverage < 1 && damageRelations[type].no_damage_from.includes(moveType)) {
-        coverage = 0;
-      } else if (coverage < 4) {
-        coverage = 3 + stab;
-      }
-    })
-    totalCoverage[type] = coverage
-  })
-  return totalCoverage
-}
-
-export const teamDefensiveCoverage = (team, pokeList) => {
-  let defensiveCoverage = {};
-  let unchecked = new Set(types);
-  types.forEach(type => {
-    defensiveCoverage[type] = 0;
-  })
-  
-  team.pokemon.forEach(pokemon => {
-    if (pokemon.pokeId && pokeList[pokemon.pokeId].types) {
-      const type1 = pokeList[pokemon.pokeId].types[0];
-      const type2 = pokeList[pokemon.pokeId].types[1];
-      let damageRelation;
-      if (!type2) {
-        damageRelation = damageRelations[type1]
-      } else {
-        damageRelation = dualTypeDamageTakenRelation(type1, type2)
-      }
-      types.forEach(type => {
-        if (type2 && damageRelation.quad_damage_from.includes(type)) {
-          defensiveCoverage[type] -= 1
-        } else if (damageRelation.double_damage_from.includes(type)) {
-          defensiveCoverage[type] -= .75
-        } else if (damageRelation.half_damage_from.includes(type)) {
-          defensiveCoverage[type] += .5
-          unchecked.has(type) ? unchecked.delete(type) : null
-        } else if (type2 && damageRelation.fourth_damage_from.includes(type)) {
-          defensiveCoverage[type] += .75
-          unchecked.has(type) ? unchecked.delete(type) : null
-        } else if (damageRelation.no_damage_from.includes(type)) {
-          defensiveCoverage[type] += 1.5
-          unchecked.has(type) ? unchecked.delete(type) : null
-        } else {
-          defensiveCoverage[type] -= -.25
-        }
-      })
-    }
-  })
-  return { coverage: defensiveCoverage, unchecked: unchecked }
-}
-
-const dualTypeDamageTakenRelation = (type1, type2) => {
-  let relation = {
-    quad_damage_from: [],
-    double_damage_from: [],
-    half_damage_from: [],
-    fourth_damage_from: [],
-    no_damage_from: []
-  }
-
-  types.forEach(moveType => {
-    switch (dualTypeDamageTaken(type1, type2, moveType)) {
-      case "no damage":
-        relation.no_damage_from.push(moveType);
-        break;
-      case "one-fourth damage":
-        relation.fourth_damage_from.push(moveType);
-        break;
-      case "four-times damage":
-        relation.quad_damage_from.push(moveType);
-        break;
-      case "half damage":
-        relation.half_damage_from.push(moveType);
-        break;
-      case "double damage":
-        relation.double_damage_from.push(moveType);
-        break;
-      default:
-        break;
-    }
-  });
-
-  return relation;
-}
-
-const dualTypeDamageTaken = (type1, type2, moveType) => {
-  const type1Dmg = damageRelations[type1];
-  const type2Dmg = damageRelations[type2];
-
-  if (type1Dmg.no_damage_from.includes(moveType) || type2Dmg.no_damage_from.includes(moveType)) {
-    return "no damage";
-  } else if (type1Dmg.half_damage_from.includes(moveType) && (type2Dmg.half_damage_from.includes(moveType))) {
-    return "one-fourth damage";
-  } else if (type1Dmg.double_damage_from.includes(moveType) && (type2Dmg.double_damage_from.includes(moveType))) {
-    return "four-times damage";
-  } else if ((type1Dmg.half_damage_from.includes(moveType) && !type2Dmg.double_damage_from.includes(moveType))
-      || (type2Dmg.half_damage_from.includes(moveType) && !type1Dmg.double_damage_from.includes(moveType))) {
-    return "half damage";
-  } else if ((type1Dmg.double_damage_from.includes(moveType) && !type2Dmg.half_damage_from.includes(moveType))
-      || (type2Dmg.double_damage_from.includes(moveType) && !type1Dmg.half_damage_from.includes(moveType))) {
-    return "double damage";
-  } else {
-    return "neutral damage";
-  }
-}
-
 const damageRelations = {
   normal: {
     double_damage_from: ['fighting'],
@@ -344,3 +161,188 @@ const damageRelations = {
     no_damage_to: []
   }
 }
+
+export const types = ['normal', 'fighting', 'flying', 'poison', 'ground', 'rock', 'bug', 'ghost', 'steel',
+                'fire', 'water', 'grass', 'electric', 'psychic', 'ice', 'dragon', 'dark', 'fairy'];
+
+
+const dualTypeDamageTaken = (type1, type2, moveType) => {
+  const type1Dmg = damageRelations[type1];
+  const type2Dmg = damageRelations[type2];
+
+  if (type1Dmg.no_damage_from.includes(moveType) || type2Dmg.no_damage_from.includes(moveType)) {
+    return "no damage";
+  } else if (type1Dmg.half_damage_from.includes(moveType) && (type2Dmg.half_damage_from.includes(moveType))) {
+    return "one-fourth damage";
+  } else if (type1Dmg.double_damage_from.includes(moveType) && (type2Dmg.double_damage_from.includes(moveType))) {
+    return "four-times damage";
+  } else if ((type1Dmg.half_damage_from.includes(moveType) && !type2Dmg.double_damage_from.includes(moveType))
+    || (type2Dmg.half_damage_from.includes(moveType) && !type1Dmg.double_damage_from.includes(moveType))) {
+    return "half damage";
+  } else if ((type1Dmg.double_damage_from.includes(moveType) && !type2Dmg.half_damage_from.includes(moveType))
+    || (type2Dmg.double_damage_from.includes(moveType) && !type1Dmg.half_damage_from.includes(moveType))) {
+    return "double damage";
+  } else {
+    return "neutral damage";
+  }
+}
+
+const dualTypeDamageTakenRelation = (type1, type2) => {
+  let relation = {
+    quad_damage_from: [],
+    double_damage_from: [],
+    half_damage_from: [],
+    fourth_damage_from: [],
+    no_damage_from: []
+  }
+
+  types.forEach(moveType => {
+    switch (dualTypeDamageTaken(type1, type2, moveType)) {
+      case "no damage":
+        relation.no_damage_from.push(moveType);
+        break;
+      case "one-fourth damage":
+        relation.fourth_damage_from.push(moveType);
+        break;
+      case "four-times damage":
+        relation.quad_damage_from.push(moveType);
+        break;
+      case "half damage":
+        relation.half_damage_from.push(moveType);
+        break;
+      case "double damage":
+        relation.double_damage_from.push(moveType);
+        break;
+      default:
+        break;
+    }
+  });
+
+  return relation;
+}
+
+const pokemonCoverageAnalysis = (pokemon, moveList, pokeList) => {
+  let moveTypes = [];
+  if (pokemon.move1 && moveList[pokemon.move1] && moveList[pokemon.move1].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move1].type)) {
+    moveTypes.push(moveList[pokemon.move1].type)
+  }
+  if (pokemon.move2 && moveList[pokemon.move2] && moveList[pokemon.move2].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move2].type)) {
+    moveTypes.push(moveList[pokemon.move2].type)
+  }
+  if (pokemon.move3 && moveList[pokemon.move3] && moveList[pokemon.move3].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move3].type)) {
+    moveTypes.push(moveList[pokemon.move3].type)
+  }
+  if (pokemon.move4 && moveList[pokemon.move4] && moveList[pokemon.move4].damage_class !== "status" && !moveTypes.includes(moveList[pokemon.move4].type)) {
+    moveTypes.push(moveList[pokemon.move4].type)
+  }
+
+  let totalCoverage = {};
+  types.forEach(type => {
+    let coverage = 0;
+    moveTypes.forEach(moveType => {
+      let stab = pokeList[pokemon.pokeId].types.includes(moveType) ? 1 : 0
+      if (coverage < 6 && damageRelations[type].double_damage_from.includes(moveType)) {
+        coverage = 5 + stab;
+      } else if (coverage < 2 && damageRelations[type].half_damage_from.includes(moveType)) {
+        coverage = 1 + stab;
+      } else if (coverage < 1 && damageRelations[type].no_damage_from.includes(moveType)) {
+        coverage = 0;
+      } else if (coverage < 4) {
+        coverage = 3 + stab;
+      }
+    })
+    totalCoverage[type] = coverage
+  })
+  return totalCoverage
+}
+
+export const teamOffensiveCoverage = (team, moveList, pokeList) => {
+  let totalCoverage = {}
+  team.pokemon.forEach(pokemon => {
+    let coverage = pokemonCoverageAnalysis(pokemon, moveList, pokeList)
+    types.forEach(type => {
+      if (!totalCoverage[type]) {
+        totalCoverage[type] = 0
+      }
+      totalCoverage[type] += coverage[type]
+    })
+  })
+
+  types.forEach(type => {
+    if (totalCoverage[type] > 0) {
+      totalCoverage[type] /= 6
+    }
+  })
+
+  return totalCoverage;
+}
+
+
+export const teamDefensiveCoverage = (team, pokeList) => {
+  let defensiveCoverage = {};
+  let unchecked = new Set(types);
+  types.forEach(type => {
+    defensiveCoverage[type] = 0;
+  })
+
+  team.pokemon.forEach(pokemon => {
+    if (pokemon.pokeId && pokeList[pokemon.pokeId].types) {
+      const type1 = pokeList[pokemon.pokeId].types[0];
+      const type2 = pokeList[pokemon.pokeId].types[1];
+      let damageRelation;
+      if (!type2) {
+        damageRelation = damageRelations[type1]
+      } else {
+        damageRelation = dualTypeDamageTakenRelation(type1, type2)
+      }
+      types.forEach(type => {
+        if (type2 && damageRelation.quad_damage_from.includes(type)) {
+          defensiveCoverage[type] -= 1
+        } else if (damageRelation.double_damage_from.includes(type)) {
+          defensiveCoverage[type] -= .75
+        } else if (damageRelation.half_damage_from.includes(type)) {
+          defensiveCoverage[type] += .5
+          unchecked.has(type) ? unchecked.delete(type) : null
+        } else if (type2 && damageRelation.fourth_damage_from.includes(type)) {
+          defensiveCoverage[type] += .75
+          unchecked.has(type) ? unchecked.delete(type) : null
+        } else if (damageRelation.no_damage_from.includes(type)) {
+          defensiveCoverage[type] += 1.5
+          unchecked.has(type) ? unchecked.delete(type) : null
+        } else {
+          defensiveCoverage[type] -= -.25
+        }
+      })
+    }
+  })
+  return { coverage: defensiveCoverage, unchecked: unchecked }
+}
+
+export const teamMoveClassAnalysis = (team, moveList) => {
+  let physicalMoves = 0;
+  let specialMoves = 0;
+  team.pokemon.forEach(pokemon => {
+    if (moveList[pokemon.move1] && moveList[pokemon.move1].damage_class === "physical") {
+      physicalMoves += 1
+    } else if (moveList[pokemon.move1] && moveList[pokemon.move1].damage_class === "special") {
+      specialMoves += 1
+    }
+    if (moveList[pokemon.move2] && moveList[pokemon.move2].damage_class === "physical") {
+      physicalMoves += 1
+    } else if (moveList[pokemon.move2] && moveList[pokemon.move2].damage_class === "special") {
+      specialMoves += 1
+    }
+    if (moveList[pokemon.move3] && moveList[pokemon.move3].damage_class === "physical") {
+      physicalMoves += 1
+    } else if (moveList[pokemon.move3] && moveList[pokemon.move3].damage_class === "special") {
+      specialMoves += 1
+    }
+    if (moveList[pokemon.move4] && moveList[pokemon.move4].damage_class === "physical") {
+      physicalMoves += 1
+    } else if (moveList[pokemon.move4] && moveList[pokemon.move4].damage_class === "special") {
+      specialMoves += 1
+    }
+  })
+
+  return { physical: physicalMoves, special: specialMoves }
+};
