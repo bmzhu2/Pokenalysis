@@ -50,6 +50,7 @@
     font-style: italic;
     top: 30px;
     font-family: 'Montserrat', sans-serif;
+    transform: translateY(-9px);
     transition: .2s ease-out;
 }
 
