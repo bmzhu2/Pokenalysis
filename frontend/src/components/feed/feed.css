@@ -44,7 +44,7 @@
     flex-wrap: wrap;
     padding-top: 20px;
     margin-top: -20px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     background-color: #fb6262;
     color: rgb(249, 245, 245);
     border-radius: 10px 10px 0 0;
@@ -154,4 +154,16 @@
 .likes > * {
     width: 12vw;
     text-align: center;
+}
+
+.team-delete {
+    width: 2vw;
+    margin: 0 0 0 auto;
+    justify-content: flex-end;
+    color: black;
+}
+
+.team-delete i {
+    padding-right: 10px;
+    font-size: 1.5em;
 }
