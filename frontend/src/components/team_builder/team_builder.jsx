@@ -278,7 +278,7 @@ class TeamBuilder extends React.Component {
             );
         });
 
-        const isTeamEmpty = !!(Object.values(team).some(poke => !!poke.pokeId)) ? "drag-description invisible-description" : "drag-description"; 
+        const isTeamEmpty = ( showStats || !!(Object.values(team).some(poke => !!poke.pokeId)) ) ? "drag-description invisible-description" : "drag-description"; 
         
         return(
             
