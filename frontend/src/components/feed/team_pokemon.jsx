@@ -4,9 +4,6 @@ import TeamPoke from './team_poke';
 
 class TeamPokemon extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         if (this.props.pokemon !== undefined) {
