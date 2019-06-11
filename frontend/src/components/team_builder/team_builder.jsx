@@ -277,6 +277,9 @@ class TeamBuilder extends React.Component {
                 />
             );
         });
+
+        const isTeamEmpty = !!(Object.values(team).some(poke => !!poke.pokeId)) ? "drag-description invisible-description" : "drag-description"; 
+        
         return(
             
             <div>
@@ -285,6 +288,11 @@ class TeamBuilder extends React.Component {
                         <div className="name-submit-container">
                             <input className={scrollY ? "team-name minimized-name" : "team-name"} onChange={this.updateTeamName()} type="text" placeholder={"New Team Name"}/>
                             <input className={scrollY ? "submit-team minimized-submit" : "submit-team"} onClick={this.saveTeam} type="submit" value="Save"/>
+                        </div>
+                        <div className="drag-description-container">
+                            <h4 className={isTeamEmpty}
+                                >drag&nbsp;a&nbsp;Pokemon&nbsp;to&nbsp;start&nbsp;building
+                            </h4>
                         </div>
                         <div className="team-and-stats-container-container">
                             <div className={showStats ? "team-and-stats-container showing" : "team-and-stats-container"}>
