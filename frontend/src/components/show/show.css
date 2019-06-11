@@ -32,15 +32,19 @@
 .like {
     flex-direction: column;
     flex-wrap: wrap;
-    margin-bottom: 2vw;
+    margin-bottom: 1.5vw;
 }
 
 .likes {
     flex-wrap: wrap;
 }
 
+.row-item  > h3{
+    padding-top: .5vw;
+}
+
 .likes > h3 {
-    width: 100%;
+    /* width: 100%; */
     margin-top: -1.5vw;
 }
 
