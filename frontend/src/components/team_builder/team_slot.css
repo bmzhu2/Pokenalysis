@@ -72,7 +72,6 @@
 }
 .team-slots-container {
     display: flex;
-    margin: 24px 10px 0 10px;
     padding: 0 10px 0 10px;
     overflow: none;
     flex-wrap: wrap;
