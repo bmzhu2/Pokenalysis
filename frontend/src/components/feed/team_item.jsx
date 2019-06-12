@@ -1,6 +1,6 @@
 import React from 'react';
 import TeamPokemon from './team_pokemon';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import {connect} from 'react-redux';
 import {deleteTeam} from '../../actions/team_actions'
 
@@ -75,7 +75,7 @@ class TeamItem extends React.Component {
         if (this.props.currentUser && this.props.currentUser.username === this.props.team.username) {
             deleteButton = (<button className="team-delete" onClick={() => this.props.deleteTeam(this.props.team._id)}>
                 <i className="fas fa-trash-alt"></i></button>)
-            editButton = (<button className="team-edit">
+            editButton = (<button className="team-edit" onClick={() => this.props.history.push(`/edit/${this.props.team._id}`)}>
                 <i className="fas fa-edit"></i></button>)
         }
 
@@ -115,4 +115,4 @@ const mapDispatchToProps = dispatch => ({
     deleteTeam: id => dispatch(deleteTeam(id))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(TeamItem);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TeamItem));

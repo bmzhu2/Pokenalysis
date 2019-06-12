@@ -2,7 +2,7 @@ import React from 'react';
 import StatCharts from '../team_builder/stat_charts'
 import TeamPoke from '../feed/team_poke'
 import ShowAttributes from './show_attributes'
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 import './show.css';
 
 class TeamShow extends React.Component{
@@ -134,7 +134,7 @@ class TeamShow extends React.Component{
             if (this.props.currentUser && this.props.currentUser.username === this.props.team.username) {
                 deleteButton = (<button className="team-show-delete" onClick={() => this.props.deleteTeam(this.props.team._id)}>
                     <i className="fas fa-trash-alt"></i>Delete Team</button>)
-                editButton = (<button className="team-show-edit">
+                editButton = (<button className="team-show-edit" onClick={() => this.props.history.push(`/edit/${this.props.team._id}`)}>
                     <i className="fas fa-edit"></i>Edit Team</button>)
             }
             return(
@@ -183,4 +183,4 @@ class TeamShow extends React.Component{
     }
 }
 
-export default TeamShow;
+export default withRouter(TeamShow);

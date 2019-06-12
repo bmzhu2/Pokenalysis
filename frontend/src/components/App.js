@@ -1,5 +1,4 @@
 import React from 'react';
-import { AuthRoute, ProtectedRoute } from '../util/route_util'
 import {
     Route,
     Redirect,
@@ -10,8 +9,6 @@ import {
 import teamBuilderContainer from './team_builder/team_builder_container';
 import './reset.css';
 import SplashContainer from './splash/splash_container';
-import LoginContainer from './forms/login_container';
-import RegisterContainer from './forms/register_container';
 import NavBarContainer from './nav/navbar_container'
 import FeedContainer from './feed/feed_container';
 import ProfileContainer from './profile/profile_container';
@@ -27,8 +24,8 @@ const App = () => (
     </header>
     <Switch>
       <Route exact path="/team-builder" component={teamBuilderContainer}/>
+      <Route path="/edit/:teamId" component={teamBuilderCounter}/>
       <Route exact path="/feed" component={FeedContainer} />
-
       <Route path = "/users/:username" component={ProfileContainer} />
       <Route exact path="/about" component={About} />
       <Route exact path="/" component={SplashContainer} />
