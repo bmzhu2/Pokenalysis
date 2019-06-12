@@ -24,7 +24,7 @@ const App = () => (
     </header>
     <Switch>
       <Route exact path="/team-builder" component={teamBuilderContainer}/>
-      <Route path="/edit/:teamId" component={teamBuilderCounter}/>
+      <Route path="/edit/:teamId" component={teamBuilderContainer}/>
       <Route exact path="/feed" component={FeedContainer} />
       <Route path = "/users/:username" component={ProfileContainer} />
       <Route exact path="/about" component={About} />
