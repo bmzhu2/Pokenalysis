@@ -99,11 +99,11 @@ class StatChart extends React.Component{
                         <div className="chart-header-container">
                             <h1 className={defensiveChart ? "chart-header selected-chart-header" : "chart-header"} 
                                 onClick={() => handleCoverageType(true)}
-                                >Defensive Coverage
+                                >Offensive Coverage
                             </h1>
                                 <h1 className={defensiveChart ? "chart-header" : "chart-header selected-chart-header"} 
                                 onClick={() => handleCoverageType(false)}
-                                >Offensive Coverage
+                                >Defensive Coverage
                             </h1>
                         </div>
                         <div className={'defensive-types'}>
