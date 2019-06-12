@@ -156,10 +156,13 @@
     text-align: center;
 }
 
-.team-delete {
+.team-controls {
     width: 2vw;
     margin: 0 0 0 auto;
     justify-content: flex-end;
+}
+
+.team-controls button {
     color: black;
 }
 

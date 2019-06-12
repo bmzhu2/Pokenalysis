@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import TeamShow from './team_show';
-import { fetchTeam } from '../../actions/team_actions'
+import { fetchTeam, deleteTeam } from '../../actions/team_actions'
 import { fetchTeamComments, createComment } from '../../actions/comment_actions'
 import { fetchPokemon, 
         fetchItem,
@@ -36,6 +36,7 @@ const mapDispatchToProps = dispatch => ({
     fetchAbility: name => dispatch(fetchAbility(name)),
     createLike: teamId => dispatch(createLike(teamId)),
 
+    deleteTeam: id => dispatch(deleteTeam(id)),
     openModal: mode => dispatch(openModal(mode))
 })
 
