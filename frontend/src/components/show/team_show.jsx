@@ -2,6 +2,7 @@ import React from 'react';
 import StatCharts from '../team_builder/stat_charts'
 import TeamPoke from '../feed/team_poke'
 import ShowAttributes from './show_attributes'
+import {Link} from 'react-router-dom'
 import './show.css';
 
 class TeamShow extends React.Component{
@@ -128,9 +129,19 @@ class TeamShow extends React.Component{
                     <input type="submit" value="Create Comment"/>
                 </form>
             }
+            let deleteButton;
+            let editButton;
+            if (this.props.currentUser && this.props.currentUser.username === this.props.team.username) {
+                deleteButton = (<button className="team-show-delete" onClick={() => this.props.deleteTeam(this.props.team._id)}>
+                    <i className="fas fa-trash-alt"></i>Delete Team</button>)
+                editButton = (<button className="team-show-edit">
+                    <i className="fas fa-edit"></i>Edit Team</button>)
+            }
             return(
                 <div className="team-show">
-                    <ul className="poke-row">
+                    <h2 className="team-name">{this.props.team.name}</h2>
+                    <Link to={`/users/${this.props.team.username}`} className="team-user">by {this.props.team.username}</Link>
+                    <ul className="poke-row show-page">
                         {this.props.team.pokemon.map((mon, idx) => {
                             return <li onClick={this.handleAttributes} value={idx} ><TeamPoke poke={mon}/></li>
                         })}
@@ -138,10 +149,13 @@ class TeamShow extends React.Component{
                     <div className="stats-button" onClick={this.state.showStats ? () => this.setState({ showStats: false }) : () => this.setState({ showStats: true })}>
                         {statText}
                     </div>
-
                     <ShowAttributes pokemon={this.props.team.pokemon[this.state.slot]} />
                     {statistics}
                     <section className="lower">
+                        <div className="team-show-controls">
+                            {editButton}
+                            {deleteButton}
+                        </div>
                         <section className="comments-and-likes">
                             {newForm}
                             <div className="likes">
@@ -169,4 +183,4 @@ class TeamShow extends React.Component{
     }
 }
 
-export default TeamShow
+export default TeamShow;

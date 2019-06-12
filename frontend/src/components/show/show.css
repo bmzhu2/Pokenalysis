@@ -5,6 +5,7 @@
 }
 
 .lower {
+    margin-top: 3vw;
 }
 
 .comments-and-likes {
@@ -74,6 +75,52 @@
 }
 
 .team-show {
+    padding-top: 2vw;
     font-family: 'Montserrat', sans-serif;
     color: white;
 }
+
+    .team-show .team-name {
+        margin: 0 auto;
+        font-size: 3em;
+    }
+
+    .team-show a {
+        margin: 1vw auto;
+        text-decoration: none;
+        color: white;
+        display: block;
+        text-align: center;
+        font-size: 1.5em;
+    }
+
+    .team-show .stats-button {
+        margin: 0 auto;
+    }
+
+.team-show-controls {
+    display: flex;
+    justify-content: center;
+}
+
+.team-show button {
+    background: rgb(200,200,200);
+    color: black;
+    margin: 0 2vw 2vw 2vw;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.team-show button i {
+    margin-right: 5px;
+}
+
+.show-page {
+    background: white;
+    margin: 2vw auto 0 auto;
+    padding: 1vw 5vw;
+    width: max-content;
+    border-radius: 10px;
+    color: black;
+}
+

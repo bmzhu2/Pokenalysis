@@ -71,10 +71,14 @@ class TeamItem extends React.Component {
             </div>
         }
         let deleteButton;
+        let editButton;
         if (this.props.currentUser && this.props.currentUser.username === this.props.team.username) {
             deleteButton = (<button className="team-delete" onClick={() => this.props.deleteTeam(this.props.team._id)}>
                 <i className="fas fa-trash-alt"></i></button>)
+            editButton = (<button className="team-edit">
+                <i className="fas fa-edit"></i></button>)
         }
+
 
         if (this.props.team !== undefined && this.state.likes !== undefined){
             return(
@@ -83,7 +87,10 @@ class TeamItem extends React.Component {
                         <Link to={`/teams/${this.props.team._id}`}><h1> {this.props.team.name}</h1></Link>
                         <Link to={`/users/${this.props.team.username}`}><h2> by: {this.props.team.username}</h2></Link>
                     </div>
-                    {deleteButton}
+                    <div className="team-controls">
+                        {editButton}
+                        {deleteButton}
+                    </div>
                     <TeamPokemon pokemon={this.props.team.pokemon} />
                     <div className="row likes">
                         <div className="row-item">
