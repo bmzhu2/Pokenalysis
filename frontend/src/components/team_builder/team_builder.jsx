@@ -81,19 +81,23 @@ class TeamBuilder extends React.Component {
             if (match.params.teamId && currentUser.id) {
                 this.props.fetchTeam(match.params.teamId).then(res => {
                     const pokemon = res.team.pokemon;
+                    pokemon.forEach(poke => {
+                        const name = poke.name.charAt(0).toLowerCase() + poke.name.slice(1);
+                        this.props.fetchPokemon(name);
+                    });
+                    console.log(pokemon);
                     const team = {
-                            1: { ...pokemon[0],  ...allPokemon[pokemon[0].pokeId - 1] }, 
-                            2: { ...pokemon[1], ...allPokemon[pokemon[1].pokeId -1] }, 
-                            3: { ...pokemon[2], ...allPokemon[pokemon[2].pokeId -1] },  
-                            4: { ...pokemon[3], ...allPokemon[pokemon[3].pokeId -1] }, 
-                            5: { ...pokemon[4], ...allPokemon[pokemon[4].pokeId -1] },  
-                            6: { ...pokemon[5], ...allPokemon[pokemon[5].pokeId -1] }, 
-                        };
+                        1: { ...allPokemon[pokemon[0].pokeId-1], ...pokemon[0] }, 
+                        2: { ...allPokemon[pokemon[1].pokeId-1], ...pokemon[1] }, 
+                        3: { ...allPokemon[pokemon[2].pokeId-1], ...pokemon[2] },  
+                        4: { ...allPokemon[pokemon[3].pokeId-1], ...pokemon[3] }, 
+                        5: { ...allPokemon[pokemon[4].pokeId-1], ...pokemon[4] },  
+                        6: { ...allPokemon[pokemon[5].pokeId-1], ...pokemon[5] }, 
+                    };
                     const teamName =  res.team.name;
                     const editTeamMode = true;
-
                     this.setState({ team, teamName, editTeamMode });
-                }).then(res => {console.log(this.state)});
+                });
                 //change save button to be a patch request on mode 'edit'
             }
         });
