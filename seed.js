@@ -132,7 +132,7 @@ const dataTeams = [
                         'name': 'tyrantrum',
                         'move1': 'dragon claw',
                         'move2': 'crunch',
-                        'move3': 'eartchquake',
+                        'move3': 'earthquake',
                         'move4': 'stone-edge',
                         'ability': 'strong-jaw'
                     }
