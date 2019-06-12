@@ -41,15 +41,6 @@ class TeamBuilder extends React.Component {
             isDragging: false,
             editTeamMode: false,
         };
-
-        if (this.props.match.id && this.props.username === this.props.team.username) {
-            // this.props.fetchTeam(this.props.match.id);
-            this.state.team = this.props.team.team;
-            this.state.teamName = this.props.team.name;
-            this.state.editTeamMode = true;
-
-            //change save button to be a patch request on mode 'edit'
-        }
         
         this.handleDrag = this.handleDrag.bind(this);
         this.onDrop1 = this.onDrop1.bind(this);
@@ -70,21 +61,41 @@ class TeamBuilder extends React.Component {
         this.handleAnimationEnd = this.handleAnimationEnd.bind(this);
         this.closeFilter = this.closeFilter.bind(this);
         this.handleCoverageType = this.handleCoverageType.bind(this);
-        console.log(this.props.match);
     }
 
     componentDidMount() {
+        const { match, currentUser } = this.props;
         this.props.fetchAllPokemon(0).then(res => {
-            this.setState({
-                pokemon: res.pokemon.data.results.map(pokemon => {
-                    let id = idParse(pokemon);
-                    return {
-                        id,
-                        name: pokemon.name,
-                        sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + id + ".png"
-                    };
-                })
+            const pokemon = res.pokemon.data.results.map(pokemon => {
+                let id = idParse(pokemon);
+                return {
+                    id,
+                    name: pokemon.name,
+                    sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + id + ".png"
+                };
             });
+            this.setState({ pokemon });
+            return pokemon;
+        }).then( allPokemon => {
+            
+            if (match.params.teamId && currentUser.id) {
+                this.props.fetchTeam(match.params.teamId).then(res => {
+                    const pokemon = res.team.pokemon;
+                    const team = {
+                            1: { ...pokemon[0],  ...allPokemon[pokemon[0].pokeId - 1] }, 
+                            2: { ...pokemon[1], ...allPokemon[pokemon[1].pokeId -1] }, 
+                            3: { ...pokemon[2], ...allPokemon[pokemon[2].pokeId -1] },  
+                            4: { ...pokemon[3], ...allPokemon[pokemon[3].pokeId -1] }, 
+                            5: { ...pokemon[4], ...allPokemon[pokemon[4].pokeId -1] },  
+                            6: { ...pokemon[5], ...allPokemon[pokemon[5].pokeId -1] }, 
+                        };
+                    const teamName =  res.team.name;
+                    const editTeamMode = true;
+
+                    this.setState({ team, teamName, editTeamMode });
+                }).then(res => {console.log(this.state)});
+                //change save button to be a patch request on mode 'edit'
+            }
         });
 
         this.props.fetchItems();
@@ -310,7 +321,7 @@ class TeamBuilder extends React.Component {
             <div className="team-builder-container" >
                     <div className={scrollY ? "sticky-container" : "sticky-container no-border"}>
                         <div className="name-submit-container">
-                            <input className={scrollY ? "team-name minimized-name" : "team-name"} onChange={this.updateTeamName()} type="text" placeholder={"New Team Name"}/>
+                            <input className={scrollY ? "team-name minimized-name" : "team-name"} onChange={this.updateTeamName()} type="text" value={this.state.teamName || null} placeholder={"New Team Name"}/>
                             <input className={scrollY ? "submit-team minimized-submit" : "submit-team"} onClick={this.saveTeam} type="submit" value="Save"/>
                         </div>
                         <div className="drag-description-container">
