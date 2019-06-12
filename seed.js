@@ -35,9 +35,24 @@ seeder.connect(db, { useNewUrlParser: true }, function(){
             seeder.disconnect();
         });
     });
+
+    seeder.loadModels([
+        './models/Like.js'
+    ])
+
+    seeder.clearModels(['like'], function () {
+        seeder.populateModels(dataLikes, function () {
+            seeder.disconnect();
+        });
+    });
 })
 
-let passwords = ['ElliotIsCool', 'GetPsyched', 'XYted', 'GetSalaMinced'];
+let passwords = ['ElliotIsCool', 
+'GetPsyched', 
+'eXcYted', 
+'GetSalaMinced', 
+'ImGreen',
+'NewWorldOrder'];
 const newPasswords = []
 let salt
 let hash
@@ -71,6 +86,16 @@ const dataUsers = [
                 'username': 'Zinnia',
                 'password': newPasswords[3],
                 '_id': '41224d776a326fb40f000000'
+            },
+            {
+                'username': 'Blue',
+                'password': newPasswords[4],
+                '_id': '41224d776a326fb40f000090'
+            },
+            {
+                'username': 'Cyrus',
+                'password': newPasswords[5],
+                '_id': '41224d776a326fb40f000150'
             }
         ]
     }
@@ -152,7 +177,7 @@ const dataTeams = [
                 '_id': '41224d776a326fb40f000002'
             },
             {
-                'name': 'champion',
+                'name': 'Balanced',
                 'pokemon': [
                     {
                         'pokeId': 637,
@@ -310,6 +335,124 @@ const dataTeams = [
                 'user': '41224d776a326fb40f000020',
                 'username': 'Diantha',
                 '_id': '41224d776a326fb40f000021'
+            },
+            {
+                'name': "Ultimate Rival",
+                'pokemon': [
+                    {
+                        'pokeId': 103,
+                        'name': 'exeggutor',
+                        'move1': 'psychic',
+                        'move2': 'leaf-storm',
+                        'move3': 'trick-room',
+                        'move4': 'explosion',
+                        'ability': 'chlorophyll'
+                    },
+                    {
+                        'pokeId': 68,
+                        'name': 'machamp',
+                        'move1': 'stone-edge',
+                        'move2': 'fling',
+                        'move3': 'attract',
+                        'move4': 'dynamic-punch',
+                        'ability': 'no-guard',
+                        'item': 'iron-ball'
+                    },
+                    {
+                        'pokeId': 464,
+                        'name': 'rhyperior',
+                        'move1': 'stone-edge',
+                        'move2': 'megahorn',
+                        'move3': 'earthquake',
+                        'move4': 'thunder-fang',
+                        'ability': 'solid-rock'
+                    },
+                    {
+                        'pokeId': 59,
+                        'name': 'arcanine',
+                        'move1': 'flare-blitz',
+                        'move2': 'extreme-speed',
+                        'move3': 'thunder-fang',
+                        'move4': 'crunch',
+                        'ability': 'flash-fire'
+                    },
+                    {
+                        'pokeId': 248,
+                        'name': 'tyranitar',
+                        'move1': 'low-kick',
+                        'move2': 'fire-fang',
+                        'move3': 'rock-slide',
+                        'move4': 'earthquake',
+                        'ability': 'sand-stream'
+                    },
+                    {
+                        'pokeId': 18,
+                        'name': 'pidgeot',
+                        'move1': 'return',
+                        'move2': 'double-team',
+                        'move3': 'air-slash',
+                        'move4': 'steel-wing',
+                        'ability': 'tangled-feet',
+                        'item': 'sitrus-berry'
+                    }
+                ],
+                'user': '41224d776a326fb40f000090',
+                'username': 'Blue',
+                '_id': '41224d776a326fb40f000091'
+            },
+            {
+                'name': "World Domination",
+                'pokemon': [
+                    {
+                        'pokeId': 229,
+                        'name': 'houndoom',
+                        'move1': 'flamethrower',
+                        'move2': 'dark-pulse',
+                        'move3': 'will-o-wisp',
+                        'move4': 'thunder-fang',
+                        'ability': 'flash-fire'
+                    },
+                    {
+                        'pokeId': 430,
+                        'name': 'honchkrow',
+                        'move1': 'drill-peck',
+                        'move2': 'night-slash',
+                        'move3': 'heat-wave',
+                        'move4': 'psychic',
+                        'ability': 'insomnia'
+                    },
+                    {
+                        'pokeId': 169,
+                        'name': 'crobat',
+                        'move1': 'cross-poison',
+                        'move2': 'air-slash',
+                        'move3': 'toxic',
+                        'move4': 'confuse-ray',
+                        'ability': 'inner-focus'
+                    },
+                    {
+                        'pokeId': 59,
+                        'name': 'gyarados',
+                        'move1': 'waterfall',
+                        'move2': 'ice-fang',
+                        'move3': 'earthquake',
+                        'move4': 'giga-impact',
+                        'ability': 'intimidate'
+                    },
+                    {
+                        'pokeId': 461,
+                        'name': 'weavile',
+                        'move1': 'night-slash',
+                        'move2': 'x-scissor',
+                        'move3': 'ice-punch',
+                        'move4': 'fake-out',
+                        'ability': 'pressure',
+                        'item': 'sitrus-berry'
+                    }
+                ],
+                'user': '41224d776a326fb40f000150',
+                'username': 'Cyrus',
+                '_id': '41224d776a326fb40f000151'
             }
         ]
     }
@@ -330,6 +473,85 @@ const dataComments = [
                 'username': 'Banana',
                 'user': '41224d776a326fb40f000001',
                 'text': 'Mega Gardevoir with no normal type moves?'
+            },
+            {
+                'team': '41224d776a326fb40f000021',
+                'username': 'Diantha',
+                'user': '41224d776a326fb40f000020',
+                'text': 'The iron ball + trick room combo is very clever!'
+            },
+        ]
+    }
+]
+
+const dataLikes = [
+    {
+        'model': 'like',
+        'documents': [
+            {
+                'team': '41224d776a326fb40f000002',
+                'user': '41224d776a326fb40f000000',
+                'username': 'Zinnia'
+            },
+            {
+                'team': '41224d776a326fb40f000100',
+                'user': '41224d776a326fb40f000000',
+                'username': 'Zinnia'
+            },
+            {
+                'team': '41224d776a326fb40f000021',
+                'user': '41224d776a326fb40f000000',
+                'username': 'Zinnia'
+            },
+            {
+                'team': '41224d776a326fb40f000002',
+                'user': '41224d776a326fb40f000010',
+                'username': 'Sabrina'
+            },
+            {
+                'team': '41224d776a326fb40f000021',
+                'user': '41224d776a326fb40f000010',
+                'username': 'Sabrina'
+            },
+            {
+                'team': '41224d776a326fb40f000091',
+                'user': '41224d776a326fb40f000010',
+                'username': 'Sabrina'
+            },
+            {
+                'team': '41224d776a326fb40f000021',
+                'username': 'Banana',
+                'user': '41224d776a326fb40f000001'
+            },
+            {
+                'team': '41224d776a326fb40f000002',
+                'username': 'Banana',
+                'user': '41224d776a326fb40f000001'
+            },
+            {
+                'team': '41224d776a326fb40f000091',
+                'username': 'Banana',
+                'user': '41224d776a326fb40f000001'
+            },
+            {
+                'team': '41224d776a326fb40f000100',
+                'username': 'Diantha',
+                'user': '41224d776a326fb40f000020'
+            },
+            {
+                'team': '41224d776a326fb40f000006',
+                'username': 'Diantha',
+                'user': '41224d776a326fb40f000020'
+            },
+            {
+                'team': '41224d776a326fb40f000002',
+                'username': 'Diantha',
+                'user': '41224d776a326fb40f000020'
+            },
+            {
+                'team': '41224d776a326fb40f000100',
+                'user': '41224d776a326fb40f000090',
+                'username': 'Blue'
             }
         ]
     }
