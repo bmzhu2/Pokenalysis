@@ -298,8 +298,8 @@ class TeamBuilder extends React.Component {
     }
 
     render(){
-        const { pokemon, attrId, team, openFilter, typeFilter1, typeFilter2, 
-            redirectTo, showStats, scrollY, defensiveChart, isDragging } = this.state;
+        const { pokemon, attrId, team, teamName, openFilter, typeFilter1, typeFilter2, 
+            redirectTo, showStats, scrollY, defensiveChart, isDragging, editTeamMode } = this.state;
 
         if (redirectTo){ 
             return <Redirect to={`/teams/${redirectTo}`}/> 
@@ -325,8 +325,8 @@ class TeamBuilder extends React.Component {
             <div className="team-builder-container" >
                     <div className={scrollY ? "sticky-container" : "sticky-container no-border"}>
                         <div className="name-submit-container">
-                            <input className={scrollY ? "team-name minimized-name" : "team-name"} onChange={this.updateTeamName()} type="text" value={this.state.teamName} placeholder={"New Team Name"}/>
-                            <input className={scrollY ? "submit-team minimized-submit" : "submit-team"} onClick={this.saveTeam} type="submit" value="Save"/>
+                            <input className={scrollY ? "team-name minimized-name" : "team-name"} onChange={this.updateTeamName()} type="text" value={teamName} placeholder={"New Team Name"}/>
+                            <input className={scrollY ? "submit-team minimized-submit" : "submit-team"} onClick={this.saveTeam} type="submit" value={editTeamMode ? "Save Updates" : "Save"}/>
                         </div>
                         <div className="drag-description-container">
                             <h4 className={isTeamEmpty}
