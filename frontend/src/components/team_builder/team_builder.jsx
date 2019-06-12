@@ -13,10 +13,14 @@ import './filter.css';
 // import { types } from '../../util/type_util'; USE THIS WHEN UTIL FILE IS FIXED
 import './team_builder.css';
 import StatCharts from './stat_charts'
+import { receiveCurrentUser } from '../../actions/session_actions';
 
 class TeamBuilder extends React.Component {
     constructor(props){
         super(props);
+
+
+
         this.state = {
             pokemon: [],
             teamName: "",
@@ -35,7 +39,18 @@ class TeamBuilder extends React.Component {
             scrollY: 0,
             defensiveChart: false,
             isDragging: false,
+            editTeamMode: false,
         };
+
+        if (this.props.match.id && this.props.username === this.props.team.username) {
+            // this.props.fetchTeam(this.props.match.id);
+            this.state.team = this.props.team.team;
+            this.state.teamName = this.props.team.name;
+            this.state.editTeamMode = true;
+
+            //change save button to be a patch request on mode 'edit'
+        }
+        
         this.handleDrag = this.handleDrag.bind(this);
         this.onDrop1 = this.onDrop1.bind(this);
         this.onDrop2 = this.onDrop2.bind(this);
@@ -55,6 +70,7 @@ class TeamBuilder extends React.Component {
         this.handleAnimationEnd = this.handleAnimationEnd.bind(this);
         this.closeFilter = this.closeFilter.bind(this);
         this.handleCoverageType = this.handleCoverageType.bind(this);
+        console.log(this.props.match);
     }
 
     componentDidMount() {
@@ -75,6 +91,7 @@ class TeamBuilder extends React.Component {
         window.addEventListener('scroll', () => {
             this.setState({ scrollY: window.scrollY });
         });
+
     }
 
     handleDrag(){
@@ -190,18 +207,25 @@ class TeamBuilder extends React.Component {
     }
 
     saveTeam(){
-        if(!this.props.loggedIn) {
-            this.props.openModal("login");
-        return;
+        const { createTeam, updateTeam, loggedIn, openModal } = this.props;
+        const { team, teamName, editTeamMode } = this.state;
+
+        if(!loggedIn) {
+            openModal("login");
+            return;
         }
-        const { createTeam } = this.props;
-        const { team, teamName } = this.state;
+
         let pokemon = Object.values(team);
         const nullifiedPokes = pokemon.map(poke => {
             return (!Object.values(poke).length) ? { pokeId: 0, name: "Missingno" } : poke;
         });
         const newTeam = { name: teamName, pokemon: nullifiedPokes };
-        createTeam(newTeam).then(res => this.setState({ redirectTo: res.team._id }));
+
+        if (editTeamMode){
+            updateTeam(newTeam).then(res => this.setState({ redirectTo: res.team_id }));
+        } else {
+            createTeam(newTeam).then(res => this.setState({ redirectTo: res.team._id }));
+        }
     }   
 
     handleOpenFilter(filter){
