@@ -21,8 +21,14 @@ class StatChart extends React.Component{
                 }
             });
         } else {
-            newTeam = this.props.team;
+            newTeam.pokemon = [];
+            this.props.team.pokemon.forEach(mon => {
+                if(mon.pokeId !== 0){
+                    newTeam.pokemon.push(mon)
+                }
+            })
         }
+        debugger
         let averages = StatUtil.averageStats(newTeam, this.props.pokemon);
         let defensiveCoverage = TypeUtil.teamDefensiveCoverage(newTeam, this.props.pokemon);
         let offensiveCoverage  = TypeUtil.teamOffensiveCoverage(newTeam, this.props.moves, this.props.pokemon)
