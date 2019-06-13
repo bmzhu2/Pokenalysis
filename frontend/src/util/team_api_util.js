@@ -17,6 +17,7 @@ export const createTeam = team => {
 }
 
 export const updateTeam = team => {
+    debugger;
     return axios.puts('api/teams/' + team.id, team)
 }
 
