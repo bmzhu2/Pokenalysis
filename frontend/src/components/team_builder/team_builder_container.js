@@ -25,6 +25,7 @@ import TeamBuilder from './team_builder';
 
 const mapStateToProps = (state, ownProps) => {
     return({
+        currentUser: state.session.user,
         loggedIn: state.session.isAuthenticated,
         teams: state.entities.teams,
         pokemon: state.entities.pokemon,

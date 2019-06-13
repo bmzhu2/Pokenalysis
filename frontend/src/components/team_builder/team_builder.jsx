@@ -13,10 +13,14 @@ import './filter.css';
 // import { types } from '../../util/type_util'; USE THIS WHEN UTIL FILE IS FIXED
 import './team_builder.css';
 import StatCharts from './stat_charts'
+import { receiveCurrentUser } from '../../actions/session_actions';
 
 class TeamBuilder extends React.Component {
     constructor(props){
         super(props);
+
+
+
         this.state = {
             pokemon: [],
             teamName: "",
@@ -35,7 +39,9 @@ class TeamBuilder extends React.Component {
             scrollY: 0,
             defensiveChart: false,
             isDragging: false,
+            editTeamMode: false,
         };
+        
         this.handleDrag = this.handleDrag.bind(this);
         this.onDrop1 = this.onDrop1.bind(this);
         this.onDrop2 = this.onDrop2.bind(this);
@@ -58,23 +64,50 @@ class TeamBuilder extends React.Component {
     }
 
     componentDidMount() {
+        const { match, currentUser } = this.props;
         this.props.fetchAllPokemon(0).then(res => {
-            this.setState({
-                pokemon: res.pokemon.data.results.map(pokemon => {
-                    let id = idParse(pokemon);
-                    return {
-                        id,
-                        name: pokemon.name,
-                        sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + id + ".png"
-                    };
-                })
+            const pokemon = res.pokemon.data.results.map(pokemon => {
+                let id = idParse(pokemon);
+                return {
+                    id,
+                    name: pokemon.name,
+                    sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + id + ".png"
+                };
             });
+            this.setState({ pokemon });
+            return pokemon;
+        }).then( allPokemon => {
+            
+            if (match.params.teamId && currentUser.id) {
+                this.props.fetchTeam(match.params.teamId).then(res => {
+                    const pokemon = res.team.pokemon;
+                    pokemon.forEach(poke => {
+                        if (poke.pokeId){
+                            const name = poke.name.charAt(0).toLowerCase() + poke.name.slice(1);
+                            this.props.fetchPokemon(name);
+                        }
+                    });
+                    const team = {
+                        1: { ...allPokemon[pokemon[0].pokeId-1], ...pokemon[0] }, 
+                        2: { ...allPokemon[pokemon[1].pokeId-1], ...pokemon[1] }, 
+                        3: { ...allPokemon[pokemon[2].pokeId-1], ...pokemon[2] },  
+                        4: { ...allPokemon[pokemon[3].pokeId-1], ...pokemon[3] }, 
+                        5: { ...allPokemon[pokemon[4].pokeId-1], ...pokemon[4] },  
+                        6: { ...allPokemon[pokemon[5].pokeId-1], ...pokemon[5] }, 
+                    };
+                    const teamName =  res.team.name;
+                    const editTeamMode = true;
+                    this.setState({ team, teamName, editTeamMode });
+                });
+                //change save button to be a patch request on mode 'edit'
+            }
         });
 
         this.props.fetchItems();
         window.addEventListener('scroll', () => {
             this.setState({ scrollY: window.scrollY });
         });
+
     }
 
     handleDrag(){
@@ -190,18 +223,26 @@ class TeamBuilder extends React.Component {
     }
 
     saveTeam(){
-        if(!this.props.loggedIn) {
-            this.props.openModal("login");
-        return;
+        const { createTeam, updateTeam, loggedIn, openModal } = this.props;
+        const { team, teamName, editTeamMode } = this.state;
+
+        if(!loggedIn) {
+            openModal("login");
+            return;
         }
-        const { createTeam } = this.props;
-        const { team, teamName } = this.state;
+
         let pokemon = Object.values(team);
         const nullifiedPokes = pokemon.map(poke => {
             return (!Object.values(poke).length) ? { pokeId: 0, name: "Missingno" } : poke;
         });
         const newTeam = { name: teamName, pokemon: nullifiedPokes };
-        createTeam(newTeam).then(res => this.setState({ redirectTo: res.team._id }));
+
+        if (editTeamMode){
+            newTeam.id = this.props.match.params.teamId;
+            updateTeam(newTeam).then(res => this.setState({ redirectTo: newTeam.id }));
+        } else {
+            createTeam(newTeam).then(res => this.setState({ redirectTo: res.team._id }));
+        }
     }   
 
     handleOpenFilter(filter){
@@ -259,8 +300,8 @@ class TeamBuilder extends React.Component {
     }
 
     render(){
-        const { pokemon, attrId, team, openFilter, typeFilter1, typeFilter2, 
-            redirectTo, showStats, scrollY, defensiveChart, isDragging } = this.state;
+        const { pokemon, attrId, team, teamName, openFilter, typeFilter1, typeFilter2, 
+            redirectTo, showStats, scrollY, defensiveChart, isDragging, editTeamMode } = this.state;
 
         if (redirectTo){ 
             return <Redirect to={`/teams/${redirectTo}`}/> 
@@ -286,8 +327,8 @@ class TeamBuilder extends React.Component {
             <div className="team-builder-container" >
                     <div className={scrollY ? "sticky-container" : "sticky-container no-border"}>
                         <div className="name-submit-container">
-                            <input className={scrollY ? "team-name minimized-name" : "team-name"} onChange={this.updateTeamName()} type="text" placeholder={"New Team Name"}/>
-                            <input className={scrollY ? "submit-team minimized-submit" : "submit-team"} onClick={this.saveTeam} type="submit" value="Save"/>
+                            <input className={scrollY ? "team-name minimized-name" : "team-name"} onChange={this.updateTeamName()} type="text" value={teamName} placeholder={"New Team Name"}/>
+                            <input className={scrollY ? "submit-team minimized-submit" : "submit-team"} onClick={this.saveTeam} type="submit" value={editTeamMode ? "Save Updates" : "Save"}/>
                         </div>
                         <div className="drag-description-container">
                             <h4 className={isTeamEmpty}
