@@ -237,7 +237,8 @@ class TeamBuilder extends React.Component {
         const newTeam = { name: teamName, pokemon: nullifiedPokes };
 
         if (editTeamMode){
-            updateTeam(newTeam).then(res => this.setState({ redirectTo: res.team_id }));
+            newTeam.id = this.props.match.params.teamId;
+            updateTeam(newTeam).then(res => this.setState({ redirectTo: newTeam.id }));
         } else {
             createTeam(newTeam).then(res => this.setState({ redirectTo: res.team._id }));
         }
