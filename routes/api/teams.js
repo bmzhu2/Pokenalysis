@@ -62,10 +62,8 @@ router.put('/:id',
     if (!isValid) {
       return res.status(400).json(errors);
     }
-    debugger;
     Team.findById(req.params.id)
       .then(team => {
-        debugger;
         team.name = req.body.name;
         for (let i = 0; i < 6; i++) {
           team.pokemon[i] = req.body.pokemon[i]
