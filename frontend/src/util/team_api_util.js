@@ -18,7 +18,7 @@ export const createTeam = team => {
 
 export const updateTeam = team => {
     debugger;
-    return axios.puts('api/teams/' + team.id, team)
+    return axios.put('api/teams/' + team.id, team)
 }
 
 export const deleteTeam = teamId => {

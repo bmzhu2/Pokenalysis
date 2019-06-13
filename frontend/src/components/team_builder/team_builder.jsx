@@ -82,10 +82,11 @@ class TeamBuilder extends React.Component {
                 this.props.fetchTeam(match.params.teamId).then(res => {
                     const pokemon = res.team.pokemon;
                     pokemon.forEach(poke => {
-                        const name = poke.name.charAt(0).toLowerCase() + poke.name.slice(1);
-                        this.props.fetchPokemon(name);
+                        if (poke.pokeId){
+                            const name = poke.name.charAt(0).toLowerCase() + poke.name.slice(1);
+                            this.props.fetchPokemon(name);
+                        }
                     });
-                    console.log(pokemon);
                     const team = {
                         1: { ...allPokemon[pokemon[0].pokeId-1], ...pokemon[0] }, 
                         2: { ...allPokemon[pokemon[1].pokeId-1], ...pokemon[1] }, 
@@ -237,7 +238,8 @@ class TeamBuilder extends React.Component {
         const newTeam = { name: teamName, pokemon: nullifiedPokes };
 
         if (editTeamMode){
-            updateTeam(newTeam).then(res => this.setState({ redirectTo: res.team_id }));
+            newTeam.id = this.props.match.params.teamId;
+            updateTeam(newTeam).then(res => this.setState({ redirectTo: newTeam.id }));
         } else {
             createTeam(newTeam).then(res => this.setState({ redirectTo: res.team._id }));
         }
