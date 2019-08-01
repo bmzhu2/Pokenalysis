@@ -310,7 +310,7 @@ export const teamDefensiveCoverage = (team, pokeList) => {
           defensiveCoverage[type] += 1.5
           unchecked.has(type) ? unchecked.delete(type) : null
         } else {
-          defensiveCoverage[type] -= -.25
+          defensiveCoverage[type] -= .25
         }
       })
     }
