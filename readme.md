@@ -5,13 +5,51 @@ Pokenalysis is a online team builder that leverages the [PokéAPI](https://pokea
 
 [Live Demo](https://pokenalysis.herokuapp.com/#/)
 
+![teambuilder](https://github.com/bmzhu2/Pokenalysis/blob/master/docs/teambuilder_demo.png)
+
+![stats](https://github.com/bmzhu2/Pokenalysis/blob/master/docs/teamstats_demo.png)
 
 ### Functionality and MVP
 
-1. Users can create, edit, and save (if logged in) teams of 6 pokemon
-2. Pokemon teams are analyzed and important information (Statistics, strengths, and weaknesses) is displayed intuitively
-3. Pokemon teams are displayed on a social feed for others to explore and like.
-4. A user's profile contains their public information, created teams, and liked teams.
+1. Users can create, edit, and save (if logged in) teams of 6 Pokemon
+2. Browse, search by name, or filter by type to easily find Pokemon to put on team
+3. Pokemon teams are analyzed and important information (Statistics, strengths, and weaknesses) is displayed intuitively
+4. Pokemon teams are displayed on a social feed for others to explore and like.
+5. A user's profile contains their public information, created teams, and liked teams.
+
+```
+   //filter code
+   filterPokemon(...filters){
+        const newFilter = filters[0] && filters[1] ? filters : filters[0] ? [filters[0]] : filters[1] ? [filters[1]] : [];
+        
+        this.setState((state, props) => {
+            const pokemon = !newFilter.length ? Object.values(props.pokemon) : Object.values(props.pokemon).filter(poke => {
+                return !!poke.types && newFilter.every(filter => poke.types.includes(filter));
+            });
+            return { pokemon };
+        });
+    }
+
+    async filterByType(filter, type){
+        const filters = Object.assign(this.state);
+        filters[filter] = type;
+
+        const { typeFilter1, typeFilter2 } = filters;
+        
+            if (typeFilter1 && !typeFilter2) {
+                await this.props.fetchByType(typeFilter1);
+                this.filterPokemon(typeFilter1, typeFilter2);      
+            } else if (!typeFilter1 && typeFilter2) {
+                await this.props.fetchByType(typeFilter2);
+                this.filterPokemon(typeFilter1, typeFilter2);   
+            } else if (typeFilter1 && typeFilter2) {
+                await this.props.fetchByType(typeFilter1).then(() => this.props.fetchByType(typeFilter2));
+                this.filterPokemon(typeFilter1, typeFilter2);
+            } else {
+                this.filterPokemon(typeFilter1, typeFilter2);
+            }
+    }
+```
 
 
 ### Bonus Features
