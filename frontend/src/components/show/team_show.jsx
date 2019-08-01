@@ -19,6 +19,7 @@ class TeamShow extends React.Component{
         this.handleChange = this.handleChange.bind(this);
         this.handleLike = this.handleLike.bind(this);
         this.handleUnLike = this.handleUnLike.bind(this);
+        this.handleCoverageType = this.handleCoverageType.bind(this)
     }
 
     componentDidMount(){
@@ -87,7 +88,9 @@ class TeamShow extends React.Component{
             })
         ));
     }
-
+    handleCoverageType(bool) {
+        this.setState({ defensiveChart: bool });
+    }
     handleUnLike() {
         // this.props.createLike(this.props.team._id).then(() => (
         this.setState({
@@ -117,7 +120,13 @@ class TeamShow extends React.Component{
         }
         if (this.state.showStats) {
             statistics = <div>
-                <StatCharts team={this.props.team} pokemon={this.props.pokemon} moves={this.props.moves} />
+                <StatCharts 
+                team={this.props.team} 
+                pokemon={this.props.pokemon} 
+                moves={this.props.moves} 
+                showStats={this.state.showStats}
+                handleCoverageType={this.handleCoverageType} 
+                defensiveChart= {this.state.defensiveChart}/>
             </div>
             statText = "Hide Stats"
         }
@@ -140,7 +149,7 @@ class TeamShow extends React.Component{
             return(
                 <div className="team-show">
                     <h2 className="team-name">{this.props.team.name}</h2>
-                    <Link to={`/users/${this.props.team.username}`} className="team-user">by {this.props.team.username}</Link>
+                    <Link to={`/3users/${this.props.team.username}`} className="team-user">by {this.props.team.username}</Link>
                     <ul className="poke-row show-page">
                         {this.props.team.pokemon.map((mon, idx) => {
                             return <li onClick={this.handleAttributes} value={idx} ><TeamPoke poke={mon}/></li>
